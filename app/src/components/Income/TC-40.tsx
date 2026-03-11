@@ -163,7 +163,10 @@ export function TC_40() {
                 Your first name &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:11.577em;top:11.2992em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "11.577em", top: "11.2992em" }}
+            >
               <span
                 className="pdf24_22 pdf24_08 pdf24_26"
                 style={{ wordSpacing: "0.003em" }}
@@ -171,10 +174,16 @@ export function TC_40() {
                 Spouse’s first name &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:11.4669em;top:13.2993em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "11.4669em", top: "13.2993em" }}
+            >
               <span className="pdf24_22 pdf24_08 pdf24_16">Address &nbsp;</span>
             </div>
-            <div className="pdf24_01" style="left:22.9651em;top:9.2989em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "22.9651em", top: "9.2989em" }}
+            >
               <span
                 className="pdf24_22 pdf24_08 pdf24_27"
                 style={{ wordSpacing: "0.021em" }}
@@ -182,7 +191,10 @@ export function TC_40() {
                 Your last name &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:3.7994em;top:11.2992em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "3.7994em", top: "11.2992em" }}
+            >
               <span
                 className="pdf24_22 pdf24_08 pdf24_28"
                 style={{ wordSpacing: "0.0029em" }}
@@ -190,7 +202,10 @@ export function TC_40() {
                 Spouse’s Soc. Sec. No. &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:22.9659em;top:11.2992em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "22.9659em", top: "11.2992em" }}
+            >
               <span
                 className="pdf24_22 pdf24_08 pdf24_18"
                 style={{ wordSpacing: "0.0006em" }}
@@ -198,7 +213,10 @@ export function TC_40() {
                 Spouse's last name &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:34.855em;top:13.2993em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "34.855em", top: "13.2993em" }}
+            >
               <span className="pdf24_22 pdf24_08 pdf24_29">T</span>
               <span className="pdf24_22 pdf24_08 pdf24_12">e</span>
               <span
@@ -208,7 +226,10 @@ export function TC_40() {
                 lephone number &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:4.0464em;top:14.7386em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "4.0464em", top: "14.7386em" }}
+            >
               <span
                 className="pdf24_22 pdf24_08 pdf24_18"
                 style={{ wordSpacing: "0.0007em" }}
@@ -216,7 +237,10 @@ export function TC_40() {
                 If deceased, complete &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:5.0678em;top:15.7384em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "5.0678em", top: "15.7384em" }}
+            >
               <span
                 className="pdf24_22 pdf24_08 pdf24_18"
                 style={{ wordSpacing: "0.0006em" }}
@@ -224,16 +248,28 @@ export function TC_40() {
                 page 3, Part 1 &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:11.4106em;top:15.2989em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "11.4106em", top: "15.2989em" }}
+            >
               <span className="pdf24_22 pdf24_08 pdf24_18">City &nbsp;</span>
             </div>
-            <div className="pdf24_01" style="left:25.3553em;top:15.2989em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "25.3553em", top: "15.2989em" }}
+            >
               <span className="pdf24_22 pdf24_08 pdf24_20">State &nbsp;</span>
             </div>
-            <div className="pdf24_01" style="left:28.3551em;top:15.2989em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "28.3551em", top: "15.2989em" }}
+            >
               <span className="pdf24_22 pdf24_08 pdf24_30">ZIP+4 &nbsp;</span>
             </div>
-            <div className="pdf24_01" style="left:34.7993em;top:15.2989em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "34.7993em", top: "15.2989em" }}
+            >
               <span
                 className="pdf24_22 pdf24_08 pdf24_18"
                 style={{ wordSpacing: "0.0005em" }}
@@ -241,10 +277,16 @@ export function TC_40() {
                 Foreign country (if not U.S.) &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:3.3em;top:18.2238em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "3.3em", top: "18.2238em" }}
+            >
               <span className="pdf24_19 pdf24_11 pdf24_20">1</span>
             </div>
-            <div className="pdf24_01" style="left:4.2582em;top:18.2238em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "4.2582em", top: "18.2238em" }}
+            >
               <span
                 className="pdf24_19 pdf24_11 pdf24_20"
                 style={{ wordSpacing: "0.0002em" }}
@@ -252,7 +294,10 @@ export function TC_40() {
                 Filing Status - enter code &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:17.0502em;top:18.2238em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "17.0502em", top: "18.2238em" }}
+            >
               <span
                 className="pdf24_31 pdf24_11 pdf24_20"
                 style={{ wordSpacing: "0.0589em" }}
@@ -275,10 +320,16 @@ export function TC_40() {
                 Dependents &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:32.5784em;top:18.2238em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "32.5784em", top: "18.2238em" }}
+            >
               <span className="pdf24_19 pdf24_11 pdf24_20">3</span>
             </div>
-            <div className="pdf24_01" style="left:33.5786em;top:18.2238em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "33.5786em", top: "18.2238em" }}
+            >
               <span
                 className="pdf24_19 pdf24_11 pdf24_30"
                 style={{ wordSpacing: "0.0004em" }}
@@ -286,7 +337,10 @@ export function TC_40() {
                 Election Campaign Fund &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:6.0774em;top:19.2238em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "6.0774em", top: "19.2238em" }}
+            >
               <span
                 className="pdf24_19 pdf24_11 pdf24_20"
                 style={{ wordSpacing: "0.0002em" }}
@@ -300,19 +354,34 @@ export function TC_40() {
                 = Single &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:17.4661em;top:19.2238em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "17.4661em", top: "19.2238em" }}
+            >
               <span className="pdf24_19 pdf24_11 pdf24_20">a</span>
             </div>
-            <div className="pdf24_01" style="left:17.4667em;top:20.2238em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "17.4667em", top: "20.2238em" }}
+            >
               <span className="pdf24_19 pdf24_11 pdf24_20">b</span>
             </div>
-            <div className="pdf24_01" style="left:17.4667em;top:21.2238em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "17.4667em", top: "21.2238em" }}
+            >
               <span className="pdf24_19 pdf24_11 pdf24_20">c</span>
             </div>
-            <div className="pdf24_01" style="left:17.4668em;top:22.2238em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "17.4668em", top: "22.2238em" }}
+            >
               <span className="pdf24_19 pdf24_11 pdf24_20">d</span>
             </div>
-            <div className="pdf24_01" style="left:20.4656em;top:19.2238em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "20.4656em", top: "19.2238em" }}
+            >
               <span
                 className="pdf24_31 pdf24_11 pdf24_12"
                 style={{ wordSpacing: "0.0007em" }}
@@ -320,7 +389,10 @@ export function TC_40() {
                 Dependents age 16 and under &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:20.4668em;top:20.2238em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "20.4668em", top: "20.2238em" }}
+            >
               <span
                 className="pdf24_31 pdf24_11 pdf24_16"
                 style={{ wordSpacing: "0.0006em" }}
@@ -328,7 +400,10 @@ export function TC_40() {
                 Other dependents &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:33.6333em;top:19.2993em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "33.6333em", top: "19.2993em" }}
+            >
               <span
                 className="pdf24_22 pdf24_08 pdf24_16"
                 style={{ wordSpacing: "0.0007em" }}
@@ -336,10 +411,16 @@ export function TC_40() {
                 Does not increase your tax or reduce your refund. &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:3.3em;top:20.2238em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "3.3em", top: "20.2238em" }}
+            >
               <span className="pdf24_31 pdf24_11 pdf24_20">•</span>
             </div>
-            <div className="pdf24_01" style="left:6.078em;top:20.2238em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "6.078em", top: "20.2238em" }}
+            >
               <span
                 className="pdf24_19 pdf24_11 pdf24_20"
                 style={{ wordSpacing: "0.0002em" }}
@@ -353,7 +434,10 @@ export function TC_40() {
                 = Married filing jointly &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:6.078em;top:21.2238em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "6.078em", top: "21.2238em" }}
+            >
               <span
                 className="pdf24_19 pdf24_11 pdf24_20"
                 style={{ wordSpacing: "0.0002em" }}
@@ -367,7 +451,10 @@ export function TC_40() {
                 = Married filing separately &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:6.078em;top:22.2238em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "6.078em", top: "22.2238em" }}
+            >
               <span
                 className="pdf24_19 pdf24_11 pdf24_20"
                 style={{ wordSpacing: "0.0002em" }}
@@ -381,7 +468,10 @@ export function TC_40() {
                 = Head of household &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:6.078em;top:23.2238em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "6.078em", top: "23.2238em" }}
+            >
               <span
                 className="pdf24_19 pdf24_11 pdf24_20"
                 style={{ wordSpacing: "0.0002em" }}
@@ -395,7 +485,10 @@ export function TC_40() {
                 = Qualifying surviving spouse &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:32.521em;top:20.2238em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "32.521em", top: "20.2238em" }}
+            >
               <span
                 className="pdf24_31 pdf24_11 pdf24_18"
                 style={{ wordSpacing: "0.0005em" }}
@@ -403,7 +496,10 @@ export function TC_40() {
                 Enter the code for the &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:32.5208em;top:21.2238em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "32.5208em", top: "21.2238em" }}
+            >
               <span
                 className="pdf24_31 pdf24_11 pdf24_16"
                 style={{ wordSpacing: "0.0007em" }}
@@ -411,7 +507,10 @@ export function TC_40() {
                 party of your choice. &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:33.1328em;top:22.2238em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "33.1328em", top: "22.2238em" }}
+            >
               <span
                 className="pdf24_31 pdf24_11 pdf24_18"
                 style={{ wordSpacing: "0.0005em" }}
@@ -419,15 +518,24 @@ export function TC_40() {
                 See instructions for &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:40.8556em;top:20.2993em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "40.8556em", top: "20.2993em" }}
+            >
               <span className="pdf24_22 pdf24_08 pdf24_32">
                 Yourself &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:45.0783em;top:20.2993em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "45.0783em", top: "20.2993em" }}
+            >
               <span className="pdf24_22 pdf24_08 pdf24_16">Spouse &nbsp;</span>
             </div>
-            <div className="pdf24_01" style="left:20.4662em;top:21.2238em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "20.4662em", top: "21.2238em" }}
+            >
               <span
                 className="pdf24_31 pdf24_11 pdf24_16"
                 style={{ wordSpacing: "0.0006em" }}
@@ -435,7 +543,10 @@ export function TC_40() {
                 Dependents born in 2025 &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:20.4669em;top:22.2238em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "20.4669em", top: "22.2238em" }}
+            >
               <span className="pdf24_31 pdf24_11 pdf24_29">T</span>
               <span className="pdf24_31 pdf24_11 pdf24_12">o</span>
               <span
@@ -445,13 +556,22 @@ export function TC_40() {
                 tal (add lines a, b and c) &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:40.5204em;top:21.2238em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "40.5204em", top: "21.2238em" }}
+            >
               <span className="pdf24_31 pdf24_11 pdf24_20">•</span>
             </div>
-            <div className="pdf24_01" style="left:44.6868em;top:21.2238em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "44.6868em", top: "21.2238em" }}
+            >
               <span className="pdf24_31 pdf24_11 pdf24_20">•</span>
             </div>
-            <div className="pdf24_01" style="left:33.1315em;top:23.2238em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "33.1315em", top: "23.2238em" }}
+            >
               <span
                 className="pdf24_31 pdf24_11 pdf24_18"
                 style={{ wordSpacing: "0.0012em" }}
@@ -463,7 +583,10 @@ export function TC_40() {
               </span>
               <span className="pdf24_33 pdf24_11 pdf24_20">. &nbsp;</span>
             </div>
-            <div className="pdf24_01" style="left:3.3em;top:24.3747em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "3.3em", top: "24.3747em" }}
+            >
               <span
                 className="pdf24_33 pdf24_11 pdf24_34"
                 style={{ wordSpacing: "0.0017em" }}
@@ -471,7 +594,10 @@ export function TC_40() {
                 If using code 2 or 3, enter spouse’s name and SSN above &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:17.4667em;top:24.2238em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "17.4667em", top: "24.2238em" }}
+            >
               <span
                 className="pdf24_19 pdf24_11 pdf24_20"
                 style={{ wordSpacing: "0.0002em" }}
@@ -479,7 +605,10 @@ export function TC_40() {
                 See instructions. &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:32.5223em;top:24.2238em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "32.5223em", top: "24.2238em" }}
+            >
               <span
                 className="pdf24_31 pdf24_11 pdf24_18"
                 style={{ wordSpacing: "0.0003em" }}
@@ -489,25 +618,46 @@ export function TC_40() {
               <span className="pdf24_19 pdf24_11 pdf24_16">N</span>
               <span className="pdf24_31 pdf24_11 pdf24_16">. &nbsp;</span>
             </div>
-            <div className="pdf24_01" style="left:3.3003em;top:26.2238em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "3.3003em", top: "26.2238em" }}
+            >
               <span className="pdf24_31 pdf24_11 pdf24_20">4</span>
             </div>
-            <div className="pdf24_01" style="left:3.3003em;top:28.2238em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "3.3003em", top: "28.2238em" }}
+            >
               <span className="pdf24_31 pdf24_11 pdf24_20">5</span>
             </div>
-            <div className="pdf24_01" style="left:3.3003em;top:30.2238em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "3.3003em", top: "30.2238em" }}
+            >
               <span className="pdf24_31 pdf24_11 pdf24_20">6</span>
             </div>
-            <div className="pdf24_01" style="left:3.3003em;top:32.2238em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "3.3003em", top: "32.2238em" }}
+            >
               <span className="pdf24_31 pdf24_11 pdf24_20">7</span>
             </div>
-            <div className="pdf24_01" style="left:3.3002em;top:34.2238em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "3.3002em", top: "34.2238em" }}
+            >
               <span className="pdf24_31 pdf24_11 pdf24_20">8</span>
             </div>
-            <div className="pdf24_01" style="left:3.3002em;top:36.2238em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "3.3002em", top: "36.2238em" }}
+            >
               <span className="pdf24_31 pdf24_11 pdf24_20">9</span>
             </div>
-            <div className="pdf24_01" style="left:4.425em;top:26.2238em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "4.425em", top: "26.2238em" }}
+            >
               <span
                 className="pdf24_31 pdf24_11 pdf24_16"
                 style={{ wordSpacing: "0.0005em" }}
@@ -515,73 +665,100 @@ export function TC_40() {
                 Federal adjusted gross income from federal return &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:38.3254em;top:26.2238em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "38.3254em", top: "26.2238em" }}
+            >
               <span className="pdf24_31 pdf24_11 pdf24_20">•</span>
             </div>
-            <div className="pdf24_01" style="left:38.3413em;top:28.2238em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "38.3413em", top: "28.2238em" }}
+            >
               <span className="pdf24_31 pdf24_11 pdf24_20">•</span>
             </div>
-            <div className="pdf24_01" style="left:39.1769em;top:26.2238em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "39.1769em", top: "26.2238em" }}
+            >
               <span className="pdf24_31 pdf24_11 pdf24_20">4</span>
             </div>
-            <div className="pdf24_01" style="left:39.178em;top:28.2238em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "39.178em", top: "28.2238em" }}
+            >
               <span className="pdf24_31 pdf24_11 pdf24_20">5</span>
             </div>
-            <div className="pdf24_01" style="left:39.1759em;top:30.2238em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "39.1759em", top: "30.2238em" }}
+            >
               <span className="pdf24_31 pdf24_11 pdf24_20">6</span>
             </div>
-            <div className="pdf24_01" style="left:39.1808em;top:32.2238em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "39.1808em", top: "32.2238em" }}
+            >
               <span className="pdf24_31 pdf24_11 pdf24_20">7</span>
             </div>
-            <div className="pdf24_01" style="left:39.1776em;top:34.2238em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "39.1776em", top: "34.2238em" }}
+            >
               <span className="pdf24_31 pdf24_11 pdf24_20">8</span>
             </div>
-            <div className="pdf24_01" style="left:39.1792em;top:36.2238em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "39.1792em", top: "36.2238em" }}
+            >
               <span className="pdf24_31 pdf24_11 pdf24_20">9</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:47.4668em;top:26.1513em;"
+              style={{ left: "47.4668em", top: "26.1513em" }}
             >
               <span className="pdf24_36 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:47.4668em;top:28.1511em;"
+              style={{ left: "47.4668em", top: "28.1511em" }}
             >
               <span className="pdf24_36 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:47.4668em;top:30.1508em;"
+              style={{ left: "47.4668em", top: "30.1508em" }}
             >
               <span className="pdf24_36 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:47.4668em;top:32.1506em;"
+              style={{ left: "47.4668em", top: "32.1506em" }}
             >
               <span className="pdf24_36 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:47.4668em;top:34.1504em;"
+              style={{ left: "47.4668em", top: "34.1504em" }}
             >
               <span className="pdf24_36 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:47.4668em;top:36.1502em;"
+              style={{ left: "47.4668em", top: "36.1502em" }}
             >
               <span className="pdf24_36 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:47.4668em;top:38.1499em;"
+              style={{ left: "47.4668em", top: "38.1499em" }}
             >
               <span className="pdf24_36 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
-            <div className="pdf24_01" style="left:4.425em;top:28.2238em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "4.425em", top: "28.2238em" }}
+            >
               <span
                 className="pdf24_31 pdf24_11 pdf24_16"
                 style={{ wordSpacing: "-0.0029em" }}
@@ -590,7 +767,10 @@ export function TC_40() {
                 &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:4.4249em;top:30.2238em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "4.4249em", top: "30.2238em" }}
+            >
               <span className="pdf24_31 pdf24_11 pdf24_38">T</span>
               <span className="pdf24_31 pdf24_11 pdf24_39">o</span>
               <span
@@ -600,7 +780,10 @@ export function TC_40() {
                 tal income - add line 4 and line 5 &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:4.425em;top:32.2238em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "4.425em", top: "32.2238em" }}
+            >
               <span
                 className="pdf24_31 pdf24_11 pdf24_16"
                 style={{ wordSpacing: "0.001em" }}
@@ -620,7 +803,10 @@ export function TC_40() {
                 (if any) &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:4.425em;top:34.2238em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "4.425em", top: "34.2238em" }}
+            >
               <span
                 className="pdf24_31 pdf24_11 pdf24_16"
                 style={{ wordSpacing: "-0.0029em" }}
@@ -629,7 +815,10 @@ export function TC_40() {
                 page 1) &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:4.4249em;top:36.2238em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "4.4249em", top: "36.2238em" }}
+            >
               <span
                 className="pdf24_19 pdf24_11 pdf24_20"
                 style={{ wordSpacing: "0.0002em" }}
@@ -643,16 +832,28 @@ export function TC_40() {
                 - subtract the sum of lines 7 and 8 from line 6 &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:38.344em;top:32.2238em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "38.344em", top: "32.2238em" }}
+            >
               <span className="pdf24_31 pdf24_11 pdf24_20">•</span>
             </div>
-            <div className="pdf24_01" style="left:38.3409em;top:34.2238em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "38.3409em", top: "34.2238em" }}
+            >
               <span className="pdf24_31 pdf24_11 pdf24_20">•</span>
             </div>
-            <div className="pdf24_01" style="left:38.3425em;top:36.2238em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "38.3425em", top: "36.2238em" }}
+            >
               <span className="pdf24_31 pdf24_11 pdf24_20">•</span>
             </div>
-            <div className="pdf24_01" style="left:3.2996em;top:38.2238em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "3.2996em", top: "38.2238em" }}
+            >
               <span
                 className="pdf24_31 pdf24_11 pdf24_39"
                 style={{ wordSpacing: "0.2979em" }}
@@ -695,7 +896,10 @@ export function TC_40() {
                 personal exemption (multiply line 2d by $2,111) &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:3.2989em;top:42.2238em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "3.2989em", top: "42.2238em" }}
+            >
               <span
                 className="pdf24_31 pdf24_11 pdf24_16"
                 style={{ wordSpacing: "0.2979em" }}
@@ -715,7 +919,10 @@ export function TC_40() {
                 standard or itemized deductions &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:3.2989em;top:44.2238em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "3.2989em", top: "44.2238em" }}
+            >
               <span
                 className="pdf24_31 pdf24_11 pdf24_12"
                 style={{ wordSpacing: "0.2976em" }}
@@ -735,7 +942,10 @@ export function TC_40() {
                 line 11 and line 12 &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:38.3387em;top:38.2238em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "38.3387em", top: "38.2238em" }}
+            >
               <span
                 className="pdf24_31 pdf24_11 pdf24_12"
                 style={{ wordSpacing: "0.0005em" }}
@@ -743,7 +953,10 @@ export function TC_40() {
                 • 10 &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:28.3962em;top:40.2238em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "28.3962em", top: "40.2238em" }}
+            >
               <span
                 className="pdf24_31 pdf24_11 pdf24_43"
                 style={{ wordSpacing: "0.1307em" }}
@@ -751,7 +964,10 @@ export function TC_40() {
                 • 11 &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:28.3789em;top:42.2238em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "28.3789em", top: "42.2238em" }}
+            >
               <span
                 className="pdf24_31 pdf24_11 pdf24_12"
                 style={{ wordSpacing: "0.0001em" }}
@@ -759,64 +975,70 @@ export function TC_40() {
                 • 12 &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:28.7956em;top:44.2238em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "28.7956em", top: "44.2238em" }}
+            >
               <span className="pdf24_31 pdf24_11 pdf24_39">13 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:37.3002em;top:40.1497em;"
+              style={{ left: "37.3002em", top: "40.1497em" }}
             >
               <span className="pdf24_36 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:37.3002em;top:42.1495em;"
+              style={{ left: "37.3002em", top: "42.1495em" }}
             >
               <span className="pdf24_36 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:37.3002em;top:44.1492em;"
+              style={{ left: "37.3002em", top: "44.1492em" }}
             >
               <span className="pdf24_36 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:37.3002em;top:46.149em;"
+              style={{ left: "37.3002em", top: "46.149em" }}
             >
               <span className="pdf24_36 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:37.3002em;top:48.1488em;"
+              style={{ left: "37.3002em", top: "48.1488em" }}
             >
               <span className="pdf24_36 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:37.3002em;top:50.1485em;"
+              style={{ left: "37.3002em", top: "50.1485em" }}
             >
               <span className="pdf24_36 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:37.3002em;top:52.1483em;"
+              style={{ left: "37.3002em", top: "52.1483em" }}
             >
               <span className="pdf24_36 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:37.3002em;top:54.1481em;"
+              style={{ left: "37.3002em", top: "54.1481em" }}
             >
               <span className="pdf24_36 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:37.3002em;top:56.1479em;"
+              style={{ left: "37.3002em", top: "56.1479em" }}
             >
               <span className="pdf24_36 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
-            <div className="pdf24_01" style="left:40.5093em;top:41.4211em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "40.5093em", top: "41.4211em" }}
+            >
               <span
                 className="pdf24_44 pdf24_11 pdf24_21"
                 style={{ wordSpacing: "0em" }}
@@ -824,7 +1046,10 @@ export function TC_40() {
                 Electronic filing &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:40.1126em;top:42.4208em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "40.1126em", top: "42.4208em" }}
+            >
               <span
                 className="pdf24_44 pdf24_11 pdf24_20"
                 style={{ wordSpacing: "0.0003em" }}
@@ -832,7 +1057,10 @@ export function TC_40() {
                 is quick, easy and &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:41.0508em;top:43.4206em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "41.0508em", top: "43.4206em" }}
+            >
               <span
                 className="pdf24_44 pdf24_11 pdf24_30"
                 style={{ wordSpacing: "0.0004em" }}
@@ -840,7 +1068,10 @@ export function TC_40() {
                 free, and will &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:39.3843em;top:44.4203em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "39.3843em", top: "44.4203em" }}
+            >
               <span
                 className="pdf24_44 pdf24_11 pdf24_30"
                 style={{ wordSpacing: "0.0003em" }}
@@ -848,7 +1079,10 @@ export function TC_40() {
                 speed up your refund. &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:3.2989em;top:46.2238em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "3.2989em", top: "46.2238em" }}
+            >
               <span
                 className="pdf24_31 pdf24_11 pdf24_18"
                 style={{ wordSpacing: "0.2971em" }}
@@ -869,7 +1103,10 @@ export function TC_40() {
                 and 5c &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:4.4237em;top:47.2238em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "4.4237em", top: "47.2238em" }}
+            >
               <span
                 className="pdf24_31 pdf24_11 pdf24_16"
                 style={{ wordSpacing: "0.0006em" }}
@@ -877,7 +1114,10 @@ export function TC_40() {
                 (not less than zero) &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:28.3786em;top:46.2238em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "28.3786em", top: "46.2238em" }}
+            >
               <span
                 className="pdf24_31 pdf24_11 pdf24_12"
                 style={{ wordSpacing: "0.0005em" }}
@@ -885,10 +1125,16 @@ export function TC_40() {
                 • 14 &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:28.7965em;top:48.2238em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "28.7965em", top: "48.2238em" }}
+            >
               <span className="pdf24_31 pdf24_11 pdf24_12">15 &nbsp;</span>
             </div>
-            <div className="pdf24_01" style="left:40.6616em;top:46.4206em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "40.6616em", top: "46.4206em" }}
+            >
               <span
                 className="pdf24_44 pdf24_11 pdf24_45"
                 style={{ wordSpacing: "0.0171em" }}
@@ -896,7 +1142,10 @@ export function TC_40() {
                 To learn more, &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:42.4053em;top:47.4203em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "42.4053em", top: "47.4203em" }}
+            >
               <span
                 className="pdf24_44 pdf24_11 pdf24_21"
                 style={{ wordSpacing: "0.0003em" }}
@@ -904,12 +1153,18 @@ export function TC_40() {
                 go to &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:41.0928em;top:48.42em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "41.0928em", top: "48.42em" }}
+            >
               <span className="pdf24_44 pdf24_11 pdf24_21">
                 tap.utah.gov &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:3.2989em;top:48.2238em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "3.2989em", top: "48.2238em" }}
+            >
               <span
                 className="pdf24_31 pdf24_11 pdf24_16"
                 style={{ wordSpacing: "0.2974em" }}
@@ -929,7 +1184,10 @@ export function TC_40() {
                 line 14 from line 13 &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:3.2989em;top:50.2238em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "3.2989em", top: "50.2238em" }}
+            >
               <span
                 className="pdf24_31 pdf24_11 pdf24_16"
                 style={{ wordSpacing: "0.2972em" }}
@@ -949,7 +1207,10 @@ export function TC_40() {
                 credit before phase-out - multiply line 15 by 6% (.06) &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:28.3773em;top:50.2238em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "28.3773em", top: "50.2238em" }}
+            >
               <span
                 className="pdf24_31 pdf24_11 pdf24_12"
                 style={{ wordSpacing: "0.0005em" }}
@@ -957,7 +1218,10 @@ export function TC_40() {
                 • 16 &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:28.3807em;top:52.2238em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "28.3807em", top: "52.2238em" }}
+            >
               <span
                 className="pdf24_31 pdf24_11 pdf24_12"
                 style={{ wordSpacing: "-0.0003em" }}
@@ -965,10 +1229,16 @@ export function TC_40() {
                 • 17 &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:28.7975em;top:54.2238em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "28.7975em", top: "54.2238em" }}
+            >
               <span className="pdf24_31 pdf24_11 pdf24_12">18 &nbsp;</span>
             </div>
-            <div className="pdf24_01" style="left:3.2989em;top:52.2238em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "3.2989em", top: "52.2238em" }}
+            >
               <span
                 className="pdf24_31 pdf24_11 pdf24_18"
                 style={{ wordSpacing: "0.2974em" }}
@@ -1006,7 +1276,10 @@ export function TC_40() {
                 (head of &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:4.4247em;top:53.2238em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "4.4247em", top: "53.2238em" }}
+            >
               <span
                 className="pdf24_31 pdf24_11 pdf24_16"
                 style={{ wordSpacing: "0.0014em" }}
@@ -1026,7 +1299,10 @@ export function TC_40() {
                 (married filing jointly or qualifying surviving spouse) &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:3.2996em;top:54.2238em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "3.2996em", top: "54.2238em" }}
+            >
               <span
                 className="pdf24_31 pdf24_11 pdf24_18"
                 style={{ wordSpacing: "0.2974em" }}
@@ -1047,7 +1323,10 @@ export function TC_40() {
                 than zero) &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:3.2996em;top:56.2238em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "3.2996em", top: "56.2238em" }}
+            >
               <span
                 className="pdf24_31 pdf24_11 pdf24_16"
                 style={{ wordSpacing: "0.2972em" }}
@@ -1067,7 +1346,10 @@ export function TC_40() {
                 amount - multiply line 18 by 1.3% (.013) &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:28.3777em;top:56.2238em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "28.3777em", top: "56.2238em" }}
+            >
               <span
                 className="pdf24_31 pdf24_11 pdf24_12"
                 style={{ wordSpacing: "0.0004em" }}
@@ -1075,7 +1357,10 @@ export function TC_40() {
                 • 19 &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:3.2996em;top:58.2238em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "3.2996em", top: "58.2238em" }}
+            >
               <span
                 className="pdf24_31 pdf24_11 pdf24_12"
                 style={{ wordSpacing: "0.2976em" }}
@@ -1099,7 +1384,10 @@ export function TC_40() {
                 &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:3.2996em;top:60.2238em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "3.2996em", top: "60.2238em" }}
+            >
               <span
                 className="pdf24_31 pdf24_11 pdf24_18"
                 style={{ wordSpacing: "0.2971em" }}
@@ -1120,7 +1408,10 @@ export function TC_40() {
                 worksheet in instr.) &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:3.2996em;top:62.2238em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "3.2996em", top: "62.2238em" }}
+            >
               <span
                 className="pdf24_31 pdf24_11 pdf24_39"
                 style={{ wordSpacing: "0.2979em" }}
@@ -1140,7 +1431,10 @@ export function TC_40() {
                 - subtract line 20 from line 10 (not less than zero) &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:38.4425em;top:58.2238em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "38.4425em", top: "58.2238em" }}
+            >
               <span
                 className="pdf24_31 pdf24_11 pdf24_12"
                 style={{ wordSpacing: "0.0247em" }}
@@ -1150,17 +1444,20 @@ export function TC_40() {
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:47.3002em;top:58.1477em;"
+              style={{ left: "47.3002em", top: "58.1477em" }}
             >
               <span className="pdf24_36 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:47.3002em;top:62.148em;"
+              style={{ left: "47.3002em", top: "62.148em" }}
             >
               <span className="pdf24_36 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
-            <div className="pdf24_01" style="left:28.3783em;top:60.2238em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "28.3783em", top: "60.2238em" }}
+            >
               <span
                 className="pdf24_31 pdf24_11 pdf24_12"
                 style={{ wordSpacing: "0.0005em" }}
@@ -1168,7 +1465,10 @@ export function TC_40() {
                 • 21 &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:38.3259em;top:62.2238em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "38.3259em", top: "62.2238em" }}
+            >
               <span
                 className="pdf24_31 pdf24_11 pdf24_12"
                 style={{ wordSpacing: "0.3087em" }}
@@ -1225,7 +1525,10 @@ export function TC_40() {
         </div>
         <div className="pdf24_view">
           <div className="pdf24_05 pdf24_06">
-            <div className="pdf24_01" style="left:7.3em;top:3.0931em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "7.3em", top: "3.0931em" }}
+            >
               <span
                 className="pdf24_52 pdf24_11 pdf24_20"
                 style={{ wordSpacing: "0.0004em" }}
@@ -1233,19 +1536,34 @@ export function TC_40() {
                 Non and Part-year Resident Schedule &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:40.4118em;top:3.0931em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "40.4118em", top: "3.0931em" }}
+            >
               <span className="pdf24_52 pdf24_11 pdf24_18">TC-40B &nbsp;</span>
             </div>
-            <div className="pdf24_01" style="left:40.4112em;top:4.0931em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "40.4112em", top: "4.0931em" }}
+            >
               <span className="pdf24_52 pdf24_11 pdf24_39">2025 &nbsp;</span>
             </div>
-            <div className="pdf24_01" style="left:3.1665em;top:4.0341em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "3.1665em", top: "4.0341em" }}
+            >
               <span className="pdf24_53 pdf24_15 pdf24_16">40506 &nbsp;</span>
             </div>
-            <div className="pdf24_01" style="left:7.2998em;top:4.3194em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "7.2998em", top: "4.3194em" }}
+            >
               <span className="pdf24_54 pdf24_11 pdf24_18">SSN &nbsp;</span>
             </div>
-            <div className="pdf24_01" style="left:3.3em;top:5.2974em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "3.3em", top: "5.2974em" }}
+            >
               <span
                 className="pdf24_55 pdf24_11 pdf24_20"
                 style={{ wordSpacing: "-0.0184em" }}
@@ -1253,7 +1571,10 @@ export function TC_40() {
                 USTC ORIGINAL FORM &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:21.0397em;top:4.3194em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "21.0397em", top: "4.3194em" }}
+            >
               <span
                 className="pdf24_54 pdf24_11 pdf24_16"
                 style={{ wordSpacing: "0.0008em" }}
@@ -1261,7 +1582,10 @@ export function TC_40() {
                 Last name &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:37.9688em;top:6.0004em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "37.9688em", top: "6.0004em" }}
+            >
               <span
                 className="pdf24_56 pdf24_15 pdf24_20"
                 style={{ wordSpacing: "0.9595em" }}
@@ -1269,7 +1593,10 @@ export function TC_40() {
                 / / &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:44.552em;top:6.0004em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "44.552em", top: "6.0004em" }}
+            >
               <span
                 className="pdf24_56 pdf24_15 pdf24_20"
                 style={{ wordSpacing: "0.9595em" }}
@@ -1277,7 +1604,7 @@ export function TC_40() {
                 / / &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:3.1em;top:6.208em;">
+            <div className="pdf24_01" style={{ left: "3.1em", top: "6.208em" }}>
               <span
                 className="pdf24_57 pdf24_11 pdf24_18"
                 style={{ wordSpacing: "0.0004em" }}
@@ -1285,10 +1612,16 @@ export function TC_40() {
                 Residency Status: &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:10.5445em;top:6.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "10.5445em", top: "6.2835em" }}
+            >
               <span className="pdf24_54 pdf24_11 pdf24_20">•</span>
             </div>
-            <div className="pdf24_01" style="left:12.7112em;top:6.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "12.7112em", top: "6.2835em" }}
+            >
               <span
                 className="pdf24_54 pdf24_11 pdf24_16"
                 style={{ wordSpacing: "0.0006em" }}
@@ -1296,10 +1629,16 @@ export function TC_40() {
                 Nonresident: Home state abbreviation: &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:27.2648em;top:6.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "27.2648em", top: "6.2835em" }}
+            >
               <span className="pdf24_54 pdf24_11 pdf24_20">•</span>
             </div>
-            <div className="pdf24_01" style="left:29.4869em;top:6.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "29.4869em", top: "6.2835em" }}
+            >
               <span
                 className="pdf24_54 pdf24_11 pdf24_16"
                 style={{ wordSpacing: "0.0007em" }}
@@ -1307,23 +1646,38 @@ export function TC_40() {
                 Part-year resident from: &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:42.0965em;top:6.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "42.0965em", top: "6.2835em" }}
+            >
               <span className="pdf24_54 pdf24_11 pdf24_30">to &nbsp;</span>
             </div>
-            <div className="pdf24_01" style="left:37.8778em;top:7.3589em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "37.8778em", top: "7.3589em" }}
+            >
               <span className="pdf24_58 pdf24_08 pdf24_20">
                 mm/dd/yy &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:44.5448em;top:7.3589em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "44.5448em", top: "7.3589em" }}
+            >
               <span className="pdf24_58 pdf24_08 pdf24_20">
                 mm/dd/yy &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:3.1em;top:9.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "3.1em", top: "9.2835em" }}
+            >
               <span className="pdf24_59 pdf24_11 pdf24_20">Income &nbsp;</span>
             </div>
-            <div className="pdf24_01" style="left:31.576em;top:9.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "31.576em", top: "9.2835em" }}
+            >
               <span
                 className="pdf24_59 pdf24_11 pdf24_60"
                 style={{ wordSpacing: "0.0004em" }}
@@ -1331,7 +1685,10 @@ export function TC_40() {
                 Col. A - UTAH &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:42.2678em;top:9.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "42.2678em", top: "9.2835em" }}
+            >
               <span
                 className="pdf24_59 pdf24_11 pdf24_61"
                 style={{ wordSpacing: "0.0265em" }}
@@ -1341,122 +1698,128 @@ export function TC_40() {
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:37.2608em;top:10.1848em;"
+              style={{ left: "37.2608em", top: "10.1848em" }}
             >
               <span className="pdf24_62 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:47.4732em;top:10.1848em;"
+              style={{ left: "47.4732em", top: "10.1848em" }}
             >
               <span className="pdf24_62 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:47.4732em;top:11.1851em;"
+              style={{ left: "47.4732em", top: "11.1851em" }}
             >
               <span className="pdf24_62 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:47.4732em;top:12.1853em;"
+              style={{ left: "47.4732em", top: "12.1853em" }}
             >
               <span className="pdf24_62 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:47.4732em;top:13.1857em;"
+              style={{ left: "47.4732em", top: "13.1857em" }}
             >
               <span className="pdf24_62 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:47.4732em;top:14.1859em;"
+              style={{ left: "47.4732em", top: "14.1859em" }}
             >
               <span className="pdf24_62 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:47.4732em;top:15.1862em;"
+              style={{ left: "47.4732em", top: "15.1862em" }}
             >
               <span className="pdf24_62 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:47.4732em;top:16.1865em;"
+              style={{ left: "47.4732em", top: "16.1865em" }}
             >
               <span className="pdf24_62 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:47.4732em;top:17.1867em;"
+              style={{ left: "47.4732em", top: "17.1867em" }}
             >
               <span className="pdf24_62 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:47.4732em;top:18.187em;"
+              style={{ left: "47.4732em", top: "18.187em" }}
             >
               <span className="pdf24_62 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:47.4732em;top:19.1873em;"
+              style={{ left: "47.4732em", top: "19.1873em" }}
             >
               <span className="pdf24_62 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:47.4732em;top:20.1876em;"
+              style={{ left: "47.4732em", top: "20.1876em" }}
             >
               <span className="pdf24_62 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:47.4732em;top:21.1879em;"
+              style={{ left: "47.4732em", top: "21.1879em" }}
             >
               <span className="pdf24_62 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:47.4732em;top:22.1881em;"
+              style={{ left: "47.4732em", top: "22.1881em" }}
             >
               <span className="pdf24_62 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:47.4732em;top:23.1884em;"
+              style={{ left: "47.4732em", top: "23.1884em" }}
             >
               <span className="pdf24_62 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:47.4732em;top:24.1887em;"
+              style={{ left: "47.4732em", top: "24.1887em" }}
             >
               <span className="pdf24_62 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:47.4732em;top:25.189em;"
+              style={{ left: "47.4732em", top: "25.189em" }}
             >
               <span className="pdf24_62 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:47.4732em;top:26.1893em;"
+              style={{ left: "47.4732em", top: "26.1893em" }}
             >
               <span className="pdf24_62 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:47.4732em;top:27.1895em;"
+              style={{ left: "47.4732em", top: "27.1895em" }}
             >
               <span className="pdf24_62 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
-            <div className="pdf24_01" style="left:3.1em;top:10.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "3.1em", top: "10.2835em" }}
+            >
               <span className="pdf24_54 pdf24_11 pdf24_20">1</span>
             </div>
-            <div className="pdf24_01" style="left:4.9889em;top:10.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "4.9889em", top: "10.2835em" }}
+            >
               <span
                 className="pdf24_54 pdf24_11 pdf24_63"
                 style={{ wordSpacing: "0.0032em" }}
@@ -1466,110 +1829,116 @@ export function TC_40() {
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:37.2608em;top:11.1851em;"
+              style={{ left: "37.2608em", top: "11.1851em" }}
             >
               <span className="pdf24_62 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:37.2608em;top:12.1853em;"
+              style={{ left: "37.2608em", top: "12.1853em" }}
             >
               <span className="pdf24_62 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:37.2608em;top:13.1857em;"
+              style={{ left: "37.2608em", top: "13.1857em" }}
             >
               <span className="pdf24_62 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:37.2608em;top:14.1859em;"
+              style={{ left: "37.2608em", top: "14.1859em" }}
             >
               <span className="pdf24_62 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:37.2608em;top:15.1862em;"
+              style={{ left: "37.2608em", top: "15.1862em" }}
             >
               <span className="pdf24_62 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:37.2608em;top:16.1865em;"
+              style={{ left: "37.2608em", top: "16.1865em" }}
             >
               <span className="pdf24_62 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:37.2608em;top:17.1867em;"
+              style={{ left: "37.2608em", top: "17.1867em" }}
             >
               <span className="pdf24_62 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:37.2608em;top:18.187em;"
+              style={{ left: "37.2608em", top: "18.187em" }}
             >
               <span className="pdf24_62 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:37.2608em;top:19.1873em;"
+              style={{ left: "37.2608em", top: "19.1873em" }}
             >
               <span className="pdf24_62 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:37.2608em;top:20.1876em;"
+              style={{ left: "37.2608em", top: "20.1876em" }}
             >
               <span className="pdf24_62 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:37.2608em;top:21.1879em;"
+              style={{ left: "37.2608em", top: "21.1879em" }}
             >
               <span className="pdf24_62 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:37.2608em;top:22.1881em;"
+              style={{ left: "37.2608em", top: "22.1881em" }}
             >
               <span className="pdf24_62 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:37.2608em;top:23.1884em;"
+              style={{ left: "37.2608em", top: "23.1884em" }}
             >
               <span className="pdf24_62 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:37.2608em;top:24.1887em;"
+              style={{ left: "37.2608em", top: "24.1887em" }}
             >
               <span className="pdf24_62 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:37.2608em;top:25.189em;"
+              style={{ left: "37.2608em", top: "25.189em" }}
             >
               <span className="pdf24_62 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:37.2608em;top:26.1893em;"
+              style={{ left: "37.2608em", top: "26.1893em" }}
             >
               <span className="pdf24_62 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:37.2608em;top:27.1895em;"
+              style={{ left: "37.2608em", top: "27.1895em" }}
             >
               <span className="pdf24_62 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
-            <div className="pdf24_01" style="left:3.1em;top:11.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "3.1em", top: "11.2835em" }}
+            >
               <span className="pdf24_54 pdf24_11 pdf24_20">2</span>
             </div>
-            <div className="pdf24_01" style="left:4.9889em;top:11.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "4.9889em", top: "11.2835em" }}
+            >
               <span className="pdf24_54 pdf24_11 pdf24_29">T</span>
               <span className="pdf24_54 pdf24_11 pdf24_12">a</span>
               <span
@@ -1579,10 +1948,16 @@ export function TC_40() {
                 xable interest income (1040, line 2b) &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:3.1em;top:12.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "3.1em", top: "12.2835em" }}
+            >
               <span className="pdf24_54 pdf24_11 pdf24_20">3</span>
             </div>
-            <div className="pdf24_01" style="left:4.9889em;top:12.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "4.9889em", top: "12.2835em" }}
+            >
               <span
                 className="pdf24_54 pdf24_11 pdf24_16"
                 style={{ wordSpacing: "0.0007em" }}
@@ -1590,10 +1965,16 @@ export function TC_40() {
                 Ordinary dividends (1040, line 3b) &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:3.1em;top:13.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "3.1em", top: "13.2835em" }}
+            >
               <span className="pdf24_54 pdf24_11 pdf24_20">4</span>
             </div>
-            <div className="pdf24_01" style="left:4.9889em;top:13.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "4.9889em", top: "13.2835em" }}
+            >
               <span
                 className="pdf24_54 pdf24_11 pdf24_18"
                 style={{ wordSpacing: "0.0006em" }}
@@ -1602,7 +1983,10 @@ export function TC_40() {
                 and 5b) &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:4.9889em;top:14.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "4.9889em", top: "14.2835em" }}
+            >
               <span
                 className="pdf24_54 pdf24_11 pdf24_16"
                 style={{ wordSpacing: "0.0006em" }}
@@ -1610,15 +1994,21 @@ export function TC_40() {
                 Social Security benefits - taxable amount (1040, line 6b) &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:3.1em;top:14.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "3.1em", top: "14.2835em" }}
+            >
               <span className="pdf24_54 pdf24_11 pdf24_20">5</span>
             </div>
-            <div className="pdf24_01" style="left:3.1em;top:15.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "3.1em", top: "15.2835em" }}
+            >
               <span className="pdf24_54 pdf24_11 pdf24_20">6</span>
             </div>
             <div
               className="pdf24_01"
-              style="left:4.9882em;top:15.2835em;z-index:339;"
+              style={{ left: "4.9882em", top: "15.2835em;z-index:339" }}
             >
               <span className="pdf24_54 pdf24_11 pdf24_64">T</span>
               <span className="pdf24_54 pdf24_11 pdf24_60">a</span>
@@ -1630,7 +2020,10 @@ export function TC_40() {
                 Schedule 1, line 1) &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:4.9889em;top:16.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "4.9889em", top: "16.2835em" }}
+            >
               <span
                 className="pdf24_54 pdf24_11 pdf24_66"
                 style={{ wordSpacing: "-0.003em" }}
@@ -1638,13 +2031,22 @@ export function TC_40() {
                 Alimony received (1040, Schedule 1, line 2a) &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:3.1em;top:16.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "3.1em", top: "16.2835em" }}
+            >
               <span className="pdf24_54 pdf24_11 pdf24_20">7</span>
             </div>
-            <div className="pdf24_01" style="left:3.1em;top:17.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "3.1em", top: "17.2835em" }}
+            >
               <span className="pdf24_54 pdf24_11 pdf24_20">8</span>
             </div>
-            <div className="pdf24_01" style="left:4.9889em;top:17.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "4.9889em", top: "17.2835em" }}
+            >
               <span
                 className="pdf24_54 pdf24_11 pdf24_13"
                 style={{ wordSpacing: "-0.0009em" }}
@@ -1652,7 +2054,10 @@ export function TC_40() {
                 Business income or loss (1040, Schedule 1, line 3) &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:4.9889em;top:18.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "4.9889em", top: "18.2835em" }}
+            >
               <span
                 className="pdf24_54 pdf24_11 pdf24_16"
                 style={{ wordSpacing: "-0.0032em" }}
@@ -1660,37 +2065,70 @@ export function TC_40() {
                 Capital gain or loss (1040, line 7a) &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:3.1em;top:18.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "3.1em", top: "18.2835em" }}
+            >
               <span className="pdf24_54 pdf24_11 pdf24_20">9</span>
             </div>
-            <div className="pdf24_01" style="left:3.1em;top:19.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "3.1em", top: "19.2835em" }}
+            >
               <span className="pdf24_54 pdf24_11 pdf24_12">10 &nbsp;</span>
             </div>
-            <div className="pdf24_01" style="left:3.1em;top:20.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "3.1em", top: "20.2835em" }}
+            >
               <span className="pdf24_54 pdf24_11 pdf24_67">11 &nbsp;</span>
             </div>
-            <div className="pdf24_01" style="left:3.1em;top:21.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "3.1em", top: "21.2835em" }}
+            >
               <span className="pdf24_54 pdf24_11 pdf24_12">12 &nbsp;</span>
             </div>
-            <div className="pdf24_01" style="left:3.1em;top:22.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "3.1em", top: "22.2835em" }}
+            >
               <span className="pdf24_54 pdf24_11 pdf24_16">13 &nbsp;</span>
             </div>
-            <div className="pdf24_01" style="left:3.1em;top:23.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "3.1em", top: "23.2835em" }}
+            >
               <span className="pdf24_54 pdf24_11 pdf24_12">14 &nbsp;</span>
             </div>
-            <div className="pdf24_01" style="left:3.1em;top:24.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "3.1em", top: "24.2835em" }}
+            >
               <span className="pdf24_54 pdf24_11 pdf24_12">15 &nbsp;</span>
             </div>
-            <div className="pdf24_01" style="left:3.1em;top:25.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "3.1em", top: "25.2835em" }}
+            >
               <span className="pdf24_54 pdf24_11 pdf24_12">16 &nbsp;</span>
             </div>
-            <div className="pdf24_01" style="left:3.1em;top:26.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "3.1em", top: "26.2835em" }}
+            >
               <span className="pdf24_54 pdf24_11 pdf24_12">17 &nbsp;</span>
             </div>
-            <div className="pdf24_01" style="left:3.1em;top:27.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "3.1em", top: "27.2835em" }}
+            >
               <span className="pdf24_54 pdf24_11 pdf24_12">18 &nbsp;</span>
             </div>
-            <div className="pdf24_01" style="left:4.9887em;top:19.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "4.9887em", top: "19.2835em" }}
+            >
               <span
                 className="pdf24_54 pdf24_11 pdf24_66"
                 style={{ wordSpacing: "-0.0004em" }}
@@ -1698,7 +2136,10 @@ export function TC_40() {
                 Other gains or losses (1040, Schedule 1, line 4) &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:4.9882em;top:20.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "4.9882em", top: "20.2835em" }}
+            >
               <span
                 className="pdf24_54 pdf24_11 pdf24_68"
                 style={{ wordSpacing: "0.0026em" }}
@@ -1707,7 +2148,10 @@ export function TC_40() {
                 etc. (1040, Schd 1, line 5) &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:4.9887em;top:21.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "4.9887em", top: "21.2835em" }}
+            >
               <span
                 className="pdf24_54 pdf24_11 pdf24_16"
                 style={{ wordSpacing: "0.0007em" }}
@@ -1715,7 +2159,10 @@ export function TC_40() {
                 Farm income or loss (1040, Schedule 1, line 6) &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:4.9888em;top:22.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "4.9888em", top: "22.2835em" }}
+            >
               <span
                 className="pdf24_54 pdf24_11 pdf24_69"
                 style={{ wordSpacing: "-0.0042em" }}
@@ -1723,7 +2170,10 @@ export function TC_40() {
                 Unemployment compensation (1040, Schedule 1, line 7) &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:4.9888em;top:23.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "4.9888em", top: "23.2835em" }}
+            >
               <span
                 className="pdf24_54 pdf24_11 pdf24_70"
                 style={{ wordSpacing: "-0.0016em" }}
@@ -1731,7 +2181,10 @@ export function TC_40() {
                 Other income (1040, Schedule 1, line 9) &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:4.9887em;top:24.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "4.9887em", top: "24.2835em" }}
+            >
               <span
                 className="pdf24_54 pdf24_11 pdf24_16"
                 style={{ wordSpacing: "-0.0009em" }}
@@ -1740,17 +2193,26 @@ export function TC_40() {
                 Utah column) &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:4.9887em;top:25.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "4.9887em", top: "25.2835em" }}
+            >
               <span className="pdf24_54 pdf24_11 pdf24_16">
                 Reserved &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:4.9887em;top:26.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "4.9887em", top: "26.2835em" }}
+            >
               <span className="pdf24_54 pdf24_11 pdf24_16">
                 Reserved &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:4.9887em;top:27.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "4.9887em", top: "27.2835em" }}
+            >
               <span className="pdf24_54 pdf24_11 pdf24_29">T</span>
               <span className="pdf24_54 pdf24_11 pdf24_12">o</span>
               <span
@@ -1761,12 +2223,18 @@ export function TC_40() {
                 B &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:3.1em;top:29.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "3.1em", top: "29.2835em" }}
+            >
               <span className="pdf24_59 pdf24_11 pdf24_20">
                 Adjustments &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:4.9891em;top:30.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "4.9891em", top: "30.2835em" }}
+            >
               <span
                 className="pdf24_54 pdf24_11 pdf24_71"
                 style={{ wordSpacing: "0.0015em" }}
@@ -1774,7 +2242,10 @@ export function TC_40() {
                 Educator expenses (1040, Schedule 1, line 11) &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:31.5647em;top:29.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "31.5647em", top: "29.2835em" }}
+            >
               <span
                 className="pdf24_59 pdf24_11 pdf24_60"
                 style={{ wordSpacing: "0.0004em" }}
@@ -1782,7 +2253,10 @@ export function TC_40() {
                 Col. A - UTAH &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:42.3231em;top:29.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "42.3231em", top: "29.2835em" }}
+            >
               <span
                 className="pdf24_59 pdf24_11 pdf24_61"
                 style={{ wordSpacing: "0.0265em" }}
@@ -1792,290 +2266,350 @@ export function TC_40() {
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:37.2608em;top:30.1896em;"
+              style={{ left: "37.2608em", top: "30.1896em" }}
             >
               <span className="pdf24_62 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:37.2608em;top:31.1899em;"
+              style={{ left: "37.2608em", top: "31.1899em" }}
             >
               <span className="pdf24_62 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:37.2608em;top:32.1901em;"
+              style={{ left: "37.2608em", top: "32.1901em" }}
             >
               <span className="pdf24_62 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:37.2608em;top:33.1905em;"
+              style={{ left: "37.2608em", top: "33.1905em" }}
             >
               <span className="pdf24_62 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:37.2608em;top:34.1907em;"
+              style={{ left: "37.2608em", top: "34.1907em" }}
             >
               <span className="pdf24_62 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:37.2608em;top:35.191em;"
+              style={{ left: "37.2608em", top: "35.191em" }}
             >
               <span className="pdf24_62 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:37.2608em;top:36.1913em;"
+              style={{ left: "37.2608em", top: "36.1913em" }}
             >
               <span className="pdf24_62 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:37.2608em;top:37.1915em;"
+              style={{ left: "37.2608em", top: "37.1915em" }}
             >
               <span className="pdf24_62 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:37.2608em;top:38.1919em;"
+              style={{ left: "37.2608em", top: "38.1919em" }}
             >
               <span className="pdf24_62 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:37.2608em;top:39.1922em;"
+              style={{ left: "37.2608em", top: "39.1922em" }}
             >
               <span className="pdf24_62 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:37.2608em;top:40.1924em;"
+              style={{ left: "37.2608em", top: "40.1924em" }}
             >
               <span className="pdf24_62 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:37.2608em;top:41.1927em;"
+              style={{ left: "37.2608em", top: "41.1927em" }}
             >
               <span className="pdf24_62 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:37.2608em;top:42.193em;"
+              style={{ left: "37.2608em", top: "42.193em" }}
             >
               <span className="pdf24_62 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:37.2608em;top:43.1933em;"
+              style={{ left: "37.2608em", top: "43.1933em" }}
             >
               <span className="pdf24_62 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:37.2608em;top:44.1936em;"
+              style={{ left: "37.2608em", top: "44.1936em" }}
             >
               <span className="pdf24_62 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:37.2608em;top:45.1938em;"
+              style={{ left: "37.2608em", top: "45.1938em" }}
             >
               <span className="pdf24_62 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:37.2608em;top:46.1941em;"
+              style={{ left: "37.2608em", top: "46.1941em" }}
             >
               <span className="pdf24_62 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:37.2608em;top:47.1944em;"
+              style={{ left: "37.2608em", top: "47.1944em" }}
             >
               <span className="pdf24_62 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:37.2608em;top:48.1947em;"
+              style={{ left: "37.2608em", top: "48.1947em" }}
             >
               <span className="pdf24_62 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:47.4732em;top:30.1896em;"
+              style={{ left: "47.4732em", top: "30.1896em" }}
             >
               <span className="pdf24_62 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:47.4732em;top:31.1899em;"
+              style={{ left: "47.4732em", top: "31.1899em" }}
             >
               <span className="pdf24_62 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:47.4732em;top:32.1901em;"
+              style={{ left: "47.4732em", top: "32.1901em" }}
             >
               <span className="pdf24_62 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:47.4732em;top:33.1905em;"
+              style={{ left: "47.4732em", top: "33.1905em" }}
             >
               <span className="pdf24_62 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:47.4732em;top:34.1907em;"
+              style={{ left: "47.4732em", top: "34.1907em" }}
             >
               <span className="pdf24_62 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:47.4732em;top:35.191em;"
+              style={{ left: "47.4732em", top: "35.191em" }}
             >
               <span className="pdf24_62 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:47.4732em;top:36.1913em;"
+              style={{ left: "47.4732em", top: "36.1913em" }}
             >
               <span className="pdf24_62 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:47.4732em;top:37.1915em;"
+              style={{ left: "47.4732em", top: "37.1915em" }}
             >
               <span className="pdf24_62 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:47.4732em;top:38.1919em;"
+              style={{ left: "47.4732em", top: "38.1919em" }}
             >
               <span className="pdf24_62 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:47.4732em;top:39.1922em;"
+              style={{ left: "47.4732em", top: "39.1922em" }}
             >
               <span className="pdf24_62 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:47.4732em;top:40.1924em;"
+              style={{ left: "47.4732em", top: "40.1924em" }}
             >
               <span className="pdf24_62 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:47.4732em;top:41.1927em;"
+              style={{ left: "47.4732em", top: "41.1927em" }}
             >
               <span className="pdf24_62 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:47.4732em;top:42.193em;"
+              style={{ left: "47.4732em", top: "42.193em" }}
             >
               <span className="pdf24_62 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:47.4732em;top:43.1933em;"
+              style={{ left: "47.4732em", top: "43.1933em" }}
             >
               <span className="pdf24_62 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:47.4732em;top:44.1936em;"
+              style={{ left: "47.4732em", top: "44.1936em" }}
             >
               <span className="pdf24_62 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:47.4732em;top:45.1938em;"
+              style={{ left: "47.4732em", top: "45.1938em" }}
             >
               <span className="pdf24_62 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:47.4732em;top:46.1941em;"
+              style={{ left: "47.4732em", top: "46.1941em" }}
             >
               <span className="pdf24_62 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:47.4732em;top:47.1944em;"
+              style={{ left: "47.4732em", top: "47.1944em" }}
             >
               <span className="pdf24_62 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:47.4732em;top:48.1947em;"
+              style={{ left: "47.4732em", top: "48.1947em" }}
             >
               <span className="pdf24_62 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
-            <div className="pdf24_01" style="left:3.1003em;top:30.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "3.1003em", top: "30.2835em" }}
+            >
               <span className="pdf24_54 pdf24_11 pdf24_16">19 &nbsp;</span>
             </div>
-            <div className="pdf24_01" style="left:3.1003em;top:31.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "3.1003em", top: "31.2835em" }}
+            >
               <span className="pdf24_54 pdf24_11 pdf24_16">20 &nbsp;</span>
             </div>
-            <div className="pdf24_01" style="left:3.1003em;top:32.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "3.1003em", top: "32.2835em" }}
+            >
               <span className="pdf24_54 pdf24_11 pdf24_12">21 &nbsp;</span>
             </div>
-            <div className="pdf24_01" style="left:3.1003em;top:33.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "3.1003em", top: "33.2835em" }}
+            >
               <span className="pdf24_54 pdf24_11 pdf24_39">22 &nbsp;</span>
             </div>
-            <div className="pdf24_01" style="left:3.1003em;top:34.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "3.1003em", top: "34.2835em" }}
+            >
               <span className="pdf24_54 pdf24_11 pdf24_16">23 &nbsp;</span>
             </div>
-            <div className="pdf24_01" style="left:3.1003em;top:35.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "3.1003em", top: "35.2835em" }}
+            >
               <span className="pdf24_54 pdf24_11 pdf24_12">24 &nbsp;</span>
             </div>
-            <div className="pdf24_01" style="left:3.1003em;top:36.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "3.1003em", top: "36.2835em" }}
+            >
               <span className="pdf24_54 pdf24_11 pdf24_12">25 &nbsp;</span>
             </div>
-            <div className="pdf24_01" style="left:3.1003em;top:37.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "3.1003em", top: "37.2835em" }}
+            >
               <span className="pdf24_54 pdf24_11 pdf24_16">26 &nbsp;</span>
             </div>
-            <div className="pdf24_01" style="left:3.1003em;top:38.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "3.1003em", top: "38.2835em" }}
+            >
               <span className="pdf24_54 pdf24_11 pdf24_12">27 &nbsp;</span>
             </div>
-            <div className="pdf24_01" style="left:3.1003em;top:39.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "3.1003em", top: "39.2835em" }}
+            >
               <span className="pdf24_54 pdf24_11 pdf24_12">28 &nbsp;</span>
             </div>
-            <div className="pdf24_01" style="left:3.1003em;top:40.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "3.1003em", top: "40.2835em" }}
+            >
               <span className="pdf24_54 pdf24_11 pdf24_12">29 &nbsp;</span>
             </div>
-            <div className="pdf24_01" style="left:3.1003em;top:41.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "3.1003em", top: "41.2835em" }}
+            >
               <span className="pdf24_54 pdf24_11 pdf24_12">30 &nbsp;</span>
             </div>
-            <div className="pdf24_01" style="left:3.1003em;top:42.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "3.1003em", top: "42.2835em" }}
+            >
               <span className="pdf24_54 pdf24_11 pdf24_12">31 &nbsp;</span>
             </div>
-            <div className="pdf24_01" style="left:3.1003em;top:43.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "3.1003em", top: "43.2835em" }}
+            >
               <span className="pdf24_54 pdf24_11 pdf24_12">32 &nbsp;</span>
             </div>
-            <div className="pdf24_01" style="left:3.1003em;top:44.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "3.1003em", top: "44.2835em" }}
+            >
               <span className="pdf24_54 pdf24_11 pdf24_26">33 &nbsp;</span>
             </div>
-            <div className="pdf24_01" style="left:3.1003em;top:45.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "3.1003em", top: "45.2835em" }}
+            >
               <span className="pdf24_54 pdf24_11 pdf24_60">34 &nbsp;</span>
             </div>
-            <div className="pdf24_01" style="left:3.1003em;top:46.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "3.1003em", top: "46.2835em" }}
+            >
               <span className="pdf24_54 pdf24_11 pdf24_60">35 &nbsp;</span>
             </div>
-            <div className="pdf24_01" style="left:3.1003em;top:47.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "3.1003em", top: "47.2835em" }}
+            >
               <span className="pdf24_54 pdf24_11 pdf24_12">36 &nbsp;</span>
             </div>
-            <div className="pdf24_01" style="left:3.1003em;top:48.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "3.1003em", top: "48.2835em" }}
+            >
               <span className="pdf24_54 pdf24_11 pdf24_12">37 &nbsp;</span>
             </div>
-            <div className="pdf24_01" style="left:4.9891em;top:31.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "4.9891em", top: "31.2835em" }}
+            >
               <span
                 className="pdf24_54 pdf24_11 pdf24_72"
                 style={{ wordSpacing: "-0.0028em" }}
@@ -2084,7 +2618,10 @@ export function TC_40() {
                 (1040, Schd 1, line 12) &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:4.9889em;top:32.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "4.9889em", top: "32.2835em" }}
+            >
               <span
                 className="pdf24_54 pdf24_11 pdf24_73"
                 style={{ wordSpacing: "-0.0023em" }}
@@ -2093,7 +2630,10 @@ export function TC_40() {
                 &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:4.9885em;top:33.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "4.9885em", top: "33.2835em" }}
+            >
               <span
                 className="pdf24_54 pdf24_11 pdf24_74"
                 style={{ wordSpacing: "-0.0081em" }}
@@ -2102,7 +2642,10 @@ export function TC_40() {
                 expenses moving into Utah &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:4.9891em;top:34.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "4.9891em", top: "34.2835em" }}
+            >
               <span
                 className="pdf24_54 pdf24_11 pdf24_46"
                 style={{ wordSpacing: "-0.0003em" }}
@@ -2113,7 +2656,7 @@ export function TC_40() {
             </div>
             <div
               className="pdf24_01"
-              style="left:4.989em;top:35.2835em;z-index:1260;"
+              style={{ left: "4.989em", top: "35.2835em;z-index:1260" }}
             >
               <span
                 className="pdf24_54 pdf24_11 pdf24_16"
@@ -2136,7 +2679,10 @@ export function TC_40() {
                 IMPLE and qualified plans (1040, Schedule 1, line 16) &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:4.989em;top:36.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "4.989em", top: "36.2835em" }}
+            >
               <span
                 className="pdf24_54 pdf24_11 pdf24_77"
                 style={{ wordSpacing: "-0.0032em" }}
@@ -2145,7 +2691,10 @@ export function TC_40() {
                 17) &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:4.9891em;top:37.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "4.9891em", top: "37.2835em" }}
+            >
               <span
                 className="pdf24_54 pdf24_11 pdf24_77"
                 style={{ wordSpacing: "-0.0002em" }}
@@ -2154,7 +2703,10 @@ export function TC_40() {
                 18) &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:4.989em;top:38.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "4.989em", top: "38.2835em" }}
+            >
               <span
                 className="pdf24_54 pdf24_11 pdf24_78"
                 style={{ wordSpacing: "-0.0001em" }}
@@ -2162,7 +2714,10 @@ export function TC_40() {
                 Alimony paid (1040, Schedule 1, line 19a) &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:4.989em;top:39.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "4.989em", top: "39.2835em" }}
+            >
               <span
                 className="pdf24_54 pdf24_11 pdf24_78"
                 style={{ wordSpacing: "-0.0113em" }}
@@ -2170,7 +2725,10 @@ export function TC_40() {
                 IRA deduction (1040, Schedule 1, line 20) &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:4.989em;top:40.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "4.989em", top: "40.2835em" }}
+            >
               <span
                 className="pdf24_54 pdf24_11 pdf24_79"
                 style={{ wordSpacing: "-0.002em" }}
@@ -2179,17 +2737,26 @@ export function TC_40() {
                 &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:4.9889em;top:41.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "4.9889em", top: "41.2835em" }}
+            >
               <span className="pdf24_54 pdf24_11 pdf24_16">
                 Reserved &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:4.9889em;top:42.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "4.9889em", top: "42.2835em" }}
+            >
               <span className="pdf24_54 pdf24_11 pdf24_16">
                 Reserved &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:4.9889em;top:43.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "4.9889em", top: "43.2835em" }}
+            >
               <span
                 className="pdf24_54 pdf24_11 pdf24_16"
                 style={{ wordSpacing: "0.0006em" }}
@@ -2198,7 +2765,10 @@ export function TC_40() {
                 1 &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:4.9876em;top:44.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "4.9876em", top: "44.2835em" }}
+            >
               <span
                 className="pdf24_54 pdf24_11 pdf24_80"
                 style={{ wordSpacing: "-0.001em" }}
@@ -2207,17 +2777,26 @@ export function TC_40() {
                 in Utah column) &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:4.9889em;top:45.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "4.9889em", top: "45.2835em" }}
+            >
               <span className="pdf24_54 pdf24_11 pdf24_80">
                 Reserved &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:4.9889em;top:46.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "4.9889em", top: "46.2835em" }}
+            >
               <span className="pdf24_54 pdf24_11 pdf24_80">
                 Reserved &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:4.9891em;top:47.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "4.9891em", top: "47.2835em" }}
+            >
               <span
                 className="pdf24_54 pdf24_11 pdf24_18"
                 style={{ wordSpacing: "0.0007em" }}
@@ -2225,7 +2804,10 @@ export function TC_40() {
                 (see instructions): &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:4.9336em;top:48.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "4.9336em", top: "48.2835em" }}
+            >
               <span className="pdf24_54 pdf24_11 pdf24_29">T</span>
               <span className="pdf24_54 pdf24_11 pdf24_12">o</span>
               <span
@@ -2238,20 +2820,26 @@ export function TC_40() {
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:37.2608em;top:51.1947em;"
+              style={{ left: "37.2608em", top: "51.1947em" }}
             >
               <span className="pdf24_62 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:47.4732em;top:51.1947em;"
+              style={{ left: "47.4732em", top: "51.1947em" }}
             >
               <span className="pdf24_62 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
-            <div className="pdf24_01" style="left:3.1003em;top:51.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "3.1003em", top: "51.2835em" }}
+            >
               <span className="pdf24_54 pdf24_11 pdf24_12">38 &nbsp;</span>
             </div>
-            <div className="pdf24_01" style="left:5.0443em;top:51.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "5.0443em", top: "51.2835em" }}
+            >
               <span
                 className="pdf24_54 pdf24_11 pdf24_16"
                 style={{ wordSpacing: "-0.0092em" }}
@@ -2259,7 +2847,10 @@ export function TC_40() {
                 Subtract line 37 from line 18 for both columns A and B &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:5.0445em;top:52.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "5.0445em", top: "52.2835em" }}
+            >
               <span
                 className="pdf24_54 pdf24_11 pdf24_16"
                 style={{ wordSpacing: "-0.0013em" }}
@@ -2267,13 +2858,22 @@ export function TC_40() {
                 Line 38, column B must equal TC-40, line 9 &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:29.649em;top:51.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "29.649em", top: "51.2835em" }}
+            >
               <span className="pdf24_54 pdf24_11 pdf24_20">•</span>
             </div>
-            <div className="pdf24_01" style="left:39.8212em;top:51.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "39.8212em", top: "51.2835em" }}
+            >
               <span className="pdf24_54 pdf24_11 pdf24_20">•</span>
             </div>
-            <div className="pdf24_01" style="left:3.1003em;top:54.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "3.1003em", top: "54.2835em" }}
+            >
               <span
                 className="pdf24_59 pdf24_11 pdf24_81"
                 style={{ wordSpacing: "0.0068em" }}
@@ -2281,16 +2881,28 @@ export function TC_40() {
                 Non or Part-year Resident Utah Tax &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:3.1003em;top:55.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "3.1003em", top: "55.2835em" }}
+            >
               <span className="pdf24_54 pdf24_11 pdf24_12">39 &nbsp;</span>
             </div>
-            <div className="pdf24_01" style="left:3.1003em;top:57.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "3.1003em", top: "57.2835em" }}
+            >
               <span className="pdf24_54 pdf24_11 pdf24_12">40 &nbsp;</span>
             </div>
-            <div className="pdf24_01" style="left:3.1003em;top:59.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "3.1003em", top: "59.2835em" }}
+            >
               <span className="pdf24_54 pdf24_11 pdf24_39">41 &nbsp;</span>
             </div>
-            <div className="pdf24_01" style="left:5.0443em;top:55.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "5.0443em", top: "55.2835em" }}
+            >
               <span
                 className="pdf24_54 pdf24_11 pdf24_16"
                 style={{ wordSpacing: "-0.0046em" }}
@@ -2299,7 +2911,10 @@ export function TC_40() {
                 places, not more than 1.0000 or less than 0.0000) &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:5.0443em;top:57.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "5.0443em", top: "57.2835em" }}
+            >
               <span
                 className="pdf24_54 pdf24_11 pdf24_16"
                 style={{ wordSpacing: "-0.0016em" }}
@@ -2308,7 +2923,10 @@ export function TC_40() {
                 (not less than zero) here &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:5.0449em;top:59.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "5.0449em", top: "59.2835em" }}
+            >
               <span
                 className="pdf24_59 pdf24_11 pdf24_82"
                 style={{ wordSpacing: "0.0584em" }}
@@ -2323,25 +2941,34 @@ export function TC_40() {
                 page 2, line 25 &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:39.2076em;top:55.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "39.2076em", top: "55.2835em" }}
+            >
               <span className="pdf24_54 pdf24_11 pdf24_12">39 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:47.4734em;top:57.1853em;"
+              style={{ left: "47.4734em", top: "57.1853em" }}
             >
               <span className="pdf24_62 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
             <div
               className="pdf24_01 pdf24_35"
-              style="left:47.4734em;top:59.1851em;"
+              style={{ left: "47.4734em", top: "59.1851em" }}
             >
               <span className="pdf24_62 pdf24_37 pdf24_18">.00 &nbsp;</span>
             </div>
-            <div className="pdf24_01" style="left:39.2078em;top:57.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "39.2078em", top: "57.2835em" }}
+            >
               <span className="pdf24_54 pdf24_11 pdf24_12">40 &nbsp;</span>
             </div>
-            <div className="pdf24_01" style="left:38.5942em;top:59.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "38.5942em", top: "59.2835em" }}
+            >
               <span
                 className="pdf24_54 pdf24_11 pdf24_12"
                 style={{ wordSpacing: "0.2978em" }}
@@ -2349,7 +2976,10 @@ export function TC_40() {
                 • 41 &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:19.4696em;top:61.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "19.4696em", top: "61.2835em" }}
+            >
               <span
                 className="pdf24_59 pdf24_11 pdf24_78"
                 style={{ wordSpacing: "0.0045em" }}
@@ -2357,7 +2987,10 @@ export function TC_40() {
                 Submit this page ONLY if data entered. &nbsp;
               </span>
             </div>
-            <div className="pdf24_01" style="left:16.0496em;top:62.2835em;">
+            <div
+              className="pdf24_01"
+              style={{ left: "16.0496em", top: "62.2835em" }}
+            >
               <span
                 className="pdf24_59 pdf24_11 pdf24_83"
                 style={{ wordSpacing: "0.0041em" }}

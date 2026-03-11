@@ -1,12 +1,11 @@
 import { createRoot } from "react-dom/client";
 import "./index.css";
 
-import { TC_40 } from "./components/TC-40.tsx";
+import { TC_40 } from "./components/Income/TC-40.tsx";
 
 function App() {
   return (
-    <div>
-      <p className="text-white">Test</p>
+    <div className="text-black">
       <TC_40 />
     </div>
   );

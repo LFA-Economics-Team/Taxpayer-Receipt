@@ -1,11 +1,15 @@
 import { createRoot } from "react-dom/client";
 import "./index.css";
+import { HomeContent } from "./components/Home/HomeContent";
+import { Header } from "./components/MetaMisc/Header";
+import { Footer } from "./components/MetaMisc/Footer";
 
 function App() {
   return (
-    <div className="flex-col text-black h-screen w-screen">
-      <p>Test</p>
-      <div className="w-full h-1/10 bg-blue-500"> Test 2</div>
+    <div className="flex flex-col h-screen w-screen justify-between">
+      <Header />
+      <HomeContent />
+      <Footer />
     </div>
   );
 }

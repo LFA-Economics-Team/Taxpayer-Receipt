@@ -29,6 +29,7 @@
   - Gross income
   - Filing Status
   - Number of Dependents
+  - Residence/ partial year-income
 
 # Sales Tax
 

@@ -1,5 +1,5 @@
 "use client";
 
 export function IncomeContent() {
-  return <div> </div>;
+  return <div className="text-black">Test</div>;
 }

@@ -1,34 +1,29 @@
+import { NavLink } from "react-router-dom";
+
+const linkClass = () =>
+  `flex p-2 place-self-center text-white no-underline rounded-xl hover:bg-[#5e5a52] `;
+
 export function NavBar() {
   return (
     <div className="flex ml-8 text-xl flex-row justify-start  w-2/4 min-w-120 font-bold">
-      <div className="flex p-2 place-self-center text-white no-underline rounded-xl hover:bg-[#5e5a52] pr-4 border-r-4">
+      <NavLink to="/" end className={linkClass}>
         Taxpayer Reciept
-      </div>
-      <div className="flex flex-row gap-8 pl-4 ">
-        <div className="flex p-2 place-self-center text-white no-underline rounded-xl hover:bg-[#5e5a52]">
+      </NavLink>
+      <div className="w-0.5 h-8 bg-white/80 ml-2 self-center rounded-full" />
+      <div className="flex flex-row gap-4 pl-4">
+        <NavLink to="/income" className={linkClass}>
           Income
-        </div>
-        <div className="flex p-2 place-self-center text-white no-underline rounded-xl hover:bg-[#5e5a52]">
+        </NavLink>
+        <NavLink to="/sales" className={linkClass}>
           Sales
-        </div>
-        <div className="flex p-2 place-self-center text-white no-underline rounded-xl hover:bg-[#5e5a52]">
+        </NavLink>
+        <NavLink to="/property" className={linkClass}>
           Property
-        </div>
-        <div className="flex p-2 place-self-center text-white no-underline rounded-xl hover:bg-[#5e5a52]">
+        </NavLink>
+        <NavLink to="/fees" className={linkClass}>
           Fuel & Fees
-        </div>
+        </NavLink>
       </div>
     </div>
   );
 }
-
-/*
-      <div
-        href="/pages/map"
-        className="place-self-center text-white no-underline"
-      >
-        Map
-      </div>
-
-
-*/

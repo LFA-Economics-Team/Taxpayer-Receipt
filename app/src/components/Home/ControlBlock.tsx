@@ -71,7 +71,13 @@ export function ControlBlock() {
         <div className="flex flex-col w-9/10 bg-white text-[12px] text-[#17301b] rounded-xl p-2 inset-shadow-sm/60">
           <div className="font-bold text-[14px]">Fuel & Fees</div>
           <div className=" flex flex-row justify-between">
-            <div>What type of vehicle do you drive?</div>
+            <div>What is the Make of your vehicle?</div>
+            <form>
+              <input className="border-1 px-2 m-2 rounded-xl" />
+            </form>
+          </div>
+          <div className=" flex flex-row justify-between">
+            <div>What is the Model of your vehilce?</div>
             <form>
               <input className="border-1 px-2 m-2 rounded-xl" />
             </form>

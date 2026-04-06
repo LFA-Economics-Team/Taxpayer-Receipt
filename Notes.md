@@ -54,9 +54,14 @@
 # Misc & Fees
 
 - Fuel taxes [motor and special fuels]
-- Sin taxes [beer, cigarette, tobacco]
-- Interactive list of fees? Sorted by commonality?
+  - Ask team about duplicate mpg data. Is there a preferance on resolving?
 - Vehicle Registration Fees
+  - fix calcuation of uniform fee to accout for vehilce age
+  - fix alternative fuel fee to only apply to evs
+  - fix pollition control fee to exclude evs and only apply to certian counties
+- Present total cost across both fuel tax and rgistration fees
+
+- add explanatory notes/ pop-ups
 
 # Misc
 

@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import React from "react";
 import Select from "react-select";
 import MakeOptions from "../../data/Misc/MakeOptions.json";
 import ModelOptions from "../../data/Misc/ModelOptions.json";
+import FuelData from "../../data/Misc/FuelData.json";
 
 type Car = {
   id: number;
@@ -9,6 +11,7 @@ type Car = {
   model: string;
   year: number;
   miles: number;
+  mpg: number;
 };
 
 function VehicleCard({
@@ -87,12 +90,25 @@ function VehicleCard({
 
 export function FeesFuelsContent() {
   const [cars, setCars] = useState<Car[]>([
-    { id: 1, make: "", model: "", year: 0, miles: 0 },
+    { id: 1, make: "", model: "", year: 0, miles: 0, mpg: 0 },
   ]);
 
   function updateCar(id: number, updated: Partial<Car>) {
     setCars((prev) =>
-      prev.map((car) => (car.id === id ? { ...car, ...updated } : car)),
+      prev.map((car) => {
+        if (car.id !== id) return car;
+        const merged = { ...car, ...updated };
+        if (merged.make && merged.model && merged.year !== 0) {
+          const match = (FuelData as any[]).find(
+            (entry) =>
+              entry.make === merged.make &&
+              entry.model === merged.model &&
+              entry.year === merged.year,
+          );
+          return { ...merged, mpg: match?.comb08 ?? 0 };
+        }
+        return merged;
+      }),
     );
   }
 
@@ -103,19 +119,76 @@ export function FeesFuelsContent() {
   function addCar() {
     setCars((prev) => [
       ...prev,
-      { id: prev.length + 1, make: "", model: "", year: 0, miles: 0 },
+      { id: prev.length + 1, make: "", model: "", year: 0, miles: 0, mpg: 0 },
     ]);
   }
+
+  const filteredFuelData = (FuelData as any[]).filter((entry) =>
+    cars.some(
+      (car) =>
+        car.make &&
+        car.model &&
+        car.year !== 0 &&
+        entry.make === car.make &&
+        entry.model === car.model &&
+        entry.year === car.year,
+    ),
+  );
+
+  const [feeResults, setFeeResults] = useState([
+    { id: 1, name: "Uniform Fee", value: 0 }, // Make conditional on the age of the car
+    { id: 2, name: "Corridor Fee", value: 0 },
+    { id: 3, name: "Driver Education Fee", value: 0 },
+    { id: 4, name: "Uninsured Motorist Fee", value: 0 },
+    { id: 5, name: "Alternative Fuel Fee", value: 0 }, // Make conditional on whether the car is an ev
+    { id: 6, name: "Pollution Control Fee", value: 0 }, // make conditional on location and =! ev
+    { id: 7, name: "Total", value: 0 },
+  ]);
+
+  useEffect(() => {
+    setFeeResults((prevItems) => {
+      const updated = prevItems.map((item) => {
+        switch (item.name) {
+          case "Uniform Fee":
+            return { ...item, value: cars.length * 10 }; // calcuate based on the age of the car
+          case "Corridor Fee":
+            return { ...item, value: cars.length * 10 }; // $10 per car per year
+          case "Driver Education Fee":
+            return { ...item, value: cars.length * 3 }; // $2.50 per car per year
+          case "Uninsured Motorist Fee":
+            return { ...item, value: cars.length }; // $1 per car per year
+          case "Alternative Fuel Fee":
+            return { ...item, value: cars.length * 180 }; // Make conditonal on whether the car is an ev or not
+          case "Pollution Control Fee":
+            return { ...item, value: cars.length * 10 }; // Make conditional on the county in which the car is registed
+          default:
+            return item;
+        }
+      });
+
+      const total = updated
+        .filter((item) => item.name !== "Total") // exclude the total row itself
+        .reduce((sum, item) => sum + item.value, 0);
+
+      return updated.map((item) =>
+        item.name === "Total" ? { ...item, value: total } : item,
+      );
+    });
+  }, [cars]);
+
+  console.log(filteredFuelData);
+  console.log(cars);
+  console.log(feeResults);
 
   return (
     <div className="flex flex-row h-full w-full justify-between gap-2">
       <div className="flex flex-col h-90vh w-1/3 bg-[#17301b]/90 my-2 ml-2 rounded-xl p-2">
-        <div className="text-center text-white font-bold p-2 text-2xl">
+        <div className="text-center text-white font-bold p-2 text-3xl">
           Calculate your fuel tax & registration fees below:
         </div>
         <div className="flex flex-col gap-2">
           <div className="flex flex-col bg-gray-100/25 text-center w-full p-4 rounded-xl">
-            <div className="font-bold text-xl">
+            <div className="font-bold text-2xl">
               What vehicles does your houshold own or drive regularly?
             </div>
           </div>
@@ -136,42 +209,47 @@ export function FeesFuelsContent() {
           </button>
         </div>
       </div>
-      <div className="flex flex-col h-90vh w-1/3 bg-gray-900/50 text-white my-2 mr-2 p-2 rounded-xl">
-        <div className="text-center font-bold p-2 text-2xl">
+
+      <div className="flex flex-col h-90vh w-1/3 bg-gray-900/50 text-white my-2 mr-2 p-2 rounded-xl gap-y-4">
+        <div className="text-center font-bold p-2 text-3xl">
           Estimated fuel tax & registration fees
         </div>
-        <div className="italic font-bold text-center text-[18px]">Fuel Tax</div>
         <div>
-          <div className="italic font-bold text-center text-[18px]">
+          <div className="italic font-bold text-center text-2xl mb-2">
+            Fuel Tax
+          </div>
+          <div className="grid w-full place-self-center grid-cols-[15%_45%_30%_5%_5%] bg-white text-black text-xl rounded-xl p-2 divide-y divide-gray-400">
+            {cars.map((car) => (
+              <React.Fragment key={car.id}>
+                <div className="col-start-1"></div>
+                <div className="col-start-2">
+                  {car.make} {car.model}
+                </div>
+                <div className="col-start-3 text-right">$</div>
+                <div className="col-start-4 text-right">
+                  {Math.round((car.miles / car.mpg) * 0.379) || 0}
+                </div>
+                <div className="col-start-5"></div>
+              </React.Fragment>
+            ))}
+            <div className="col-span-3"></div>
+          </div>
+        </div>
+        <div>
+          <div className="italic font-bold text-center text-2xl mb-2">
             Registration Fees
           </div>
-          <div className="grid w-full place-self-center grid-cols-[60%_30%_10%] bg-white text-black rounded-xl p-2 divide-y divide-gray-400">
-            <div className="row-start-1">Uniform Fee</div>
-            <div className="row-start-1 col-start-2"></div>
-
-            <div className="row-start-2 bg-gray-100">Corridor Fee</div>
-            <div className="row-start-2 col-start-2 bg-gray-100"></div>
-
-            <div className="row-start-3">Driver's Education Fee</div>
-            <div className="row-start-3 col-start-2"></div>
-
-            <div className="row-start-4 bg-gray-100">
-              Uninsured Motorist Fee
-            </div>
-            <div className="row-start-4 col-start-2 bg-gray-100"></div>
-
-            <div className="row-start-5">Alternative Fuel Fee</div>
-            <div className="row-start-5 col-start-2"></div>
-
-            <div className="row-start-6 bg-gray-100">
-              Air Pollution Control Fee
-            </div>
-            <div className="row-start-6 col-start-2 bg-gray-100"></div>
-
-            <div className="row-start-7 font-bold">Total</div>
-            <div className="row-start-7 col-start-2"></div>
-
-            <div className="row-start-8 col-span-3"></div>
+          <div className="grid w-full place-self-center grid-cols-[5%_55%_30%_5%_5%] bg-white text-black text-xl rounded-xl p-2 divide-y divide-gray-400">
+            {feeResults.map((result) => (
+              <React.Fragment key={result.id}>
+                <div className="col-start-1"></div>
+                <div className="col-start-2">{result.name}</div>
+                <div className="col-start-3 text-right">$</div>
+                <div className="col-start-4 text-right">{result.value}</div>
+                <div className="col-start-5"></div>
+              </React.Fragment>
+            ))}
+            <div className="col-span-3"></div>
           </div>
         </div>
       </div>
@@ -180,6 +258,9 @@ export function FeesFuelsContent() {
 }
 
 /*
+
+How to address duplicates of [make, model, year]
+
 Fees to calcuate:
 Sources:
   Registration Fees: https://dmv.utah.gov/register/registration-taxes-fees/

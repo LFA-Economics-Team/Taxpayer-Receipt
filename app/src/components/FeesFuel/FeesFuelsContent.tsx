@@ -12,6 +12,8 @@ type Car = {
   year: number;
   miles: number;
   mpg: number;
+  fueltype: string;
+  county: string;
 };
 
 function VehicleCard({
@@ -90,7 +92,16 @@ function VehicleCard({
 
 export function FeesFuelsContent() {
   const [cars, setCars] = useState<Car[]>([
-    { id: 1, make: "", model: "", year: 0, miles: 0, mpg: 0 },
+    {
+      id: 1,
+      make: "",
+      model: "",
+      year: 0,
+      miles: 0,
+      mpg: 0,
+      fueltype: "",
+      county: "",
+    },
   ]);
 
   function updateCar(id: number, updated: Partial<Car>) {
@@ -119,7 +130,16 @@ export function FeesFuelsContent() {
   function addCar() {
     setCars((prev) => [
       ...prev,
-      { id: prev.length + 1, make: "", model: "", year: 0, miles: 0, mpg: 0 },
+      {
+        id: prev.length + 1,
+        make: "",
+        model: "",
+        year: 0,
+        miles: 0,
+        mpg: 0,
+        fueltype: "",
+        county: "",
+      },
     ]);
   }
 
@@ -181,7 +201,7 @@ export function FeesFuelsContent() {
   console.log(feeResults);
 
   return (
-    <div className="flex flex-row h-full w-full justify-between gap-2">
+    <div className="flex flex-row h-full w-full justify-center gap-8">
       <div className="flex flex-col h-90vh w-1/3 bg-[#17301b]/90 my-2 ml-2 rounded-xl p-2">
         <div className="text-center text-white font-bold p-2 text-3xl">
           Calculate your fuel tax & registration fees below:

@@ -29,7 +29,7 @@
   - Gross income
   - Filing Status
   - Number of Dependents
-  - Residence/ partial year-income
+  - Residence/ partial year-income?
 
 # Sales Tax
 
@@ -53,16 +53,22 @@
 
 # Misc & Fees
 
-- Fuel taxes [motor and special fuels]
+- Fuel taxes
   - Ask team about duplicate mpg data. Is there a preferance on resolving?
 - Vehicle Registration Fees
   - fix calcuation of uniform fee to accout for vehilce age
   - fix alternative fuel fee to only apply to evs
   - fix pollition control fee to exclude evs and only apply to certian counties
+  - Make year options conditional on make-model combinations
 - Present total cost across both fuel tax and rgistration fees
 
 - add explanatory notes/ pop-ups
 
-# Misc
+# Strech goals
 
 - Consider doing retrospective calcualtions for how tax burden has changed over time?
+
+# Accomplish Today:
+
+- Finalize registration fee calculations
+- get start on setting up sales tax map

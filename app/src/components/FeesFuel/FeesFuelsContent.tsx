@@ -4,6 +4,7 @@ import Select from "react-select";
 import MakeOptions from "../../data/Misc/MakeOptions.json";
 import ModelOptions from "../../data/Misc/ModelOptions.json";
 import FuelData from "../../data/Misc/FuelData.json";
+import countyOptions from "../../data/Geospacial/countyOptions.json";
 
 type Car = {
   id: number;
@@ -83,6 +84,13 @@ function VehicleCard({
           })
         }
       />
+      <Select
+        className="text-black text-sm w-1/5"
+        options={countyOptions}
+        placeholder="County"
+        value={countyOptions.find((o) => o.value === car.county) ?? null}
+        onChange={(opt) => onUpdate({ county: opt?.value ?? "" })}
+      />
       <button onClick={onRemove} className="font-bold px-2 ">
         -
       </button>
@@ -116,7 +124,10 @@ export function FeesFuelsContent() {
               entry.model === merged.model &&
               entry.year === merged.year,
           );
-          return { ...merged, mpg: match?.comb08 ?? 0 };
+          const fueltype = match?.fuelType?.includes("Electricity")
+            ? "electric"
+            : "gas";
+          return { ...merged, mpg: match?.comb08 ?? 0, fueltype };
         }
         return merged;
       }),
@@ -156,12 +167,12 @@ export function FeesFuelsContent() {
   );
 
   const [feeResults, setFeeResults] = useState([
-    { id: 1, name: "Uniform Fee", value: 0 }, // Make conditional on the age of the car
+    { id: 1, name: "Uniform Fee", value: 0 },
     { id: 2, name: "Corridor Fee", value: 0 },
     { id: 3, name: "Driver Education Fee", value: 0 },
     { id: 4, name: "Uninsured Motorist Fee", value: 0 },
-    { id: 5, name: "Alternative Fuel Fee", value: 0 }, // Make conditional on whether the car is an ev
-    { id: 6, name: "Pollution Control Fee", value: 0 }, // make conditional on location and =! ev
+    { id: 5, name: "Alternative Fuel Fee", value: 0 },
+    { id: 6, name: "Pollution Control Fee", value: 0 },
     { id: 7, name: "Total", value: 0 },
   ]);
 
@@ -169,18 +180,61 @@ export function FeesFuelsContent() {
     setFeeResults((prevItems) => {
       const updated = prevItems.map((item) => {
         switch (item.name) {
-          case "Uniform Fee":
-            return { ...item, value: cars.length * 10 }; // calcuate based on the age of the car
+          case "Uniform Fee": {
+            // Calcuate Uniform fee by vehicle age
+            const currentYear = new Date().getFullYear();
+            const total = cars.reduce((sum, car) => {
+              const age = currentYear - car.year;
+              let fee = 0;
+              switch (true) {
+                case age <= 2:
+                  fee = 150;
+                  break;
+                case age <= 5:
+                  fee = 110;
+                  break;
+                case age <= 8:
+                  fee = 80;
+                  break;
+                case age <= 11:
+                  fee = 50;
+                  break;
+                default:
+                  fee = 10;
+                  break;
+              }
+              return sum + fee;
+            }, 0);
+            return { ...item, value: total };
+          }
           case "Corridor Fee":
             return { ...item, value: cars.length * 10 }; // $10 per car per year
           case "Driver Education Fee":
-            return { ...item, value: cars.length * 3 }; // $2.50 per car per year
+            return { ...item, value: cars.length * 3 }; // $2.50 per car per year, rounded to $3
           case "Uninsured Motorist Fee":
             return { ...item, value: cars.length }; // $1 per car per year
-          case "Alternative Fuel Fee":
-            return { ...item, value: cars.length * 180 }; // Make conditonal on whether the car is an ev or not
-          case "Pollution Control Fee":
-            return { ...item, value: cars.length * 10 }; // Make conditional on the county in which the car is registed
+          case "Alternative Fuel Fee": {
+            // Calcuates the maximum additional fee for evs. True amount will be lower for Hybrids and if the user is enrolled in the Road Usage Program
+            const evCount = cars.filter(
+              (car) => car.fueltype === "electric",
+            ).length;
+            return { ...item, value: evCount * 180 };
+          }
+          case "Pollution Control Fee": {
+            // Calculates the pollution control fee based on the car's county of registration. Does not apply to evs.
+            const apcFeeByCounty: Record<string, number> = {
+              "Salt Lake": 3,
+              Davis: 3,
+              Cache: 3,
+              Utah: 2,
+              Weber: 2,
+            };
+            const apcTotal = cars.reduce((sum, car) => {
+              if (car.fueltype === "electric") return sum;
+              return sum + (apcFeeByCounty[car.county] ?? 0);
+            }, 0);
+            return { ...item, value: apcTotal };
+          }
           default:
             return item;
         }
@@ -247,7 +301,11 @@ export function FeesFuelsContent() {
                 </div>
                 <div className="col-start-3 text-right">$</div>
                 <div className="col-start-4 text-right">
-                  {Math.round((car.miles / car.mpg) * 0.379) || 0}
+                  {car.mpg === 0
+                    ? "N/A"
+                    : car.fueltype === "gas"
+                      ? Math.round((car.miles / car.mpg) * 0.379) || 0
+                      : 0}
                 </div>
                 <div className="col-start-5"></div>
               </React.Fragment>
@@ -286,7 +344,6 @@ Sources:
   Registration Fees: https://dmv.utah.gov/register/registration-taxes-fees/
   Uniform Fees: https://dmv.utah.gov/register/registration-taxes-fees/uniform-fees/
 
-Uniform Fee [age-based fee applied to all car; see source for amounts]
 
 Fixed Fees:
   Corridor Fee [$10/ car/ year]

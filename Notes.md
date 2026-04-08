@@ -1,5 +1,7 @@
 # Taxpayer Receipt development checklist
 
+From IT Security: https://snyk.io/
+
 # Global
 
 - Demo for teaching user to navigate the new and improved taxpayer receipt?
@@ -23,7 +25,6 @@
 
 # Income Tax
 
-- Interactive TC-40 to calcualte individual income taxes?
 - Use average/ median values for defaults
 - Variables:
   - Gross income
@@ -55,7 +56,6 @@
 
 - Fuel taxes
   - Ask team about duplicate mpg data. Is there a preferance on resolving?
-- Present total cost across both fuel tax and rgistration fees
 
 - add explanatory notes/ pop-ups
 

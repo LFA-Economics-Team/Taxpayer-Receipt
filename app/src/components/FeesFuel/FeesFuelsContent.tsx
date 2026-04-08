@@ -28,25 +28,46 @@ function VehicleCard({
 }) {
   return (
     <div className="flex flex-row bg-gray-100/25 justify-around w-full p-4 rounded-xl items-center gap-2">
+      <input
+        type="number"
+        className="w-1/5 text-white text-sm rounded px-2 py-1 border border-gray-300"
+        placeholder="Year"
+        value={car.year === 0 ? "" : car.year}
+        onChange={(e) =>
+          onUpdate({
+            year: e.target.value === "" ? 0 : parseInt(e.target.value, 10),
+            model: "",
+          })
+        }
+      />
       <Select
         className="text-black text-sm w-1/5"
         options={MakeOptions}
         placeholder="Make"
         value={MakeOptions.find((o) => o.value === car.make) ?? null}
-        onChange={(opt) => onUpdate({ make: opt?.value ?? "" })}
+        onChange={(opt) => onUpdate({ make: opt?.value ?? "", model: "" })}
       />
       <Select
         className="text-black text-sm w-1/5"
-        options={
-          car.make
+        options={(() => {
+          const makeModels = car.make
             ? ((
                 ModelOptions as Record<
                   string,
                   { value: string; label: string }[]
                 >
               )[car.make] ?? [])
-            : []
-        }
+            : [];
+          if (car.make && car.year !== 0) {
+            const validModels = new Set(
+              (FuelData as any[])
+                .filter((e) => e.make === car.make && e.year === car.year)
+                .map((e) => e.model),
+            );
+            return makeModels.filter((o) => validModels.has(o.value));
+          }
+          return makeModels;
+        })()}
         placeholder="Model"
         value={
           car.make
@@ -62,17 +83,7 @@ function VehicleCard({
         }
         onChange={(opt) => onUpdate({ model: opt?.value ?? "" })}
       />
-      <input
-        type="number"
-        className="w-1/5 text-white text-sm rounded px-2 py-1 border border-gray-300"
-        placeholder="Year"
-        value={car.year === 0 ? "" : car.year}
-        onChange={(e) =>
-          onUpdate({
-            year: e.target.value === "" ? 0 : parseInt(e.target.value, 10),
-          })
-        }
-      />
+
       <input
         type="number"
         className="w-1/5 text-white text-sm rounded px-2 py-1 border border-gray-300"
@@ -99,18 +110,7 @@ function VehicleCard({
 }
 
 export function FeesFuelsContent() {
-  const [cars, setCars] = useState<Car[]>([
-    {
-      id: 1,
-      make: "",
-      model: "",
-      year: 0,
-      miles: 0,
-      mpg: 0,
-      fueltype: "",
-      county: "",
-    },
-  ]);
+  const [cars, setCars] = useState<Car[]>([]);
 
   function updateCar(id: number, updated: Partial<Car>) {
     setCars((prev) =>
@@ -175,6 +175,16 @@ export function FeesFuelsContent() {
     { id: 6, name: "Pollution Control Fee", value: 0 },
     { id: 7, name: "Total", value: 0 },
   ]);
+
+  const fuelTaxes = cars.map((car) =>
+    car.mpg === 0
+      ? null
+      : car.fueltype === "gas"
+        ? Math.round((car.miles / car.mpg) * 0.379) || 0
+        : 0,
+  );
+
+  const fuelTaxTotal = fuelTaxes.reduce<number>((sum, t) => sum + (t ?? 0), 0);
 
   useEffect(() => {
     setFeeResults((prevItems) => {
@@ -292,8 +302,8 @@ export function FeesFuelsContent() {
           <div className="italic font-bold text-center text-2xl mb-2">
             Fuel Tax
           </div>
-          <div className="grid w-full place-self-center grid-cols-[15%_45%_30%_5%_5%] bg-white text-black text-xl rounded-xl p-2 divide-y divide-gray-400">
-            {cars.map((car) => (
+          <div className="grid w-full place-self-center grid-cols-[15%_55%_20%_5%_5%] bg-white text-black text-xl rounded-xl p-2 divide-y divide-gray-400">
+            {cars.map((car, i) => (
               <React.Fragment key={car.id}>
                 <div className="col-start-1"></div>
                 <div className="col-start-2">
@@ -301,16 +311,17 @@ export function FeesFuelsContent() {
                 </div>
                 <div className="col-start-3 text-right">$</div>
                 <div className="col-start-4 text-right">
-                  {car.mpg === 0
-                    ? "N/A"
-                    : car.fueltype === "gas"
-                      ? Math.round((car.miles / car.mpg) * 0.379) || 0
-                      : 0}
+                  {fuelTaxes[i] === null ? "N/A" : fuelTaxes[i]}
                 </div>
                 <div className="col-start-5"></div>
               </React.Fragment>
             ))}
-            <div className="col-span-3"></div>
+            <div className="col-start-1"></div>
+            <div className="col-start-2">Total</div>
+            <div className="col-start-3 text-right ">$</div>
+            <div className="col-start-4 text-right ">{fuelTaxTotal}</div>
+            <div className="col-start-5"></div>
+            <div className="row-span-5"></div>
           </div>
         </div>
         <div>
@@ -328,6 +339,14 @@ export function FeesFuelsContent() {
               </React.Fragment>
             ))}
             <div className="col-span-3"></div>
+          </div>
+        </div>
+        <div className="flex flex-row bg-white text-black font-bold text-xl rounded-xl p-2 gap-8 justify-end">
+          <div>Estimated Annual Total: </div>
+          <div className="flex mr-8">
+            ${" "}
+            {fuelTaxTotal +
+              (feeResults.find((t) => t.name === "Total")?.value ?? 0)}
           </div>
         </div>
       </div>
@@ -362,4 +381,6 @@ Air Pollution Control* (APC) Fee [$/ car/ year]
 
   *Does not apply to EVs
 
+
+  Basic Registration fee?
 */

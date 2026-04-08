@@ -4,8 +4,8 @@ import Select from "react-select";
 
 const filingOptions = [
   { value: "Single", label: "Single" },
-  { value: "Married filing Single", label: "Married filing Single" },
-  { value: "Married filing Jointly", label: "Married filing Jointly" },
+  { value: "Married Filing Single", label: "Married Filing Single" },
+  { value: "Married Filing Jointly", label: "Married Filing Jointly" },
   { value: "Head of Household", label: "Head of Household" },
   {
     value: " Qualifying surviving spouse",

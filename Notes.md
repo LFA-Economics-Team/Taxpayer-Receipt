@@ -55,9 +55,11 @@ From IT Security: https://snyk.io/
 # Misc & Fees
 
 - Fuel taxes
-  - Ask team about duplicate mpg data. Is there a preferance on resolving?
-
+  - Ask team about duplicate mpg data. Is there a preferance on resolving? [estimate max tax]
 - add explanatory notes/ pop-ups
+  - What each fee is, who it applies to, what it's used for?
+  - 6 Month-registrations?
+  - Code citations for each fee?
 
 # Strech goals
 

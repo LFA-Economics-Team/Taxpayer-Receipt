@@ -167,13 +167,14 @@ export function FeesFuelsContent() {
   );
 
   const [feeResults, setFeeResults] = useState([
-    { id: 1, name: "Uniform Fee", value: 0 },
-    { id: 2, name: "Corridor Fee", value: 0 },
-    { id: 3, name: "Driver Education Fee", value: 0 },
-    { id: 4, name: "Uninsured Motorist Fee", value: 0 },
-    { id: 5, name: "Alternative Fuel Fee", value: 0 },
-    { id: 6, name: "Pollution Control Fee", value: 0 },
-    { id: 7, name: "Total", value: 0 },
+    { id: 1, name: "Registration Fee", value: 0 },
+    { id: 2, name: "Age-Based Fee", value: 0 },
+    { id: 3, name: "Corridor Fee", value: 0 },
+    { id: 4, name: "Driver Education Fee", value: 0 },
+    { id: 5, name: "Uninsured Motorist Fee", value: 0 },
+    { id: 6, name: "Alternative Fuel Fee", value: 0 },
+    { id: 7, name: "Pollution Control Fee", value: 0 },
+    { id: 8, name: "Total", value: 0 },
   ]);
 
   const fuelTaxes = cars.map((car) =>
@@ -190,8 +191,10 @@ export function FeesFuelsContent() {
     setFeeResults((prevItems) => {
       const updated = prevItems.map((item) => {
         switch (item.name) {
-          case "Uniform Fee": {
-            // Calcuate Uniform fee by vehicle age
+          case "Registration Fee":
+            return { ...item, value: cars.length * 66 }; // Calcualte the baseline registation
+          case "Age-Based Fee": {
+            // Calcuate Age-Based fee by vehicle age
             const currentYear = new Date().getFullYear();
             const total = cars.reduce((sum, car) => {
               const age = currentYear - car.year;
@@ -361,7 +364,7 @@ How to address duplicates of [make, model, year]
 Fees to calcuate:
 Sources:
   Registration Fees: https://dmv.utah.gov/register/registration-taxes-fees/
-  Uniform Fees: https://dmv.utah.gov/register/registration-taxes-fees/uniform-fees/
+  Uniform (Age-Based) Fees: https://dmv.utah.gov/register/registration-taxes-fees/uniform-fees/
 
 
 Fixed Fees:

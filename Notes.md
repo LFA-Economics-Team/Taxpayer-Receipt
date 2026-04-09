@@ -1,6 +1,7 @@
 # Taxpayer Receipt development checklist
 
 From IT Security: https://snyk.io/
+Use UGRS hybrid base for property and sales tax maps: https://gis.utah.gov/products/sgid/base-maps/
 
 # Global
 
@@ -45,12 +46,11 @@ From IT Security: https://snyk.io/
 # Property Tax
 
 - Interactive Map visualization
-  - Allows user to input addresses they own/ rent?
-  - Classify addresses by primary residential vs everything else?
   - Lists address and values in left column, show tax entity rate & revenue on right column
-  - Put markers on map in center for each address entered by user
   - Toggle between tax entities and tax areas?
 - Rental Imputation overhaul?
+
+- Review Map Block in detail
 
 # Misc & Fees
 

@@ -1,6 +1,7 @@
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./index.css";
+import "leaflet/dist/leaflet.css";
 import { Header } from "./components/MetaMisc/Header";
 import { Footer } from "./components/MetaMisc/Footer";
 import { HomeContent } from "./components/Home/HomeContent";

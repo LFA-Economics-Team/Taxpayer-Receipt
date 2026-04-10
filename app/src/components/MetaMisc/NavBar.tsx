@@ -23,6 +23,7 @@ export function NavBar() {
         <NavLink to="/fees" className={linkClass}>
           Fuel & Fees
         </NavLink>
+        <NavLink to="/leg" className={linkClass}></NavLink>
       </div>
     </div>
   );

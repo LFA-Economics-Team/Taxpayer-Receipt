@@ -9,6 +9,7 @@ import { IncomeContent } from "./components/Income/IncomeContent";
 import { SalesContent } from "./components/Sales/SalesContent";
 import { PropertyContent } from "./components/Property/PropertyContent";
 import { FeesFuelsContent } from "./components/FeesFuel/FeesFuelsContent";
+import { LegMap } from "./components/MetaMisc/Extras/LegMap";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/sales" element={<SalesContent />} />
           <Route path="/property" element={<PropertyContent />} />
           <Route path="/fees" element={<FeesFuelsContent />} />
+          <Route path="/leg" element={<LegMap />} />
         </Routes>
         <Footer />
       </div>

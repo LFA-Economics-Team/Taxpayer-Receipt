@@ -297,7 +297,7 @@ export function FeesFuelsContent() {
         </div>
       </div>
 
-      <div className="flex flex-col h-90vh w-1/3 bg-gray-900/50 text-white my-2 mr-2 p-2 rounded-xl gap-y-4">
+      <div className="flex flex-col h-90vh w-1/3 bg-[#e0e0e0] text-black my-2 mr-2 p-2 rounded-xl gap-y-4">
         <div className="text-center font-bold p-2 text-3xl">
           Estimated fuel tax & registration fees
         </div>

@@ -3,11 +3,6 @@
 From IT Security: https://snyk.io/
 Use UGRS hybrid base for property and sales tax maps: https://gis.utah.gov/products/sgid/base-maps/
 
-# Global
-
-- Demo for teaching user to navigate the new and improved taxpayer receipt?
-- Let box sizes scale proportional to revenue/ spending amounts in visualizations?
-
 # Main Page
 
 - Three column sankey visualization
@@ -33,6 +28,12 @@ Use UGRS hybrid base for property and sales tax maps: https://gis.utah.gov/produ
   - Number of Dependents
   - Residence/ partial year-income?
 
+- Visuals
+  - Graph comparing percentile of income to effective tax rate
+  - Graph comparing percential of income to nominal tax liability [logged?]
+  - Allow graphs to be conditional on filing status and number of dependents
+  - Consider privacy/ data risks and stratagies to mitigate [!!!]
+
 # Sales Tax
 
 - Interactive Map visualization
@@ -47,15 +48,13 @@ Use UGRS hybrid base for property and sales tax maps: https://gis.utah.gov/produ
 
 - Interactive Map visualization
   - Lists address and values in left column, show tax entity rate & revenue on right column
-  - Toggle between tax entities and tax areas?
+  - Swap out baselayer for UGRS's hybrid tiles
 - Rental Imputation overhaul?
 
 - Review Map Block in detail
 
-# Misc & Fees
+# Fuel & Fees
 
-- Fuel taxes
-  - Ask team about duplicate mpg data. Is there a preferance on resolving? [estimate max tax]
 - add explanatory notes/ pop-ups
   - What each fee is, who it applies to, what it's used for?
   - 6 Month-registrations?
@@ -63,4 +62,5 @@ Use UGRS hybrid base for property and sales tax maps: https://gis.utah.gov/produ
 
 # Strech goals
 
+- Add a tool for collecting which sales & property taxing areas/ entites overlap legislative districts?
 - Consider doing retrospective calcualtions for how tax burden has changed over time?

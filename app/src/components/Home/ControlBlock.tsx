@@ -1,7 +1,7 @@
-"use client";
-
 import Select from "react-select";
+import { filingOptions } from "../MetaMisc/filingOptions";
 
+/*
 const filingOptions = [
   { value: "Single", label: "Single" },
   { value: "Married Filing Single", label: "Married Filing Single" },
@@ -12,6 +12,7 @@ const filingOptions = [
     label: " Qualifying surviving spouse",
   },
 ];
+*/
 
 const rentOrOwn = [
   { value: "Rent", label: "Rent" },

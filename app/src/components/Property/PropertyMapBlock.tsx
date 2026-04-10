@@ -45,10 +45,10 @@ function getColor(rate: number) {
 function style(feature: Feature | undefined) {
   return {
     fillColor: getColor(feature?.properties?.ENT_RATE ?? 0),
-    weight: 2,
+    weight: 1,
     color: "#555",
     dashArray: ENTITY_DASH[feature?.properties?.entity_type ?? ""] ?? "",
-    fillOpacity: 0.4,
+    fillOpacity: 0.1,
   };
 }
 

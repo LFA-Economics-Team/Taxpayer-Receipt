@@ -1,15 +1,20 @@
-"use client";
+import { useState } from "react";
+import { ControlBlock } from "./ControlBlock";
+import { GraphBlock } from "./GraphBlock";
+import { ResultsBlock } from "./ResultsBlock";
 
 export function IncomeContent() {
+  const [incomeInfo, setIncomeInfo] = useState({
+    annualIncome: 0,
+    filingStatus: "",
+    dependents: 0,
+  });
+
   return (
-    <div className="text-black">
-      <div>
-        <div>Inputs</div>
-        <div>Gross Annual Income</div>
-        <div>Filing Status</div>
-        <div>Number of Dependents</div>
-        <div>Inputs</div>
-      </div>
+    <div className="flex flex-row h-full w-full justify-between text-center gap-2">
+      <ControlBlock />
+      <GraphBlock />
+      <ResultsBlock />
     </div>
   );
 }

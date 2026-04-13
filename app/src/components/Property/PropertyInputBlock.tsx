@@ -1,5 +1,13 @@
-import type { Property } from "./types";
-import { geocodeAddress } from "./types";
+import { useState } from "react";
+import type { Property } from "../MetaMisc/types";
+import { geocodeAddress } from "../MetaMisc/types";
+
+const formatCurrency = (value: number) =>
+  new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    maximumFractionDigits: 0,
+  }).format(value);
 
 function PropertyCard({
   property,
@@ -10,6 +18,8 @@ function PropertyCard({
   onChange: (updated: Property) => void;
   onRemove: () => void;
 }) {
+  const [valueEditing, setValueEditing] = useState(false);
+
   const handleAddressBlur = async () => {
     if (!property.address) return;
     const coords = await geocodeAddress(property.address);
@@ -28,9 +38,17 @@ function PropertyCard({
           className=" w-9/10 text-white text-sm rounded px-2 py-1 border border-gray-300"
         />
         <input
-          type="number"
+          type={valueEditing ? "number" : "text"}
           placeholder="Value"
-          value={property.value || ""}
+          value={
+            valueEditing
+              ? property.value || ""
+              : property.value
+                ? formatCurrency(property.value)
+                : ""
+          }
+          onFocus={() => setValueEditing(true)}
+          onBlur={() => setValueEditing(false)}
           onChange={(e) =>
             onChange({ ...property, value: Number(e.target.value) })
           }
@@ -64,7 +82,7 @@ function PropertyCard({
   );
 }
 
-export function InputBlock({
+export function PropertyInputBlock({
   properties,
   onAdd,
   onUpdate,
@@ -76,21 +94,26 @@ export function InputBlock({
   onRemove: (id: number) => void;
 }) {
   return (
-    <div className="flex flex-col h-90-vh w-1/5 bg-[#17301b]/90 rounded-xl shadow-xl/20 text-white text-center m-2 p-2 gap-2">
+    <div className="flex flex-col w-1/5 bg-[#17301b]/90 rounded-xl shadow-xl/20 text-white text-center m-2 p-2 gap-2">
       <div className="text-2xl font-bold my-2">
         Calculate your property taxes below:
       </div>
       <div className="text-xl font-bold bg-gray-100/25 rounded-xl p-2">
         What real property do you own or rent?
       </div>
-      {properties.map((p) => (
-        <PropertyCard
-          key={p.id}
-          property={p}
-          onChange={onUpdate}
-          onRemove={() => onRemove(p.id)}
-        />
-      ))}
+      <div
+        className="flex flex-col gap-2 overflow-y-hidden hover:overflow-y-auto 
+  focus-within:overflow-y-auto min-h-0"
+      >
+        {properties.map((p) => (
+          <PropertyCard
+            key={p.id}
+            property={p}
+            onChange={onUpdate}
+            onRemove={() => onRemove(p.id)}
+          />
+        ))}
+      </div>
       <button
         className="mt-2 w-full py-2 rounded-xl bg-green-700 text-white hover:bg-green-600 transition-colors"
         onClick={onAdd}

@@ -12,7 +12,7 @@ import { useState } from "react";
 import booleanPointInPolygon from "@turf/boolean-point-in-polygon";
 import { point } from "@turf/helpers";
 import Property2025 from "../../data/Geospacial/Property2025.json";
-import type { Property } from "./types";
+import type { Property } from "../MetaMisc/types";
 
 const DISCOVER_TOKEN = import.meta.env.VITE_DISCOVER_TOKEN;
 

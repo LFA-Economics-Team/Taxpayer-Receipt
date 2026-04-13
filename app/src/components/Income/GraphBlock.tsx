@@ -10,7 +10,7 @@ export function GraphBlock() {
     <div className="flex flex-col h-90vh w-3/5 border-2 bg-[#e0e0e0] my-2 rounded-xl p-0.5">
       <div className="grid h-full w-full grid-cols-2 grid-rows-2 gap-0.5 rounded-xl">
         {gridItems.map((item) => (
-          <div className="border-1 rounded-xl p-2">
+          <div className="border-1 rounded-xl p-2 text-black">
             <div>{item.title}</div>
             <div>{item.content}</div>
           </div>

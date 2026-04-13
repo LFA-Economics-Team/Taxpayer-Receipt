@@ -5,17 +5,7 @@ import MakeOptions from "../../data/Misc/MakeOptions.json";
 import ModelOptions from "../../data/Misc/ModelOptions.json";
 import FuelData from "../../data/Misc/FuelData.json";
 import countyOptions from "../../data/Geospacial/countyOptions.json";
-
-type Car = {
-  id: number;
-  make: string;
-  model: string;
-  year: number;
-  miles: number;
-  mpg: number;
-  fueltype: string;
-  county: string;
-};
+import type { Car } from "../MetaMisc/types";
 
 function VehicleCard({
   car,
@@ -109,8 +99,52 @@ function VehicleCard({
   );
 }
 
+const feeInfo: Record<string, { description: string; statute: string }> = {
+  "Registration Fee": {
+    description:
+      "A flat $66 fee charged per vehicle per year to cover DMV administrative costs.",
+    statute: "41-1a-1206",
+  },
+  "Age-Based Fee": {
+    description:
+      "Varies by vehicle age: $150 (0–2 yrs), $110 (3–5), $80 (6–8), $50 (9–11), $10 (12+).",
+    statute: "59-2-405.1",
+  },
+  "Corridor Fee": {
+    description:
+      "$10/year for vehicles registered in designated corridor counties: Salt Lake, Davis, Utah, Weber, Summit, Wasatch, Iron, Box Elder, Washington, Tooele, and Morgan.",
+    statute: "41-1a-1222",
+  },
+  "Driver Education Fee": {
+    description:
+      "$2.50 per vehicle per year, used to fund driver education programs.",
+    statute: "41-1a-1204",
+  },
+  "Uninsured Motorist Fee": {
+    description:
+      "$1.00 per vehicle per year, used to fund the Uninsured Motorist Identification Database.",
+    statute: "41-1a-1218",
+  },
+  "Alternative Fuel Fee": {
+    description:
+      "Up to $180/year for electric vehicles, offsetting fuel taxes not paid at the pump. Drivers enrolled in the Road Usage Charge program may pay less depending on miles driven (>14,440 miles).",
+    statute: "72-1-213.1",
+  },
+  "Pollution Control Fee": {
+    description:
+      "Charged in counties with air quality concerns. Does not apply to EVs. Salt Lake, Davis, Cache: $3/yr. Utah, Weber: $2/yr.",
+    statute: "41-1a-12",
+  },
+  Total: {
+    description:
+      "Total registration fees are the sum of each fee applicable to the vehicle. Fees calculated here are for passenger cars; other vehicle classes may be subject to additional fees at registration",
+    statute: "",
+  },
+};
+
 export function FeesFuelsContent() {
   const [cars, setCars] = useState<Car[]>([]);
+  const [openFee, setOpenFee] = useState<string | null>(null);
 
   function updateCar(id: number, updated: Partial<Car>) {
     setCars((prev) =>
@@ -220,8 +254,25 @@ export function FeesFuelsContent() {
             }, 0);
             return { ...item, value: total };
           }
-          case "Corridor Fee":
-            return { ...item, value: cars.length * 10 }; // $10 per car per year
+          case "Corridor Fee": {
+            const apcFeeByCounty: Record<string, number> = {
+              "Salt Lake": 10,
+              Davis: 10,
+              Utah: 10,
+              Weber: 10,
+              Summit: 10,
+              Wasatch: 10,
+              Iron: 10,
+              "Box Elder": 10,
+              Washington: 10,
+              Tooele: 10,
+              Morgan: 10,
+            };
+            const corridorTotal = cars.reduce((sum, car) => {
+              return sum + (apcFeeByCounty[car.county] ?? 0);
+            }, 0);
+            return { ...item, value: corridorTotal };
+          } // $10 per car per year in certain counties
           case "Driver Education Fee":
             return { ...item, value: cars.length * 3 }; // $2.50 per car per year, rounded to $3
           case "Uninsured Motorist Fee":
@@ -331,13 +382,57 @@ export function FeesFuelsContent() {
           <div className="italic font-bold text-center text-2xl mb-2">
             Registration Fees
           </div>
+          {openFee && (
+            <div
+              className="fixed inset-0 z-10"
+              onClick={() => setOpenFee(null)}
+            />
+          )}
           <div className="grid w-full place-self-center grid-cols-[5%_55%_30%_5%_5%] bg-white text-black text-xl rounded-xl p-2 divide-y divide-gray-400">
             {feeResults.map((result) => (
               <React.Fragment key={result.id}>
-                <div className="col-start-1"></div>
-                <div className="col-start-2">{result.name}</div>
-                <div className="col-start-3 text-right">$</div>
-                <div className="col-start-4 text-right">{result.value}</div>
+                <div className="col-start-1 relative flex items-center justify-center">
+                  {feeInfo[result.name] && (
+                    <>
+                      <button
+                        onClick={() =>
+                          setOpenFee(
+                            openFee === result.name ? null : result.name,
+                          )
+                        }
+                        className="rounded-full text-black hover:text-gray-600 leading-none"
+                        style={{
+                          fontSize: "20px",
+                          backgroundColor: "transparent",
+                        }}
+                        aria-label={`More info about ${result.name}`}
+                      >
+                        🛈
+                      </button>
+                      {openFee === result.name && (
+                        <div className="absolute right-0 top-6 z-20 w-64 bg-white border border-gray-300 rounded-lg shadow-xl p-3 text-left text-sm text-gray-700">
+                          <p className="mb-2">
+                            {feeInfo[result.name].description}
+                          </p>
+                          {result.name != "Total" && (
+                            <p className="text-xs text-gray-400">
+                              Utah Code §{feeInfo[result.name].statute}
+                            </p>
+                          )}
+                        </div>
+                      )}
+                    </>
+                  )}
+                </div>
+                <div className="col-start-2 flex items-center">
+                  {result.name}
+                </div>
+                <div className="col-start-3 flex items-center justify-end">
+                  $
+                </div>
+                <div className="col-start-4 flex items-center justify-end">
+                  {result.value}
+                </div>
                 <div className="col-start-5"></div>
               </React.Fragment>
             ))}
@@ -365,17 +460,19 @@ Fees to calcuate:
 Sources:
   Registration Fees: https://dmv.utah.gov/register/registration-taxes-fees/
   Uniform (Age-Based) Fees: https://dmv.utah.gov/register/registration-taxes-fees/uniform-fees/
-
+  - registration fee [41-1a-1206]
+  - age-based fee [59-2-405.1]
 
 Fixed Fees:
-  Corridor Fee [$10/ car/ year]
-  Driver Education Fee [$2.50/ car/ year]
-  Uninsured Motorist Identification Fee [$1.00/ car/ year]
-  Alternative Fuel Fees` [$180``/ car/ year]
+  Driver Education Fee [$2.50/ car/ year] [41-11-1204]
+  Uninsured Motorist Identification Fee [$1.00/ car/ year] [41-1a-1218]
+  Alternative Fuel Fees` [$180``/ car/ year] [72-1-213.1]
     `Applies only to EVs
     ``$180 is the maximum per year; drivers enrolled in the Road usage charge program may pay less depending on miles driven [>14,440 miles].
 
-Air Pollution Control* (APC) Fee [$/ car/ year]
+  Corridor Fee [$10/ car/ year] in [Salt Lake, Davis, Utah, Weber, Summit, Wasatch, Iron, Box Elder, Washington, Tooele, Morgan] [41-1a-1222]
+
+Air Pollution Control* (APC) Fee [$/ car/ year] [41-1a-12]
   Salt Lake $3.00
   Davis $3.00
   Cache $3.00
@@ -385,5 +482,6 @@ Air Pollution Control* (APC) Fee [$/ car/ year]
   *Does not apply to EVs
 
 
-  Basic Registration fee?
+- Fuel Tax [59-12-201]
+
 */

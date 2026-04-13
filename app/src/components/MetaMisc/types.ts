@@ -1,11 +1,33 @@
+export type Car = {
+  id: number;
+  make: string;
+  model: string;
+  year: number;
+  miles: number;
+  mpg: number;
+  fueltype: string;
+  county: string;
+};
+
 export type Property = {
   id: number;
   address: string;
   value: number;
   prime: boolean;
   rent: boolean;
+  liability?: number;
   lat?: number;
   lon?: number;
+};
+
+export type Entity = {
+  id: number;
+  name: string;
+  type: string;
+  county: string;
+  rate: number;
+  value: number;
+  liability: number;
 };
 
 export async function geocodeAddress(

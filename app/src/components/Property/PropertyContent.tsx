@@ -1,11 +1,13 @@
 "use client";
 
-import { useState } from "react";
-import { InputBlock } from "./InputBlock";
+import { useState, useMemo } from "react";
+import { PropertyInputBlock } from "./PropertyInputBlock";
 import { PropertyMapBlock } from "./PropertyMapBlock";
-//import { PropertyMapBlockHybrid } from "./PropertyMapBlockHybrid";
 import { PropertyResultsBlock } from "./PropertyResultsBlock";
-import type { Property } from "./types";
+import type { Property, Entity } from "../MetaMisc/types";
+import booleanPointInPolygon from "@turf/boolean-point-in-polygon";
+import { point } from "@turf/helpers";
+import Property2025 from "../../data/Geospacial/Property2025.json";
 
 export function PropertyContent() {
   const [properties, setProperties] = useState<Property[]>([]);
@@ -30,16 +32,55 @@ export function PropertyContent() {
     setProperties((prev) => prev.filter((p) => p.id !== id));
   };
 
+  const entities = useMemo<Entity[]>(() => {
+    const geocoded = properties.filter(
+      (p) => p.lat !== undefined && p.lon !== undefined && p.value > 0,
+    );
+    if (geocoded.length === 0) return [];
+
+    const data = Property2025 as GeoJSON.FeatureCollection;
+    const results: Entity[] = [];
+
+    for (const feature of data.features) {
+      const props = feature.properties;
+      if (!props) continue;
+
+      const rate: number = props.ENT_RATE ?? 0;
+      let totalValue = 0;
+
+      for (const prop of geocoded) {
+        const pt = point([prop.lon!, prop.lat!]);
+        if (booleanPointInPolygon(pt, feature as any)) {
+          totalValue += prop.value;
+        }
+      }
+
+      if (totalValue > 0) {
+        results.push({
+          id: props.ENT_NBR,
+          name: props.ENT_DESC,
+          type: props.entity_type,
+          county: props.county,
+          rate,
+          value: totalValue,
+          liability: rate * totalValue,
+        });
+      }
+    }
+
+    return results;
+  }, [properties]);
+
   return (
-    <div className="flex flex-row h-full w-full text-black">
-      <InputBlock
+    <div className="flex flex-row overflow-hidden h-full w-full text-black">
+      <PropertyInputBlock
         properties={properties}
         onAdd={addProperty}
         onUpdate={updateProperty}
         onRemove={removeProperty}
       />
       <PropertyMapBlock properties={properties} />
-      <PropertyResultsBlock />
+      <PropertyResultsBlock entities={entities} />
     </div>
   );
 }

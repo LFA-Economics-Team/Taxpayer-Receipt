@@ -51,7 +51,7 @@ export function PropertyContent() {
       for (const prop of geocoded) {
         const pt = point([prop.lon!, prop.lat!]);
         if (booleanPointInPolygon(pt, feature as any)) {
-          totalValue += prop.value;
+          totalValue += prop.prime ? prop.value * 0.55 : prop.value; // this applies the primary residential exemption by scaling the property value to 55% of the user input.
         }
       }
 
@@ -68,7 +68,7 @@ export function PropertyContent() {
       }
     }
 
-    return results;
+    return results.sort((a, b) => b.liability - a.liability);
   }, [properties]);
 
   return (

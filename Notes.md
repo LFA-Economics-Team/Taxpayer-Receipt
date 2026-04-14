@@ -42,24 +42,12 @@ Use UGRS hybrid base for property and sales tax maps: https://gis.utah.gov/produ
     - Split between food and non-food?
   - Lists address and amounts in left column, show tax entity rate & revenue on right column
   - Put markers on map in center for each address entered by user
-  - Toggle between tax entities and tax areas?
 
 # Property Tax
 
 - Interactive Map visualization
   - Swap out baselayer for UGRS's hybrid tiles
-  - sort entities by tax liability amount
 - Rental Imputation overhaul?
-- Factor in residential exemption
-
-# Fuel & Fees
-
-- add explanatory notes/ pop-ups
-  - What each fee is, who it applies to, what it's used for?
-  - 6 Month-registrations?
-  - Code citations for each fee?
-  - Revise fee description language
-  - double check usage description against code [and check code citations]
 
 # Strech goals
 
@@ -68,13 +56,7 @@ Use UGRS hybrid base for property and sales tax maps: https://gis.utah.gov/produ
 
 # Accomplish Today
 
-- review fee pop-ups:
-  - description langugage
-  - uses as laid out in code
-  - check code citations
-- write general caveats for fee page
-
-- Sort property tax entities by estimated liabilty
-- Factor in Residential Exemption
-
-- Get started on Sales Tax page
+- Sales taxes
+  - design sales result card
+  - set up liability calculations by rate component
+  - Implement food tax rate difference

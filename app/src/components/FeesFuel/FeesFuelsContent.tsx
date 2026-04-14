@@ -102,42 +102,42 @@ function VehicleCard({
 const feeInfo: Record<string, { description: string; statute: string }> = {
   "Registration Fee": {
     description:
-      "A flat $66 fee charged per vehicle per year to cover DMV administrative costs.",
+      "A flat $66 fee charged per vehicle per year for to fund transportation services. Fee amount is inflation adjusted annually",
     statute: "41-1a-1206",
   },
   "Age-Based Fee": {
     description:
-      "Varies by vehicle age: $150 (0–2 yrs), $110 (3–5), $80 (6–8), $50 (9–11), $10 (12+).",
+      "Uniform fee by vehicle age with older vehicles paying less than newer ones.",
     statute: "59-2-405.1",
   },
   "Corridor Fee": {
     description:
-      "$10/year for vehicles registered in designated corridor counties: Salt Lake, Davis, Utah, Weber, Summit, Wasatch, Iron, Box Elder, Washington, Tooele, and Morgan.",
+      "$10 per year fee imposed by counties for transportation maintainance. Applies to vehicles registered in Salt Lake, Davis, Utah, Weber, Summit, Wasatch, Iron, Box Elder, Washington, Tooele, and Morgan.",
     statute: "41-1a-1222",
   },
   "Driver Education Fee": {
     description:
-      "$2.50 per vehicle per year, used to fund driver education programs.",
+      "$2.50 per vehicle per year, used to fund driver education and student transportation programs.",
     statute: "41-1a-1204",
   },
   "Uninsured Motorist Fee": {
     description:
-      "$1.00 per vehicle per year, used to fund the Uninsured Motorist Identification Database.",
+      "$1.00 per vehicle per year, used to fund the Uninsured Motorist Identification Restricted Account.",
     statute: "41-1a-1218",
   },
   "Alternative Fuel Fee": {
     description:
-      "Up to $180/year for electric vehicles, offsetting fuel taxes not paid at the pump. Drivers enrolled in the Road Usage Charge program may pay less depending on miles driven (>14,440 miles).",
+      "Up to $180 per year for electric vehicles, offsetting fuel taxes not paid at the pump. Hybrid vehicles or those enrolled in the Road Usage Charge program may pay less depending on miles driven.",
     statute: "72-1-213.1",
   },
   "Pollution Control Fee": {
     description:
-      "Charged in counties with air quality concerns. Does not apply to EVs. Salt Lake, Davis, Cache: $3/yr. Utah, Weber: $2/yr.",
+      "Up to $3 per year which goes to fund local emissions testing programs. Does not apply to EVs. Fee amount is determined by county.",
     statute: "41-1a-12",
   },
   Total: {
     description:
-      "Total registration fees are the sum of each fee applicable to the vehicle. Fees calculated here are for passenger cars; other vehicle classes may be subject to additional fees at registration",
+      "Total registration fees are the sum of each fee applicable to the vehicle. Fees calculated here are for passenger cars; other vehicle classes may be subject to different or additional fees at registration.",
     statute: "",
   },
 };
@@ -345,6 +345,17 @@ export function FeesFuelsContent() {
           >
             + Add Vehicle
           </button>
+          <div className="flex flex-col text-sm justify-self-end p-2 gap-2">
+            <div>
+              *Fuel taxes are estimated from miles diven and combined expected
+              fuel efficiency. Individual tax liability will vary with driving
+              behavior and vehicle maintainance.
+            </div>
+            <div>
+              **Results are illustrative of full-year registration fees.
+              Part-year registrations may differ.
+            </div>
+          </div>
         </div>
       </div>
 
@@ -410,7 +421,12 @@ export function FeesFuelsContent() {
                         🛈
                       </button>
                       {openFee === result.name && (
-                        <div className="absolute right-0 top-6 z-20 w-64 bg-white border border-gray-300 rounded-lg shadow-xl p-3 text-left text-sm text-gray-700">
+                        <div
+                          className="absolute right-0 top-6 z-20 w-64 bg-white border border-gray-300 rounded-lg shadow-xl p-3 text-left text-base text-gray-700"
+                          style={{
+                            fontSize: "16px",
+                          }}
+                        >
                           <p className="mb-2">
                             {feeInfo[result.name].description}
                           </p>

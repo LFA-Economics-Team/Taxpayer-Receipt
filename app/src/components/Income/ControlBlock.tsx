@@ -1,4 +1,4 @@
-import { filingOptions } from "../MetaMisc/filingOptions";
+import { filingOptions } from "../MetaMisc/types";
 import Select from "react-select";
 
 export function ControlBlock() {

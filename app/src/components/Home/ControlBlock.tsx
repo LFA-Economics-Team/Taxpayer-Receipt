@@ -1,5 +1,5 @@
 import Select from "react-select";
-import { filingOptions } from "../MetaMisc/filingOptions";
+import { filingOptions } from "../MetaMisc/types";
 
 /*
 const filingOptions = [

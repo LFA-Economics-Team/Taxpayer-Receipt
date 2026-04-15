@@ -7,10 +7,10 @@ const gridItems = [
 
 export function GraphBlock() {
   return (
-    <div className="flex flex-col h-90vh w-3/5 border-2 bg-[#e0e0e0] my-2 rounded-xl p-0.5">
-      <div className="grid h-full w-full grid-cols-2 grid-rows-2 gap-0.5 rounded-xl">
+    <div className="flex flex-col w-3/5 border-2 my-2 rounded-xl p-0.5">
+      <div className="grid h-full w-full grid-cols-2 grid-rows-2 gap-1 rounded-xl">
         {gridItems.map((item) => (
-          <div className="border-1 rounded-xl p-2 text-black">
+          <div className="border-1 rounded-xl p-2 bg-[#e0e0e0] text-black">
             <div>{item.title}</div>
             <div>{item.content}</div>
           </div>
@@ -28,7 +28,7 @@ Statistical breakdowns:
     - add a horizontal line at the statuory income tax rate; the area between this line and the effective rate curve is the impact of deductions/ credits
 
   - Collections graph: income percentile vs nominal liability 
-    - primary curce shows how nominal liability changes with income [likely an exponential relationship; consider logging this curve]
+    - primary curve shows how nominal liability changes with income [likely an exponential relationship; consider logging this curve]
     - add breakpoints to show how much different shares of the income spectrum contribute to total collections
   
   - Make graphs responsive to number of dependents and filing status?

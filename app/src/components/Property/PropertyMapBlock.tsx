@@ -47,7 +47,7 @@ function getOpacity(rate: number) {
 
 function style(feature: Feature | undefined) {
   return {
-    fillColor: "#8B0000",
+    fillColor: "#5576e0",
     weight: 0.5,
     color: "#555",
     dashArray: ENTITY_DASH[feature?.properties?.entity_type ?? ""] ?? "",

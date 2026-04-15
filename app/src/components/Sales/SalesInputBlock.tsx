@@ -50,7 +50,7 @@ function SalesCard({
         />
         <input
           type={foodEditing ? "number" : "text"}
-          placeholder="Annual Food Spending"
+          placeholder="Annual Food Spending*"
           value={
             foodEditing
               ? location.foodSpending || ""
@@ -108,6 +108,18 @@ export function SalesInputBlock({
       >
         + Add Location
       </button>
+      {locations.length !== 0 ? (
+        <div className="flex flex-col text-sm justify-self-end p-2 gap-2 text-gray-200 text-left">
+          <div>
+            *For food items, the state assess a lower rate of 1.75% while all
+            other taxable transactions are assessed at 4.85%. Additionally, only
+            the state, county, and local options apply to food purchases.
+          </div>
+          <div>**[Guidance on estimating taxable spending]</div>
+        </div>
+      ) : (
+        <></>
+      )}
     </div>
   );
 }

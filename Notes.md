@@ -1,9 +1,11 @@
 # Taxpayer Receipt development checklist
 
-From IT Security: https://snyk.io/
-Use UGRS hybrid base for property and sales tax maps: https://gis.utah.gov/products/sgid/base-maps/
+From IT [Matt] Security: https://snyk.io/
 
-Consider reviewing each page and re-sizing the components
+# Global
+
+- Consider reviewing each page and re-sizing the components
+- Swap out Baselayers for UGRS's hybrid tiles in mapping blocks: https://gis.utah.gov/products/sgid/base-maps/
 
 # Main Page
 
@@ -38,21 +40,18 @@ Consider reviewing each page and re-sizing the components
 
 # Sales Tax
 
-- Interactive Map visualization
-  - Allows user to input addresses where they spend?
-    - 'Generate Default' based on property location and gross income?
+- 'Generate Default' based on property location and gross income?
 
 # Property Tax
 
-- Interactive Map visualization
-  - Swap out baselayer for UGRS's hybrid tiles
 - Rental Imputation overhaul?
 
-# Strech goals
+# Misc
 
 - Add a tool for collecting which sales & property taxing areas/ entites overlap legislative districts?
-- Consider doing retrospective calcualtions for how tax burden has changed over time?
+  - address search
+  - add legislator name to option labels?
+  - add toggles for turning property & sales layers on and off
+  - Review mapping code in detail
 
 # Accomplish Today
-
-- CONNECT TO INCOME TAX DATA!!!

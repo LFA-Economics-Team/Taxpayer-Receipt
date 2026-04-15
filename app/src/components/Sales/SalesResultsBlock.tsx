@@ -7,6 +7,8 @@ import {
 
 const FOOD_STATE_RATE = 0.0175;
 const STATE_COMPONENT = "STATE SALES AND USE TAX";
+const LOCAL_COMPONENT = "LOCAL SALES AND USE TAX";
+const COUNTY_COMPONENT = "COUNTY OPTION SALES TAX";
 
 function calcLiability(
   key: string,
@@ -14,7 +16,12 @@ function calcLiability(
   nonFood: number,
   food: number,
 ) {
-  const foodRate = key === STATE_COMPONENT ? FOOD_STATE_RATE : rate;
+  const foodRate =
+    key === STATE_COMPONENT
+      ? FOOD_STATE_RATE
+      : key === LOCAL_COMPONENT || key === COUNTY_COMPONENT
+        ? rate
+        : 0;
   return nonFood * rate + food * foodRate;
 }
 
@@ -82,16 +89,23 @@ export function SalesResultsBlock({
   return (
     <div className="flex flex-col overflow-hidden w-1/5 m-2 p-2 text-[#17301b] bg-[#e0e0e0] rounded-xl text-center shadow-xl/20 outline-1 gap-2">
       <div className="text-2xl font-bold my-2 p-2">Estimated Sales Taxes</div>
+
       {locationsWithFeatures.length === 0 ? (
         <div className="text-sm text-gray-500 mt-4">
           Add a location to the left to see your taxing area(s).
         </div>
       ) : (
-        <div className="flex flex-col gap-2 overflow-y-hidden hover:overflow-y-auto focus-within:overflow-y-auto min-h-0">
-          {locationsWithFeatures.map((lf) => (
-            <ResultCard key={lf.location.id} {...lf} />
-          ))}
-        </div>
+        <>
+          <div className="flex flex-col gap-2 overflow-y-hidden hover:overflow-y-auto focus-within:overflow-y-auto min-h-0">
+            {locationsWithFeatures.map((lf) => (
+              <ResultCard key={lf.location.id} {...lf} />
+            ))}
+          </div>
+          <div className="flex flex-col text-sm text-gray-500 justify-self-end p-2 gap-2 text-left">
+            The above results are for illustration purposes only. This is not a
+            tax notice, bill, or other offical record.
+          </div>
+        </>
       )}
     </div>
   );

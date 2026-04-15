@@ -38,6 +38,14 @@ export const RATE_COMPONENTS = [
 export const formatRateLabel = (key: string) =>
   key.charAt(0) + key.slice(1).toLowerCase();
 
+export function formatDollars(amount: number) {
+  return amount.toLocaleString("en-US", {
+    style: "currency",
+    currency: "USD",
+    maximumFractionDigits: 0,
+  });
+}
+
 export type Car = {
   id: number;
   make: string;

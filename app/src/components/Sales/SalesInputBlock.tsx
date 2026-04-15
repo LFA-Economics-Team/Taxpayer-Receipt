@@ -1,5 +1,6 @@
+import { useState } from "react";
 import type { SalesLocation } from "../MetaMisc/types";
-import { geocodeAddress } from "../MetaMisc/types";
+import { geocodeAddress, formatDollars } from "../MetaMisc/types";
 
 function SalesCard({
   location,
@@ -10,6 +11,9 @@ function SalesCard({
   onChange: (updated: SalesLocation) => void;
   onRemove: () => void;
 }) {
+  const [nonFoodEditing, setNonFoodEditing] = useState(false);
+  const [foodEditing, setFoodEditing] = useState(false);
+
   const handleAddressBlur = async () => {
     if (!location.address) return;
     const coords = await geocodeAddress(location.address);
@@ -28,18 +32,34 @@ function SalesCard({
           className=" w-9/10 text-white text-sm rounded px-2 py-1 border border-gray-300"
         />
         <input
-          type="number"
+          type={nonFoodEditing ? "number" : "text"}
           placeholder="Annual Non-Food Spending"
-          value={location.nonFoodSpending || ""}
+          value={
+            nonFoodEditing
+              ? location.nonFoodSpending || ""
+              : location.nonFoodSpending
+                ? formatDollars(location.nonFoodSpending)
+                : ""
+          }
+          onFocus={() => setNonFoodEditing(true)}
+          onBlur={() => setNonFoodEditing(false)}
           onChange={(e) =>
             onChange({ ...location, nonFoodSpending: Number(e.target.value) })
           }
           className=" w-9/10 text-white text-sm rounded px-2 py-1 border border-gray-300"
         />
         <input
-          type="number"
+          type={foodEditing ? "number" : "text"}
           placeholder="Annual Food Spending"
-          value={location.foodSpending || ""}
+          value={
+            foodEditing
+              ? location.foodSpending || ""
+              : location.foodSpending
+                ? formatDollars(location.foodSpending)
+                : ""
+          }
+          onFocus={() => setFoodEditing(true)}
+          onBlur={() => setFoodEditing(false)}
           onChange={(e) =>
             onChange({ ...location, foodSpending: Number(e.target.value) })
           }

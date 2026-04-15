@@ -1,36 +1,75 @@
 import {
   RATE_COMPONENTS,
   formatRateLabel,
+  formatDollars,
   type SalesLocationWithFeature,
 } from "../MetaMisc/types";
 
+const FOOD_STATE_RATE = 0.0175;
+const STATE_COMPONENT = "STATE SALES AND USE TAX";
+
+function calcLiability(
+  key: string,
+  rate: number,
+  nonFood: number,
+  food: number,
+) {
+  const foodRate = key === STATE_COMPONENT ? FOOD_STATE_RATE : rate;
+  return nonFood * rate + food * foodRate;
+}
+
 function ResultCard({ location, feature }: SalesLocationWithFeature) {
   const p = feature?.properties ?? {};
+  const { nonFoodSpending, foodSpending } = location;
+
+  const activeComponents = RATE_COMPONENTS.filter((key) => p[key] != null);
+  const totalLiability = activeComponents.reduce(
+    (sum, key) =>
+      sum + calcLiability(key, p[key], nonFoodSpending, foodSpending),
+    0,
+  );
 
   return (
-    <div className="bg-white rounded-xl p-3 text-left text-sm">
-      <div className="font-bold text-base mb-1">{location.address}</div>
-      <div className="text-gray-500 mb-2">{p.METRONAME}</div>
-      <table className="w-full border-collapse">
-        <tbody>
-          {RATE_COMPONENTS.filter((key) => p[key] != null).map((key) => (
-            <tr key={key}>
-              <td className="pr-2 py-0.5 text-gray-700">
+    <div className="bg-white rounded-xl p-3 text-center text-sm">
+      <div className="font-bold text-base mb-1">{p.METRONAME}</div>
+      <div className="mb-2 text-black border-b border-gray-300">
+        {location.address}
+      </div>
+      <div className="grid grid-cols-[60%_15%_20%]">
+        {activeComponents.map((key) => {
+          const liability = calcLiability(
+            key,
+            p[key],
+            nonFoodSpending,
+            foodSpending,
+          );
+          return (
+            <>
+              <div
+                key={key}
+                className="col-start-1 text-left text-xs border-r border-gray-300"
+              >
                 {formatRateLabel(key)}
-              </td>
-              <td className="text-right py-0.5">
+              </div>
+              <div key={key} className="col-start-2 text-right">
                 {(p[key] * 100).toFixed(2)}%
-              </td>
-            </tr>
-          ))}
-          <tr className="border-t border-gray-300 font-bold">
-            <td className="pr-2 pt-1">Total</td>
-            <td className="text-right pt-1">
-              {(p.CURRRATE * 100).toFixed(2)}%
-            </td>
-          </tr>
-        </tbody>
-      </table>
+              </div>
+              <div key={key} className="col-start-3 text-right">
+                {formatDollars(liability)}
+              </div>
+            </>
+          );
+        })}
+        <div className="grid col-start-1 border-t border-gray-300 font-bold pt-1 text-left">
+          Total
+        </div>
+        <div className="grid col-start-2 border-t border-gray-300 font-bold pt-1 text-right">
+          {(p.CURRRATE * 100).toFixed(2)}%
+        </div>
+        <div className="grid col-start-3 border-t border-gray-300 font-bold pt-1 text-right">
+          {formatDollars(totalLiability)}
+        </div>
+      </div>
     </div>
   );
 }

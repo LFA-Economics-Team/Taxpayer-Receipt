@@ -1,13 +1,6 @@
 import { useState } from "react";
 import type { Property } from "../MetaMisc/types";
-import { geocodeAddress } from "../MetaMisc/types";
-
-const formatCurrency = (value: number) =>
-  new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-    maximumFractionDigits: 0,
-  }).format(value);
+import { geocodeAddress, formatDollars } from "../MetaMisc/types";
 
 function PropertyCard({
   property,
@@ -44,7 +37,7 @@ function PropertyCard({
             valueEditing
               ? property.value || ""
               : property.value
-                ? formatCurrency(property.value)
+                ? formatDollars(property.value)
                 : ""
           }
           onFocus={() => setValueEditing(true)}

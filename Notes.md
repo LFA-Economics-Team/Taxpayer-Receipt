@@ -3,6 +3,8 @@
 From IT Security: https://snyk.io/
 Use UGRS hybrid base for property and sales tax maps: https://gis.utah.gov/products/sgid/base-maps/
 
+Consider reviewing each page and re-sizing the components
+
 # Main Page
 
 - Three column sankey visualization
@@ -39,9 +41,6 @@ Use UGRS hybrid base for property and sales tax maps: https://gis.utah.gov/produ
 - Interactive Map visualization
   - Allows user to input addresses where they spend?
     - 'Generate Default' based on property location and gross income?
-    - Split between food and non-food?
-  - Lists address and amounts in left column, show tax entity rate & revenue on right column
-  - Put markers on map in center for each address entered by user
 
 # Property Tax
 
@@ -56,7 +55,4 @@ Use UGRS hybrid base for property and sales tax maps: https://gis.utah.gov/produ
 
 # Accomplish Today
 
-- Sales taxes
-  - design sales result card
-  - set up liability calculations by rate component
-  - Implement food tax rate difference
+- CONNECT TO INCOME TAX DATA!!!

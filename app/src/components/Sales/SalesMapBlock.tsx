@@ -18,22 +18,22 @@ const customIcon = L.divIcon({
 
 function getColor(rate: number) {
   return rate > 0.085
-    ? "#800026"
+    ? "#642451"
     : rate > 0.08
-      ? "#BD0026"
+      ? "#7E2D65"
       : rate > 0.075
-        ? "#E31A1C"
+        ? "#9B4580"
         : rate > 0.07
-          ? "#FC4E2A"
+          ? "#BA749E"
           : rate > 0.065
-            ? "#FD8D3C"
-            : "#FFEDA0";
+            ? "#D8A8C4"
+            : "#F5E3EF";
 }
 
 function style(feature: Feature | undefined) {
   return {
     fillColor: getColor(feature?.properties?.CURRRATE ?? 0),
-    weight: 1,
+    weight: 0.5,
     color: "#555",
     fillOpacity: 0.7,
   };

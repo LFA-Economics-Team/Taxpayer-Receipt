@@ -1,5 +1,3 @@
-"use client";
-
 import { useState, useMemo } from "react";
 import booleanPointInPolygon from "@turf/boolean-point-in-polygon";
 import { point } from "@turf/helpers";
@@ -51,7 +49,7 @@ export function SalesContent() {
   }, [locations]);
 
   return (
-    <div className="flex flex-row h-full w-full text-black">
+    <div className="flex flex-row overflow-hidden h-full w-full text-black">
       <SalesInputBlock
         locations={locations}
         onAdd={addLocation}

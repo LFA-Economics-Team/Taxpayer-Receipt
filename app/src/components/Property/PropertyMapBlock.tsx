@@ -33,22 +33,25 @@ const ENTITY_DASH: Record<string, string> = {
   "RDA or CDA": "12 6",
 };
 
-function getColor(rate: number) {
-  const max = 0.15;
-  const t = Math.min(rate / max, 1);
-  const r = Math.round(173 + (10 - 173) * t);
-  const g = Math.round(214 + (50 - 214) * t);
-  const b = Math.round(255 + (150 - 255) * t);
-  return `rgb(${r}, ${g}, ${b})`;
+function getOpacity(rate: number) {
+  return rate > 0.003
+    ? 0.25
+    : rate > 0.002
+      ? 0.1
+      : rate > 0.001
+        ? 0.03
+        : rate > 0.0005
+          ? 0.01
+          : 0.005;
 }
 
 function style(feature: Feature | undefined) {
   return {
-    fillColor: getColor(feature?.properties?.ENT_RATE ?? 0),
-    weight: 1,
+    fillColor: "#8B0000",
+    weight: 0.5,
     color: "#555",
     dashArray: ENTITY_DASH[feature?.properties?.entity_type ?? ""] ?? "",
-    fillOpacity: 0.1,
+    fillOpacity: getOpacity(feature?.properties?.ENT_RATE ?? 0),
   };
 }
 

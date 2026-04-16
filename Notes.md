@@ -36,7 +36,7 @@ From IT [Matt] Security: https://snyk.io/
   - Graph comparing percentile of income to effective tax rate
   - Graph comparing percential of income to nominal tax liability [logged?]
   - Allow graphs to be conditional on filing status and number of dependents
-  - Consider privacy/ data risks and stratagies to mitigate [!!!]
+  - Consider privacy/ data risks and strategies to mitigate [!!!]
 
 # Sales Tax
 
@@ -46,12 +46,8 @@ From IT [Matt] Security: https://snyk.io/
 
 - Rental Imputation overhaul?
 
-# Misc
-
-- Add a tool for collecting which sales & property taxing areas/ entites overlap legislative districts?
-  - address search
-  - add legislator name to option labels?
-  - add toggles for turning property & sales layers on and off
-  - Review mapping code in detail
-
 # Accomplish Today
+
+- Review Income tax data
+- compute general percentile information
+- begin building income tax graphs

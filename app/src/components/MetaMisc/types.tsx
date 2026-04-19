@@ -4,6 +4,8 @@ export type IncomeInfo = {
   annualIncome: number;
   filingStatus: string;
   incomeTile: number;
+  householdSize: number;
+  effectiveRate: number;
 };
 
 export const filingOptions = [
@@ -12,8 +14,8 @@ export const filingOptions = [
   { value: "Married Filing Jointly", label: "Married Filing Jointly" },
   { value: "Head of Household", label: "Head of Household" },
   {
-    value: " Qualifying surviving spouse",
-    label: " Qualifying surviving spouse",
+    value: "Qualifying surviving spouse",
+    label: "Qualifying surviving spouse",
   },
 ];
 
@@ -238,4 +240,16 @@ export async function geocodeAddress(
   const data = await res.json();
   if (!data.length) return null;
   return { lat: parseFloat(data[0].lat), lon: parseFloat(data[0].lon) };
+}
+
+// Standard Text
+
+export function ResultsDisclaimer() {
+  return (
+    <div className="flex flex-col text-sm text-gray-500 justify-self-end p-2 gap-2 text-left">
+      The above results are for illustration purposes only. Estimates represent
+      the typical circumstances for similarly situated taxpayers. This is not a
+      tax notice, bill, or other offical record.
+    </div>
+  );
 }

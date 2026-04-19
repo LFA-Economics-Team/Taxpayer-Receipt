@@ -1,4 +1,4 @@
-import type { Entity } from "../MetaMisc/types";
+import { type Entity, ResultsDisclaimer } from "../MetaMisc/types";
 
 function ResultCard({ entity }: { entity: Entity }) {
   return (
@@ -55,10 +55,7 @@ export function PropertyResultsBlock({ entities }: { entities: Entity[] }) {
               maximumFractionDigits: 0,
             })}
           </div>
-          <div className="flex flex-col text-sm text-gray-500 justify-self-end p-2 gap-2 text-left">
-            The above results are for illustration purposes only. This is not a
-            tax notice, bill, or other offical record.
-          </div>
+          <ResultsDisclaimer />
         </>
       )}
     </div>

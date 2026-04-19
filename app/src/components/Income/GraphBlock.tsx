@@ -60,6 +60,7 @@ export function GraphBlock({ incomeInfo }: { incomeInfo: IncomeInfo }) {
           curveName={"Household Size"}
           verticalReferenceLineValue={incomeInfo.incomeTile}
           filingStatus={incomeInfo.filingStatus}
+          yDomain={4}
         />
       ),
     },

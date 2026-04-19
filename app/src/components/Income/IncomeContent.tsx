@@ -8,6 +8,8 @@ export function IncomeContent() {
     annualIncome: 0,
     filingStatus: "",
     incomeTile: 0,
+    householdSize: 1,
+    effectiveRate: 0,
   });
 
   console.log(incomeInfo);
@@ -16,7 +18,7 @@ export function IncomeContent() {
     <div className="flex flex-row h-full w-full justify-between text-center gap-2">
       <ControlBlock incomeInfo={incomeInfo} setIncomeInfo={setIncomeInfo} />
       <GraphBlock incomeInfo={incomeInfo} />
-      <ResultsBlock />
+      <ResultsBlock incomeInfo={incomeInfo} />
     </div>
   );
 }

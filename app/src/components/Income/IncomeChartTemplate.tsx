@@ -51,53 +51,60 @@ export function LineChartTemplate({
   return (
     <>
       <div className="flex h-1/10 justify-center font-bold p-2">{title}</div>
-      <div className="flex h-9/10 w-9/10">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart
-            data={
-              selectedData[
-                (filingStatus || "default") as keyof typeof selectedData
-              ]
-            }
-          >
-            <CartesianGrid strokeDasharray="2 2" />
-            {showReferenceLine && (
+      <div className="flex h-9/10 w-full p-2">
+        {filingStatus === "Qualifying surviving spouse" ? (
+          <div className="flex flex-col h-full w-full text-sm text-gray-500 items-center justify-center p-2 gap-2 text-center">
+            Insufficent Data for statistical analysis with selected varables.
+            Please modify inputs.
+          </div>
+        ) : (
+          <ResponsiveContainer width="100%" height="100%">
+            <LineChart
+              data={
+                selectedData[
+                  (filingStatus || "default") as keyof typeof selectedData
+                ]
+              }
+            >
+              <CartesianGrid strokeDasharray="2 2" />
+              {showReferenceLine && (
+                <ReferenceLine
+                  y={horizonReferenceLineValue}
+                  stroke="black"
+                  strokeDasharray="2 2"
+                  label="Statutory Tax Rate"
+                />
+              )}
               <ReferenceLine
-                y={horizonReferenceLineValue}
+                x={verticalReferenceLineValue}
                 stroke="black"
                 strokeDasharray="2 2"
-                label="Statutory Tax Rate"
               />
-            )}
-            <ReferenceLine
-              x={verticalReferenceLineValue}
-              stroke="black"
-              strokeDasharray="2 2"
-            />
-            <XAxis
-              dataKey={xDataKey}
-              ticks={[10, 20, 30, 40, 50, 60, 70, 80, 90]}
-            />
-            <YAxis
-              domain={[0, yDomain]}
-              tickFormatter={(value) =>
-                yAsPercent ? `${(100 * value).toFixed(2)}%` : `${value}`
-              }
-            />
-            <Line dataKey={yDataKey} name={curveName} />
-            <Legend />
-            <Tooltip
-              labelFormatter={(value) => `Percentile: ${value}`}
-              formatter={(value) =>
-                typeof value === "number"
-                  ? yAsPercent
-                    ? `${(100 * value).toFixed(2)}%`
-                    : `${value.toFixed(2)}`
-                  : value
-              }
-            />
-          </LineChart>
-        </ResponsiveContainer>
+              <XAxis
+                dataKey={xDataKey}
+                ticks={[10, 20, 30, 40, 50, 60, 70, 80, 90]}
+              />
+              <YAxis
+                domain={[0, yDomain]}
+                tickFormatter={(value) =>
+                  yAsPercent ? `${(100 * value).toFixed(2)}%` : `${value}`
+                }
+              />
+              <Line dataKey={yDataKey} name={curveName} />
+              <Legend />
+              <Tooltip
+                labelFormatter={(value) => `Percentile: ${value}`}
+                formatter={(value) =>
+                  typeof value === "number"
+                    ? yAsPercent
+                      ? `${(100 * value).toFixed(2)}%`
+                      : `${value.toFixed(2)}`
+                    : value
+                }
+              />
+            </LineChart>
+          </ResponsiveContainer>
+        )}
       </div>
     </>
   );

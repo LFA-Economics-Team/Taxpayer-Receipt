@@ -2,6 +2,7 @@ import {
   RATE_COMPONENTS,
   formatRateLabel,
   formatDollars,
+  ResultsDisclaimer,
   type SalesLocationWithFeature,
 } from "../MetaMisc/types";
 
@@ -101,10 +102,7 @@ export function SalesResultsBlock({
               <ResultCard key={lf.location.id} {...lf} />
             ))}
           </div>
-          <div className="flex flex-col text-sm text-gray-500 justify-self-end p-2 gap-2 text-left">
-            The above results are for illustration purposes only. This is not a
-            tax notice, bill, or other offical record.
-          </div>
+          <ResultsDisclaimer />
         </>
       )}
     </div>

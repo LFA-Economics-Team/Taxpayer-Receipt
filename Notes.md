@@ -6,6 +6,7 @@ From IT [Matt] Security: https://snyk.io/
 
 - Consider reviewing each page and re-sizing the components
 - Swap out Baselayers for UGRS's hybrid tiles in mapping blocks: https://gis.utah.gov/products/sgid/base-maps/
+- Consider pre-calculating legislative map polygon intersections
 
 # Main Page
 
@@ -41,7 +42,8 @@ From IT [Matt] Security: https://snyk.io/
 
   - Consider privacy/ data risks and strategies to mitigate [!!!]
   - add a vertical line to show the user where in the income spectrum they fall based on the user-input gross income
-  - Wire up conditional such that when 'QS' status is selected, graphs show 'Insufficent Data for statistical analysis with selected varables'
+
+  -Results display: wire up the correct variables/ calculations
 
 - Questions:
   - what is going on with the first percentile?

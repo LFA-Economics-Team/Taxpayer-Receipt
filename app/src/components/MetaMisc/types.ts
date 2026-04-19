@@ -1,5 +1,11 @@
 // Income Tax
 
+export type IncomeInfo = {
+  annualIncome: number;
+  filingStatus: string;
+  incomeTile: number;
+};
+
 export const filingOptions = [
   { value: "Single", label: "Single" },
   { value: "Married Filing Single", label: "Married Filing Single" },

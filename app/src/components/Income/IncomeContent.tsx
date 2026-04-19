@@ -7,13 +7,15 @@ export function IncomeContent() {
   const [incomeInfo, setIncomeInfo] = useState({
     annualIncome: 0,
     filingStatus: "",
-    dependents: 0,
+    incomeTile: 0,
   });
+
+  console.log(incomeInfo);
 
   return (
     <div className="flex flex-row h-full w-full justify-between text-center gap-2">
-      <ControlBlock />
-      <GraphBlock />
+      <ControlBlock incomeInfo={incomeInfo} setIncomeInfo={setIncomeInfo} />
+      <GraphBlock incomeInfo={incomeInfo} />
       <ResultsBlock />
     </div>
   );

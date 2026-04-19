@@ -131,7 +131,7 @@ export function LegMap() {
   const [legType, setlegtype] = useState(true);
   const [propOn, setPropOn] = useState(false);
   const [SalesOn, setSalesOn] = useState(false);
-  const [selectedDistrict, setSelectedDistrict] = useState<number | null>(null);
+  const [selectedDistricts, setSelectedDistricts] = useState<number[]>([]);
   const [clickPoint, setClickPoint] = useState<[number, number] | null>(null);
   const [expandedSalesCards, setExpandedSalesCards] = useState<Set<number>>(
     new Set(),
@@ -173,7 +173,7 @@ export function LegMap() {
 
   const handleLegType = () => {
     setlegtype(!legType);
-    setSelectedDistrict(null);
+    setSelectedDistricts([]);
   };
 
   const handlePropToggle = () => {
@@ -184,70 +184,71 @@ export function LegMap() {
     setSalesOn(!SalesOn);
   };
 
-  const selectedDistrictFeature = useMemo(
+  const selectedDistrictFeatures = useMemo(
     () =>
-      selectedDistrict !== null
-        ? (allDistrictFeatures.find(
-            (f: any) => f.properties.DIST === selectedDistrict,
-          ) ?? null)
-        : null,
-    [selectedDistrict, legType],
+      selectedDistricts.length > 0
+        ? allDistrictFeatures.filter((f: any) =>
+            selectedDistricts.includes(f.properties.DIST),
+          )
+        : [],
+    [selectedDistricts, legType],
   );
 
   const filteredProperty = useMemo(() => {
-    if (!selectedDistrictFeature)
+    if (selectedDistrictFeatures.length === 0)
       return Property2025 as GeoJSON.FeatureCollection;
-    const distBbox = featureBbox(selectedDistrictFeature);
     return {
       type: "FeatureCollection" as const,
       features: (Property2025 as any).features
         .filter((f: any) => {
-          if (!bboxOverlap(featureBbox(f), distBbox)) return false;
-          const result = intersect(
-            featureCollection([f, selectedDistrictFeature]),
-          );
-          return (
-            result !== null &&
-            (result.geometry.type === "Polygon" ||
-              result.geometry.type === "MultiPolygon")
-          );
+          const propBbox = featureBbox(f);
+          return selectedDistrictFeatures.some((distFeature: any) => {
+            if (!bboxOverlap(propBbox, featureBbox(distFeature))) return false;
+            const result = intersect(featureCollection([f, distFeature]));
+            return (
+              result !== null &&
+              (result.geometry.type === "Polygon" ||
+                result.geometry.type === "MultiPolygon")
+            );
+          });
         })
         .sort((a: any, b: any) =>
           a.properties.entity_type.localeCompare(b.properties.entity_type),
         ),
     };
-  }, [selectedDistrictFeature]);
+  }, [selectedDistrictFeatures]);
 
   const filteredSales = useMemo(() => {
-    if (!selectedDistrictFeature) return Sales2025 as GeoJSON.FeatureCollection;
-    const distBbox = featureBbox(selectedDistrictFeature);
+    if (selectedDistrictFeatures.length === 0)
+      return Sales2025 as GeoJSON.FeatureCollection;
     return {
       type: "FeatureCollection" as const,
       features: (Sales2025 as any).features.filter((f: any) => {
-        if (!bboxOverlap(featureBbox(f), distBbox)) return false;
-        const result = intersect(
-          featureCollection([f, selectedDistrictFeature]),
-        );
-        return (
-          result !== null &&
-          (result.geometry.type === "Polygon" ||
-            result.geometry.type === "MultiPolygon")
-        );
+        const saleBbox = featureBbox(f);
+        return selectedDistrictFeatures.some((distFeature: any) => {
+          if (!bboxOverlap(saleBbox, featureBbox(distFeature))) return false;
+          const result = intersect(featureCollection([f, distFeature]));
+          return (
+            result !== null &&
+            (result.geometry.type === "Polygon" ||
+              result.geometry.type === "MultiPolygon")
+          );
+        });
       }),
     };
-  }, [selectedDistrictFeature]);
+  }, [selectedDistrictFeatures]);
 
   const filteredDistricts = useMemo(
     () => ({
       type: "FeatureCollection" as const,
       features:
-        selectedDistrict !== null
-          ? allDistrictFeatures.filter(
-              (f: any) => f.properties.DIST === selectedDistrict,
+        selectedDistricts.length > 0
+          ? allDistrictFeatures.filter((f: any) =>
+              selectedDistricts.includes(f.properties.DIST),
             )
           : allDistrictFeatures,
     }),
-    [selectedDistrict, legType],
+    [selectedDistricts, legType],
   );
 
   return (
@@ -267,28 +268,30 @@ export function LegMap() {
             </button>{" "}
             {legType ? (
               <Select
+                isMulti
                 options={houseDistrictOptions}
                 className="text-black place-self-center"
                 placeholder={"District"}
-                value={
-                  houseDistrictOptions.find(
-                    (o) => o.value === selectedDistrict,
-                  ) ?? null
+                value={houseDistrictOptions.filter((o) =>
+                  selectedDistricts.includes(o.value),
+                )}
+                onChange={(opts) =>
+                  setSelectedDistricts(opts ? opts.map((o) => o.value) : [])
                 }
-                onChange={(opt) => setSelectedDistrict(opt ? opt.value : null)}
                 isClearable
               />
             ) : (
               <Select
+                isMulti
                 options={senateDistrictOptions}
                 className="text-black place-self-center"
                 placeholder={"District"}
-                value={
-                  senateDistrictOptions.find(
-                    (o) => o.value === selectedDistrict,
-                  ) ?? null
+                value={senateDistrictOptions.filter((o) =>
+                  selectedDistricts.includes(o.value),
+                )}
+                onChange={(opts) =>
+                  setSelectedDistricts(opts ? opts.map((o) => o.value) : [])
                 }
-                onChange={(opt) => setSelectedDistrict(opt ? opt.value : null)}
                 isClearable
               />
             )}
@@ -322,7 +325,7 @@ export function LegMap() {
         >
           {propOn ? (
             <GeoJSON
-              key={`property-${selectedDistrict}`}
+              key={`property-${selectedDistricts.join(",")}`}
               data={filteredProperty}
               style={Propstyle}
             />
@@ -331,7 +334,7 @@ export function LegMap() {
           )}
           {SalesOn ? (
             <GeoJSON
-              key={`sales-${selectedDistrict}`}
+              key={`sales-${selectedDistricts.join(",")}`}
               data={filteredSales}
               style={Salestyle}
             />
@@ -435,13 +438,13 @@ export function LegMap() {
           {legOn ? (
             legType ? (
               <GeoJSON
-                key={`house-${selectedDistrict}`}
+                key={`house-${selectedDistricts.join(",")}`}
                 data={filteredDistricts}
                 style={Legstyle}
               />
             ) : (
               <GeoJSON
-                key={`senate-${selectedDistrict}`}
+                key={`senate-${selectedDistricts.join(",")}`}
                 data={filteredDistricts}
                 style={Legstyle}
               />
@@ -454,9 +457,10 @@ export function LegMap() {
 
       <div className="flex flex-col bg-[#e0e0e0] h-full min-h-0 w-1/5 rounded-xl p-2 overflow-y-auto">
         <div className="text-2xl font-bold my-2 p-2">Taxing Jurisdictions</div>
-        {selectedDistrict === null ? (
+        {selectedDistricts.length === 0 ? (
           <div className="text-sm text-gray-500 italic px-2">
-            Select a district to the left to see your taxing jurisdictions.
+            Select one or more districts to the left to see your taxing
+            jurisdictions.
           </div>
         ) : (
           <>
@@ -465,6 +469,10 @@ export function LegMap() {
                 <div className="font-bold text-base px-2 mb-1">
                   Sales Tax Areas
                 </div>
+                <div className="flex flex-row justify-center text-xs font-bold">
+                  {filteredSales.features.length} Sales Tax Areas
+                </div>
+
                 {filteredSales.features.length === 0 ? (
                   <div className="text-sm text-gray-500 italic px-2 mb-2">
                     None found

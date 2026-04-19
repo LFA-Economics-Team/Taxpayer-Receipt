@@ -25,29 +25,34 @@ From IT [Matt] Security: https://snyk.io/
 
 # Income Tax
 
-- Use average/ median values for defaults
-- Variables:
-  - Gross income
-  - Filing Status
-  - Number of Dependents
-  - Residence/ partial year-income?
+- Change the state function to lookup percentile given user-input for income
+- allow graphs to fill the graphblock when selected?
+
+- Data work:
+  - create 'cumulative share of income' variable
+  - create 'cumulative share of tax' variable
+  - create 'average income' variable
 
 - Visuals
-  - Graph comparing percentile of income to effective tax rate
-  - Graph comparing percential of income to nominal tax liability [logged?]
-  - Allow graphs to be conditional on filing status and number of dependents
+  - 1: Lorenz Curve [% of returns vs cumulative share of income]
+  - 2: percentile of income to effective tax rate
+  - 3: percential of income to cummulative share tax liability
+  - 4: percentile of income vs houshold size?
+
   - Consider privacy/ data risks and strategies to mitigate [!!!]
+  - add a vertical line to show the user where in the income spectrum they fall based on the user-input gross income
+  - Wire up conditional such that when 'QS' status is selected, graphs show 'Insufficent Data for statistical analysis with selected varables'
+
+- Questions:
+  - what is going on with the first percentile?
 
 # Sales Tax
 
 - 'Generate Default' based on property location and gross income?
+- Guidance on estimating taxable spending
 
 # Property Tax
 
-- Rental Imputation overhaul?
+- Rental Imputation overhaul? [Ask tax commission?]
 
 # Accomplish Today
-
-- Review Income tax data
-- compute general percentile information
-- begin building income tax graphs

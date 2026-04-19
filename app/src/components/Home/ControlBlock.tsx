@@ -1,19 +1,6 @@
 import Select from "react-select";
 import { filingOptions } from "../MetaMisc/types";
 
-/*
-const filingOptions = [
-  { value: "Single", label: "Single" },
-  { value: "Married Filing Single", label: "Married Filing Single" },
-  { value: "Married Filing Jointly", label: "Married Filing Jointly" },
-  { value: "Head of Household", label: "Head of Household" },
-  {
-    value: " Qualifying surviving spouse",
-    label: " Qualifying surviving spouse",
-  },
-];
-*/
-
 const rentOrOwn = [
   { value: "Rent", label: "Rent" },
   { value: "Own", label: "Own" },
@@ -47,12 +34,6 @@ export function ControlBlock() {
           <div className=" flex flex-row justify-between">
             <div>What is your filing status?</div>
             <Select defaultValue={[filingOptions[0]]} options={filingOptions} />
-          </div>
-          <div className=" flex flex-row justify-between">
-            <div>How many dependents do you have?</div>
-            <form>
-              <input className="border-1 px-2 m-2 rounded-xl" />
-            </form>
           </div>
         </div>
         <div className="flex flex-col w-9/10 bg-white text-[12px] text-[#17301b] rounded-xl p-2 inset-shadow-sm/60 divide-y divide-gray-400">

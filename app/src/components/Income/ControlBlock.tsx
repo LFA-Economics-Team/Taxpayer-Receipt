@@ -1,4 +1,8 @@
-import { filingOptions, formatDollars } from "../MetaMisc/types";
+import {
+  filingOptions,
+  formatDollars,
+  lookupIncomeData,
+} from "../MetaMisc/types";
 import type { IncomeInfo } from "../MetaMisc/types";
 import Select from "react-select";
 import { useState } from "react";
@@ -38,7 +42,10 @@ export function ControlBlock({
             }}
             onBlur={() => {
               const raw = Number(incomeDisplay.replace(/[^0-9]/g, ""));
-              setIncomeInfo({ ...incomeInfo, annualIncome: raw });
+              const lookup = raw
+                ? lookupIncomeData(raw, incomeInfo.filingStatus)
+                : {};
+              setIncomeInfo({ ...incomeInfo, annualIncome: raw, ...lookup });
               setIncomeDisplay(raw ? formatDollars(raw) : "");
             }}
           />
@@ -53,12 +60,13 @@ export function ControlBlock({
               filingOptions.find((o) => o.value === incomeInfo.filingStatus) ??
               null
             }
-            onChange={(selected) =>
-              setIncomeInfo({
-                ...incomeInfo,
-                filingStatus: selected?.value ?? "",
-              })
-            }
+            onChange={(selected) => {
+              const status = selected?.value ?? "";
+              const lookup = incomeInfo.annualIncome
+                ? lookupIncomeData(incomeInfo.annualIncome, status)
+                : {};
+              setIncomeInfo({ ...incomeInfo, filingStatus: status, ...lookup });
+            }}
           />
         </div>
       </div>

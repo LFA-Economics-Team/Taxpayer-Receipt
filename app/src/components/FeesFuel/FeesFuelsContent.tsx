@@ -342,17 +342,21 @@ export function FeesFuelsContent() {
           >
             + Add Vehicle
           </button>
-          <div className="flex flex-col text-sm justify-self-end p-2 gap-2">
-            <div>
-              *Fuel taxes are estimated from miles diven and combined expected
-              fuel efficiency. Individual tax liability will vary with driving
-              behavior and vehicle maintainance.
+          {cars.length !== 0 ? (
+            <div className="flex flex-col text-sm justify-self-end p-2 gap-2">
+              <div>
+                *Fuel taxes are estimated from miles diven and combined expected
+                fuel efficiency. Individual tax liability will vary with driving
+                behavior and vehicle maintainance.
+              </div>
+              <div>
+                **Results are illustrative of full-year registration fees.
+                Part-year registrations may differ.
+              </div>
             </div>
-            <div>
-              **Results are illustrative of full-year registration fees.
-              Part-year registrations may differ.
-            </div>
-          </div>
+          ) : (
+            <></>
+          )}
         </div>
       </div>
 

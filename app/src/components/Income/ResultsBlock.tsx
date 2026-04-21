@@ -5,12 +5,14 @@ import {
 } from "../MetaMisc/types";
 
 export function ResultsBlock({ incomeInfo }: { incomeInfo: IncomeInfo }) {
+  console.log(incomeInfo);
+
   return (
     <div className="flex flex-col overflow-hidden w-1/5 m-2 p-2 text-[#17301b] bg-[#e0e0e0] rounded-xl text-center shadow-xl/20 outline-1 gap-2">
       <div className="text-2xl font-bold my-2 p-2">Estimated Income Taxes</div>
       {incomeInfo.annualIncome === 0 ? (
         <div className="text-sm text-gray-500 mt-4">
-          Enter income to the left to see your taxing area(s).
+          Enter income to the left to estimate your income tax.
         </div>
       ) : (
         <>
@@ -19,22 +21,28 @@ export function ResultsBlock({ incomeInfo }: { incomeInfo: IncomeInfo }) {
               Based on the information provided, taxpayers like you typically...
             </div>
             <div className="grid grid-cols[55%_20%_5%_20%_] text-left gap-y-2">
-              <div className="grid row-start-1 ">Earn between</div>
-              <div className="grid col-start-3 text-center">
-                {formatDollars(incomeInfo.annualIncome)}
-              </div>
-              <div className="grid col-start-5 text-center">
-                {formatDollars(incomeInfo.annualIncome)}
+              <div className="grid row-start-1 ">Earn on average</div>
+              <div className="grid row-start-1 col-start-3 col-span-3 text-center">
+                {formatDollars(incomeInfo.averageIncome, 0, 10)}{" "}
               </div>
 
               <div className="grid row-start-2">Pay an Effective Rate of</div>
               <div className="grid row-start-2 col-start-3 col-span-3 text-center">
-                Effective Rate
+                {incomeInfo.effectiveRate.toLocaleString("en-US", {
+                  style: "percent",
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                })}
               </div>
 
               <div className="grid row-start-3">With household size</div>
               <div className="grid row-start-3 col-start-3 col-span-3 text-center">
-                about {incomeInfo.householdSize}
+                about{" "}
+                {incomeInfo.householdSize.toLocaleString("en-US", {
+                  style: "decimal",
+                  minimumFractionDigits: 1,
+                  maximumFractionDigits: 1,
+                })}
               </div>
 
               <div className="grid row-start-4 col-span-5 border-t border-gray-300"></div>
@@ -47,6 +55,8 @@ export function ResultsBlock({ incomeInfo }: { incomeInfo: IncomeInfo }) {
                 about{" "}
                 {formatDollars(
                   incomeInfo.annualIncome * incomeInfo.effectiveRate,
+                  0,
+                  10,
                 )}
               </div>
             </div>

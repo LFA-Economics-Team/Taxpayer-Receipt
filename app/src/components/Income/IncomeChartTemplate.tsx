@@ -24,6 +24,7 @@ interface LineChartTemplateProps {
   showReferenceLine?: boolean;
   horizonReferenceLineValue?: number;
   verticalReferenceLineValue?: number;
+  equalityReferenceLine?: boolean;
   yAsPercent?: boolean;
   filingStatus?: string;
 }
@@ -37,6 +38,7 @@ export function LineChartTemplate({
   showReferenceLine = false,
   horizonReferenceLineValue,
   verticalReferenceLineValue,
+  equalityReferenceLine = false,
   yAsPercent = false,
   filingStatus,
 }: LineChartTemplateProps) {
@@ -54,7 +56,7 @@ export function LineChartTemplate({
       <div className="flex h-9/10 w-full p-2">
         {filingStatus === "Qualifying surviving spouse" ? (
           <div className="flex flex-col h-full w-full text-sm text-gray-500 items-center justify-center p-2 gap-2 text-center">
-            Insufficent Data for statistical analysis with selected varables.
+            Insufficent data for statistical analysis with selected varables.
             Please modify inputs.
           </div>
         ) : (
@@ -75,11 +77,25 @@ export function LineChartTemplate({
                   label="Statutory Tax Rate"
                 />
               )}
-              <ReferenceLine
-                x={verticalReferenceLineValue}
-                stroke="black"
-                strokeDasharray="2 2"
-              />
+              {verticalReferenceLineValue === 0 ? (
+                <></>
+              ) : (
+                <ReferenceLine
+                  x={verticalReferenceLineValue}
+                  label={{ position: "insideBottom", value: "Income" }}
+                  stroke="black"
+                  strokeDasharray="2 2"
+                />
+              )}
+              {equalityReferenceLine && (
+                <ReferenceLine
+                  label="Line of Equality"
+                  segment={[
+                    { x: 0, y: 0 },
+                    { x: 100, y: 1 },
+                  ]}
+                />
+              )}
               <XAxis
                 dataKey={xDataKey}
                 ticks={[10, 20, 30, 40, 50, 60, 70, 80, 90]}

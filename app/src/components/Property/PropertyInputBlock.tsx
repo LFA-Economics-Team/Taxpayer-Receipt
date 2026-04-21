@@ -48,7 +48,7 @@ function PropertyCard({
           className="w-9/10 text-white text-sm rounded px-2 py-1 border border-gray-300"
         />
         <div className="flex flex-row gap-4 align-bottom">
-          <div> Is this your Primary Residence? </div>
+          <div> Is this your Primary Residence?* </div>
           <input
             type="checkbox"
             name="Primary Residence"
@@ -113,6 +113,17 @@ export function PropertyInputBlock({
       >
         + Add Property
       </button>
+      {properties.length !== 0 ? (
+        <div className="flex flex-col text-sm justify-self-end p-2 gap-2 text-gray-200 text-left">
+          <div>
+            *Primary residences receive an exemption equal to 45% of taxable
+            value. Consequently, such properties are taxed on the remaining 55%.
+            All other properties are taxed at full value.
+          </div>
+        </div>
+      ) : (
+        <></>
+      )}
     </div>
   );
 }

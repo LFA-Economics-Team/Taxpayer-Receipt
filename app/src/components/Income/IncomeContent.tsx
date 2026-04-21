@@ -10,6 +10,7 @@ export function IncomeContent() {
     incomeTile: 0,
     householdSize: 1,
     effectiveRate: 0,
+    averageIncome: 0,
   });
 
   return (

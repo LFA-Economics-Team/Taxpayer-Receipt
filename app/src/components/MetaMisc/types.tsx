@@ -1,11 +1,63 @@
 // Income Tax
 
+import allData from "../../data/Tax&Spend/IncomeData.json";
+import sData from "../../data/Tax&Spend/IncomeData_S.json";
+import mfsData from "../../data/Tax&Spend/IncomeData_MFS.json";
+import mfjData from "../../data/Tax&Spend/IncomeData_MFJ.json";
+import hhData from "../../data/Tax&Spend/IncomeData_HH.json";
+
+const statusDataMap: Record<string, typeof allData> = {
+  Single: sData,
+  "Married Filing Single": mfsData,
+  "Married Filing Jointly": mfjData,
+  "Head of Household": hhData,
+  "Qualifying surviving spouse": mfjData,
+};
+
+export function lookupIncomeData(
+  annualIncome: number,
+  filingStatus: string,
+): {
+  effectiveRate: number;
+  householdSize: number;
+  incomeTile: number;
+  averageIncome: number;
+} {
+  if (!annualIncome)
+    return {
+      effectiveRate: 0,
+      householdSize: 0,
+      incomeTile: 0,
+      averageIncome: 0,
+    };
+
+  const data = statusDataMap[filingStatus] ?? allData;
+  let closest = data[0];
+  let minDiff = Math.abs(data[0].FAGI - annualIncome);
+
+  for (const row of data) {
+    const diff = Math.abs(row.FAGI - annualIncome);
+    if (diff < minDiff) {
+      minDiff = diff;
+      closest = row;
+    }
+  }
+
+  return {
+    effectiveRate: closest.EFFECTIVE_ON_FAGI,
+    householdSize: closest.HH_SIZE,
+    incomeTile: closest.status_conditioned_tile,
+    averageIncome: closest.FAGI,
+  };
+}
+
 export type IncomeInfo = {
   annualIncome: number;
   filingStatus: string;
   incomeTile: number;
   householdSize: number;
   effectiveRate: number;
+  averageIncome: number;
 };
 
 export const filingOptions = [
@@ -259,11 +311,17 @@ export const houseDistrictOptions = [
 export const formatRateLabel = (key: string) =>
   key.charAt(0) + key.slice(1).toLowerCase();
 
-export function formatDollars(amount: number) {
-  return amount.toLocaleString("en-US", {
+export function formatDollars(
+  amount: number,
+  decimals: number = 0,
+  roundTo: number = 1,
+) {
+  const rounded = Math.round(amount / roundTo) * roundTo;
+  return rounded.toLocaleString("en-US", {
     style: "currency",
     currency: "USD",
-    maximumFractionDigits: 0,
+    minimumFractionDigits: decimals,
+    maximumFractionDigits: decimals,
   });
 }
 

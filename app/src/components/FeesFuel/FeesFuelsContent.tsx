@@ -5,6 +5,7 @@ import MakeOptions from "../../data/Misc/MakeOptions.json";
 import ModelOptions from "../../data/Misc/ModelOptions.json";
 import FuelData from "../../data/Misc/FuelData.json";
 import countyOptions from "../../data/Geospacial/countyOptions.json";
+import { FEES_FUEL_CONSTANTS } from "../MetaMisc/types";
 import type { Car } from "../MetaMisc/types";
 
 function VehicleCard({
@@ -215,7 +216,9 @@ export function FeesFuelsContent() {
     car.mpg === 0
       ? null
       : car.fueltype === "gas"
-        ? Math.round((car.miles / car.mpg) * 0.379) || 0
+        ? Math.round(
+            (car.miles / car.mpg) * FEES_FUEL_CONSTANTS.fuelTaxRatePerGallon,
+          ) || 0
         : 0,
   );
 
@@ -226,28 +229,32 @@ export function FeesFuelsContent() {
       const updated = prevItems.map((item) => {
         switch (item.name) {
           case "Registration Fee":
-            return { ...item, value: cars.length * 66 }; // Calcualte the baseline registation
+            return {
+              ...item,
+              value: cars.length * FEES_FUEL_CONSTANTS.registrationFee,
+            };
           case "Age-Based Fee": {
             // Calcuate Age-Based fee by vehicle age
             const currentYear = new Date().getFullYear();
             const total = cars.reduce((sum, car) => {
               const age = currentYear - car.year;
               let fee = 0;
+              const ab = FEES_FUEL_CONSTANTS.ageBased;
               switch (true) {
                 case age <= 2:
-                  fee = 150;
+                  fee = ab.age0to2;
                   break;
                 case age <= 5:
-                  fee = 110;
+                  fee = ab.age3to5;
                   break;
                 case age <= 8:
-                  fee = 80;
+                  fee = ab.age6to8;
                   break;
                 case age <= 11:
-                  fee = 50;
+                  fee = ab.age9to11;
                   break;
                 default:
-                  fee = 10;
+                  fee = ab.age12plus;
                   break;
               }
               return sum + fee;
@@ -255,47 +262,41 @@ export function FeesFuelsContent() {
             return { ...item, value: total };
           }
           case "Corridor Fee": {
-            const apcFeeByCounty: Record<string, number> = {
-              "Salt Lake": 10,
-              Davis: 10,
-              Utah: 10,
-              Weber: 10,
-              Summit: 10,
-              Wasatch: 10,
-              Iron: 10,
-              "Box Elder": 10,
-              Washington: 10,
-              Tooele: 10,
-              Morgan: 10,
-            };
             const corridorTotal = cars.reduce((sum, car) => {
-              return sum + (apcFeeByCounty[car.county] ?? 0);
+              return (
+                sum + (FEES_FUEL_CONSTANTS.corridorFeeByCounty[car.county] ?? 0)
+              );
             }, 0);
             return { ...item, value: corridorTotal };
           } // $10 per car per year in certain counties
           case "Driver Education Fee":
-            return { ...item, value: cars.length * 3 }; // $2.50 per car per year, rounded to $3
+            return {
+              ...item,
+              value: cars.length * FEES_FUEL_CONSTANTS.driverEducationFee,
+            };
           case "Uninsured Motorist Fee":
-            return { ...item, value: cars.length }; // $1 per car per year
+            return {
+              ...item,
+              value: cars.length * FEES_FUEL_CONSTANTS.uninsuredMotoristFee,
+            };
           case "Alternative Fuel Fee": {
             // Calcuates the maximum additional fee for evs. True amount will be lower for Hybrids and if the user is enrolled in the Road Usage Program
             const evCount = cars.filter(
               (car) => car.fueltype === "electric",
             ).length;
-            return { ...item, value: evCount * 180 };
+            return {
+              ...item,
+              value: evCount * FEES_FUEL_CONSTANTS.alternativeFuelFee,
+            };
           }
           case "Pollution Control Fee": {
-            // Calculates the pollution control fee based on the car's county of registration. Does not apply to evs.
-            const apcFeeByCounty: Record<string, number> = {
-              "Salt Lake": 3,
-              Davis: 3,
-              Cache: 3,
-              Utah: 2,
-              Weber: 2,
-            };
             const apcTotal = cars.reduce((sum, car) => {
               if (car.fueltype === "electric") return sum;
-              return sum + (apcFeeByCounty[car.county] ?? 0);
+              return (
+                sum +
+                (FEES_FUEL_CONSTANTS.pollutionControlFeeByCounty[car.county] ??
+                  0)
+              );
             }, 0);
             return { ...item, value: apcTotal };
           }
@@ -313,10 +314,6 @@ export function FeesFuelsContent() {
       );
     });
   }, [cars]);
-
-  console.log(filteredFuelData);
-  console.log(cars);
-  console.log(feeResults);
 
   return (
     <div className="flex flex-row h-full w-full justify-center gap-8">

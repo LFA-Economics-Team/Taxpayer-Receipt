@@ -12,8 +12,6 @@ export function IncomeContent() {
     effectiveRate: 0,
   });
 
-  console.log(incomeInfo);
-
   return (
     <div className="flex flex-row h-full w-full justify-between text-center gap-2">
       <ControlBlock incomeInfo={incomeInfo} setIncomeInfo={setIncomeInfo} />

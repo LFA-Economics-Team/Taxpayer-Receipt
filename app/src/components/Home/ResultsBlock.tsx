@@ -49,6 +49,16 @@ export function ResultsBlock() {
           </div>
 
           <div className="row-start-8 col-span-3"></div>
+
+          <div className="row-start-9 font-bold bg-gray-100">
+            Effective Tax Rate
+          </div>
+          <div className="row-start-9 col-start-2 bg-gray-100"></div>
+          <div className="row-start-9 col-start-3 font-bold bg-gray-100">
+            0%
+          </div>
+
+          <div className="row-start-10 col-span-3"></div>
         </div>
       </div>
       <div className="flex flex-col h-5/10 gap-2 bg-white rounded-xl">

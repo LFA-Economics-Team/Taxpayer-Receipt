@@ -1,10 +1,9 @@
-# Taxpayer Receipt development checklist
+### Taxpayer Receipt development checklist
 
 From IT [Matt] Security: https://snyk.io/
 
 # Global
 
-- Consider reviewing each page and re-sizing the components
 - Swap out Baselayers for UGRS's hybrid tiles in mapping blocks: https://gis.utah.gov/products/sgid/base-maps/
 - Consider pre-calculating legislative map polygon intersections
 
@@ -24,10 +23,32 @@ From IT [Matt] Security: https://snyk.io/
 - Overall effective tax rate?
 - Median Utahn [single vs household?] Profile?
 
-# Income Tax
+# Expenditure side
 
-- Change the state function to lookup percentile given user-input for income
-- allow graphs to fill the graphblock when selected?
+- Types of dollars:
+  - State income tax [Use query from Brian?]
+  - State Sales Tax [Use query from Brian?]
+  - Entity property tax [Evaluate Auditor data]
+  - Sales tax options [Cross-check code?]
+  - Registration fees [Cross-check code?]
+  - Fuel taxes [Cross-check code?]
+
+# Accomplish Today
+
+- Mapping meeting notes:
+  - negative buffer distance to exclude entities with spurious overlap
+  - https://geopandas.org/en/latest/docs/reference/api/geopandas.GeoSeries.buffer.html
+  - consider districts begin removed by
+
+- Consider reviewing each page and re-sizing the components
+
+- allow graphs to fill the graphblock when selected? [Income Tax]
+
+- Create state to manage user-inputs globally
+
+# Accomplish tomorrow:
+
+# Income Tax
 
 - Data work:
   - create 'cumulative share of income' variable
@@ -41,6 +62,8 @@ From IT [Matt] Security: https://snyk.io/
   - 4: percentile of income vs houshold size?
 
   - Consider privacy/ data risks and strategies to mitigate [!!!]
+
+  - Change the state function to lookup percentile given user-input for income
   - add a vertical line to show the user where in the income spectrum they fall based on the user-input gross income
 
   -Results display: wire up the correct variables/ calculations
@@ -48,13 +71,10 @@ From IT [Matt] Security: https://snyk.io/
 - Questions:
   - what is going on with the first percentile?
 
-# Sales Tax
+  # Sales Tax
 
-- 'Generate Default' based on property location and gross income?
-- Guidance on estimating taxable spending
+  -'Generate Default' based on property location and gross income?
+  - Guidance on estimating taxable spending
 
-# Property Tax
-
-- Rental Imputation overhaul? [Ask tax commission?]
-
-# Accomplish Today
+  # Property Tax
+  - Rental Imputation overhaul? [Ask tax commission?]

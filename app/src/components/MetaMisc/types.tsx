@@ -96,6 +96,41 @@ export type Entity = {
 
 // Fuel & Fees
 
+export const FEES_FUEL_CONSTANTS = {
+  registrationFee: 66,
+  ageBased: {
+    age0to2: 150,
+    age3to5: 110,
+    age6to8: 80,
+    age9to11: 50,
+    age12plus: 10,
+  },
+  driverEducationFee: 3,
+  uninsuredMotoristFee: 1,
+  alternativeFuelFee: 180,
+  fuelTaxRatePerGallon: 0.379,
+  corridorFeeByCounty: {
+    "Salt Lake": 10,
+    Davis: 10,
+    Utah: 10,
+    Weber: 10,
+    Summit: 10,
+    Wasatch: 10,
+    Iron: 10,
+    "Box Elder": 10,
+    Washington: 10,
+    Tooele: 10,
+    Morgan: 10,
+  } as Record<string, number>,
+  pollutionControlFeeByCounty: {
+    "Salt Lake": 3,
+    Davis: 3,
+    Cache: 3,
+    Utah: 2,
+    Weber: 2,
+  } as Record<string, number>,
+};
+
 export type Car = {
   id: number;
   make: string;

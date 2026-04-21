@@ -27,8 +27,6 @@ function ResultCard({ entity }: { entity: Entity }) {
 export function PropertyResultsBlock({ entities }: { entities: Entity[] }) {
   const total = entities.reduce((sum, e) => sum + e.liability, 0);
 
-  console.log(entities);
-
   return (
     <div className="flex flex-col overflow-hidden w-1/5 m-2 p-2 text-[#17301b] bg-[#e0e0e0] rounded-xl text-center shadow-xl/20 outline-1 gap-2">
       <div className="text-2xl font-bold my-2 p-2">

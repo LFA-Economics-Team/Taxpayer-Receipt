@@ -7,6 +7,7 @@ import FuelData from "../../data/Misc/FuelData.json";
 import countyOptions from "../../data/Geospacial/countyOptions.json";
 import { FEES_FUEL_CONSTANTS } from "../MetaMisc/types";
 import type { Car } from "../MetaMisc/types";
+import { useAppContext } from "../../AppContext";
 
 function VehicleCard({
   car,
@@ -35,6 +36,7 @@ function VehicleCard({
         className="text-black text-sm w-1/5"
         options={MakeOptions}
         placeholder="Make"
+        isClearable={true}
         value={MakeOptions.find((o) => o.value === car.make) ?? null}
         onChange={(opt) => onUpdate({ make: opt?.value ?? "", model: "" })}
       />
@@ -60,6 +62,7 @@ function VehicleCard({
           return makeModels;
         })()}
         placeholder="Model"
+        isClearable={true}
         value={
           car.make
             ? ((
@@ -90,6 +93,7 @@ function VehicleCard({
         className="text-black text-sm w-1/5"
         options={countyOptions}
         placeholder="County"
+        isClearable={true}
         value={countyOptions.find((o) => o.value === car.county) ?? null}
         onChange={(opt) => onUpdate({ county: opt?.value ?? "" })}
       />
@@ -144,50 +148,8 @@ const feeInfo: Record<string, { description: string; statute: string }> = {
 };
 
 export function FeesFuelsContent() {
-  const [cars, setCars] = useState<Car[]>([]);
+  const { cars, addCar, updateCar, removeCar } = useAppContext();
   const [openFee, setOpenFee] = useState<string | null>(null);
-
-  function updateCar(id: number, updated: Partial<Car>) {
-    setCars((prev) =>
-      prev.map((car) => {
-        if (car.id !== id) return car;
-        const merged = { ...car, ...updated };
-        if (merged.make && merged.model && merged.year !== 0) {
-          const match = (FuelData as any[]).find(
-            (entry) =>
-              entry.make === merged.make &&
-              entry.model === merged.model &&
-              entry.year === merged.year,
-          );
-          const fueltype = match?.fuelType?.includes("Electricity")
-            ? "electric"
-            : "gas";
-          return { ...merged, mpg: match?.comb08 ?? 0, fueltype };
-        }
-        return merged;
-      }),
-    );
-  }
-
-  function removeCar(id: number) {
-    setCars((prev) => prev.filter((car) => car.id !== id));
-  }
-
-  function addCar() {
-    setCars((prev) => [
-      ...prev,
-      {
-        id: prev.length + 1,
-        make: "",
-        model: "",
-        year: 0,
-        miles: 0,
-        mpg: 0,
-        fueltype: "",
-        county: "",
-      },
-    ]);
-  }
 
   const filteredFuelData = (FuelData as any[]).filter((entry) =>
     cars.some(
@@ -318,12 +280,12 @@ export function FeesFuelsContent() {
   return (
     <div className="flex flex-row h-full w-full justify-center gap-8">
       <div className="flex flex-col h-90vh w-1/3 bg-[#17301b]/90 my-2 ml-2 rounded-xl p-2">
-        <div className="text-center text-white font-bold p-2 text-3xl">
+        <div className="text-center text-white font-bold p-2 text-2xl">
           Calculate your fuel tax & registration fees below:
         </div>
         <div className="flex flex-col gap-2">
           <div className="flex flex-col bg-gray-100/25 text-center w-full p-4 rounded-xl">
-            <div className="font-bold text-2xl">
+            <div className="font-bold text-xl">
               What vehicles does your houshold own or drive regularly?
             </div>
           </div>
@@ -361,14 +323,14 @@ export function FeesFuelsContent() {
       </div>
 
       <div className="flex flex-col h-90vh w-1/3 bg-[#e0e0e0] text-black my-2 mr-2 p-2 rounded-xl gap-y-4">
-        <div className="text-center font-bold p-2 text-3xl">
+        <div className="text-center font-bold p-2 text-2xl">
           Estimated fuel tax & registration fees
         </div>
         <div>
-          <div className="italic font-bold text-center text-2xl mb-2">
+          <div className="italic font-bold text-center text-xl mb-2">
             Fuel Tax
           </div>
-          <div className="grid w-full place-self-center grid-cols-[15%_55%_20%_5%_5%] bg-white text-black text-xl rounded-xl p-2 divide-y divide-gray-400">
+          <div className="grid w-full place-self-center grid-cols-[15%_55%_20%_5%_5%] bg-white text-black text-base rounded-xl p-2 divide-y divide-gray-400">
             {cars.map((car, i) => (
               <React.Fragment key={car.id}>
                 <div className="col-start-1"></div>
@@ -391,7 +353,7 @@ export function FeesFuelsContent() {
           </div>
         </div>
         <div>
-          <div className="italic font-bold text-center text-2xl mb-2">
+          <div className="italic font-bold text-center text-xl mb-2">
             Registration Fees
           </div>
           {openFee && (
@@ -400,7 +362,7 @@ export function FeesFuelsContent() {
               onClick={() => setOpenFee(null)}
             />
           )}
-          <div className="grid w-full place-self-center grid-cols-[5%_55%_30%_5%_5%] bg-white text-black text-xl rounded-xl p-2 divide-y divide-gray-400">
+          <div className="grid w-full place-self-center grid-cols-[5%_55%_30%_5%_5%] bg-white text-black text-base rounded-xl p-2 divide-y divide-gray-400">
             {feeResults.map((result) => (
               <React.Fragment key={result.id}>
                 <div className="col-start-1 relative flex items-center justify-center">
@@ -456,7 +418,7 @@ export function FeesFuelsContent() {
             <div className="col-span-3"></div>
           </div>
         </div>
-        <div className="flex flex-row bg-white text-black font-bold text-xl rounded-xl p-2 gap-8 justify-end">
+        <div className="flex flex-row bg-white text-black font-bold text-base rounded-xl p-2 gap-8 justify-end">
           <div>Estimated Annual Total: </div>
           <div className="flex mr-8">
             ${" "}

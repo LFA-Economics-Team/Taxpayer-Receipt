@@ -1,17 +1,10 @@
-import { useState } from "react";
 import { ControlBlock } from "./ControlBlock";
 import { GraphBlock } from "./GraphBlock";
 import { ResultsBlock } from "./ResultsBlock";
+import { useAppContext } from "../../AppContext";
 
 export function IncomeContent() {
-  const [incomeInfo, setIncomeInfo] = useState({
-    annualIncome: 0,
-    filingStatus: "",
-    incomeTile: 0,
-    householdSize: 1,
-    effectiveRate: 0,
-    averageIncome: 0,
-  });
+  const { incomeInfo, setIncomeInfo } = useAppContext();
 
   return (
     <div className="flex flex-row h-full w-full justify-between text-center gap-2">

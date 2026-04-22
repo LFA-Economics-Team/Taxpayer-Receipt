@@ -10,9 +10,9 @@ import Property2025 from "../../../data/Geospacial/Property2025.json";
 import HouseDistricts from "../../../data/Geospacial/HouseDistricts.json";
 import SeanteDistricts from "../../../data/Geospacial/SenateDistricts.json";
 import { useState, useMemo } from "react";
-import intersect from "@turf/intersect";
-import { featureCollection, point } from "@turf/helpers";
+import { point } from "@turf/helpers";
 import booleanPointInPolygon from "@turf/boolean-point-in-polygon";
+import DistrictIntersections from "../../../data/Geospacial/DistrictIntersections.json";
 import type { Feature } from "geojson";
 import Select from "react-select";
 import {
@@ -84,29 +84,6 @@ function Salestyle(feature: Feature | undefined) {
     color: "#555",
     fillOpacity: 0.7,
   };
-}
-
-type Bbox = [number, number, number, number];
-
-function featureBbox(feature: any): Bbox {
-  const flat: number[][] = [];
-  const collect = (c: any) => {
-    if (typeof c[0] === "number") flat.push(c);
-    else c.forEach(collect);
-  };
-  collect(feature.geometry.coordinates);
-  const lons = flat.map((c) => c[0]);
-  const lats = flat.map((c) => c[1]);
-  return [
-    Math.min(...lons),
-    Math.min(...lats),
-    Math.max(...lons),
-    Math.max(...lats),
-  ];
-}
-
-function bboxOverlap(a: Bbox, b: Bbox): boolean {
-  return a[0] <= b[2] && a[2] >= b[0] && a[1] <= b[3] && a[3] >= b[1];
 }
 
 function MapClickHandler({
@@ -184,59 +161,41 @@ export function LegMap() {
     setSalesOn(!SalesOn);
   };
 
-  const selectedDistrictFeatures = useMemo(
-    () =>
-      selectedDistricts.length > 0
-        ? allDistrictFeatures.filter((f: any) =>
-            selectedDistricts.includes(f.properties.DIST),
-          )
-        : [],
-    [selectedDistricts, legType],
-  );
-
   const filteredProperty = useMemo(() => {
-    if (selectedDistrictFeatures.length === 0)
+    if (selectedDistricts.length === 0)
       return Property2025 as GeoJSON.FeatureCollection;
+    const key = legType ? "house" : "senate";
+    const indices = new Set(
+      selectedDistricts.flatMap(
+        (d) => (DistrictIntersections as any)[key].property[String(d)] ?? [],
+      ),
+    );
     return {
       type: "FeatureCollection" as const,
       features: (Property2025 as any).features
-        .filter((f: any) => {
-          const propBbox = featureBbox(f);
-          return selectedDistrictFeatures.some((distFeature: any) => {
-            if (!bboxOverlap(propBbox, featureBbox(distFeature))) return false;
-            const result = intersect(featureCollection([f, distFeature]));
-            return (
-              result !== null &&
-              (result.geometry.type === "Polygon" ||
-                result.geometry.type === "MultiPolygon")
-            );
-          });
-        })
+        .filter((_: any, i: number) => indices.has(i))
         .sort((a: any, b: any) =>
           a.properties.entity_type.localeCompare(b.properties.entity_type),
         ),
     };
-  }, [selectedDistrictFeatures]);
+  }, [selectedDistricts, legType]);
 
   const filteredSales = useMemo(() => {
-    if (selectedDistrictFeatures.length === 0)
+    if (selectedDistricts.length === 0)
       return Sales2025 as GeoJSON.FeatureCollection;
+    const key = legType ? "house" : "senate";
+    const indices = new Set(
+      selectedDistricts.flatMap(
+        (d) => (DistrictIntersections as any)[key].sales[String(d)] ?? [],
+      ),
+    );
     return {
       type: "FeatureCollection" as const,
-      features: (Sales2025 as any).features.filter((f: any) => {
-        const saleBbox = featureBbox(f);
-        return selectedDistrictFeatures.some((distFeature: any) => {
-          if (!bboxOverlap(saleBbox, featureBbox(distFeature))) return false;
-          const result = intersect(featureCollection([f, distFeature]));
-          return (
-            result !== null &&
-            (result.geometry.type === "Polygon" ||
-              result.geometry.type === "MultiPolygon")
-          );
-        });
-      }),
+      features: (Sales2025 as any).features.filter((_: any, i: number) =>
+        indices.has(i),
+      ),
     };
-  }, [selectedDistrictFeatures]);
+  }, [selectedDistricts, legType]);
 
   const filteredDistricts = useMemo(
     () => ({
@@ -254,7 +213,7 @@ export function LegMap() {
   return (
     <div className="flex h-full w-full text-black text-center p-2 gap-2 overflow-hidden">
       <div className="flex flex-col h-full bg-[#17301b]/90 w-1/5 rounded-xl p-2 text-white gap-2">
-        <div className="text-2xl font-bold p-2"> Map Controls </div>
+        <div className="text-xl font-bold p-2"> Map Controls </div>
 
         <div className="flex flex-col text-sm bg-gray-100/25 p-2 gap-2 rounded-xl">
           <div className="text-base font-bold underline">
@@ -456,7 +415,7 @@ export function LegMap() {
       </div>
 
       <div className="flex flex-col bg-[#e0e0e0] h-full min-h-0 w-1/5 rounded-xl p-2 overflow-y-auto">
-        <div className="text-2xl font-bold my-2 p-2">Taxing Jurisdictions</div>
+        <div className="text-xl font-bold my-2 p-2">Taxing Jurisdictions</div>
         {selectedDistricts.length === 0 ? (
           <div className="text-sm text-gray-500 italic px-2">
             Select one or more districts to the left to see your taxing

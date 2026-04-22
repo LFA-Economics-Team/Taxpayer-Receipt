@@ -130,7 +130,6 @@ export type Property = {
   address: string;
   value: number;
   prime: boolean;
-  rent: boolean;
   liability?: number;
   lat?: number;
   lon?: number;

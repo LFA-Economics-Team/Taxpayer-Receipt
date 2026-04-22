@@ -68,7 +68,7 @@ export function LineChartTemplate({
                 ]
               }
             >
-              <CartesianGrid strokeDasharray="2 2" />
+              <CartesianGrid strokeDasharray="2 2" strokeOpacity={0.4} />
               {showReferenceLine && (
                 <ReferenceLine
                   y={horizonReferenceLineValue}
@@ -102,8 +102,9 @@ export function LineChartTemplate({
               />
               <YAxis
                 domain={[0, yDomain]}
+                niceTicks="none"
                 tickFormatter={(value) =>
-                  yAsPercent ? `${(100 * value).toFixed(2)}%` : `${value}`
+                  yAsPercent ? `${(100 * value).toFixed(0)}%` : `${value}`
                 }
               />
               <Line dataKey={yDataKey} name={curveName} />

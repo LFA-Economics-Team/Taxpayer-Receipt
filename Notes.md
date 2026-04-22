@@ -2,12 +2,6 @@
 
 From IT [Matt] Security: https://snyk.io/
 
-# Global
-
-- Create state to manage user-inputs globally
-- Swap out Baselayers for UGRS's hybrid tiles in mapping blocks: https://gis.utah.gov/products/sgid/base-maps/
-- Consider pre-calculating legislative map polygon intersections
-
 # Main Page
 
 - Three column sankey visualization
@@ -24,16 +18,6 @@ From IT [Matt] Security: https://snyk.io/
 - Overall effective tax rate?
 - Median Utahn [single vs household?] Profile?
 
-# Income Tax
-
-- Consider privacy/ data risks and strategies to mitigate [!!!]
-
-# Sales Tax
-
--'Generate Default' based on property location and gross income?
-
-- Guidance on estimating taxable spending
-
 # Expenditure side
 
 - Types of dollars:
@@ -44,12 +28,17 @@ From IT [Matt] Security: https://snyk.io/
   - Registration fees [Cross-check code?]
   - Fuel taxes [Cross-check code?]
 
-# Accomplish Today
+# Misc notes
 
 - Email Jason for review meeting
+  - Consider privacy/ data risks and strategies to mitigate [!!!]
 
-- Review each page and re-size the components
+- Swap out Baselayers for UGRS's hybrid tiles in mapping blocks: https://gis.utah.gov/products/sgid/base-maps/
 
-- Property Tax
-  - Rental Imputation overhaul?
-  - Convert to tax areas?
+- Wire up the home results block to the global context
+
+- Design changes:
+  - change income tax chart color [green? red?]
+  - Fix styling of 'clear receipt' button on home page
+
+# Accomplish Today

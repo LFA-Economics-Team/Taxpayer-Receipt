@@ -5,7 +5,7 @@ import {
 } from "../MetaMisc/types";
 import type { IncomeInfo } from "../MetaMisc/types";
 import Select from "react-select";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export function ControlBlock({
   incomeInfo,
@@ -18,6 +18,10 @@ export function ControlBlock({
     incomeInfo.annualIncome ? formatDollars(incomeInfo.annualIncome) : "",
   );
 
+  useEffect(() => {
+    if (incomeInfo.annualIncome === 0) setIncomeDisplay("");
+  }, [incomeInfo.annualIncome]);
+
   return (
     <div className="flex flex-col h-90vh w-1/5 bg-[#17301b]/90 my-2 ml-2 rounded-xl p-2 gap-4">
       <div className=" text-white font-bold p-2 text-xl">
@@ -27,7 +31,7 @@ export function ControlBlock({
         What are your income characteristics?
       </div>
 
-      <div className="flex flex-col gap-2 p-2 text-sm">
+      <div className="flex flex-col gap-4 p-2 text-sm">
         <div className="flex flex-row justify-around">
           <div>Gross Annual Income </div>
           <input
@@ -56,6 +60,7 @@ export function ControlBlock({
           <Select
             options={filingOptions}
             className="text-black"
+            isClearable={true}
             value={
               filingOptions.find((o) => o.value === incomeInfo.filingStatus) ??
               null
@@ -70,10 +75,12 @@ export function ControlBlock({
           />
         </div>
       </div>
-
-      <div className="text-base font-bold bg-gray-100/25 rounded-xl p-2">
-        Graph Controls
-      </div>
     </div>
   );
 }
+
+/*
+<div className="text-base font-bold bg-gray-100/25 rounded-xl p-2">
+        Graph Controls
+      </div>
+*/

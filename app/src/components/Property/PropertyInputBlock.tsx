@@ -21,7 +21,7 @@ function PropertyCard({
 
   return (
     <div className=" flex flex-row justify-around bg-gray-100/25 rounded-xl p-1 items-center">
-      <div className="flex flex-col w-7/10 items-center gap-1 p-1">
+      <div className="flex flex-col w-7/10 items-center gap-2 p-1">
         <input
           type="text"
           placeholder="Address"
@@ -47,23 +47,13 @@ function PropertyCard({
           }
           className="w-9/10 text-white text-sm rounded px-2 py-1 border border-gray-300"
         />
-        <div className="flex flex-row gap-4 align-bottom">
+        <div className="flex flex-row text-sm gap-4 align-bottom">
           <div> Is this your Primary Residence?* </div>
           <input
             type="checkbox"
             name="Primary Residence"
             checked={property.prime}
             onChange={(e) => onChange({ ...property, prime: e.target.checked })}
-            className="scale-175"
-          />
-        </div>
-        <div className="flex flex-row gap-4 align-bottom">
-          <div> Do you rent this property? </div>
-          <input
-            type="checkbox"
-            name="Rent"
-            checked={property.rent}
-            onChange={(e) => onChange({ ...property, rent: e.target.checked })}
             className="scale-175"
           />
         </div>
@@ -88,10 +78,10 @@ export function PropertyInputBlock({
 }) {
   return (
     <div className="flex flex-col w-1/5 bg-[#17301b]/90 rounded-xl shadow-xl/20 text-white text-center m-2 p-2 gap-2">
-      <div className="text-2xl font-bold my-2">
+      <div className="text-xl font-bold my-2">
         Calculate your property taxes below:
       </div>
-      <div className="text-xl font-bold bg-gray-100/25 rounded-xl p-2">
+      <div className="text-base font-bold bg-gray-100/25 rounded-xl p-2">
         What real property do you own or rent?
       </div>
       <div

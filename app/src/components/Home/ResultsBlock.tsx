@@ -15,7 +15,7 @@ export function ResultsBlock() {
           alt="State Seal"
         ></img>
       </div>
-      <div className="flex flex-col h-3/10 gap-2 bg-white rounded-xl">
+      <div className="flex flex-col h-3/10 bg-white rounded-xl">
         <div className="italic font-bold text-center text-[18px]">
           Your Estimated Taxes Paid
         </div>
@@ -26,45 +26,78 @@ export function ResultsBlock() {
           <div className="row-start-2 col-start-2"></div>
           <div className="row-start-2 col-start-3">$0</div>
 
-          <div className="row-start-3 bg-gray-100">Sales</div>
-          <div className="row-start-3 col-start-2 bg-gray-100"></div>
-          <div className="row-start-3 col-start-3 bg-gray-100">$0</div>
+          <div className="row-start-3 bg-emerald-950/15">Sales</div>
+          <div className="row-start-3 col-start-2 bg-emerald-950/15"></div>
+          <div className="row-start-3 col-start-3 bg-emerald-950/15">$0</div>
 
           <div className="row-start-4">Property</div>
           <div className="row-start-4 col-start-2"></div>
           <div className="row-start-4 col-start-3">$0</div>
 
-          <div className="row-start-5 bg-gray-100">Fuel</div>
-          <div className="row-start-5 col-start-2 bg-gray-100"></div>
-          <div className="row-start-5 col-start-3 bg-gray-100">$0</div>
+          <div className="row-start-5 bg-emerald-950/15">Fuel</div>
+          <div className="row-start-5 col-start-2 bg-emerald-950/15"></div>
+          <div className="row-start-5 col-start-3 bg-emerald-950/15">$0</div>
 
           <div className="row-start-6">Fees</div>
           <div className="row-start-6 col-start-2"></div>
           <div className="row-start-6 col-start-3">$0</div>
 
-          <div className="row-start-7 font-bold bg-gray-100">Total</div>
-          <div className="row-start-7 col-start-2 bg-gray-100"></div>
-          <div className="row-start-7 col-start-3 font-bold bg-gray-100">
+          <div className="row-start-7 font-bold bg-emerald-950/15">Total</div>
+          <div className="row-start-7 col-start-2 bg-emerald-950/15"></div>
+          <div className="row-start-7 col-start-3 font-bold bg-emerald-950/15">
             $0
           </div>
 
           <div className="row-start-8 col-span-3"></div>
 
-          <div className="row-start-9 font-bold bg-gray-100">
-            Effective Tax Rate
-          </div>
-          <div className="row-start-9 col-start-2 bg-gray-100"></div>
-          <div className="row-start-9 col-start-3 font-bold bg-gray-100">
-            0%
-          </div>
+          <div className="row-start-9 font-bold ">Effective Tax Rate</div>
+          <div className="row-start-9 col-start-2 "></div>
+          <div className="row-start-9 col-start-3 font-bold">0%</div>
 
           <div className="row-start-10 col-span-3"></div>
         </div>
       </div>
-      <div className="flex flex-col h-5/10 gap-2 bg-white rounded-xl">
+      <div className="flex flex-col h-4/10 bg-white rounded-xl">
         <div className="italic font-bold text-center text-[18px]">
           {" "}
           Your Estimated Public Purchases
+        </div>
+        <div className="grid h-full w-full place-self-center grid-cols-[60%_30%_10%] divide-y divide-gray-400">
+          <div className="row-start-1 col-span-3"></div>
+
+          <div className="row-start-2">Income</div>
+          <div className="row-start-2 col-start-2"></div>
+          <div className="row-start-2 col-start-3">$0</div>
+
+          <div className="row-start-3 bg-emerald-950/15">Sales</div>
+          <div className="row-start-3 col-start-2 bg-emerald-950/15"></div>
+          <div className="row-start-3 col-start-3 bg-emerald-950/15">$0</div>
+
+          <div className="row-start-4">Property</div>
+          <div className="row-start-4 col-start-2"></div>
+          <div className="row-start-4 col-start-3">$0</div>
+
+          <div className="row-start-5 bg-emerald-950/15">Fuel</div>
+          <div className="row-start-5 col-start-2 bg-emerald-950/15"></div>
+          <div className="row-start-5 col-start-3 bg-emerald-950/15">$0</div>
+
+          <div className="row-start-6">Fees</div>
+          <div className="row-start-6 col-start-2"></div>
+          <div className="row-start-6 col-start-3">$0</div>
+
+          <div className="row-start-7 font-bold bg-emerald-950/15">Total</div>
+          <div className="row-start-7 col-start-2 bg-emerald-950/15"></div>
+          <div className="row-start-7 col-start-3 font-bold bg-emerald-950/15">
+            $0
+          </div>
+
+          <div className="row-start-8 col-span-3"></div>
+
+          <div className="row-start-9 font-bold ">Effective Tax Rate</div>
+          <div className="row-start-9 col-start-2 "></div>
+          <div className="row-start-9 col-start-3 font-bold">0%</div>
+
+          <div className="row-start-10 col-span-3"></div>
         </div>
       </div>
       <div className="flex flex-row gap-4 justify-around">

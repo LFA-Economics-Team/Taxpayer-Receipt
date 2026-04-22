@@ -2,7 +2,7 @@ import { type Entity, ResultsDisclaimer } from "../MetaMisc/types";
 
 function ResultCard({ entity }: { entity: Entity }) {
   return (
-    <div className="bg-white rounded-xl p-2">
+    <div className="bg-white rounded-xl text-base p-2">
       <div className="font-bold text-center">{entity.name}</div>
       <div className="text-center">{entity.county} County</div>
       <div className="text-center">{entity.type}</div>
@@ -46,7 +46,7 @@ export function PropertyResultsBlock({ entities }: { entities: Entity[] }) {
               <ResultCard key={e.id} entity={e} />
             ))}
           </div>
-          <div className="py-1 border-t bg-white rounded-xl border-gray-400 font-bold text-lg shrink-0">
+          <div className="py-1 border-t bg-white rounded-xl border-gray-400 font-bold text-base shrink-0">
             Total: $
             {total.toLocaleString("en-US", {
               minimumFractionDigits: 0,

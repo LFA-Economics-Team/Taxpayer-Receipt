@@ -86,10 +86,10 @@ export function SalesInputBlock({
 }) {
   return (
     <div className="flex flex-col h-90-vh w-1/5 bg-[#17301b]/90 rounded-xl shadow-xl/20 text-white text-center m-2 p-2 gap-2">
-      <div className="text-2xl font-bold my-2">
+      <div className="text-xl font-bold my-2">
         Calculate your sales taxes below:
       </div>
-      <div className="text-xl font-bold bg-gray-100/25 rounded-xl p-2">
+      <div className="text-base font-bold bg-gray-100/25 rounded-xl p-2">
         Where do you typically make purchases?
       </div>
       <div className="flex flex-col gap-2 overflow-y-hidden hover:overflow-y-auto focus-within:overflow-y-auto min-h-0">
@@ -115,7 +115,10 @@ export function SalesInputBlock({
             other taxable transactions are assessed at 4.85%. Additionally, only
             the state, county, and local options apply to food purchases.
           </div>
-          <div>**[Guidance on estimating taxable spending]</div>
+          <div>
+            **Consumers typically spend 30-35% of their income on non-food
+            spending and 10-15% on food spending.
+          </div>
         </div>
       ) : (
         <></>

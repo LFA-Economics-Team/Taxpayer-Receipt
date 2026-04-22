@@ -34,11 +34,6 @@ From IT [Matt] Security: https://snyk.io/
 
 - Guidance on estimating taxable spending
 
-# Property Tax
-
-- Rental Imputation overhaul?
-- Convert to tax areas?
-
 # Expenditure side
 
 - Types of dollars:
@@ -53,7 +48,8 @@ From IT [Matt] Security: https://snyk.io/
 
 - Email Jason for review meeting
 
-- Attempt negative buffer distance for sales tax map [-50m, review areas zeroed out]
-  - https://geopandas.org/en/latest/docs/reference/api/geopandas.GeoSeries.buffer.html
-
 - Review each page and re-size the components
+
+- Property Tax
+  - Rental Imputation overhaul?
+  - Convert to tax areas?

@@ -1,4 +1,8 @@
-import { type Entity, ResultsDisclaimer } from "../MetaMisc/types";
+import {
+  type Entity,
+  ResultsDisclaimer,
+  formatDollars,
+} from "../MetaMisc/types";
 
 function ResultCard({ entity }: { entity: Entity }) {
   return (
@@ -13,11 +17,7 @@ function ResultCard({ entity }: { entity: Entity }) {
       <div className=" flex flex-row justify-around xt-sm text-gray-600">
         <div>Estimated Liability: </div>
         <span className="font-semibold text-black">
-          $
-          {entity.liability.toLocaleString("en-US", {
-            minimumFractionDigits: 0,
-            maximumFractionDigits: 0,
-          })}
+          {formatDollars(entity.liability)}
         </span>
       </div>
     </div>
@@ -47,11 +47,7 @@ export function PropertyResultsBlock({ entities }: { entities: Entity[] }) {
             ))}
           </div>
           <div className="py-1 border-t bg-white rounded-xl border-gray-400 font-bold text-base shrink-0">
-            Total: $
-            {total.toLocaleString("en-US", {
-              minimumFractionDigits: 0,
-              maximumFractionDigits: 0,
-            })}
+            Total: ${formatDollars(total)}
           </div>
           <ResultsDisclaimer />
         </>

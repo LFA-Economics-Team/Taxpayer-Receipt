@@ -14,9 +14,6 @@ From IT [Matt] Security: https://snyk.io/
     - Fed by:
       - COBI for state appropraitions data
       - State Auditor for data from political subdivisions
-- Option to print or email your reciept?
-- Overall effective tax rate?
-- Median Utahn [single vs household?] Profile?
 
 # Expenditure side
 
@@ -31,14 +28,11 @@ From IT [Matt] Security: https://snyk.io/
 # Misc notes
 
 - Email Jason for review meeting
-  - Consider privacy/ data risks and strategies to mitigate [!!!]
+
+- Email Matt for Security Checks
 
 - Swap out Baselayers for UGRS's hybrid tiles in mapping blocks: https://gis.utah.gov/products/sgid/base-maps/
 
-- Wire up the home results block to the global context
+- Wire up conections between Sankey results and public purchases table
 
-- Design changes:
-  - change income tax chart color [green? red?]
-  - Fix styling of 'clear receipt' button on home page
-
-# Accomplish Today
+- devise print/ email methods [ask Travis]

@@ -193,6 +193,13 @@ export type Car = {
   county: string;
 };
 
+// Sankey
+
+export type SankeyData = {
+  nodes: { name: string }[];
+  links: { source: number; target: number; value: number }[];
+};
+
 // Misc
 
 export const senateDistrictOptions = [

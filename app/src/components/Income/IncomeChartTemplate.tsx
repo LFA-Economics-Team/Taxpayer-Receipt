@@ -89,7 +89,7 @@ export function LineChartTemplate({
               )}
               {equalityReferenceLine && (
                 <ReferenceLine
-                  label="Line of Equality"
+                  label={{ angle: -30, value: "Equality Reference" }}
                   segment={[
                     { x: 0, y: 0 },
                     { x: 100, y: 1 },
@@ -107,7 +107,7 @@ export function LineChartTemplate({
                   yAsPercent ? `${(100 * value).toFixed(0)}%` : `${value}`
                 }
               />
-              <Line dataKey={yDataKey} name={curveName} />
+              <Line dataKey={yDataKey} name={curveName} stroke={"#C26767"} />
               <Legend />
               <Tooltip
                 labelFormatter={(value) => `Percentile: ${value}`}

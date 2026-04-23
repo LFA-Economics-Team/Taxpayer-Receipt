@@ -7,7 +7,10 @@ import type {
   SalesLocationWithFeature,
   Car,
 } from "./components/MetaMisc/types";
-import { FEES_FUEL_CONSTANTS, RATE_COMPONENTS } from "./components/MetaMisc/types";
+import {
+  FEES_FUEL_CONSTANTS,
+  RATE_COMPONENTS,
+} from "./components/MetaMisc/types";
 import booleanPointInPolygon from "@turf/boolean-point-in-polygon";
 import { point } from "@turf/helpers";
 import Property2025 from "./data/Geospacial/Property2025.json";
@@ -42,7 +45,9 @@ type AppState = {
   addProperty: () => void;
   updateProperty: (updated: Property) => void;
   removeProperty: (id: number) => void;
-  upsertPrimaryProperty: (patch: Partial<Omit<Property, "id" | "prime">>) => void;
+  upsertPrimaryProperty: (
+    patch: Partial<Omit<Property, "id" | "prime">>,
+  ) => void;
   entities: Entity[];
 
   locations: SalesLocation[];
@@ -67,14 +72,108 @@ type AppState = {
   totalTax: number;
 };
 
+export const TAX_TO_ENTITY: Record<string, Record<string, number>> = {
+  incomeTax: {
+    state: 1.0,
+    county: 0.0,
+    schoolDistrict: 0.0,
+    municipality: 0.0,
+    specialDistricts: 0.0,
+  },
+  salesTax: {
+    state: 0.6,
+    county: 0.15,
+    schoolDistrict: 0.05,
+    municipality: 0.15,
+    specialDistricts: 0.05,
+  },
+  propertyTax: {
+    state: 0.0,
+    county: 0.25,
+    schoolDistrict: 0.5,
+    municipality: 0.15,
+    specialDistricts: 0.1,
+  },
+  fuelTax: {
+    state: 0.85,
+    county: 0.1,
+    schoolDistrict: 0.0,
+    municipality: 0.05,
+    specialDistricts: 0.0,
+  },
+  fees: {
+    state: 1.0,
+    county: 0.0,
+    schoolDistrict: 0.0,
+    municipality: 0.0,
+    specialDistricts: 0.0,
+  },
+};
+
+export const ENTITY_TO_PURPOSE: Record<string, Record<string, number>> = {
+  state: {
+    criminalJustice: 0.05,
+    econDev: 0.05,
+    higherEd: 0.25,
+    publicEd: 0.15,
+    generalGov: 0.1,
+    infrastructure: 0.2,
+    naturalRes: 0.05,
+    socialServices: 0.15,
+  },
+  county: {
+    criminalJustice: 0.2,
+    econDev: 0.05,
+    higherEd: 0.0,
+    publicEd: 0.0,
+    generalGov: 0.25,
+    infrastructure: 0.3,
+    naturalRes: 0.05,
+    socialServices: 0.15,
+  },
+  schoolDistrict: {
+    criminalJustice: 0.0,
+    econDev: 0.0,
+    higherEd: 0.0,
+    publicEd: 1.0,
+    generalGov: 0.0,
+    infrastructure: 0.0,
+    naturalRes: 0.0,
+    socialServices: 0.0,
+  },
+  municipality: {
+    criminalJustice: 0.15,
+    econDev: 0.1,
+    higherEd: 0.0,
+    publicEd: 0.0,
+    generalGov: 0.25,
+    infrastructure: 0.45,
+    naturalRes: 0.0,
+    socialServices: 0.05,
+  },
+  specialDistricts: {
+    criminalJustice: 0.0,
+    econDev: 0.0,
+    higherEd: 0.0,
+    publicEd: 0.0,
+    generalGov: 0.1,
+    infrastructure: 0.7,
+    naturalRes: 0.2,
+    socialServices: 0.0,
+  },
+};
+
 const AppContext = createContext<AppState | null>(null);
 
 function applyFuelLookup(car: Car): Car {
   if (car.make && car.model && car.year !== 0) {
     const match = (FuelData as any[]).find(
-      (e) => e.make === car.make && e.model === car.model && e.year === car.year,
+      (e) =>
+        e.make === car.make && e.model === car.model && e.year === car.year,
     );
-    const fueltype = match?.fuelType?.includes("Electricity") ? "electric" : "gas";
+    const fueltype = match?.fuelType?.includes("Electricity")
+      ? "electric"
+      : "gas";
     return { ...car, mpg: match?.comb08 ?? 0, fueltype };
   }
   return car;
@@ -281,7 +380,12 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       if (income <= 0 && !primaryPropAddress) return prev;
       return [{ id: 0, ...update }, ...prev];
     });
-  }, [incomeInfo.annualIncome, primaryPropAddress, primaryPropLat, primaryPropLon]);
+  }, [
+    incomeInfo.annualIncome,
+    primaryPropAddress,
+    primaryPropLat,
+    primaryPropLon,
+  ]);
 
   const clearAll = () => {
     setIncomeInfo({
@@ -312,12 +416,15 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       locationsWithFeatures.reduce((total, { location, feature }) => {
         const p = feature?.properties ?? {};
         const { nonFoodSpending, foodSpending } = location;
-        const activeComponents = RATE_COMPONENTS.filter((key) => p[key] != null);
+        const activeComponents = RATE_COMPONENTS.filter(
+          (key) => p[key] != null,
+        );
         return (
           total +
           activeComponents.reduce(
             (sum, key) =>
-              sum + calcSalesLiability(key, p[key], nonFoodSpending, foodSpending),
+              sum +
+              calcSalesLiability(key, p[key], nonFoodSpending, foodSpending),
             0,
           )
         );

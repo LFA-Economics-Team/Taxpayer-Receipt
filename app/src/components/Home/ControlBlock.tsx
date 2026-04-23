@@ -105,7 +105,7 @@ export function ControlBlock() {
           <div className="flex flex-row justify-between items-center">
             <div>What is your filing status?</div>
             <Select
-              className="text-black w-1/3"
+              className="text-black w-1/2"
               options={filingOptions}
               isClearable={true}
               value={
@@ -174,7 +174,7 @@ export function ControlBlock() {
           <div className="flex flex-row justify-between items-center">
             <div>What is the Make of your vehicle?</div>
             <Select
-              className="text-black w-1/3"
+              className="text-black w-1/2"
               options={MakeOptions}
               isClearable={true}
               placeholder="Make"
@@ -189,7 +189,7 @@ export function ControlBlock() {
           <div className="flex flex-row justify-between items-center">
             <div>What is the Model of your vehicle?</div>
             <Select
-              className="text-black w-1/3"
+              className="text-black w-1/2"
               options={modelOptions}
               isClearable={true}
               placeholder="Model"
@@ -225,7 +225,7 @@ export function ControlBlock() {
 
         <button
           onClick={clearAll}
-          className="flex flex-col w-5/10 self-center rounded-xl text-[#17301b] hover:bg-gray-200 px-4 py-1 cursor-pointer"
+          className="flex flex-col w-5/10 self-center rounded-xl text-white hover:bg-gray-200 px-4 py-1 cursor-pointer"
         >
           Clear Receipt
         </button>

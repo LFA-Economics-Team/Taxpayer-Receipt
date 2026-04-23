@@ -23,7 +23,7 @@ export function ResultsBlock({ incomeInfo }: { incomeInfo: IncomeInfo }) {
             <div className="grid grid-cols[55%_20%_5%_20%_] text-left gap-y-2">
               <div className="grid row-start-1 ">Earn on average</div>
               <div className="grid row-start-1 col-start-3 col-span-3 text-center">
-                {formatDollars(incomeInfo.averageIncome, 0, 10)}{" "}
+                {formatDollars(incomeInfo.averageIncome)}{" "}
               </div>
 
               <div className="grid row-start-2">Pay an Effective Rate of</div>
@@ -55,8 +55,6 @@ export function ResultsBlock({ incomeInfo }: { incomeInfo: IncomeInfo }) {
                 about{" "}
                 {formatDollars(
                   incomeInfo.annualIncome * incomeInfo.effectiveRate,
-                  0,
-                  10,
                 )}
               </div>
             </div>

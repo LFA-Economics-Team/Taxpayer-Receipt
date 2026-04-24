@@ -5,8 +5,8 @@ import {
   ResultsDisclaimer,
   type SalesLocationWithFeature,
 } from "../MetaMisc/types";
+import { FOOD_STATE_RATE } from "../../AppContext";
 
-const FOOD_STATE_RATE = 0.0175;
 const STATE_COMPONENT = "STATE SALES AND USE TAX";
 const LOCAL_COMPONENT = "LOCAL SALES AND USE TAX";
 const COUNTY_COMPONENT = "COUNTY OPTION SALES TAX";

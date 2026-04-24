@@ -138,7 +138,7 @@ const feeInfo: Record<string, { description: string; statute: string }> = {
   "Pollution Control Fee": {
     description:
       "Up to $3 per year which goes to fund local emissions testing programs. Does not apply to EVs. Fee amount is determined by county.",
-    statute: "41-1a-12",
+    statute: "41-1a-1223",
   },
   Total: {
     description:

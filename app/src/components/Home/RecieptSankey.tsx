@@ -5,7 +5,6 @@ import {
   Tooltip,
   Rectangle,
   Layer,
-  Label,
   Text,
   type SankeyNodeProps,
 } from "recharts";
@@ -37,7 +36,7 @@ export function RecieptSankey({ data }: { data: SankeyData }) {
         />
         <Text
           x={labelX}
-          y={y + height / 2}
+          y={y + height / 2 - 16}
           textAnchor={isOut ? "end" : "start"}
           verticalAnchor="middle"
         >
@@ -45,7 +44,7 @@ export function RecieptSankey({ data }: { data: SankeyData }) {
         </Text>
         <Text
           x={labelX}
-          y={y + height / 2 + 16}
+          y={y + height / 2}
           textAnchor={isOut ? "end" : "start"}
           verticalAnchor="middle"
         >
@@ -62,7 +61,7 @@ export function RecieptSankey({ data }: { data: SankeyData }) {
       </div>
       <ResponsiveContainer
         width="90%"
-        height="90%"
+        height="95%"
         onResize={(w) => setChartWidth(w)}
       >
         <Sankey data={data} node={CustomNode} sort={false}>

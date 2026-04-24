@@ -17,7 +17,7 @@ import Property2025 from "./data/Geospacial/Property2025.json";
 import Sales2025 from "./data/Geospacial/Sales2025.json";
 import FuelData from "./data/Misc/FuelData.json";
 
-const FOOD_STATE_RATE = 0.0175;
+export const FOOD_STATE_RATE = 0.0175;
 const STATE_COMPONENT = "STATE SALES AND USE TAX";
 const LOCAL_COMPONENT = "LOCAL SALES AND USE TAX";
 const COUNTY_COMPONENT = "COUNTY OPTION SALES TAX";

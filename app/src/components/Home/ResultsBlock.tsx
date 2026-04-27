@@ -1,9 +1,5 @@
 import { Fragment } from "react";
-import {
-  useAppContext,
-  TAX_TO_ENTITY,
-  ENTITY_TO_PURPOSE,
-} from "../../AppContext";
+import { useAppContext } from "../../AppContext";
 import { formatDollars } from "../MetaMisc/types";
 
 const TAX_ROW_CONFIG = [
@@ -26,37 +22,10 @@ const PURPOSE_ROW_CONFIG = [
 ] as const;
 
 export function ResultsBlock() {
-  const { incomeInfo, incomeTax, propertyTax, salesTax, fuelTax, fees } =
-    useAppContext();
-
-  const taxAmounts: Record<string, number> = {
-    incomeTax,
-    salesTax,
-    propertyTax,
-    fuelTax,
-    fees,
-  };
-
-  const entityAmounts = Object.fromEntries(
-    Object.keys(ENTITY_TO_PURPOSE).map((entity) => [
-      entity,
-      Object.entries(TAX_TO_ENTITY).reduce(
-        (sum, [tax, shares]) => sum + taxAmounts[tax] * (shares[entity] ?? 0),
-        0,
-      ),
-    ]),
-  );
-
-  const purposeAmount = (purpose: string) =>
-    Object.entries(ENTITY_TO_PURPOSE).reduce(
-      (sum, [entity, shares]) =>
-        sum + entityAmounts[entity] * (shares[purpose] ?? 0),
-      0,
-    );
-
-  const totalTax = incomeTax + salesTax + propertyTax + fuelTax + fees;
+  const ctx = useAppContext();
+  const { incomeInfo, totalTax, purposeAmounts } = ctx;
   const totalPurpose = PURPOSE_ROW_CONFIG.reduce(
-    (s, { key }) => s + purposeAmount(key),
+    (s, { key }) => s + (purposeAmounts[key] ?? 0),
     0,
   );
 
@@ -86,7 +55,7 @@ export function ResultsBlock() {
                 <div className={shade}>{label}</div>
                 <div className={shade}></div>
                 <div className={`text-center ${shade}`}>
-                  {formatDollars(taxAmounts[key])}
+                  {formatDollars(ctx[key])}
                 </div>
               </Fragment>
             );
@@ -119,7 +88,7 @@ export function ResultsBlock() {
                 <div className={shade}>{label}</div>
                 <div className={shade}></div>
                 <div className={`text-center ${shade}`}>
-                  {formatDollars(purposeAmount(key))}
+                  {formatDollars(purposeAmounts[key] ?? 0)}
                 </div>
               </Fragment>
             );

@@ -1,8 +1,11 @@
-import { RecieptSankey } from "./RecieptSankey";
+import { ReceiptSankey } from "./ReceiptSankey";
 import {
   useAppContext,
-  TAX_TO_ENTITY,
+  TAX_KEYS,
+  type TaxKey,
   ENTITY_TO_PURPOSE,
+  INCOME_TAX_ENTITY_SHARES,
+  FUEL_TAX_ENTITY_SHARES,
 } from "../../AppContext";
 
 const NODE_NAME: Record<string, string> = {
@@ -30,29 +33,36 @@ const NODE_NAME: Record<string, string> = {
 const ALL_NODE_NAMES = Object.values(NODE_NAME);
 
 export function SankeyBlock() {
-  const { incomeTax, propertyTax, salesTax, fuelTax, fees } = useAppContext();
+  const {
+    incomeTax,
+    propertyTax,
+    salesTax,
+    fuelTax,
+    fees,
+    entityAmounts,
+    propertyTaxEntityShares,
+    feesEntityShares,
+    salesEntityShares,
+  } = useAppContext();
 
-  const taxAmounts: Record<string, number> = {
+  const taxAmounts: Record<TaxKey, number> = {
     incomeTax,
     salesTax,
     propertyTax,
     fuelTax,
     fees,
   };
-
-  const entityAmounts = Object.fromEntries(
-    Object.keys(ENTITY_TO_PURPOSE).map((entity) => [
-      entity,
-      Object.entries(TAX_TO_ENTITY).reduce(
-        (sum, [tax, shares]) => sum + taxAmounts[tax] * (shares[entity] ?? 0),
-        0,
-      ),
-    ]),
-  );
+  const sharesByTax: Record<TaxKey, Record<string, number>> = {
+    incomeTax:   INCOME_TAX_ENTITY_SHARES,
+    fuelTax:     FUEL_TAX_ENTITY_SHARES,
+    propertyTax: propertyTaxEntityShares,
+    salesTax:    salesEntityShares,
+    fees:        feesEntityShares,
+  };
 
   const namedLinks = [
-    ...Object.entries(TAX_TO_ENTITY).flatMap(([tax, shares]) =>
-      Object.entries(shares).map(([entity, share]) => ({
+    ...TAX_KEYS.flatMap((tax) =>
+      Object.entries(sharesByTax[tax]).map(([entity, share]) => ({
         source: NODE_NAME[tax],
         target: NODE_NAME[entity],
         value: taxAmounts[tax] * share,
@@ -95,7 +105,7 @@ export function SankeyBlock() {
       })),
     };
 
-    return <RecieptSankey data={data} />;
+    return <ReceiptSankey data={data} />;
   })();
 
   return (

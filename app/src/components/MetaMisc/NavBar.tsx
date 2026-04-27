@@ -7,7 +7,7 @@ export function NavBar() {
   return (
     <div className="flex ml-8 text-xl flex-row justify-start  w-2/4 min-w-120 font-bold">
       <NavLink to="/" end className={linkClass}>
-        Taxpayer Reciept
+        Taxpayer Receipt
       </NavLink>
       <div className="w-0.5 h-8 bg-white/80 ml-2 self-center rounded-full" />
       <div className="flex flex-row gap-4 pl-4">

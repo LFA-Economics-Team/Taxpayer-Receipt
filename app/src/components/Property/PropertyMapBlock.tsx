@@ -12,7 +12,10 @@ import { useState } from "react";
 import booleanPointInPolygon from "@turf/boolean-point-in-polygon";
 import { point } from "@turf/helpers";
 import Property2025 from "../../data/Geospacial/Property2025.json";
-import type { Property } from "../MetaMisc/types";
+import type { Property, PropertyFeatureProps } from "../MetaMisc/types";
+import { UTAH_MAP_CENTER, UTAH_MAP_DEFAULT_ZOOM, getPropOpacity } from "../../AppContext";
+
+type PropertyFC = GeoJSON.FeatureCollection<GeoJSON.MultiPolygon, PropertyFeatureProps>;
 
 const customIcon = L.divIcon({
   className: "",
@@ -33,25 +36,13 @@ const ENTITY_DASH: Record<string, string> = {
   "RDA or CDA": "12 6",
 };
 
-function getOpacity(rate: number) {
-  return rate > 0.003
-    ? 0.25
-    : rate > 0.002
-      ? 0.1
-      : rate > 0.001
-        ? 0.03
-        : rate > 0.0005
-          ? 0.01
-          : 0.005;
-}
-
 function style(feature: Feature | undefined) {
   return {
     fillColor: "#5576e0",
     weight: 1,
     color: "#555",
     dashArray: ENTITY_DASH[feature?.properties?.entity_type ?? ""] ?? "",
-    fillOpacity: getOpacity(feature?.properties?.ENT_RATE ?? 0),
+    fillOpacity: getPropOpacity(feature?.properties?.ENT_RATE ?? 0),
   };
 }
 
@@ -59,14 +50,14 @@ function MapClickHandler({
   data,
   onFeaturesFound,
 }: {
-  data: GeoJSON.FeatureCollection;
-  onFeaturesFound: (features: GeoJSON.Feature[], latlng: L.LatLng) => void;
+  data: PropertyFC;
+  onFeaturesFound: (features: PropertyFC["features"], latlng: L.LatLng) => void;
 }) {
   useMapEvents({
     click(e) {
       const clicked = point([e.latlng.lng, e.latlng.lat]);
       const matches = data.features.filter((f) =>
-        booleanPointInPolygon(clicked, f as any),
+        booleanPointInPolygon(clicked, f),
       );
       onFeaturesFound(matches, e.latlng);
     },
@@ -77,31 +68,31 @@ function MapClickHandler({
 export function PropertyMapBlock({ properties }: { properties: Property[] }) {
   const [clickPopup, setClickPopup] = useState<{
     latlng: L.LatLng;
-    features: GeoJSON.Feature[];
+    features: PropertyFC["features"];
   } | null>(null);
 
   const geocodedProperties = properties.filter(
     (p) => p.lat !== undefined && p.lon !== undefined,
   );
 
-  const filteredData: GeoJSON.FeatureCollection =
+  const typedData = Property2025 as PropertyFC;
+  const filteredData: PropertyFC =
     geocodedProperties.length === 0
-      ? (Property2025 as GeoJSON.FeatureCollection)
+      ? typedData
       : {
-          ...(Property2025 as GeoJSON.FeatureCollection),
-          features: (Property2025 as GeoJSON.FeatureCollection).features.filter(
-            (feature) =>
-              geocodedProperties.some((p) =>
-                booleanPointInPolygon(point([p.lon!, p.lat!]), feature as any),
-              ),
+          ...typedData,
+          features: typedData.features.filter((feature) =>
+            geocodedProperties.some((p) =>
+              booleanPointInPolygon(point([p.lon!, p.lat!]), feature),
+            ),
           ),
         };
 
   return (
     <div className="flex flex-col h-90vh w-3/5 rounded-xl shadow-xl/20 overflow-hidden my-2">
       <MapContainer
-        center={[39.5, -111.5]}
-        zoom={7}
+        center={UTAH_MAP_CENTER}
+        zoom={UTAH_MAP_DEFAULT_ZOOM}
         style={{ height: "100%", width: "100%" }}
       >
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
@@ -158,7 +149,7 @@ export function PropertyMapBlock({ properties }: { properties: Property[] }) {
               <br />
               Value: ${p.value.toLocaleString()}
               <br />
-              {p.prime ? "Primary Residence" : p.rent ? "Rental" : ""}
+              {p.prime ? "Primary Residence" : ""}
             </Popup>
           </Marker>
         ))}

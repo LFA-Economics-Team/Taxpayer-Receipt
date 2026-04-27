@@ -5,8 +5,12 @@ import Sales2025 from "../../data/Geospacial/Sales2025.json";
 import {
   RATE_COMPONENTS,
   formatRateLabel,
+  type SalesFeatureProps,
   type SalesLocationWithFeature,
 } from "../MetaMisc/types";
+import { UTAH_MAP_CENTER, UTAH_MAP_DEFAULT_ZOOM, getSalesColor } from "../../AppContext";
+
+type SalesFC = GeoJSON.FeatureCollection<GeoJSON.MultiPolygon, SalesFeatureProps>;
 
 const customIcon = L.divIcon({
   className: "",
@@ -16,23 +20,9 @@ const customIcon = L.divIcon({
   popupAnchor: [0, -24],
 });
 
-function getColor(rate: number) {
-  return rate > 0.085
-    ? "#642451"
-    : rate > 0.08
-      ? "#7E2D65"
-      : rate > 0.075
-        ? "#9B4580"
-        : rate > 0.07
-          ? "#BA749E"
-          : rate > 0.065
-            ? "#D8A8C4"
-            : "#F5E3EF";
-}
-
-function style(feature: Feature | undefined) {
+function style(feature: GeoJSON.Feature<GeoJSON.MultiPolygon, SalesFeatureProps> | undefined) {
   return {
-    fillColor: getColor(feature?.properties?.CURRRATE ?? 0),
+    fillColor: getSalesColor(feature?.properties?.CURRRATE ?? 0),
     weight: 0.5,
     color: "#555",
     fillOpacity: 0.7,
@@ -50,12 +40,13 @@ export function SalesMapBlock({
       .map((lf) => lf.feature!.properties?.TAXDIST),
   );
 
-  const filteredData: GeoJSON.FeatureCollection =
+  const typedData = Sales2025 as SalesFC;
+  const filteredData: SalesFC =
     locationsWithFeatures.length === 0
-      ? (Sales2025 as GeoJSON.FeatureCollection)
+      ? typedData
       : {
-          ...(Sales2025 as GeoJSON.FeatureCollection),
-          features: (Sales2025 as GeoJSON.FeatureCollection).features.filter(
+          ...typedData,
+          features: typedData.features.filter(
             (f) => matchedFeatureIds.has(f.properties?.TAXDIST),
           ),
         };
@@ -63,8 +54,8 @@ export function SalesMapBlock({
   return (
     <div className="flex flex-col h-90vh w-3/5 rounded-xl shadow-xl/20 overflow-hidden my-2">
       <MapContainer
-        center={[39.5, -111.5]}
-        zoom={7}
+        center={UTAH_MAP_CENTER}
+        zoom={UTAH_MAP_DEFAULT_ZOOM}
         style={{ height: "100%", width: "100%" }}
       >
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />

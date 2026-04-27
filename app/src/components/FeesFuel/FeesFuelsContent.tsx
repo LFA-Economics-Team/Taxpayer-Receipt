@@ -5,8 +5,8 @@ import MakeOptions from "../../data/Misc/MakeOptions.json";
 import ModelOptions from "../../data/Misc/ModelOptions.json";
 import FuelData from "../../data/Misc/FuelData.json";
 import countyOptions from "../../data/Geospacial/countyOptions.json";
-import { FEES_FUEL_CONSTANTS } from "../MetaMisc/types";
-import type { Car } from "../MetaMisc/types";
+import { FEES_FUEL_CONSTANTS, feeInfo } from "../MetaMisc/types";
+import type { Car, FuelEntry } from "../MetaMisc/types";
 import { useAppContext } from "../../AppContext";
 
 function VehicleCard({
@@ -53,7 +53,7 @@ function VehicleCard({
             : [];
           if (car.make && car.year !== 0) {
             const validModels = new Set(
-              (FuelData as any[])
+              (FuelData as FuelEntry[])
                 .filter((e) => e.make === car.make && e.year === car.year)
                 .map((e) => e.model),
             );
@@ -104,64 +104,9 @@ function VehicleCard({
   );
 }
 
-const feeInfo: Record<string, { description: string; statute: string }> = {
-  "Registration Fee": {
-    description:
-      "A flat $66 fee charged per vehicle per year for to fund transportation services. Fee amount is inflation adjusted annually",
-    statute: "41-1a-1206",
-  },
-  "Age-Based Fee": {
-    description:
-      "Uniform fee by vehicle age with older vehicles paying less than newer ones.",
-    statute: "59-2-405.1",
-  },
-  "Corridor Fee": {
-    description:
-      "$10 per year fee imposed by counties for transportation maintainance. Applies to vehicles registered in Salt Lake, Davis, Utah, Weber, Summit, Wasatch, Iron, Box Elder, Washington, Tooele, and Morgan.",
-    statute: "41-1a-1222",
-  },
-  "Driver Education Fee": {
-    description:
-      "$2.50 per vehicle per year, used to fund driver education and student transportation programs.",
-    statute: "41-1a-1204",
-  },
-  "Uninsured Motorist Fee": {
-    description:
-      "$1.00 per vehicle per year, used to fund the Uninsured Motorist Identification Restricted Account.",
-    statute: "41-1a-1218",
-  },
-  "Alternative Fuel Fee": {
-    description:
-      "Up to $180 per year for electric vehicles, offsetting fuel taxes not paid at the pump. Hybrid vehicles or those enrolled in the Road Usage Charge program may pay less depending on miles driven.",
-    statute: "72-1-213.1",
-  },
-  "Pollution Control Fee": {
-    description:
-      "Up to $3 per year which goes to fund local emissions testing programs. Does not apply to EVs. Fee amount is determined by county.",
-    statute: "41-1a-1223",
-  },
-  Total: {
-    description:
-      "Total registration fees are the sum of each fee applicable to the vehicle. Fees calculated here are for passenger cars; other vehicle classes may be subject to different or additional fees at registration.",
-    statute: "",
-  },
-};
-
 export function FeesFuelsContent() {
   const { cars, addCar, updateCar, removeCar } = useAppContext();
   const [openFee, setOpenFee] = useState<string | null>(null);
-
-  const filteredFuelData = (FuelData as any[]).filter((entry) =>
-    cars.some(
-      (car) =>
-        car.make &&
-        car.model &&
-        car.year !== 0 &&
-        entry.make === car.make &&
-        entry.model === car.model &&
-        entry.year === car.year,
-    ),
-  );
 
   const [feeResults, setFeeResults] = useState([
     { id: 1, name: "Registration Fee", value: 0 },

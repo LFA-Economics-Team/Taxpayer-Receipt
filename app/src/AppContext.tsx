@@ -3,13 +3,19 @@ import type {
   IncomeInfo,
   Property,
   Entity,
+  PropertyFeatureProps,
+  SalesFeatureProps,
   SalesLocation,
   SalesLocationWithFeature,
   Car,
+  FuelEntry,
 } from "./components/MetaMisc/types";
 import {
   FEES_FUEL_CONSTANTS,
   RATE_COMPONENTS,
+  FEE_ENTITY_ASSIGNMENT,
+  SALES_COMPONENT_ENTITY_ASSIGNMENT,
+  PROPERTY_ENTITY_TYPE_MAP,
 } from "./components/MetaMisc/types";
 import booleanPointInPolygon from "@turf/boolean-point-in-polygon";
 import { point } from "@turf/helpers";
@@ -17,10 +23,47 @@ import Property2025 from "./data/Geospacial/Property2025.json";
 import Sales2025 from "./data/Geospacial/Sales2025.json";
 import FuelData from "./data/Misc/FuelData.json";
 
+export const STATE_INCOME_RATE = 0.0455;
+
+export const PRIME_RESIDE_EXEMPT = 0.55;
+
 export const FOOD_STATE_RATE = 0.0175;
+export const STATE_SALES_RATE = 0.0485;
 const STATE_COMPONENT = "STATE SALES AND USE TAX";
 const LOCAL_COMPONENT = "LOCAL SALES AND USE TAX";
 const COUNTY_COMPONENT = "COUNTY OPTION SALES TAX";
+
+export const NONFOOD_SPEND_SHARE = 0.32;
+export const FOOD_SPEND_SHARE = 0.12;
+
+export const UTAH_MAP_CENTER: [number, number] = [39.5, -111.5];
+export const UTAH_MAP_DEFAULT_ZOOM = 7;
+
+export function getPropOpacity(rate: number) {
+  return rate > 0.003
+    ? 0.25
+    : rate > 0.002
+      ? 0.1
+      : rate > 0.001
+        ? 0.03
+        : rate > 0.0005
+          ? 0.01
+          : 0.005;
+}
+
+export function getSalesColor(rate: number) {
+  return rate > 0.085
+    ? "#642451"
+    : rate > 0.08
+      ? "#7E2D65"
+      : rate > 0.075
+        ? "#9B4580"
+        : rate > 0.07
+          ? "#BA749E"
+          : rate > 0.065
+            ? "#D8A8C4"
+            : "#F5E3EF";
+}
 
 function calcSalesLiability(
   key: string,
@@ -70,45 +113,37 @@ type AppState = {
   fuelTax: number;
   fees: number;
   totalTax: number;
+  entityAmounts: Record<string, number>;
+  purposeAmounts: Record<string, number>;
+  propertyTaxEntityShares: Record<string, number>;
+  feesEntityShares: Record<string, number>;
+  salesEntityShares: Record<string, number>;
 };
 
-export const TAX_TO_ENTITY: Record<string, Record<string, number>> = {
-  incomeTax: {
-    state: 1.0,
-    county: 0.0,
-    schoolDistrict: 0.0,
-    municipality: 0.0,
-    specialDistricts: 0.0,
-  },
-  salesTax: {
-    state: 0.6,
-    county: 0.15,
-    schoolDistrict: 0.05,
-    municipality: 0.15,
-    specialDistricts: 0.05,
-  },
-  propertyTax: {
-    state: 0.0,
-    county: 0.25,
-    schoolDistrict: 0.5,
-    municipality: 0.15,
-    specialDistricts: 0.1,
-  },
-  fuelTax: {
-    state: 0.85,
-    county: 0.1,
-    schoolDistrict: 0.0,
-    municipality: 0.05,
-    specialDistricts: 0.0,
-  },
-  fees: {
-    state: 1.0,
-    county: 0.0,
-    schoolDistrict: 0.0,
-    municipality: 0.0,
-    specialDistricts: 0.0,
-  },
+export const FUEL_TAX_ENTITY_SHARES: Record<string, number> = {
+  state: 1,
+  county: 0,
+  schoolDistrict: 0,
+  municipality: 0,
+  specialDistricts: 0,
 };
+
+export const INCOME_TAX_ENTITY_SHARES: Record<string, number> = {
+  state: 1,
+  county: 0,
+  schoolDistrict: 0,
+  municipality: 0,
+  specialDistricts: 0,
+};
+
+export const TAX_KEYS = [
+  "incomeTax",
+  "salesTax",
+  "propertyTax",
+  "fuelTax",
+  "fees",
+] as const;
+export type TaxKey = (typeof TAX_KEYS)[number];
 
 export const ENTITY_TO_PURPOSE: Record<string, Record<string, number>> = {
   state: {
@@ -167,7 +202,7 @@ const AppContext = createContext<AppState | null>(null);
 
 function applyFuelLookup(car: Car): Car {
   if (car.make && car.model && car.year !== 0) {
-    const match = (FuelData as any[]).find(
+    const match = (FuelData as FuelEntry[]).find(
       (e) =>
         e.make === car.make && e.model === car.model && e.year === car.year,
     );
@@ -217,20 +252,25 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     );
     if (geocoded.length === 0) return [];
 
-    const data = Property2025 as GeoJSON.FeatureCollection;
+    const data = Property2025 as GeoJSON.FeatureCollection<
+      GeoJSON.MultiPolygon,
+      PropertyFeatureProps
+    >;
     const results: Entity[] = [];
 
     for (const feature of data.features) {
       const props = feature.properties;
       if (!props) continue;
 
-      const rate: number = props.ENT_RATE ?? 0;
+      const rate = props.ENT_RATE;
       let totalValue = 0;
 
       for (const prop of geocoded) {
         const pt = point([prop.lon!, prop.lat!]);
-        if (booleanPointInPolygon(pt, feature as any)) {
-          totalValue += prop.prime ? prop.value * 0.55 : prop.value;
+        if (booleanPointInPolygon(pt, feature)) {
+          totalValue += prop.prime
+            ? prop.value * PRIME_RESIDE_EXEMPT
+            : prop.value;
         }
       }
 
@@ -275,14 +315,17 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   };
 
   const locationsWithFeatures = useMemo<SalesLocationWithFeature[]>(() => {
-    const data = Sales2025 as GeoJSON.FeatureCollection;
+    const data = Sales2025 as GeoJSON.FeatureCollection<
+      GeoJSON.MultiPolygon,
+      SalesFeatureProps
+    >;
     return locations
       .filter((l) => l.lat !== undefined && l.lon !== undefined)
       .map((l) => ({
         location: l,
         feature:
           data.features.find((f) =>
-            booleanPointInPolygon(point([l.lon!, l.lat!]), f as any),
+            booleanPointInPolygon(point([l.lon!, l.lat!]), f),
           ) ?? null,
       }));
   }, [locations]);
@@ -371,8 +414,8 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
         address: primaryPropAddress ?? "",
         lat: primaryPropLat,
         lon: primaryPropLon,
-        nonFoodSpending: Math.round(income * 0.32),
-        foodSpending: Math.round(income * 0.12),
+        nonFoodSpending: Math.round(income * NONFOOD_SPEND_SHARE),
+        foodSpending: Math.round(income * FOOD_SPEND_SHARE),
       };
       if (prev.some((l) => l.id === 0)) {
         return prev.map((l) => (l.id === 0 ? { ...l, ...update } : l));
@@ -406,31 +449,79 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     [incomeInfo],
   );
 
-  const propertyTax = useMemo(
-    () => entities.reduce((sum, e) => sum + e.liability, 0),
-    [entities],
-  );
+  const { propertyTax, propertyTaxEntityShares } = useMemo(() => {
+    const byEntity = {
+      state: 0,
+      county: 0,
+      schoolDistrict: 0,
+      municipality: 0,
+      specialDistricts: 0,
+    };
 
-  const salesTax = useMemo(
-    () =>
-      locationsWithFeatures.reduce((total, { location, feature }) => {
-        const p = feature?.properties ?? {};
-        const { nonFoodSpending, foodSpending } = location;
-        const activeComponents = RATE_COMPONENTS.filter(
-          (key) => p[key] != null,
+    for (const entity of entities) {
+      const key = PROPERTY_ENTITY_TYPE_MAP[entity.type] ?? "specialDistricts";
+      byEntity[key] += entity.liability;
+    }
+
+    const total = Object.values(byEntity).reduce((s, v) => s + v, 0);
+    const propertyTaxEntityShares =
+      total === 0
+        ? {
+            state: 0,
+            county: 0,
+            schoolDistrict: 0,
+            municipality: 0,
+            specialDistricts: 0,
+          }
+        : Object.fromEntries(
+            Object.entries(byEntity).map(([e, v]) => [e, v / total]),
+          );
+
+    return { propertyTax: total, propertyTaxEntityShares };
+  }, [entities]);
+
+  const { salesTax, salesEntityShares } = useMemo(() => {
+    const byEntity = {
+      state: 0,
+      county: 0,
+      schoolDistrict: 0,
+      municipality: 0,
+      specialDistricts: 0,
+    };
+
+    for (const { location, feature } of locationsWithFeatures) {
+      const p = feature?.properties ?? ({} as SalesFeatureProps);
+      const { nonFoodSpending, foodSpending } = location;
+
+      for (const key of RATE_COMPONENTS) {
+        if (p[key] == null) continue;
+        const liability = calcSalesLiability(
+          key,
+          p[key] as number,
+          nonFoodSpending,
+          foodSpending,
         );
-        return (
-          total +
-          activeComponents.reduce(
-            (sum, key) =>
-              sum +
-              calcSalesLiability(key, p[key], nonFoodSpending, foodSpending),
-            0,
-          )
-        );
-      }, 0),
-    [locationsWithFeatures],
-  );
+        const entity = SALES_COMPONENT_ENTITY_ASSIGNMENT[key] ?? "state";
+        byEntity[entity] += liability;
+      }
+    }
+
+    const total = Object.values(byEntity).reduce((s, v) => s + v, 0);
+    const salesEntityShares =
+      total === 0
+        ? {
+            state: 1,
+            county: 0,
+            schoolDistrict: 0,
+            municipality: 0,
+            specialDistricts: 0,
+          }
+        : Object.fromEntries(
+            Object.entries(byEntity).map(([e, v]) => [e, v / total]),
+          );
+
+    return { salesTax: total, salesEntityShares };
+  }, [locationsWithFeatures]);
 
   const fuelTax = useMemo(
     () =>
@@ -446,37 +537,120 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     [cars],
   );
 
-  const fees = useMemo(() => {
+  const { fees, feesEntityShares } = useMemo(() => {
     const currentYear = new Date().getFullYear();
-    return cars.reduce((sum, car) => {
-      if (car.year === 0) return sum;
-      let carFees =
-        FEES_FUEL_CONSTANTS.registrationFee +
-        FEES_FUEL_CONSTANTS.driverEducationFee +
-        FEES_FUEL_CONSTANTS.uninsuredMotoristFee;
+    const byEntity = {
+      state: 0,
+      county: 0,
+      schoolDistrict: 0,
+      municipality: 0,
+      specialDistricts: 0,
+    };
+
+    for (const car of cars) {
+      if (car.year === 0) continue;
 
       const age = currentYear - car.year;
       const ab = FEES_FUEL_CONSTANTS.ageBased;
-      if (age <= 2) carFees += ab.age0to2;
-      else if (age <= 5) carFees += ab.age3to5;
-      else if (age <= 8) carFees += ab.age6to8;
-      else if (age <= 11) carFees += ab.age9to11;
-      else carFees += ab.age12plus;
+      const ageFee =
+        age <= 2
+          ? ab.age0to2
+          : age <= 5
+            ? ab.age3to5
+            : age <= 8
+              ? ab.age6to8
+              : age <= 11
+                ? ab.age9to11
+                : ab.age12plus;
 
-      carFees += FEES_FUEL_CONSTANTS.corridorFeeByCounty[car.county] ?? 0;
+      byEntity[FEE_ENTITY_ASSIGNMENT.registrationFee] +=
+        FEES_FUEL_CONSTANTS.registrationFee;
+      byEntity[FEE_ENTITY_ASSIGNMENT.ageBased] += ageFee;
+      byEntity[FEE_ENTITY_ASSIGNMENT.driverEducationFee] +=
+        FEES_FUEL_CONSTANTS.driverEducationFee;
+      byEntity[FEE_ENTITY_ASSIGNMENT.uninsuredMotoristFee] +=
+        FEES_FUEL_CONSTANTS.uninsuredMotoristFee;
+      byEntity[FEE_ENTITY_ASSIGNMENT.corridorFee] +=
+        FEES_FUEL_CONSTANTS.corridorFeeByCounty[car.county] ?? 0;
 
       if (car.fueltype === "electric") {
-        carFees += FEES_FUEL_CONSTANTS.alternativeFuelFee;
+        byEntity[FEE_ENTITY_ASSIGNMENT.alternativeFuelFee] +=
+          FEES_FUEL_CONSTANTS.alternativeFuelFee;
       } else {
-        carFees +=
+        byEntity[FEE_ENTITY_ASSIGNMENT.pollutionControlFee] +=
           FEES_FUEL_CONSTANTS.pollutionControlFeeByCounty[car.county] ?? 0;
       }
+    }
 
-      return sum + carFees;
-    }, 0);
+    const total = Object.values(byEntity).reduce((s, v) => s + v, 0);
+    const feesEntityShares =
+      total === 0
+        ? {
+            state: 1,
+            county: 0,
+            schoolDistrict: 0,
+            municipality: 0,
+            specialDistricts: 0,
+          }
+        : Object.fromEntries(
+            Object.entries(byEntity).map(([e, v]) => [e, v / total]),
+          );
+
+    return { fees: total, feesEntityShares };
   }, [cars]);
 
   const totalTax = incomeTax + propertyTax + salesTax + fuelTax + fees;
+
+  const entityAmounts = useMemo(() => {
+    const taxAmounts: Record<TaxKey, number> = {
+      incomeTax,
+      salesTax,
+      propertyTax,
+      fuelTax,
+      fees,
+    };
+    const sharesByTax: Record<TaxKey, Record<string, number>> = {
+      incomeTax: INCOME_TAX_ENTITY_SHARES,
+      fuelTax: FUEL_TAX_ENTITY_SHARES,
+      propertyTax: propertyTaxEntityShares,
+      salesTax: salesEntityShares,
+      fees: feesEntityShares,
+    };
+
+    return Object.fromEntries(
+      Object.keys(ENTITY_TO_PURPOSE).map((entity) => [
+        entity,
+        TAX_KEYS.reduce(
+          (sum, tax) => sum + taxAmounts[tax] * (sharesByTax[tax][entity] ?? 0),
+          0,
+        ),
+      ]),
+    );
+  }, [
+    incomeTax,
+    salesTax,
+    propertyTax,
+    fuelTax,
+    fees,
+    propertyTaxEntityShares,
+    salesEntityShares,
+    feesEntityShares,
+  ]);
+
+  const purposeAmounts = useMemo(
+    () =>
+      Object.fromEntries(
+        Object.keys(Object.values(ENTITY_TO_PURPOSE)[0]).map((purpose) => [
+          purpose,
+          Object.entries(ENTITY_TO_PURPOSE).reduce(
+            (sum, [entity, shares]) =>
+              sum + entityAmounts[entity] * (shares[purpose] ?? 0),
+            0,
+          ),
+        ]),
+      ),
+    [entityAmounts],
+  );
 
   return (
     <AppContext.Provider
@@ -506,6 +680,11 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
         fuelTax,
         fees,
         totalTax,
+        entityAmounts,
+        purposeAmounts,
+        propertyTaxEntityShares,
+        feesEntityShares,
+        salesEntityShares,
       }}
     >
       {children}

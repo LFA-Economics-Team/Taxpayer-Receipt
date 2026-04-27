@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { LineChartTemplate } from "./IncomeChartTemplate";
+import { STATE_INCOME_RATE } from "../../AppContext";
 import type { IncomeInfo } from "../MetaMisc/types";
 
 export function GraphBlock({ incomeInfo }: { incomeInfo: IncomeInfo }) {
@@ -32,7 +33,7 @@ export function GraphBlock({ incomeInfo }: { incomeInfo: IncomeInfo }) {
           yDataKey={"EFFECTIVE_ON_FAGI"}
           curveName={"Effective Tax Rate"}
           showReferenceLine={true}
-          horizonReferenceLineValue={0.0455}
+          horizonReferenceLineValue={STATE_INCOME_RATE}
           verticalReferenceLineValue={incomeInfo.incomeTile}
           yAsPercent={true}
           filingStatus={incomeInfo.filingStatus}
@@ -41,7 +42,7 @@ export function GraphBlock({ incomeInfo }: { incomeInfo: IncomeInfo }) {
     },
     {
       id: 3,
-      title: "Aggregate Liability on Income Perecntile",
+      title: "Aggregate Liability on Income Percentile",
       content: (
         <LineChartTemplate
           title={"Tax Share by Income"}

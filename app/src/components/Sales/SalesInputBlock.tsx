@@ -1,7 +1,7 @@
 import { useState } from "react";
 import type { SalesLocation } from "../MetaMisc/types";
 import { geocodeAddress, formatDollars } from "../MetaMisc/types";
-import { FOOD_STATE_RATE } from "../../AppContext";
+import { FOOD_STATE_RATE, STATE_SALES_RATE } from "../../AppContext";
 
 function SalesCard({
   location,
@@ -114,8 +114,9 @@ export function SalesInputBlock({
           <div>
             *For food items, the state assess a lower rate of{" "}
             {(FOOD_STATE_RATE * 100).toFixed(2)}% while all other taxable
-            transactions are assessed at 4.85%. Additionally, only the state,
-            county, and local options apply to food purchases.
+            transactions are assessed at {(STATE_SALES_RATE * 100).toFixed(2)}%.
+            Additionally, only the state, county, and local options apply to
+            food purchases.
           </div>
           <div>
             **Consumers typically spend 30-35% of their income on non-food

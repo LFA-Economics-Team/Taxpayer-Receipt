@@ -7,6 +7,7 @@ import {
   lookupIncomeData,
   geocodeAddress,
 } from "../MetaMisc/types";
+import type { FuelEntry } from "../MetaMisc/types";
 import MakeOptions from "../../data/Misc/MakeOptions.json";
 import ModelOptions from "../../data/Misc/ModelOptions.json";
 import FuelData from "../../data/Misc/FuelData.json";
@@ -42,7 +43,7 @@ export function ControlBlock() {
       ] ?? [];
     if (firstCar.year) {
       const validModels = new Set(
-        (FuelData as any[])
+        (FuelData as FuelEntry[])
           .filter((e) => e.make === firstCar.make && e.year === firstCar.year)
           .map((e) => e.model),
       );

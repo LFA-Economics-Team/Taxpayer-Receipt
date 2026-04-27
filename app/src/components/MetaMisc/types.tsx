@@ -95,9 +95,17 @@ export type SalesLocation = {
   lon?: number;
 };
 
+export type SalesFeatureProps = {
+  TAXDIST: string;
+  CURRRATE: number;
+  METRONAME: string;
+  SHORTDESC_x: string;
+  [key: string]: number | string | null | undefined;
+};
+
 export type SalesLocationWithFeature = {
   location: SalesLocation;
-  feature: GeoJSON.Feature | null;
+  feature: GeoJSON.Feature<GeoJSON.MultiPolygon, SalesFeatureProps> | null;
 };
 
 export const RATE_COMPONENTS = [
@@ -145,7 +153,23 @@ export type Entity = {
   liability: number;
 };
 
+export type PropertyFeatureProps = {
+  ENT_NBR: number;
+  ENT_DESC: string;
+  ENT_RATE: number;
+  entity_type: string;
+  county: string;
+};
+
 // Fuel & Fees
+
+export type FuelEntry = {
+  make: string;
+  model: string;
+  year: number;
+  fuelType: string;
+  comb08: number;
+};
 
 export const FEES_FUEL_CONSTANTS = {
   registrationFee: 66,
@@ -182,6 +206,57 @@ export const FEES_FUEL_CONSTANTS = {
   } as Record<string, number>,
 };
 
+export type EntityKey =
+  | "state"
+  | "county"
+  | "schoolDistrict"
+  | "municipality"
+  | "specialDistricts";
+
+export const PROPERTY_ENTITY_TYPE_MAP: Record<string, EntityKey> = {
+  County: "county",
+  Municipality: "municipality",
+  "School District": "schoolDistrict",
+  "County Assessing": "specialDistricts",
+  "Multicounty Assessing": "specialDistricts",
+  "Special District": "specialDistricts",
+  PID: "specialDistricts",
+  "RDA or CDA": "specialDistricts",
+};
+
+export const SALES_COMPONENT_ENTITY_ASSIGNMENT: Record<string, EntityKey> = {
+  "STATE SALES AND USE TAX": "state",
+  "SUPPLEMENTAL STATE SALES AND USE TAX": "state",
+  "COUNTY OPTION SALES TAX": "county",
+  "COUNTY OPTION TRANSPORTATION TAX": "county",
+  "COUNTY AIRPORT, HIGHWAY, PUBLIC TRANSIT TAX": "county",
+  "COUNTY PUBLIC TRANSIT": "county",
+  "MASS TRANSIT TAX": "county",
+  "ADDITIONAL MASS TRANSIT TAX": "county",
+  "MASS TRANSIT FIXED GUIDEWAY TAX": "county",
+  "TRANSPORTATION INFRUSTRUCTURE TAX": "county",
+  "BOTANICAL, CULTURAL, ZOO TAX": "county",
+  "EMERGENCY SERVICES TAX": "county",
+  "LOCAL SALES AND USE TAX": "municipality",
+  "TOWN OPTION TAX": "municipality",
+  "CITY OR TOWN OPTION TAX": "municipality",
+  "RESORT COMMUNITY TAX": "municipality",
+  "CAPITAL CITY REVITALIZATION TAX": "municipality",
+  "CORRECTIONAL FACILITY TAX": "municipality",
+  "RURAL HOSPITAL TAX": "municipality",
+  "HIGHWAYS TAX": "municipality",
+};
+
+export const FEE_ENTITY_ASSIGNMENT: Record<string, EntityKey> = {
+  registrationFee: "state",
+  ageBased: "state",
+  driverEducationFee: "state",
+  uninsuredMotoristFee: "state",
+  alternativeFuelFee: "state",
+  corridorFee: "county",
+  pollutionControlFee: "county",
+};
+
 export type Car = {
   id: number;
   make: string;
@@ -191,6 +266,23 @@ export type Car = {
   mpg: number;
   fueltype: string;
   county: string;
+};
+
+// Legislative Districts
+
+export type DistrictFeatureProps = {
+  DIST: number;
+};
+
+export type DistrictIntersectionsData = {
+  house: {
+    property: Record<string, number[]>;
+    sales: Record<string, number[]>;
+  };
+  senate: {
+    property: Record<string, number[]>;
+    sales: Record<string, number[]>;
+  };
 };
 
 // Sankey
@@ -352,3 +444,47 @@ export function ResultsDisclaimer() {
     </div>
   );
 }
+
+export const feeInfo: Record<string, { description: string; statute: string }> =
+  {
+    "Registration Fee": {
+      description:
+        "A flat $66 fee charged per vehicle per year for to fund transportation services. Fee amount is inflation adjusted annually",
+      statute: "41-1a-1206",
+    },
+    "Age-Based Fee": {
+      description:
+        "Uniform fee by vehicle age with older vehicles paying less than newer ones.",
+      statute: "59-2-405.1",
+    },
+    "Corridor Fee": {
+      description:
+        "$10 per year fee imposed by counties for transportation maintainance. Applies to vehicles registered in Salt Lake, Davis, Utah, Weber, Summit, Wasatch, Iron, Box Elder, Washington, Tooele, and Morgan.",
+      statute: "41-1a-1222",
+    },
+    "Driver Education Fee": {
+      description:
+        "$2.50 per vehicle per year, used to fund driver education and student transportation programs.",
+      statute: "41-1a-1204",
+    },
+    "Uninsured Motorist Fee": {
+      description:
+        "$1.00 per vehicle per year, used to fund the Uninsured Motorist Identification Restricted Account.",
+      statute: "41-1a-1218",
+    },
+    "Alternative Fuel Fee": {
+      description:
+        "Up to $180 per year for electric vehicles, offsetting fuel taxes not paid at the pump. Hybrid vehicles or those enrolled in the Road Usage Charge program may pay less depending on miles driven.",
+      statute: "72-1-213.1",
+    },
+    "Pollution Control Fee": {
+      description:
+        "Up to $3 per year which goes to fund local emissions testing programs. Does not apply to EVs. Fee amount is determined by county.",
+      statute: "41-1a-1223",
+    },
+    Total: {
+      description:
+        "Total registration fees are the sum of each fee applicable to the vehicle. Fees calculated here are for passenger cars; other vehicle classes may be subject to different or additional fees at registration.",
+      statute: "",
+    },
+  };

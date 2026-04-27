@@ -1,6 +1,7 @@
 import { useState } from "react";
 import type { Property } from "../MetaMisc/types";
 import { geocodeAddress, formatDollars } from "../MetaMisc/types";
+import { PRIME_RESIDE_EXEMPT } from "../../AppContext";
 
 function PropertyCard({
   property,
@@ -106,9 +107,11 @@ export function PropertyInputBlock({
       {properties.length !== 0 ? (
         <div className="flex flex-col text-sm justify-self-end p-2 gap-2 text-gray-200 text-left">
           <div>
-            *Primary residences receive an exemption equal to 45% of taxable
-            value. Consequently, such properties are taxed on the remaining 55%.
-            All other properties are taxed at full value.
+            *Primary residences receive an exemption equal to{" "}
+            {((1 - PRIME_RESIDE_EXEMPT) * 100).toFixed(0)}% of taxable value.
+            Consequently, such properties are taxed on the remaining{" "}
+            {(PRIME_RESIDE_EXEMPT * 100).toFixed(0)}%. All other properties are
+            taxed at full value.
           </div>
         </div>
       ) : (

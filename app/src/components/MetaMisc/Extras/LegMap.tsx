@@ -8,7 +8,7 @@ import {
 import Sales2025 from "../../../data/Geospacial/Sales2025.json";
 import Property2025 from "../../../data/Geospacial/Property2025.json";
 import HouseDistricts from "../../../data/Geospacial/HouseDistricts.json";
-import SeanteDistricts from "../../../data/Geospacial/SenateDistricts.json";
+import SenateDistricts from "../../../data/Geospacial/SenateDistricts.json";
 import { useState, useMemo } from "react";
 import { point } from "@turf/helpers";
 import booleanPointInPolygon from "@turf/boolean-point-in-polygon";
@@ -20,7 +20,30 @@ import {
   houseDistrictOptions,
   RATE_COMPONENTS,
   formatRateLabel,
+  type PropertyFeatureProps,
+  type SalesFeatureProps,
+  type DistrictFeatureProps,
+  type DistrictIntersectionsData,
 } from "../types";
+import {
+  UTAH_MAP_CENTER,
+  UTAH_MAP_DEFAULT_ZOOM,
+  getPropOpacity,
+  getSalesColor,
+} from "../../../AppContext";
+
+type PropertyFC = GeoJSON.FeatureCollection<
+  GeoJSON.MultiPolygon,
+  PropertyFeatureProps
+>;
+type SalesFC = GeoJSON.FeatureCollection<
+  GeoJSON.MultiPolygon,
+  SalesFeatureProps
+>;
+type DistrictFC = GeoJSON.FeatureCollection<
+  GeoJSON.MultiPolygon,
+  DistrictFeatureProps
+>;
 
 function Legstyle() {
   return {
@@ -49,32 +72,6 @@ function Propstyle(feature: Feature | undefined) {
     dashArray: ENTITY_DASH[feature?.properties?.entity_type ?? ""] ?? "",
     fillOpacity: getPropOpacity(feature?.properties?.ENT_RATE ?? 0),
   };
-}
-
-function getPropOpacity(rate: number) {
-  return rate > 0.003
-    ? 0.25
-    : rate > 0.002
-      ? 0.1
-      : rate > 0.001
-        ? 0.03
-        : rate > 0.0005
-          ? 0.01
-          : 0.005;
-}
-
-function getSalesColor(rate: number) {
-  return rate > 0.085
-    ? "#642451"
-    : rate > 0.08
-      ? "#7E2D65"
-      : rate > 0.075
-        ? "#9B4580"
-        : rate > 0.07
-          ? "#BA749E"
-          : rate > 0.065
-            ? "#D8A8C4"
-            : "#F5E3EF";
 }
 
 function Salestyle(feature: Feature | undefined) {
@@ -122,25 +119,24 @@ export function LegMap() {
       return next;
     });
 
-  const allDistrictFeatures = legType
-    ? (HouseDistricts as any).features
-    : (SeanteDistricts as any).features;
+  const allDistrictFeatures = (
+    legType ? (HouseDistricts as DistrictFC) : (SenateDistricts as DistrictFC)
+  ).features;
 
   const entitiesAtPoint = useMemo(() => {
     if (!clickPoint) return null;
     const pt = point([clickPoint[1], clickPoint[0]]);
-    const propertyEntities = (Property2025 as any).features
-      .filter((f: any) => booleanPointInPolygon(pt, f))
-      .sort((a: any, b: any) =>
-        a.properties.entity_type.localeCompare(b.properties.entity_type),
+    const propertyEntities = (Property2025 as PropertyFC).features
+      .filter((f) => booleanPointInPolygon(pt, f))
+      .sort((a, b) =>
+        a.properties!.entity_type.localeCompare(b.properties!.entity_type),
       );
     const salesArea =
-      (Sales2025 as any).features.find((f: any) =>
+      (Sales2025 as SalesFC).features.find((f) =>
         booleanPointInPolygon(pt, f),
       ) ?? null;
     const districtFeature =
-      allDistrictFeatures.find((f: any) => booleanPointInPolygon(pt, f)) ??
-      null;
+      allDistrictFeatures.find((f) => booleanPointInPolygon(pt, f)) ?? null;
     return { propertyEntities, salesArea, districtFeature };
   }, [clickPoint, legType]);
 
@@ -162,36 +158,40 @@ export function LegMap() {
   };
 
   const filteredProperty = useMemo(() => {
-    if (selectedDistricts.length === 0)
-      return Property2025 as GeoJSON.FeatureCollection;
+    if (selectedDistricts.length === 0) return Property2025 as PropertyFC;
     const key = legType ? "house" : "senate";
     const indices = new Set(
       selectedDistricts.flatMap(
-        (d) => (DistrictIntersections as any)[key].property[String(d)] ?? [],
+        (d) =>
+          (DistrictIntersections as DistrictIntersectionsData)[key].property[
+            String(d)
+          ] ?? [],
       ),
     );
     return {
       type: "FeatureCollection" as const,
-      features: (Property2025 as any).features
-        .filter((_: any, i: number) => indices.has(i))
-        .sort((a: any, b: any) =>
-          a.properties.entity_type.localeCompare(b.properties.entity_type),
+      features: (Property2025 as PropertyFC).features
+        .filter((_, i) => indices.has(i))
+        .sort((a, b) =>
+          a.properties!.entity_type.localeCompare(b.properties!.entity_type),
         ),
     };
   }, [selectedDistricts, legType]);
 
   const filteredSales = useMemo(() => {
-    if (selectedDistricts.length === 0)
-      return Sales2025 as GeoJSON.FeatureCollection;
+    if (selectedDistricts.length === 0) return Sales2025 as SalesFC;
     const key = legType ? "house" : "senate";
     const indices = new Set(
       selectedDistricts.flatMap(
-        (d) => (DistrictIntersections as any)[key].sales[String(d)] ?? [],
+        (d) =>
+          (DistrictIntersections as DistrictIntersectionsData)[key].sales[
+            String(d)
+          ] ?? [],
       ),
     );
     return {
       type: "FeatureCollection" as const,
-      features: (Sales2025 as any).features.filter((_: any, i: number) =>
+      features: (Sales2025 as SalesFC).features.filter((_, i) =>
         indices.has(i),
       ),
     };
@@ -278,8 +278,8 @@ export function LegMap() {
 
       <div className="flex flex-col h-full w-3/5">
         <MapContainer
-          center={[39.5, -111.5]}
-          zoom={7}
+          center={UTAH_MAP_CENTER}
+          zoom={UTAH_MAP_DEFAULT_ZOOM}
           style={{ height: "100%", width: "100%" }}
         >
           {propOn ? (

@@ -13,9 +13,16 @@ import booleanPointInPolygon from "@turf/boolean-point-in-polygon";
 import { point } from "@turf/helpers";
 import Property2025 from "../../data/Geospacial/Property2025.json";
 import type { Property, PropertyFeatureProps } from "../MetaMisc/types";
-import { UTAH_MAP_CENTER, UTAH_MAP_DEFAULT_ZOOM, getPropOpacity } from "../../AppContext";
+import {
+  UTAH_MAP_CENTER,
+  UTAH_MAP_DEFAULT_ZOOM,
+  getPropOpacity,
+} from "../../AppContext";
 
-type PropertyFC = GeoJSON.FeatureCollection<GeoJSON.MultiPolygon, PropertyFeatureProps>;
+type PropertyFC = GeoJSON.FeatureCollection<
+  GeoJSON.MultiPolygon,
+  PropertyFeatureProps
+>;
 
 const customIcon = L.divIcon({
   className: "",
@@ -95,7 +102,7 @@ export function PropertyMapBlock({ properties }: { properties: Property[] }) {
         zoom={UTAH_MAP_DEFAULT_ZOOM}
         style={{ height: "100%", width: "100%" }}
       >
-        <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+        <TileLayer url="https://discover.agrc.utah.gov/login/path/gondola-toga-message-henry/tiles/lite_basemap/{z}/{x}/{y}.png" />
         <GeoJSON
           key={geocodedProperties.map((p) => p.id).join(",")}
           data={filteredData}

@@ -8,9 +8,16 @@ import {
   type SalesFeatureProps,
   type SalesLocationWithFeature,
 } from "../MetaMisc/types";
-import { UTAH_MAP_CENTER, UTAH_MAP_DEFAULT_ZOOM, getSalesColor } from "../../AppContext";
+import {
+  UTAH_MAP_CENTER,
+  UTAH_MAP_DEFAULT_ZOOM,
+  getSalesColor,
+} from "../../AppContext";
 
-type SalesFC = GeoJSON.FeatureCollection<GeoJSON.MultiPolygon, SalesFeatureProps>;
+type SalesFC = GeoJSON.FeatureCollection<
+  GeoJSON.MultiPolygon,
+  SalesFeatureProps
+>;
 
 const customIcon = L.divIcon({
   className: "",
@@ -20,7 +27,9 @@ const customIcon = L.divIcon({
   popupAnchor: [0, -24],
 });
 
-function style(feature: GeoJSON.Feature<GeoJSON.MultiPolygon, SalesFeatureProps> | undefined) {
+function style(
+  feature: GeoJSON.Feature<GeoJSON.MultiPolygon, SalesFeatureProps> | undefined,
+) {
   return {
     fillColor: getSalesColor(feature?.properties?.CURRRATE ?? 0),
     weight: 0.5,
@@ -46,8 +55,8 @@ export function SalesMapBlock({
       ? typedData
       : {
           ...typedData,
-          features: typedData.features.filter(
-            (f) => matchedFeatureIds.has(f.properties?.TAXDIST),
+          features: typedData.features.filter((f) =>
+            matchedFeatureIds.has(f.properties?.TAXDIST),
           ),
         };
 
@@ -58,7 +67,7 @@ export function SalesMapBlock({
         zoom={UTAH_MAP_DEFAULT_ZOOM}
         style={{ height: "100%", width: "100%" }}
       >
-        <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+        <TileLayer url="https://discover.agrc.utah.gov/login/path/gondola-toga-message-henry/tiles/lite_basemap/{z}/{x}/{y}.png" />
         <GeoJSON
           key={locationsWithFeatures.map((lf) => lf.location.id).join(",")}
           data={filteredData}

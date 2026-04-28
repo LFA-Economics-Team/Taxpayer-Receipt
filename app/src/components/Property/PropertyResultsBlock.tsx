@@ -47,7 +47,7 @@ export function PropertyResultsBlock({ entities }: { entities: Entity[] }) {
             ))}
           </div>
           <div className="py-1 border-t bg-white rounded-xl border-gray-400 font-bold text-base shrink-0">
-            Total: ${formatDollars(total)}
+            Total: {formatDollars(total)}
           </div>
           <ResultsDisclaimer />
         </>

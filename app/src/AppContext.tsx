@@ -41,7 +41,7 @@ export const UTAH_MAP_DEFAULT_ZOOM = 7;
 
 export function getPropOpacity(rate: number) {
   return rate > 0.003
-    ? 0.25
+    ? 0.4
     : rate > 0.002
       ? 0.1
       : rate > 0.001

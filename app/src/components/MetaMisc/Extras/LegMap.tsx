@@ -300,7 +300,7 @@ export function LegMap() {
           ) : (
             <></>
           )}
-          <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+          <TileLayer url="https://discover.agrc.utah.gov/login/path/gondola-toga-message-henry/tiles/lite_basemap/{z}/{x}/{y}.png" />
           <MapClickHandler onClick={setClickPoint} />
           {clickPoint && entitiesAtPoint && (
             <Popup

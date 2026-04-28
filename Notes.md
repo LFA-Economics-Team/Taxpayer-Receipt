@@ -56,13 +56,7 @@ From IT [Matt] Security: https://snyk.io/
 
 # Misc notes
 
-- devise print/ email methods [ask Travis]
-
-- Spin up dockerized version
-
-- move source code into LFA team github
-
-- Email Matt for Security Checks
+- devise print/ email methods [Playwrite]
 
 - Email Jason for review meeting
 

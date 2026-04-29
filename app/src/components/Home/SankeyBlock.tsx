@@ -3,7 +3,6 @@ import {
   useAppContext,
   TAX_KEYS,
   type TaxKey,
-  ENTITY_TO_PURPOSE,
   INCOME_TAX_ENTITY_SHARES,
   FUEL_TAX_ENTITY_SHARES,
 } from "../../AppContext";
@@ -40,6 +39,7 @@ export function SankeyBlock() {
     fuelTax,
     fees,
     entityAmounts,
+    entityPurposeMap,
     propertyTaxEntityShares,
     feesEntityShares,
     salesEntityShares,
@@ -53,11 +53,11 @@ export function SankeyBlock() {
     fees,
   };
   const sharesByTax: Record<TaxKey, Record<string, number>> = {
-    incomeTax:   INCOME_TAX_ENTITY_SHARES,
-    fuelTax:     FUEL_TAX_ENTITY_SHARES,
+    incomeTax: INCOME_TAX_ENTITY_SHARES,
+    fuelTax: FUEL_TAX_ENTITY_SHARES,
     propertyTax: propertyTaxEntityShares,
-    salesTax:    salesEntityShares,
-    fees:        feesEntityShares,
+    salesTax: salesEntityShares,
+    fees: feesEntityShares,
   };
 
   const namedLinks = [
@@ -68,7 +68,7 @@ export function SankeyBlock() {
         value: taxAmounts[tax] * share,
       })),
     ),
-    ...Object.entries(ENTITY_TO_PURPOSE).flatMap(([entity, shares]) =>
+    ...Object.entries(entityPurposeMap).flatMap(([entity, shares]) =>
       Object.entries(shares).map(([purpose, share]) => ({
         source: NODE_NAME[entity],
         target: NODE_NAME[purpose],

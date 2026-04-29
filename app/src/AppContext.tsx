@@ -114,6 +114,7 @@ type AppState = {
   fees: number;
   totalTax: number;
   entityAmounts: Record<string, number>;
+  entityPurposeMap: Record<string, Record<string, number>>;
   purposeAmounts: Record<string, number>;
   propertyTaxEntityShares: Record<string, number>;
   feesEntityShares: Record<string, number>;
@@ -145,17 +146,54 @@ export const TAX_KEYS = [
 ] as const;
 export type TaxKey = (typeof TAX_KEYS)[number];
 
-export const ENTITY_TO_PURPOSE: Record<string, Record<string, number>> = {
-  state: {
-    criminalJustice: 0.05,
-    econDev: 0.05,
-    higherEd: 0.25,
-    publicEd: 0.15,
-    generalGov: 0.1,
-    infrastructure: 0.2,
-    naturalRes: 0.05,
-    socialServices: 0.15,
+export const WEIGHTED_STATE_PURPOSES: Record<string, Record<string, number>> = {
+  incomeTax: {
+    criminalJustice: 0.00003,
+    econDev: 0.00696,
+    higherEd: 0.16139,
+    publicEd: 0.70822,
+    generalGov: 0.00337,
+    infrastructure: 0.04442,
+    naturalRes: 0.00006,
+    socialServices: 0.07555,
   },
+
+  salesTax: {
+    criminalJustice: 0.21839,
+    econDev: 0.07538,
+    higherEd: 0.09131,
+    publicEd: 0.00204,
+    generalGov: 0.04186,
+    infrastructure: 0.32848,
+    naturalRes: 0.04706,
+    socialServices: 0.19549,
+  },
+
+  fuelTax: {
+    criminalJustice: 0,
+    econDev: 0,
+    higherEd: 0,
+    publicEd: 0,
+    generalGov: 0,
+    infrastructure: 1,
+    naturalRes: 0,
+    socialServices: 0,
+  },
+
+  fees: {
+    criminalJustice: 0,
+    econDev: 0,
+    higherEd: 0,
+    publicEd: 0,
+    generalGov: 0,
+    infrastructure: 1,
+    naturalRes: 0,
+    socialServices: 0,
+  },
+};
+
+export const ENTITY_TO_PURPOSE: Record<string, Record<string, number>> = {
+  state: {},
   county: {
     criminalJustice: 0.2,
     econDev: 0.05,
@@ -637,19 +675,51 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     feesEntityShares,
   ]);
 
+  const entityPurposeMap = useMemo(() => {
+    const stateAmounts: Record<string, number> = {
+      incomeTax: incomeTax * INCOME_TAX_ENTITY_SHARES.state,
+      salesTax: salesTax * salesEntityShares.state,
+      fuelTax: fuelTax * FUEL_TAX_ENTITY_SHARES.state,
+      fees: fees * feesEntityShares.state,
+    };
+
+    const totalStateRevenue = Object.values(stateAmounts).reduce(
+      (s, v) => s + v,
+      0,
+    );
+
+    const statePurposes =
+      totalStateRevenue === 0
+        ? WEIGHTED_STATE_PURPOSES.incomeTax
+        : Object.fromEntries(
+            Object.keys(WEIGHTED_STATE_PURPOSES.incomeTax).map((purpose) => [
+              purpose,
+              Object.entries(WEIGHTED_STATE_PURPOSES).reduce(
+                (sum, [source, shares]) =>
+                  sum +
+                  (stateAmounts[source] / totalStateRevenue) *
+                    (shares[purpose] ?? 0),
+                0,
+              ),
+            ]),
+          );
+
+    return { ...ENTITY_TO_PURPOSE, state: statePurposes };
+  }, [incomeTax, salesTax, fuelTax, fees, salesEntityShares, feesEntityShares]);
+
   const purposeAmounts = useMemo(
     () =>
       Object.fromEntries(
-        Object.keys(Object.values(ENTITY_TO_PURPOSE)[0]).map((purpose) => [
+        Object.keys(Object.values(entityPurposeMap)[0]).map((purpose) => [
           purpose,
-          Object.entries(ENTITY_TO_PURPOSE).reduce(
+          Object.entries(entityPurposeMap).reduce(
             (sum, [entity, shares]) =>
               sum + entityAmounts[entity] * (shares[purpose] ?? 0),
             0,
           ),
         ]),
       ),
-    [entityAmounts],
+    [entityAmounts, entityPurposeMap],
   );
 
   return (
@@ -681,6 +751,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
         fees,
         totalTax,
         entityAmounts,
+        entityPurposeMap,
         purposeAmounts,
         propertyTaxEntityShares,
         feesEntityShares,

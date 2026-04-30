@@ -1,3 +1,4 @@
+import type React from "react";
 import { ReceiptSankey } from "./ReceiptSankey";
 import {
   useAppContext,
@@ -31,7 +32,11 @@ const NODE_NAME: Record<string, string> = {
 // Canonical order determines Sankey column layout
 const ALL_NODE_NAMES = Object.values(NODE_NAME);
 
-export function SankeyBlock() {
+export function SankeyBlock({
+  containerRef,
+}: {
+  containerRef: React.RefObject<HTMLDivElement | null>;
+}) {
   const {
     incomeTax,
     propertyTax,
@@ -105,7 +110,7 @@ export function SankeyBlock() {
       })),
     };
 
-    return <ReceiptSankey data={data} />;
+    return <ReceiptSankey data={data} containerRef={containerRef} />;
   })();
 
   return (

@@ -10,10 +10,7 @@ From IT [Matt] Security: https://snyk.io/
     - school districts
     - municipalities
 
-- Ways to highlight Sankey contents?
-- Link 'public purchases' to cobi pages
-
-- devise print/ email methods [Playwrite?]
+- Plan/ implement screen size variation/ mobile view
 
 - Review meeting
   - Jason for Tax Commission

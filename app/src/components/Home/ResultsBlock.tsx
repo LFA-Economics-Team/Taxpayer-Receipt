@@ -1,5 +1,4 @@
 import { Fragment } from "react";
-import { NavLink } from "react-router-dom";
 import { useAppContext } from "../../AppContext";
 import { formatDollars } from "../MetaMisc/types";
 
@@ -15,42 +14,38 @@ export const PURPOSE_ROW_CONFIG = [
   {
     label: "Criminal Justice",
     key: "criminalJustice",
-    link: "https://cobi.utah.gov/2026/4527/overview",
+  },
+  {
+    label: "Colleges & Universities",
+    key: "higherEd",
   },
   {
     label: "Economic Development",
     key: "econDev",
-    link: "https://cobi.utah.gov/2026/4528/overview",
-  },
-  {
-    label: "Education, Higher",
-    key: "higherEd",
-    link: "https://cobi.utah.gov/2026/6/overview",
-  },
-  {
-    label: "Education, Public",
-    key: "publicEd",
-    link: "https://cobi.utah.gov/2026/8/overview",
   },
   {
     label: "General Government",
     key: "generalGov",
-    link: "https://cobi.utah.gov/2026/4526/overview",
   },
   {
     label: "Infrastructure",
     key: "infrastructure",
-    link: "https://cobi.utah.gov/2026/4529/overview",
+  },
+  {
+    label: "Municipal Services",
+    key: "muniServices",
   },
   {
     label: "Natural Resources",
     key: "naturalRes",
-    link: "https://cobi.utah.gov/2026/7/overview",
+  },
+  {
+    label: "Public Education",
+    key: "publicEd",
   },
   {
     label: "Social Services",
     key: "socialServices",
-    link: "https://cobi.utah.gov/2026/5/overview",
   },
 ] as const;
 
@@ -119,16 +114,14 @@ export function ResultsBlock({
 
       <div className="flex flex-col grow max-h-1/2 bg-white rounded-xl">
         <div className="italic font-bold text-center text-[18px]">
-          Your Estimated Public Purchases
+          Infered Public Purchases
         </div>
         <div className="grid h-full w-full place-self-center grid-cols-[60%_10%_30%] divide-y divide-gray-400 text-right">
-          {PURPOSE_ROW_CONFIG.map(({ label, key, link }, i) => {
+          {PURPOSE_ROW_CONFIG.map(({ label, key }, i) => {
             const shade = i % 2 === 1 ? "bg-emerald-950/15" : "";
             return (
               <Fragment key={key}>
-                <NavLink className={shade} to={link}>
-                  {label}
-                </NavLink>
+                <div className={shade}>{label}</div>
                 <div className={shade}></div>
                 <div className={`text-center ${shade}`}>
                   {formatDollars(purposeAmounts[key] ?? 0)}
@@ -136,9 +129,9 @@ export function ResultsBlock({
               </Fragment>
             );
           })}
-          <div className="font-bold">Total</div>
-          <div></div>
-          <div className="font-bold text-center">
+          <div className="font-bold bg-emerald-950/15">Total</div>
+          <div className="bg-emerald-950/15"></div>
+          <div className="font-bold text-center bg-emerald-950/15">
             {formatDollars(totalPurpose)}
           </div>
           <div className="col-span-3"></div>

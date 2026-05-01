@@ -26,7 +26,7 @@ function SalesCard({
       <div className="flex flex-col w-7/10 items-center gap-1 p-1">
         <input
           type="text"
-          placeholder="Address"
+          placeholder="City or County"
           value={location.address}
           onChange={(e) => onChange({ ...location, address: e.target.value })}
           onBlur={handleAddressBlur}

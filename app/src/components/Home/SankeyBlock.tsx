@@ -20,12 +20,13 @@ const NODE_NAME: Record<string, string> = {
   municipality: "Municipality",
   specialDistricts: "Special Districts",
   criminalJustice: "Criminal Justice",
+  higherEd: "Colleges and Universities",
   econDev: "Economic Development",
-  higherEd: "Education, Higher",
-  publicEd: "Education, Public",
   generalGov: "General Government",
   infrastructure: "Infrastructure",
+  muniServices: "Municipal Services",
   naturalRes: "Natural Resources",
+  publicEd: "Public Education",
   socialServices: "Social Services",
 };
 

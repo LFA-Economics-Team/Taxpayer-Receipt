@@ -25,7 +25,7 @@ function PropertyCard({
       <div className="flex flex-col w-7/10 items-center gap-2 p-1">
         <input
           type="text"
-          placeholder="Address"
+          placeholder="City or County"
           value={property.address}
           onChange={(e) => onChange({ ...property, address: e.target.value })}
           onBlur={handleAddressBlur}

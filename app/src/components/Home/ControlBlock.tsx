@@ -68,7 +68,7 @@ export function ControlBlock() {
           </div>
           <input
             className="border-1 px-2 m-2 rounded-xl"
-            placeholder="Address"
+            placeholder="City or County"
             value={primaryProperty?.address ?? ""}
             onChange={(e) => upsertPrimaryProperty({ address: e.target.value })}
             onBlur={async (e) => {

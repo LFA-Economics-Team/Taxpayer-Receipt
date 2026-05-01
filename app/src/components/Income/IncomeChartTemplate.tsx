@@ -82,7 +82,7 @@ export function LineChartTemplate({
               ) : (
                 <ReferenceLine
                   x={verticalReferenceLineValue}
-                  label={{ position: "insideBottom", value: "Income" }}
+                  label={{ position: "insideBottom", value: "Your Income" }}
                   stroke="black"
                   strokeDasharray="2 2"
                 />

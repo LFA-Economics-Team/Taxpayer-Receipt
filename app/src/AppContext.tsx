@@ -156,6 +156,7 @@ export const WEIGHTED_STATE_PURPOSES: Record<string, Record<string, number>> = {
     infrastructure: 0.04442,
     naturalRes: 0.00006,
     socialServices: 0.07555,
+    muniServices: 0,
   },
 
   salesTax: {
@@ -167,6 +168,7 @@ export const WEIGHTED_STATE_PURPOSES: Record<string, Record<string, number>> = {
     infrastructure: 0.32848,
     naturalRes: 0.04706,
     socialServices: 0.19549,
+    muniServices: 0,
   },
 
   fuelTax: {
@@ -178,6 +180,7 @@ export const WEIGHTED_STATE_PURPOSES: Record<string, Record<string, number>> = {
     infrastructure: 1,
     naturalRes: 0,
     socialServices: 0,
+    muniServices: 0,
   },
 
   fees: {
@@ -189,6 +192,7 @@ export const WEIGHTED_STATE_PURPOSES: Record<string, Record<string, number>> = {
     infrastructure: 1,
     naturalRes: 0,
     socialServices: 0,
+    muniServices: 0,
   },
 };
 
@@ -203,6 +207,7 @@ export const ENTITY_TO_PURPOSE: Record<string, Record<string, number>> = {
     infrastructure: 0.3,
     naturalRes: 0.05,
     socialServices: 0.15,
+    muniServices: 0,
   },
   schoolDistrict: {
     criminalJustice: 0.0,
@@ -213,6 +218,7 @@ export const ENTITY_TO_PURPOSE: Record<string, Record<string, number>> = {
     infrastructure: 0.0,
     naturalRes: 0.0,
     socialServices: 0.0,
+    muniServices: 0,
   },
   municipality: {
     criminalJustice: 0.15,
@@ -223,16 +229,18 @@ export const ENTITY_TO_PURPOSE: Record<string, Record<string, number>> = {
     infrastructure: 0.45,
     naturalRes: 0.0,
     socialServices: 0.05,
+    muniServices: 0,
   },
   specialDistricts: {
     criminalJustice: 0.0,
     econDev: 0.0,
     higherEd: 0.0,
     publicEd: 0.0,
-    generalGov: 0.1,
-    infrastructure: 0.7,
-    naturalRes: 0.2,
+    generalGov: 0.0,
+    infrastructure: 0.0,
+    naturalRes: 0.0,
     socialServices: 0.0,
+    muniServices: 1.0,
   },
 };
 

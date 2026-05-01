@@ -412,9 +412,9 @@ export const formatRateLabel = (key: string) =>
 export function formatDollars(
   amount: number,
   decimals: number = 0,
-  roundTo: number = 1,
+  roundTo: number = 2,
 ) {
-  const rounded = Math.round(amount / roundTo) * roundTo;
+  const rounded = Math.round(amount / 10 ** roundTo) * 10 ** roundTo;
   return rounded.toLocaleString("en-US", {
     style: "currency",
     currency: "USD",

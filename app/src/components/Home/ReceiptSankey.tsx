@@ -188,9 +188,12 @@ export function ReceiptSankey({
   }, [activeNodeIndex, activeLinkIndex, originalLinks]);
 
   return (
-    <div ref={containerRef} className="flex flex-col h-full w-full items-center justify-around">
+    <div
+      ref={containerRef}
+      className="flex flex-col h-full w-full items-center justify-around"
+    >
       <div className="text-2xl font-bold text-[#17301b]">
-        Track how your tax dollar flow from collection to spending
+        Track how your tax dollars flow from collection to spending
       </div>
       <ResponsiveContainer
         width="90%"

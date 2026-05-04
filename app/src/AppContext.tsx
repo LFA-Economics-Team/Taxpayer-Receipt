@@ -107,6 +107,9 @@ type AppState = {
 
   clearAll: () => void;
 
+  stateOnly: boolean;
+  setStateOnly: (v: boolean) => void;
+
   incomeTax: number;
   propertyTax: number;
   salesTax: number;
@@ -476,6 +479,8 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     primaryPropLon,
   ]);
 
+  const [stateOnly, setStateOnly] = useState(false);
+
   const clearAll = () => {
     setIncomeInfo({
       annualIncome: 0,
@@ -752,6 +757,8 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
         removeCar,
         upsertFirstCar,
         clearAll,
+        stateOnly,
+        setStateOnly,
         incomeTax,
         propertyTax,
         salesTax,

@@ -63,7 +63,7 @@ function ResultCard({ location, feature }: SalesLocationWithFeature) {
                 {(p[key] * 100).toFixed(2)}%
               </div>
               <div key={key} className="col-start-3 text-right">
-                {formatDollars(liability)}
+                {formatDollars(liability, 0, 0)}
               </div>
             </>
           );
@@ -75,7 +75,7 @@ function ResultCard({ location, feature }: SalesLocationWithFeature) {
           {(p.CURRRATE * 100).toFixed(2)}%
         </div>
         <div className="grid col-start-3 border-t border-gray-300 font-bold pt-1 text-right">
-          {formatDollars(totalLiability)}
+          {formatDollars(totalLiability, 0, 0)}
         </div>
       </div>
     </div>

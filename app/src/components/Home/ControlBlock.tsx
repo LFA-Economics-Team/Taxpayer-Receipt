@@ -60,10 +60,10 @@ export function ControlBlock() {
 
       <div className="flex flex-col h-8/10 items-center gap-4">
         {/* General */}
-        <div className="flex flex-col w-9/10 bg-white text-[12px] text-[#17301b] rounded-xl pt-2 inset-shadow-sm/60">
+        <div className="flex flex-col w-9/10 bg-white text-[12px] text-[#17301b] rounded-xl pt-2 px-1 inset-shadow-sm/60">
           <div className="font-bold text-[14px]">General</div>
           <div>
-            What address are your taxes attributed to? This impacts which
+            What city or county are your taxes attributed to? This impacts which
             entities tax you.
           </div>
           <input
@@ -73,8 +73,18 @@ export function ControlBlock() {
             onChange={(e) => upsertPrimaryProperty({ address: e.target.value })}
             onBlur={async (e) => {
               const coords = await geocodeAddress(e.target.value);
-              if (coords)
-                upsertPrimaryProperty({ address: e.target.value, ...coords });
+              if (coords) {
+                const { city, county, ...latLon } = coords;
+                const normalizedCounty = county?.replace(/ County$/i, "") ?? "";
+                upsertPrimaryProperty({
+                  address: city ?? county ?? e.target.value,
+                  county: normalizedCounty,
+                  ...latLon,
+                });
+                if (cars.length > 0) {
+                  upsertFirstCar({ county: normalizedCounty });
+                }
+              }
             }}
           />
         </div>
@@ -168,6 +178,7 @@ export function ControlBlock() {
                 upsertFirstCar({
                   year: Number(e.target.value) || 0,
                   model: "",
+                  county: primaryProperty?.county ?? "",
                 })
               }
             />
@@ -183,7 +194,11 @@ export function ControlBlock() {
                 MakeOptions.find((o) => o.value === firstCar?.make) ?? null
               }
               onChange={(opt) =>
-                upsertFirstCar({ make: opt?.value ?? "", model: "" })
+                upsertFirstCar({
+                  make: opt?.value ?? "",
+                  model: "",
+                  county: primaryProperty?.county ?? "",
+                })
               }
             />
           </div>
@@ -206,7 +221,12 @@ export function ControlBlock() {
                     ).find((o) => o.value === firstCar.model) ?? null)
                   : null
               }
-              onChange={(opt) => upsertFirstCar({ model: opt?.value ?? "" })}
+              onChange={(opt) =>
+                upsertFirstCar({
+                  model: opt?.value ?? "",
+                  county: primaryProperty?.county ?? "",
+                })
+              }
             />
           </div>
 
@@ -218,7 +238,10 @@ export function ControlBlock() {
               placeholder="Miles"
               value={firstCar?.miles || ""}
               onChange={(e) =>
-                upsertFirstCar({ miles: Number(e.target.value) || 0 })
+                upsertFirstCar({
+                  miles: Number(e.target.value) || 0,
+                  county: primaryProperty?.county ?? "",
+                })
               }
             />
           </div>
@@ -232,10 +255,10 @@ export function ControlBlock() {
         </button>
       </div>
 
-      <div className="flex flex-col h-1/10 p-2 text-[14px]">
+      <div className="flex flex-col h-1/10 pt-2 text-[12px]">
         *Your data are not stored or sent to any government entity. Results are
         illustrative of a typical full-year Utah resident with similar
-        circumstances.
+        circumstances. Values may differ between pages due to rounding.
       </div>
     </div>
   );

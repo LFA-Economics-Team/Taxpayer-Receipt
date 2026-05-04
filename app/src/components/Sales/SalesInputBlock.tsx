@@ -18,7 +18,14 @@ function SalesCard({
   const handleAddressBlur = async () => {
     if (!location.address) return;
     const coords = await geocodeAddress(location.address);
-    if (coords) onChange({ ...location, ...coords });
+    if (coords) {
+      const { city, county, ...latLon } = coords;
+      onChange({
+        ...location,
+        address: city ?? county ?? location.address,
+        ...latLon,
+      });
+    }
   };
 
   return (

@@ -1,7 +1,11 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { useAppContext } from "../../AppContext";
+import {
+  useAppContext,
+  INCOME_TAX_ENTITY_SHARES,
+  FUEL_TAX_ENTITY_SHARES,
+} from "../../AppContext";
 import { rasterizeSvg } from "../../utils/rasterizeSvg";
 import { ControlBlock } from "./ControlBlock";
 import { SankeyBlock } from "./SankeyBlock";
@@ -20,6 +24,12 @@ export function HomeContent() {
     fees,
     totalTax,
     purposeAmounts,
+    entityAmounts,
+    entityPurposeMap,
+    propertyTaxEntityShares,
+    salesEntityShares,
+    feesEntityShares,
+    stateOnly,
     properties,
     cars,
   } = useAppContext();
@@ -42,6 +52,27 @@ export function HomeContent() {
         properties.find((p) => p.prime) ?? properties[0];
       const firstCar = cars[0];
 
+      const stateTotal = entityAmounts["state"] ?? 0;
+      const statePurposes = entityPurposeMap["state"] ?? {};
+      const pdfTaxAmounts = stateOnly
+        ? {
+            incomeTax: incomeTax * INCOME_TAX_ENTITY_SHARES.state,
+            salesTax: salesTax * salesEntityShares.state,
+            propertyTax: propertyTax * propertyTaxEntityShares.state,
+            fuelTax: fuelTax * FUEL_TAX_ENTITY_SHARES.state,
+            fees: fees * feesEntityShares.state,
+          }
+        : { incomeTax, salesTax, propertyTax, fuelTax, fees };
+      const pdfTotalTax = stateOnly ? stateTotal : totalTax;
+      const pdfPurposeAmounts = stateOnly
+        ? Object.fromEntries(
+            Object.entries(statePurposes).map(([k, share]) => [
+              k,
+              stateTotal * share,
+            ]),
+          )
+        : purposeAmounts;
+
       const blob = await pdf(
         <ReceiptPDF
           userInputs={{
@@ -54,9 +85,9 @@ export function HomeContent() {
             carModel: firstCar?.model ?? "",
             carMiles: firstCar?.miles ?? 0,
           }}
-          taxAmounts={{ incomeTax, salesTax, propertyTax, fuelTax, fees }}
-          totalTax={totalTax}
-          purposeAmounts={purposeAmounts}
+          taxAmounts={pdfTaxAmounts}
+          totalTax={pdfTotalTax}
+          purposeAmounts={pdfPurposeAmounts}
           sankeyImageUrl={sankeyImageUrl}
           utahSealUrl={utahSealUrl}
         />,

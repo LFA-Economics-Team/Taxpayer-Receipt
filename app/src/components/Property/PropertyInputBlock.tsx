@@ -17,7 +17,14 @@ function PropertyCard({
   const handleAddressBlur = async () => {
     if (!property.address) return;
     const coords = await geocodeAddress(property.address);
-    if (coords) onChange({ ...property, ...coords });
+    if (coords) {
+      const { city, county, ...latLon } = coords;
+      onChange({
+        ...property,
+        address: city ?? county ?? property.address,
+        ...latLon,
+      });
+    }
   };
 
   return (

@@ -39,6 +39,8 @@ export function SankeyBlock({
   containerRef: React.RefObject<HTMLDivElement | null>;
 }) {
   const {
+    stateOnly,
+    setStateOnly,
     incomeTax,
     propertyTax,
     salesTax,
@@ -66,7 +68,7 @@ export function SankeyBlock({
     fees: feesEntityShares,
   };
 
-  const namedLinks = [
+  const allLinks = [
     ...TAX_KEYS.flatMap((tax) =>
       Object.entries(sharesByTax[tax]).map(([entity, share]) => ({
         source: NODE_NAME[tax],
@@ -83,12 +85,43 @@ export function SankeyBlock({
     ),
   ].filter((l) => l.value > 0);
 
+  const stateName = NODE_NAME["state"];
+  const namedLinks = stateOnly
+    ? allLinks.filter((l) => l.source === stateName || l.target === stateName)
+    : allLinks;
+
   const inner = (() => {
-    if (namedLinks.length === 0) {
+    if (allLinks.length === 0) {
       return (
         <div className="text-gray-400 text-sm m-auto">
           Answer the questions to the left to see how your tax dollars flow.
         </div>
+      );
+    }
+
+    const toggleButton = (
+      <div className="flex justify-end px-4 pt-3">
+        <button
+          onClick={() => setStateOnly(!stateOnly)}
+          className={`text-xs px-3 py-1 rounded-full border transition-colors ${
+            stateOnly
+              ? "bg-blue-600 text-white border-blue-600"
+              : "bg-white text-white border-blue-600 hover:border-blue-400"
+          }`}
+        >
+          {stateOnly ? "State only" : "All entities"}
+        </button>
+      </div>
+    );
+
+    if (namedLinks.length === 0) {
+      return (
+        <>
+          {toggleButton}
+          <div className="text-gray-400 text-sm m-auto">
+            No state data to display.
+          </div>
+        </>
       );
     }
 
@@ -111,7 +144,12 @@ export function SankeyBlock({
       })),
     };
 
-    return <ReceiptSankey data={data} containerRef={containerRef} />;
+    return (
+      <>
+        {toggleButton}
+        <ReceiptSankey data={data} containerRef={containerRef} />
+      </>
+    );
   })();
 
   return (

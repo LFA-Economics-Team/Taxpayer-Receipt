@@ -17,7 +17,7 @@ function ResultCard({ entity }: { entity: Entity }) {
       <div className=" flex flex-row justify-around xt-sm text-gray-600">
         <div>Estimated Liability: </div>
         <span className="font-semibold text-black">
-          {formatDollars(entity.liability)}
+          {formatDollars(entity.liability, 0, 0)}
         </span>
       </div>
     </div>
@@ -47,7 +47,7 @@ export function PropertyResultsBlock({ entities }: { entities: Entity[] }) {
             ))}
           </div>
           <div className="py-1 border-t bg-white rounded-xl border-gray-400 font-bold text-base shrink-0">
-            Total: {formatDollars(total)}
+            Total: {formatDollars(total, 0, 0)}
           </div>
           <ResultsDisclaimer />
         </>

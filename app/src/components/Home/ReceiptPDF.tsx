@@ -164,7 +164,7 @@ export function ReceiptPDF({
         <View style={s.inputsSection}>
           {!!address && (
             <View style={s.inputCell}>
-              <Text style={s.inputLabel}>Address</Text>
+              <Text style={s.inputLabel}>City or County</Text>
               <Text style={s.inputValue}>{address}</Text>
             </View>
           )}

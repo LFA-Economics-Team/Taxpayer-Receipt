@@ -93,6 +93,8 @@ export type SalesLocation = {
   foodSpending: number;
   lat?: number;
   lon?: number;
+  city?: string | null;
+  county?: string | null;
 };
 
 export type SalesFeatureProps = {
@@ -141,6 +143,8 @@ export type Property = {
   liability?: number;
   lat?: number;
   lon?: number;
+  city?: string | null;
+  county?: string | null;
 };
 
 export type Entity = {
@@ -423,14 +427,23 @@ export function formatDollars(
   });
 }
 
-export async function geocodeAddress(
-  address: string,
-): Promise<{ lat: number; lon: number } | null> {
-  const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(address)}&format=json&limit=1`;
+export async function geocodeAddress(address: string): Promise<{
+  lat: number;
+  lon: number;
+  city: string | null;
+  county: string | null;
+} | null> {
+  const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(address)}&format=json&limit=1&addressdetails=1`;
   const res = await fetch(url, { headers: { "Accept-Language": "en" } });
   const data = await res.json();
   if (!data.length) return null;
-  return { lat: parseFloat(data[0].lat), lon: parseFloat(data[0].lon) };
+  const addr = data[0].address ?? {};
+  return {
+    lat: parseFloat(data[0].lat),
+    lon: parseFloat(data[0].lon),
+    city: addr.city ?? addr.town ?? addr.village ?? null,
+    county: addr.county ?? null,
+  };
 }
 
 // Standard Text

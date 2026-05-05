@@ -10,6 +10,7 @@ import { rasterizeSvg } from "../../utils/rasterizeSvg";
 import { ControlBlock } from "./ControlBlock";
 import { SankeyBlock } from "./SankeyBlock";
 import { ResultsBlock } from "./ResultsBlock";
+import { HomeTutorial } from "../MetaMisc/Tutorials";
 
 export function HomeContent() {
   const sankeyContainerRef = useRef<HTMLDivElement>(null);
@@ -32,6 +33,7 @@ export function HomeContent() {
     stateOnly,
     properties,
     cars,
+    tutorialOpen,
   } = useAppContext();
 
   async function handleDownloadPdf() {
@@ -48,8 +50,7 @@ export function HomeContent() {
         import("./ReceiptPDF"),
       ]);
 
-      const primaryProperty =
-        properties.find((p) => p.prime) ?? properties[0];
+      const primaryProperty = properties.find((p) => p.prime) ?? properties[0];
       const firstCar = cars[0];
 
       const stateTotal = entityAmounts["state"] ?? 0;
@@ -112,6 +113,7 @@ export function HomeContent() {
         onDownloadPdf={handleDownloadPdf}
         isGeneratingPdf={isGeneratingPdf}
       />
+      {tutorialOpen && <HomeTutorial />}
     </div>
   );
 }

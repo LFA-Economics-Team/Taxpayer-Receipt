@@ -6,6 +6,7 @@ import {
   Tooltip,
   Legend,
   Line,
+  Label,
   ReferenceLine,
   ResponsiveContainer,
 } from "recharts";
@@ -20,6 +21,7 @@ interface LineChartTemplateProps {
   xDataKey: string;
   yDataKey: string;
   yDomain?: number;
+  yAxisLabel?: string;
   curveName: string;
   showReferenceLine?: boolean;
   horizonReferenceLineValue?: number;
@@ -34,6 +36,7 @@ export function LineChartTemplate({
   xDataKey,
   yDataKey,
   yDomain = 0.05,
+  yAxisLabel,
   curveName,
   showReferenceLine = false,
   horizonReferenceLineValue,
@@ -100,6 +103,9 @@ export function LineChartTemplate({
                 dataKey={xDataKey}
                 ticks={[10, 20, 30, 40, 50, 60, 70, 80, 90]}
               />
+              <Label position="insideBottomRight">Income Percentile</Label>
+              <Label position="insideTopLeft">{yAxisLabel}</Label>
+
               <YAxis
                 domain={[0, yDomain]}
                 niceTicks="none"

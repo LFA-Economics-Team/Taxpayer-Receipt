@@ -2,6 +2,12 @@
 
 @custom-variant hover (&:hover);
 
+@layer components {
+  .linkClass {
+    @apply flex p-2 place-self-center text-white no-underline rounded-xl hover:bg-[#5e5a52];
+  }
+}
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;

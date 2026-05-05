@@ -106,7 +106,7 @@ export function ResultsBlock({
   return (
     <div
       className="relative flex flex-col w-1/5 justify-between m-2 p-2 pt-4 pb-4 gap-8 text-[#17301b] font-mono"
-      style={{ backgroundColor: "#022c2210" }}
+      style={{ backgroundColor: "#e0e0e0" }}
     >
       {/* Top scalloped edge */}
       <div

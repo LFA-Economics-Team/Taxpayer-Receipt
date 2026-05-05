@@ -1,5 +1,3 @@
-"use client";
-
 export function Footer() {
   return (
     <div className="flex justify-center bg-[#47443e] h-1/10 max-h-16 object-bottom  rounded-t-xl">

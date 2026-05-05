@@ -12,13 +12,14 @@ export function GraphBlock({ incomeInfo }: { incomeInfo: IncomeInfo }) {
       title: "Lorenz Curve",
       content: (
         <LineChartTemplate
-          title={"Income Share by Income"}
+          title={"Cumulative Income by Income"}
           xDataKey={"status_conditioned_tile"}
           yDataKey={"Cumulative_Income_Share"}
           curveName={"Cumulative Share of Income"}
           verticalReferenceLineValue={incomeInfo.incomeTile}
           equalityReferenceLine={true}
           yAsPercent={true}
+          yAxisLabel={"Percent of Taxpayers"}
           filingStatus={incomeInfo.filingStatus}
         />
       ),
@@ -36,6 +37,7 @@ export function GraphBlock({ incomeInfo }: { incomeInfo: IncomeInfo }) {
           horizonReferenceLineValue={STATE_INCOME_RATE}
           verticalReferenceLineValue={incomeInfo.incomeTile}
           yAsPercent={true}
+          yAxisLabel={"Effective Tax Rate"}
           filingStatus={incomeInfo.filingStatus}
         />
       ),
@@ -45,13 +47,14 @@ export function GraphBlock({ incomeInfo }: { incomeInfo: IncomeInfo }) {
       title: "Aggregate Liability on Income Percentile",
       content: (
         <LineChartTemplate
-          title={"Tax Share by Income"}
+          title={"Cumulative Tax by Income"}
           xDataKey={"status_conditioned_tile"}
           yDataKey={"Cumulative_Tax_Share"}
           curveName={"Cumulative Share of Income Tax"}
           verticalReferenceLineValue={incomeInfo.incomeTile}
           equalityReferenceLine={true}
           yAsPercent={true}
+          yAxisLabel={"Percent of Taxpayers"}
           filingStatus={incomeInfo.filingStatus}
           yDomain={1}
         />
@@ -69,6 +72,7 @@ export function GraphBlock({ incomeInfo }: { incomeInfo: IncomeInfo }) {
           verticalReferenceLineValue={incomeInfo.incomeTile}
           filingStatus={incomeInfo.filingStatus}
           yDomain={5}
+          yAxisLabel={"Household Size"}
         />
       ),
     },

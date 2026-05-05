@@ -110,6 +110,9 @@ type AppState = {
   stateOnly: boolean;
   setStateOnly: (v: boolean) => void;
 
+  tutorialOpen: boolean;
+  setTutorialOpen: (v: boolean) => void;
+
   incomeTax: number;
   propertyTax: number;
   salesTax: number;
@@ -481,6 +484,8 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
 
   const [stateOnly, setStateOnly] = useState(false);
 
+  const [tutorialOpen, setTutorialOpen] = useState(true);
+
   const clearAll = () => {
     setIncomeInfo({
       annualIncome: 0,
@@ -759,6 +764,8 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
         clearAll,
         stateOnly,
         setStateOnly,
+        tutorialOpen,
+        setTutorialOpen,
         incomeTax,
         propertyTax,
         salesTax,

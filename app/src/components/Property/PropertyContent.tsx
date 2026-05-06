@@ -4,6 +4,7 @@ import { PropertyInputBlock } from "./PropertyInputBlock";
 import { PropertyMapBlock } from "./PropertyMapBlock";
 import { PropertyResultsBlock } from "./PropertyResultsBlock";
 import { useAppContext } from "../../AppContext";
+import { PropertyTutorial } from "../MetaMisc/Tutorials";
 
 export function PropertyContent() {
   const {
@@ -12,6 +13,7 @@ export function PropertyContent() {
     updateProperty,
     removeProperty,
     entities,
+    tutorialOpen,
   } = useAppContext();
 
   return (
@@ -24,6 +26,7 @@ export function PropertyContent() {
       />
       <PropertyMapBlock properties={properties} />
       <PropertyResultsBlock entities={entities} />
+      {tutorialOpen && <PropertyTutorial />}
     </div>
   );
 }

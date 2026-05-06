@@ -8,6 +8,7 @@ import countyOptions from "../../data/Geospacial/countyOptions.json";
 import { FEES_FUEL_CONSTANTS, feeInfo } from "../MetaMisc/types";
 import type { Car, FuelEntry } from "../MetaMisc/types";
 import { useAppContext } from "../../AppContext";
+import { FuelsTutorial } from "../MetaMisc/Tutorials";
 
 function VehicleCard({
   car,
@@ -105,7 +106,7 @@ function VehicleCard({
 }
 
 export function FeesFuelsContent() {
-  const { cars, addCar, updateCar, removeCar } = useAppContext();
+  const { cars, addCar, updateCar, removeCar, tutorialOpen } = useAppContext();
   const [openFee, setOpenFee] = useState<string | null>(null);
 
   const [feeResults, setFeeResults] = useState([
@@ -372,6 +373,7 @@ export function FeesFuelsContent() {
           </div>
         </div>
       </div>
+      {tutorialOpen && <FuelsTutorial />}
     </div>
   );
 }

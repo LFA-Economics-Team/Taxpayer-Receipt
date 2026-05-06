@@ -2,6 +2,7 @@ import { SalesInputBlock } from "./SalesInputBlock";
 import { SalesMapBlock } from "./SalesMapBlock";
 import { SalesResultsBlock } from "./SalesResultsBlock";
 import { useAppContext } from "../../AppContext";
+import { SalesTutorial } from "../MetaMisc/Tutorials";
 
 export function SalesContent() {
   const {
@@ -10,6 +11,7 @@ export function SalesContent() {
     updateLocation,
     removeLocation,
     locationsWithFeatures,
+    tutorialOpen,
   } = useAppContext();
 
   return (
@@ -22,6 +24,7 @@ export function SalesContent() {
       />
       <SalesMapBlock locationsWithFeatures={locationsWithFeatures} />
       <SalesResultsBlock locationsWithFeatures={locationsWithFeatures} />
+      {tutorialOpen && <SalesTutorial />}
     </div>
   );
 }

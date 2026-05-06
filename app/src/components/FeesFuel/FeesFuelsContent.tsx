@@ -23,7 +23,7 @@ function VehicleCard({
     <div className="flex flex-row bg-gray-100/25 justify-around w-full p-4 rounded-xl items-center gap-2">
       <input
         type="number"
-        className="w-1/5 text-white text-sm rounded px-2 py-1 border border-gray-300"
+        className="w-1/10 text-white text-sm rounded px-2 py-1 border border-gray-300"
         placeholder="Year"
         value={car.year === 0 ? "" : car.year}
         onChange={(e) =>
@@ -81,7 +81,7 @@ function VehicleCard({
 
       <input
         type="number"
-        className="w-1/5 text-white text-sm rounded px-2 py-1 border border-gray-300"
+        className="w-1/8 text-white text-sm rounded px-2 py-1 border border-gray-300"
         placeholder="Annual Miles"
         value={car.miles === 0 ? "" : car.miles}
         onChange={(e) =>
@@ -225,7 +225,7 @@ export function FeesFuelsContent() {
 
   return (
     <div className="flex flex-row h-full w-full justify-center gap-8">
-      <div className="flex flex-col h-90vh w-1/3 bg-[#17301b]/90 my-2 ml-2 rounded-xl p-2">
+      <div className="flex flex-col h-90vh w-1/2 bg-[#17301b]/90 my-2 ml-2 rounded-xl p-2">
         <div className="text-center text-white font-bold p-2 text-2xl">
           Calculate your fuel tax & registration fees below:
         </div>

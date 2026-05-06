@@ -30,7 +30,9 @@ import {
   UTAH_MAP_DEFAULT_ZOOM,
   getPropOpacity,
   getSalesColor,
+  useAppContext,
 } from "../../../AppContext";
+import { LegTutorial } from "../Tutorials";
 
 type PropertyFC = GeoJSON.FeatureCollection<
   GeoJSON.MultiPolygon,
@@ -210,6 +212,8 @@ export function LegMap() {
     [selectedDistricts, legType],
   );
 
+  const { tutorialOpen } = useAppContext();
+
   return (
     <div className="flex h-full w-full text-black text-center p-2 gap-2 overflow-hidden">
       <div className="flex flex-col h-full bg-[#17301b]/90 w-1/5 rounded-xl p-2 text-white gap-2">
@@ -300,7 +304,7 @@ export function LegMap() {
           ) : (
             <></>
           )}
-          <TileLayer url="https://discover.agrc.utah.gov/login/path/gondola-toga-message-henry/tiles/lite_basemap/{z}/{x}/{y}.png" />
+          <TileLayer url="https://discover.agrc.utah.gov/login/path/rent-bombay-castro-agatha/tiles/lite_basemap/{z}/{x}/{y}.png" />
           <MapClickHandler onClick={setClickPoint} />
           {clickPoint && entitiesAtPoint && (
             <Popup
@@ -522,6 +526,8 @@ export function LegMap() {
           </>
         )}
       </div>
+
+      {tutorialOpen && <LegTutorial />}
     </div>
   );
 }

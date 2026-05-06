@@ -20,6 +20,32 @@ From IT [Matt] Security: https://snyk.io/
   - randomly sample to assess divergence
   - Consider re-sizing buckets [1, 2, 3-4, 5+]?
 
+- fix geocoding
+  - restrict to only allow Utah entries
+  - implement error messages
+
+- Add 'x' button on income tax charts for closing
+
+- User guide should close when clicking off of it
+
 # Do Today:
 
 - Introductory page/ user guide
+
+# Meeting Notes:
+
+- group property tax entities by property
+
+- tooltip to explain public purchases/ definitions
+
+- clarify where the money goes/ why it goes there.
+
+- make leg map a radio button intead
+
+- click list to highlight on leg map
+
+- include disclaimer for timing effects and changes in tax rates may impact calcuations
+
+- specifc types sales taxes aren't included
+
+- add labels to sales tax card inputs

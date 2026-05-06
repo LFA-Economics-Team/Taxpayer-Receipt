@@ -27,7 +27,7 @@ export function NavBar() {
       </div>
       <button
         onClick={() => setTutorialOpen(!tutorialOpen)}
-        className="linkClass"
+        className="linkClass ml-8"
       >
         User Guide
       </button>

@@ -53,12 +53,12 @@ export function ControlBlock() {
   })();
 
   return (
-    <div className="flex flex-col h-90-vh w-1/5 justify-between bg-[#17301b]/90 rounded-xl shadow-xl/20 text-white text-center m-2 p-2 gap-2">
+    <div className="flex flex-col h-90-vh w-1/5 justify-between bg-[#17301b]/90 rounded-xl shadow-xl/20 text-white text-center m-2 p-2">
       <div className="flex h-1/10 w-9/10 place-self-center font-bold italic text-[20px]">
         Answer the following questions to see what your tax dollars buy*
       </div>
 
-      <div className="flex flex-col h-8/10 items-center gap-4">
+      <div className="flex flex-col h-9/10 items-center gap-2">
         {/* General */}
         <div className="flex flex-col w-9/10 bg-white text-[12px] text-[#17301b] rounded-xl pt-2 px-1 inset-shadow-sm/60">
           <div className="font-bold text-[14px]">General</div>
@@ -249,16 +249,17 @@ export function ControlBlock() {
 
         <button
           onClick={clearAll}
-          className="flex flex-col w-5/10 self-center rounded-xl text-white hover:bg-gray-200 px-4 py-1 cursor-pointer"
+          className="flex flex-col w-5/10 self-center rounded-xl text-white hover:bg-gray-200 px-4 cursor-pointer"
         >
           Clear Receipt
         </button>
-      </div>
-
-      <div className="flex flex-col h-1/10 pt-2 text-[12px]">
-        *Your data are not stored or sent to any government entity. Results are
-        illustrative of a typical full-year Utah resident with similar
-        circumstances. Values may differ between pages due to rounding.
+        <div className="flex flex-col h-1/10 text-[12px] py-2">
+          *Your data are not stored by or sent to any government entity. Results
+          are illustrative of a typical full-year Utah resident with similar
+          circumstances. Actually liability may vary due to timing effects,
+          policy changes, or other factors. Values may differ between pages due
+          to rounding.
+        </div>
       </div>
     </div>
   );

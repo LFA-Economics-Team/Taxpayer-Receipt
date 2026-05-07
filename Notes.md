@@ -24,13 +24,14 @@ From IT [Matt] Security: https://snyk.io/
   - restrict to only allow Utah entries
   - implement error messages
 
-- Add 'x' button on income tax charts for closing
-
-- User guide should close when clicking off of it
-
 # Do Today:
 
-- Introductory page/ user guide
+- User guide pages
+  - Income
+  - Sales
+  - Property
+  - Fuels/ Fees
+  - Legislative Map
 
 # Meeting Notes:
 
@@ -40,12 +41,6 @@ From IT [Matt] Security: https://snyk.io/
 
 - clarify where the money goes/ why it goes there.
 
-- make leg map a radio button intead
-
 - click list to highlight on leg map
 
-- include disclaimer for timing effects and changes in tax rates may impact calcuations
-
-- specifc types sales taxes aren't included
-
-- add labels to sales tax card inputs
+- review each component for spellcheck

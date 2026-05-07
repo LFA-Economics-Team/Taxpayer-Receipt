@@ -67,7 +67,7 @@ export function SalesMapBlock({
         zoom={UTAH_MAP_DEFAULT_ZOOM}
         style={{ height: "100%", width: "100%" }}
       >
-        <TileLayer url="https://discover.agrc.utah.gov/login/path/rent-bombay-castro-agatha/tiles/lite_basemap/{z}/{x}/{y}.png" />
+        <TileLayer url="https://discover.agrc.utah.gov/login/path/gondola-toga-message-henry/tiles/lite_basemap/{z}/{x}/{y}.png" />
         <GeoJSON
           key={locationsWithFeatures.map((lf) => lf.location.id).join(",")}
           data={filteredData}

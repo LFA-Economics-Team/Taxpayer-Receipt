@@ -14,13 +14,19 @@ import ModelOptions from "../../data/Misc/ModelOptions.json";
 import FuelData from "../../data/Misc/FuelData.json";
 
 export function TutorialTemplate({ children }: { children?: React.ReactNode }) {
-  const { tutorialOpen, setTutorialOpen } = useAppContext();
+  const { setTutorialOpen } = useAppContext();
 
   return (
-    <div className="fixed text-[#17301b] inset-0 place-self-center content-center h-full w-full z-[1001] w-64 bg-gray-100/70 rounded-lg shadow-xl">
-      <div className="flex flex-col p-4 bg-white h-7/10 w-7/10 rounded-xl place-self-center">
+    <div
+      className="fixed text-[#17301b] inset-0 place-self-center content-center h-full w-full z-[1001] w-64 bg-gray-100/70 rounded-lg shadow-xl"
+      onClick={() => setTutorialOpen(false)}
+    >
+      <div
+        className="flex flex-col p-4 bg-white h-7/10 w-7/10 rounded-xl place-self-center"
+        onClick={(e) => e.stopPropagation()}
+      >
         <button
-          onClick={() => setTutorialOpen(!tutorialOpen)}
+          onClick={() => setTutorialOpen(false)}
           className="flex border-1 rounded-xl size-6 place-self-end "
         >
           <p className="flex w-full place-self-center justify-center text-white">
@@ -82,9 +88,9 @@ export function HomeTutorial() {
           </div>
 
           <div className="flex w-2/3 text-xl place-self-center justify-center">
-            The purpose of this tool is to estimate how an individual's taxes
-            flow into public purchases. Each of the four tax types below
-            represent one of the major sources of revenue within the state.
+            The purpose of this tool is to estimate how individual taxes flow
+            into public purchases. Each of the four tax types below represent
+            one of the major sources of revenue within the state.
           </div>
 
           <div className="flex flex-row w-full h-1/2 font-bold text-2xl place-self-center justify-between px-2">
@@ -109,7 +115,7 @@ export function HomeTutorial() {
                 The total rate levied on a given taxable transation is the sum
                 of the individual components charged by each level of
                 government. While the state's sales tax revenue in unrestricted,
-                most rate components are dedicated to specific purposes.
+                most local rate components are dedicated to specific purposes.
               </div>
               <NavLink
                 to="/sales"
@@ -124,7 +130,7 @@ export function HomeTutorial() {
                 While the state itself does not charge property taxes, political
                 subdivisions like counties and cities rely on them to fund many
                 essential functions including public education, munuipal
-                services, and other basic government admistration.
+                services, and basic government administration.
               </div>
               <NavLink
                 to="/property"
@@ -137,9 +143,9 @@ export function HomeTutorial() {
               <div>🚗 Fuel Tax and Fees 🚗</div>
               <div className="text-base font-normal ">
                 Fuel tax entails a fixed levy on each gallon of gas sold in the
-                state. The fees here are the collection of charged due when
+                state. The fees here are the collection of fees charged when
                 registring a vehicle. Both generally go to infrastructure
-                related projects.
+                related purposes.
               </div>
               <NavLink
                 to="/fees"
@@ -151,8 +157,9 @@ export function HomeTutorial() {
           </div>
 
           <div className="flex w-2/3 text-xl place-self-center justify-center">
-            Answer the questions on the next few pages to see what your taxes
-            buy, or select one of the tax types to explore it in more detail.
+            Answer the questions on the next few pages to see what the taxes of
+            Utahns like you buy, or select one of the tax types to explore it in
+            more detail.
           </div>
           <button
             onClick={() => setTutPage(TutPage + 1)}
@@ -191,15 +198,15 @@ export function HomeTutorial() {
           {TutPage === 1 && (
             <>
               <div className=" flex w-1/2 place-self-center">
-                The first step in getting an estimate of your overall tax
-                liablity is to know which local taxes apply to you. The taxpayer
-                reciept achieves this by using geocoding (latitude/ longitude)
+                The first step in getting an estimate of one's overall tax
+                liablity is to know which local taxes apply. The Taxpayer
+                Receipt achieves this by using geocoding (latitude/ longitude)
                 to filter the list of all political subdivisions in the state
-                down to only those which tax you. As a result, the reciept needs
-                a location to put your taxes. This can be as specific as a
-                street address or as general as a city or county. For maximum
-                accuracy, please enter a location physically proximate to your
-                primary residence.
+                down to only those which tax Utahns like you. As a result, the
+                reciept needs a location to attribute the taxes. This can be as
+                specific as a street address or as general as a city or county.
+                For maximum accuracy, please enter a location physically
+                proximate to your primary residence.
               </div>
               <div className="flex flex-col gap-2">
                 <div className=" font-bold">
@@ -231,21 +238,23 @@ export function HomeTutorial() {
                   }}
                 />
               </div>
-              <div>
+              <div className="flex w-1/2 place-self-center ">
                 This location determines which property tax entities and sales
-                tax rates apply during the final calculations.
+                tax rates apply during the final calculations. This, and all
+                other information entered in othe Receipt is not stored by or
+                sent to any government entity.
               </div>
             </>
           )}
           {TutPage === 2 && (
             <>
               <div className=" flex w-1/2 place-self-center">
-                Instead of having you fill out an entire tax return to calculate
-                your income tax, the Receipt uses a shortcut: effective tax
-                rates. By calculating the effective tax rates conditioned on
-                gross income and filing status for all taxpayers, the Receipt
-                can approximate your income tax from a much smaller set of
-                information than a full return.
+                Instead of needing an entire tax return's information to
+                calculate your income tax, the Receipt uses effective tax rates
+                to estimate liability. By calculating the effective tax rates
+                conditioned on gross income and filing status for all taxpayers,
+                the Receipt can approximate one's income tax from a much smaller
+                set of information than a full return.
               </div>
               <div className="flex flex-col gap-2">
                 <div className=" font-bold">
@@ -300,21 +309,21 @@ export function HomeTutorial() {
                 />
               </div>
               <div className=" flex w-1/2 place-self-center">
-                Your income also allows the receipt to estimate your sales tax.
-                On average, people tend to spend a relatively consistent share
-                of income on taxable sales. Applying that share to the income
-                you entered yields a approximation of annualized sales tax.
+                The above information also allows the Receipt to estimate sales
+                tax. On average, people tend to spend a relatively consistent
+                share of income on taxable sales. Applying that share to the
+                income entered yields a approximation of annualized sales tax.
               </div>
             </>
           )}
           {TutPage === 3 && (
             <>
               <div className=" flex w-1/2 place-self-center">
-                Using the location you entered in the 'General' tab, the reciept
-                can identify the set of property tax entities that apply to you.
-                That, combined with the value of your property, computes an
-                estimate of your property taxes by applying each entity's tax
-                rate to your property's value.
+                Using the location entered in the 'General' tab, the Receipt can
+                identify the set of property tax entities that apply. It then,
+                combined with the value of property, computes a property tax
+                estimate by applying each entity's tax rate to the property's
+                value.
               </div>
               <div className="flex flex-col gap-2">
                 <div className=" font-bold">
@@ -343,7 +352,7 @@ export function HomeTutorial() {
               <div className=" flex w-1/2 place-self-center">
                 Primary residences recieve a tax exemption of 45% of their fair
                 market value. By contrast, other classes of property are taxed
-                on the full value. The receipt automatically accounts for this
+                on the full value. The Receipt automatically accounts for this
                 in its calcualtions of property tax.
               </div>
             </>
@@ -351,13 +360,13 @@ export function HomeTutorial() {
           {TutPage === 4 && (
             <>
               <div className=" flex w-1/2 place-self-center">
-                Last but not least, fuel taxes and fees can be calculated from
-                the car your drive and your annual mileage. Typical drivers
-                range around ten to fifteen thousand miles annually. The receipt
-                looks up the fuel efficency of the car you enter and computes
-                the tax by estimating the fuel your car consumes in a year. Fees
-                by contrast, are flat charges based on factors which can be
-                infered from your car's make, model, and age.
+                Last but not least, fuel taxes and fees can be calculated from a
+                car's characteristics and annual mileage. Typical drivers range
+                around ten to fifteen thousand miles annually. The Receipt looks
+                up the fuel efficency of the car entered and computes the tax by
+                estimating the fuel consumed in a year. Fees by contrast are
+                flat charges based on vehilce type, age, and county of
+                registration.
               </div>
               <div className="flex flex-col gap-2 items-center">
                 <div className="font-bold">
@@ -434,11 +443,11 @@ export function HomeTutorial() {
               </div>
               <div className=" flex w-1/2 place-self-center">
                 Vehicle information rounds out the set of data the Receipt needs
-                to approximate your taxes across the major types and how those
-                are estimated to translate into public purchases. Click 'Show my
-                results' to see a flow diagram which maps out these
-                relationships. Additionally, individual tax types can be
-                explored in more depth in thier indivudals pages.
+                to approximate the tax liabilty of Utahn's like you. Click 'Show
+                my results' to see a flow diagram which maps out an estimate of
+                how those taxes flow into public purchases. Additionally,
+                specific tax types can be explored in more depth in their
+                individual pages.
               </div>
             </>
           )}
@@ -481,15 +490,34 @@ export function SalesTutorial() {
       <div className="flex flex-col h-full gap-y-8 justify-between text-center">
         <div className=" text-4xl font-bold"> Sales Tax </div>
         <div className="flex flex-row h-full justify-around">
-          <div className="w-1/2 border-1">
-            General descrption of sales tax, rate components, and sales tax
-            areas.
+          <div className="flex flex-col h-full w-1/2 gap-2 p-2 place-self-center">
+            <p>
+              Sales taxes in Utah are assessed as a composite rate on the value
+              of a taxable transaction. In practice, this means that the total
+              tax on a given transaction is the sum of the rates charged by all
+              levels of government.
+            </p>
+            <p>
+              These composite rates are organized geographically into Sales Tax
+              Areas. A Sales Tax Area is a geographic region with a unique
+              combination of sales tax rates. See the graphic to the right for a
+              visual demonstration of how theses areas are determined.
+            </p>
+            <p>
+              The Taxpayer Receipt estimates sales tax by first identifing the
+              Sales Tax Area(s) which apply. Then, it takes the annualized value
+              of taxable transactions entered by the user (or infered from the
+              user's income) and multiplies the value by the identified Area(s).
+              This allows the Receipt to determine the amount of sales tax
+              attributable to each rate component, and therefore each level of
+              government.
+            </p>
           </div>
           <div className="w-1/2 border-1">
             Map visual to explain sales tax areas
           </div>
         </div>
-        <div> Notes</div>
+        <div> - </div>
       </div>
     </TutorialTemplate>
   );
@@ -508,8 +536,32 @@ export function PropertyTutorial() {
 export function FuelsTutorial() {
   return (
     <TutorialTemplate>
-      <div className="flex flex-col h-full gap-y-8 justify-around text-center">
-        Fuels & Fees
+      <div className="flex flex-col h-full gap-y-8 justify-between text-center">
+        <div className=" text-4xl font-bold"> Fuel Tax and Fees </div>
+        <div className="flex flex-col h-full w-full gap-8 p-2 place-self-center">
+          <div className="flex w-1/2 place-self-center">
+            Since fuel taxes and fees are fixed charges per unit, calculating
+            them is among the most straightforward of the Receipt's
+            computations. For each vehicle
+          </div>
+
+          <div className="flex flex-row justify-around">
+            <div className="w-1/2">
+              <div className=" text-2xl font-bold pb-4">Fuel Tax</div>
+              <div className="px-8">
+                Fuels taxes are computed by identifying the combined fuel
+              </div>
+            </div>
+            <div className="w-1/2">
+              <div className=" text-2xl font-bold pb-4">Fees</div>
+              <div className="px-8">
+                Fees are computed based on the age, type, and county of
+                registration of the vehicle.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>-</div>
       </div>
     </TutorialTemplate>
   );

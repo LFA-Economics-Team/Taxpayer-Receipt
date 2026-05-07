@@ -19,7 +19,7 @@ export function GraphBlock({ incomeInfo }: { incomeInfo: IncomeInfo }) {
           verticalReferenceLineValue={incomeInfo.incomeTile}
           equalityReferenceLine={true}
           yAsPercent={true}
-          yAxisLabel={"Percent of Taxpayers"}
+          yAxisLabel={"Percent of Income"}
           filingStatus={incomeInfo.filingStatus}
         />
       ),
@@ -54,7 +54,7 @@ export function GraphBlock({ incomeInfo }: { incomeInfo: IncomeInfo }) {
           verticalReferenceLineValue={incomeInfo.incomeTile}
           equalityReferenceLine={true}
           yAsPercent={true}
-          yAxisLabel={"Percent of Taxpayers"}
+          yAxisLabel={"Percent of Tax"}
           filingStatus={incomeInfo.filingStatus}
           yDomain={1}
         />
@@ -89,6 +89,9 @@ export function GraphBlock({ incomeInfo }: { incomeInfo: IncomeInfo }) {
             onClick={() => setExpandedId(0)}
           >
             {expandedItem.content}
+            <div className="absolute top-5 right-5 border-1 rounded-xl font-bold size-6 hover:hover:bg-emerald-950/30 hover:text-white">
+              X
+            </div>
           </div>
         </div>
       ) : (

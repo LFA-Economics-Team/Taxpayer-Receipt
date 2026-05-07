@@ -4,6 +4,7 @@ import {
   GeoJSON,
   Popup,
   useMapEvents,
+  Pane,
 } from "react-leaflet";
 import Sales2025 from "../../../data/Geospacial/Sales2025.json";
 import Property2025 from "../../../data/Geospacial/Property2025.json";
@@ -226,9 +227,26 @@ export function LegMap() {
           </div>
 
           <div className="flex flex-row justify-around">
-            <button onClick={handleLegType}>
-              {legType ? "House" : "Senate"}
-            </button>{" "}
+            <div className="flex rounded-lg overflow-hidden text-xs gap-1">
+              <button
+                onClick={() => !legType && handleLegType()}
+                className={`px-3 py-1 transition-colors ${
+                  legType
+                    ? "text-white font-bold"
+                    : "text-white/30 hover:text-white "
+                }`}
+              >
+                House
+              </button>
+              <button
+                onClick={() => legType && handleLegType()}
+                className={`px-3 py-1 transition-colors ${
+                  !legType ? "text-white" : "text-white/30 hover:text-white"
+                }`}
+              >
+                Senate
+              </button>
+            </div>
             {legType ? (
               <Select
                 isMulti
@@ -304,7 +322,7 @@ export function LegMap() {
           ) : (
             <></>
           )}
-          <TileLayer url="https://discover.agrc.utah.gov/login/path/rent-bombay-castro-agatha/tiles/lite_basemap/{z}/{x}/{y}.png" />
+          <TileLayer url="https://discover.agrc.utah.gov/login/path/gondola-toga-message-henry/tiles/lite_basemap/{z}/{x}/{y}.png" />
           <MapClickHandler onClick={setClickPoint} />
           {clickPoint && entitiesAtPoint && (
             <Popup
@@ -398,23 +416,25 @@ export function LegMap() {
               </div>
             </Popup>
           )}
-          {legOn ? (
-            legType ? (
-              <GeoJSON
-                key={`house-${selectedDistricts.join(",")}`}
-                data={filteredDistricts}
-                style={Legstyle}
-              />
+          <Pane name="district-pane" style={{ zIndex: 450 }}>
+            {legOn ? (
+              legType ? (
+                <GeoJSON
+                  key={`house-${selectedDistricts.join(",")}`}
+                  data={filteredDistricts}
+                  style={Legstyle}
+                />
+              ) : (
+                <GeoJSON
+                  key={`senate-${selectedDistricts.join(",")}`}
+                  data={filteredDistricts}
+                  style={Legstyle}
+                />
+              )
             ) : (
-              <GeoJSON
-                key={`senate-${selectedDistricts.join(",")}`}
-                data={filteredDistricts}
-                style={Legstyle}
-              />
-            )
-          ) : (
-            <></>
-          )}
+              <></>
+            )}
+          </Pane>
         </MapContainer>
       </div>
 

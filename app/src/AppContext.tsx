@@ -92,6 +92,7 @@ type AppState = {
     patch: Partial<Omit<Property, "id" | "prime">>,
   ) => void;
   entities: Entity[];
+  entitiesByProperty: Record<number, Entity[]>;
 
   locations: SalesLocation[];
   addLocation: () => void;
@@ -340,6 +341,47 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     }
 
     return results.sort((a, b) => b.liability - a.liability);
+  }, [properties]);
+
+  const entitiesByProperty = useMemo<Record<number, Entity[]>>(() => {
+    const geocoded = properties.filter(
+      (p) => p.lat !== undefined && p.lon !== undefined && p.value > 0,
+    );
+    if (geocoded.length === 0) return {};
+
+    const data = Property2025 as GeoJSON.FeatureCollection<
+      GeoJSON.MultiPolygon,
+      PropertyFeatureProps
+    >;
+    const result: Record<number, Entity[]> = {};
+
+    for (const prop of geocoded) {
+      const pt = point([prop.lon!, prop.lat!]);
+      const taxableValue = prop.prime
+        ? prop.value * PRIME_RESIDE_EXEMPT
+        : prop.value;
+      const propEntities: Entity[] = [];
+
+      for (const feature of data.features) {
+        const fprops = feature.properties;
+        if (!fprops) continue;
+        if (booleanPointInPolygon(pt, feature)) {
+          propEntities.push({
+            id: fprops.ENT_NBR,
+            name: fprops.ENT_DESC,
+            type: fprops.entity_type,
+            county: fprops.county,
+            rate: fprops.ENT_RATE,
+            value: taxableValue,
+            liability: fprops.ENT_RATE * taxableValue,
+          });
+        }
+      }
+
+      result[prop.id] = propEntities.sort((a, b) => b.liability - a.liability);
+    }
+
+    return result;
   }, [properties]);
 
   const [locations, setLocations] = useState<SalesLocation[]>([]);
@@ -751,6 +793,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
         removeProperty,
         upsertPrimaryProperty,
         entities,
+        entitiesByProperty,
         locations,
         addLocation,
         updateLocation,

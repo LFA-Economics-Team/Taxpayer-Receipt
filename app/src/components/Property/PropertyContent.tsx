@@ -12,7 +12,7 @@ export function PropertyContent() {
     addProperty,
     updateProperty,
     removeProperty,
-    entities,
+    entitiesByProperty,
     tutorialOpen,
   } = useAppContext();
 
@@ -25,7 +25,7 @@ export function PropertyContent() {
         onRemove={removeProperty}
       />
       <PropertyMapBlock properties={properties} />
-      <PropertyResultsBlock entities={entities} />
+      <PropertyResultsBlock properties={properties} entitiesByProperty={entitiesByProperty} />
       {tutorialOpen && <PropertyTutorial />}
     </div>
   );

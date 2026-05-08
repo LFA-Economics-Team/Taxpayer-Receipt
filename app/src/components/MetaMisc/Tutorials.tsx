@@ -7,6 +7,7 @@ import {
   formatDollars,
   filingOptions,
   lookupIncomeData,
+  feeInfo,
 } from "./types";
 import type { FuelEntry } from "./types";
 import MakeOptions from "../../data/Misc/MakeOptions.json";
@@ -112,7 +113,7 @@ export function HomeTutorial() {
             <div className="flex flex-col w-1/4 justify-around">
               <div>🛒 Sales Tax 🛒</div>
               <div className="text-base font-normal ">
-                The total rate levied on a given taxable transation is the sum
+                The total rate levied on a given taxable transaction is the sum
                 of the individual components charged by each level of
                 government. While the state's sales tax revenue in unrestricted,
                 most local rate components are dedicated to specific purposes.
@@ -129,7 +130,7 @@ export function HomeTutorial() {
               <div className="text-base font-normal ">
                 While the state itself does not charge property taxes, political
                 subdivisions like counties and cities rely on them to fund many
-                essential functions including public education, munuipal
+                essential functions including public education, municipal
                 services, and basic government administration.
               </div>
               <NavLink
@@ -144,7 +145,7 @@ export function HomeTutorial() {
               <div className="text-base font-normal ">
                 Fuel tax entails a fixed levy on each gallon of gas sold in the
                 state. The fees here are the collection of fees charged when
-                registring a vehicle. Both generally go to infrastructure
+                registering a vehicle. Both generally go to infrastructure
                 related purposes.
               </div>
               <NavLink
@@ -199,11 +200,11 @@ export function HomeTutorial() {
             <>
               <div className=" flex w-1/2 place-self-center">
                 The first step in getting an estimate of one's overall tax
-                liablity is to know which local taxes apply. The Taxpayer
+                liability is to know which local taxes apply. The Taxpayer
                 Receipt achieves this by using geocoding (latitude/ longitude)
                 to filter the list of all political subdivisions in the state
                 down to only those which tax Utahns like you. As a result, the
-                reciept needs a location to attribute the taxes. This can be as
+                receipt needs a location to attribute the taxes. This can be as
                 specific as a street address or as general as a city or county.
                 For maximum accuracy, please enter a location physically
                 proximate to your primary residence.
@@ -241,7 +242,7 @@ export function HomeTutorial() {
               <div className="flex w-1/2 place-self-center ">
                 This location determines which property tax entities and sales
                 tax rates apply during the final calculations. This, and all
-                other information entered in othe Receipt is not stored by or
+                other information entered into the Receipt is not stored by or
                 sent to any government entity.
               </div>
             </>
@@ -258,7 +259,7 @@ export function HomeTutorial() {
               </div>
               <div className="flex flex-col gap-2">
                 <div className=" font-bold">
-                  Please enter your total pre-tax houshold income:
+                  Please enter your total pre-tax household income:
                 </div>
                 <input
                   className="w-1/4 border-1 px-2 m-2 rounded-xl place-self-center"
@@ -350,10 +351,10 @@ export function HomeTutorial() {
                 />
               </div>
               <div className=" flex w-1/2 place-self-center">
-                Primary residences recieve a tax exemption of 45% of their fair
+                Primary residences receive a tax exemption of 45% of their fair
                 market value. By contrast, other classes of property are taxed
                 on the full value. The Receipt automatically accounts for this
-                in its calcualtions of property tax.
+                in its calculations of property tax.
               </div>
             </>
           )}
@@ -363,9 +364,9 @@ export function HomeTutorial() {
                 Last but not least, fuel taxes and fees can be calculated from a
                 car's characteristics and annual mileage. Typical drivers range
                 around ten to fifteen thousand miles annually. The Receipt looks
-                up the fuel efficency of the car entered and computes the tax by
-                estimating the fuel consumed in a year. Fees by contrast are
-                flat charges based on vehilce type, age, and county of
+                up the fuel efficiency of the car entered and computes the tax
+                by estimating the fuel consumed in a year. Fees by contrast are
+                flat charges based on vehicle type, age, and county of
                 registration.
               </div>
               <div className="flex flex-col gap-2 items-center">
@@ -443,11 +444,11 @@ export function HomeTutorial() {
               </div>
               <div className=" flex w-1/2 place-self-center">
                 Vehicle information rounds out the set of data the Receipt needs
-                to approximate the tax liabilty of Utahn's like you. Click 'Show
-                my results' to see a flow diagram which maps out an estimate of
-                how those taxes flow into public purchases. Additionally,
-                specific tax types can be explored in more depth in their
-                individual pages.
+                to approximate the tax liability of Utahn's like you. Click
+                'Show my results' to see a flow diagram which maps out an
+                estimate of how those taxes flow into public purchases.
+                Additionally, specific tax types can be explored in more depth
+                in their individual pages.
               </div>
             </>
           )}
@@ -504,9 +505,9 @@ export function SalesTutorial() {
               visual demonstration of how theses areas are determined.
             </p>
             <p>
-              The Taxpayer Receipt estimates sales tax by first identifing the
+              The Taxpayer Receipt estimates sales tax by first identifying the
               Sales Tax Area(s) which apply. Then, it takes the annualized value
-              of taxable transactions entered by the user (or infered from the
+              of taxable transactions entered by the user (or inferred from the
               user's income) and multiplies the value by the identified Area(s).
               This allows the Receipt to determine the amount of sales tax
               attributable to each rate component, and therefore each level of
@@ -536,27 +537,63 @@ export function PropertyTutorial() {
 export function FuelsTutorial() {
   return (
     <TutorialTemplate>
-      <div className="flex flex-col h-full gap-y-8 justify-between text-center">
+      <div className="flex flex-col h-full gap-4 justify-between text-center">
         <div className=" text-4xl font-bold"> Fuel Tax and Fees </div>
-        <div className="flex flex-col h-full w-full gap-8 p-2 place-self-center">
-          <div className="flex w-1/2 place-self-center">
+        <div className="flex flex-col h-full w-full p-2 place-self-center">
+          <div className="flex w-2/3 place-self-center">
             Since fuel taxes and fees are fixed charges per unit, calculating
             them is among the most straightforward of the Receipt's
-            computations. For each vehicle
+            computations. For each vehicle, it's fuel EPA economy is used to
+            estimate fuel tax as detailed in the formula below. Additionally,
+            its characteristics are compared against the criteria of the fees to
+            determine which apply. See the table below for a summary of these
+            criteria.
           </div>
 
           <div className="flex flex-row justify-around">
-            <div className="w-1/2">
+            <div className="flex flex-col gap-2 w-1/2">
               <div className=" text-2xl font-bold pb-4">Fuel Tax</div>
               <div className="px-8">
                 Fuels taxes are computed by identifying the combined fuel
+                economy for the specific make, model, and year combination
+                entered by the user. This value is then used to compute
+                estimated fuel tax using this formula:
+              </div>
+              <div className="font-bold">
+                {" "}
+                (Vehicle Mileage/ Fuel Economy) * Fuel Tax Rate = Estimated Fuel
+                Tax{" "}
               </div>
             </div>
-            <div className="w-1/2">
+            <div className="flex flex-col w-1/2 px-8">
               <div className=" text-2xl font-bold pb-4">Fees</div>
-              <div className="px-8">
-                Fees are computed based on the age, type, and county of
-                registration of the vehicle.
+              <div className="px-8 pb-4">
+                Each fee has criteria to determine whether it applies to a given
+                vehicle or to determine the amount charged at registration.
+              </div>
+              <div className="grid grid-cols-[50%_50%]">
+                <div className="font-bold border-b border-gray-200">Fee</div>
+                <div className="font-bold border-b border-gray-200">
+                  Criteria
+                </div>
+                {Object.entries(feeInfo)
+                  .filter(([name]) => name !== "Total")
+                  .map(([name, info]) => (
+                    <>
+                      <div
+                        key={`${name}-name`}
+                        className="py-1 border-b border-gray-200"
+                      >
+                        {name}
+                      </div>
+                      <div
+                        key={`${name}-criteria`}
+                        className="py-1 border-b border-gray-200"
+                      >
+                        {info.criteria}
+                      </div>
+                    </>
+                  ))}
               </div>
             </div>
           </div>

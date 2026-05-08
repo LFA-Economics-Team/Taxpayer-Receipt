@@ -59,7 +59,7 @@ export function LineChartTemplate({
       <div className="flex h-9/10 w-full p-2">
         {filingStatus === "Qualifying surviving spouse" ? (
           <div className="flex flex-col h-full w-full text-sm text-gray-500 items-center justify-center p-2 gap-2 text-center">
-            Insufficent data for statistical analysis with selected varables.
+            Insufficient data for statistical analysis with selected variables.
             Please modify inputs.
           </div>
         ) : (

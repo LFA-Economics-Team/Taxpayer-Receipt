@@ -1,10 +1,10 @@
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import {
   useAppContext,
   INCOME_TAX_ENTITY_SHARES,
   FUEL_TAX_ENTITY_SHARES,
 } from "../../AppContext";
-import { formatDollars } from "../MetaMisc/types";
+import { formatDollars, purposeInfo } from "../MetaMisc/types";
 
 export const TAX_ROW_CONFIG = [
   { label: "Income", key: "incomeTax" },
@@ -60,6 +60,7 @@ export function ResultsBlock({
   onDownloadPdf: () => void;
   isGeneratingPdf: boolean;
 }) {
+  const [openPurpose, setOpenPurpose] = useState<string | null>(null);
   const ctx = useAppContext();
   const {
     incomeInfo,
@@ -165,14 +166,65 @@ export function ResultsBlock({
 
       <div className="flex flex-col grow max-h-1/2 bg-white rounded-xl">
         <div className="italic font-bold text-center text-[18px]">
-          Infered Public Purchases
+          Inferred Public Purchases
         </div>
-        <div className="grid h-full w-full place-self-center grid-cols-[60%_10%_30%] text-right">
+        {openPurpose && (
+          <div
+            className="fixed inset-0 z-10"
+            onClick={() => setOpenPurpose(null)}
+          />
+        )}
+        <div className="grid h-full w-full place-self-center grid-cols-[60%_13%_2%_25%] text-right">
           {PURPOSE_ROW_CONFIG.map(({ label, key }, i) => {
             const shade = i % 2 === 1 ? "bg-emerald-950/15" : "";
             return (
               <Fragment key={key}>
-                <div className={shade}>{label}</div>
+                <div className={`${shade} text-right`}>{label}</div>
+                <div
+                  className={`${shade} relative flex items-center justify-center`}
+                >
+                  {purposeInfo[key] && (
+                    <>
+                      <button
+                        onClick={() =>
+                          setOpenPurpose(openPurpose === key ? null : key)
+                        }
+                        className="rounded-full text-black hover:text-gray-600 leading-none"
+                        style={{
+                          fontSize: "16px",
+                          backgroundColor: "transparent",
+                        }}
+                        aria-label={`More info about ${label}`}
+                      >
+                        🛈
+                      </button>
+                      {openPurpose === key && (
+                        <div className="absolute right-12 bottom-6 z-20 w-56 bg-white border border-gray-300 rounded-lg shadow-xl p-3 text-left text-sm text-gray-700">
+                          {(() => {
+                            const { description, link } = purposeInfo[key];
+                            if (!link) return <p>{description}</p>;
+                            const [before, after] = description.split("COBI");
+                            return (
+                              <p>
+                                {before}
+                                <a
+                                  href={link}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="text-blue-500 underline"
+                                  onClick={(e) => e.stopPropagation()}
+                                >
+                                  COBI
+                                </a>
+                                {after}
+                              </p>
+                            );
+                          })()}
+                        </div>
+                      )}
+                    </>
+                  )}
+                </div>
                 <div className={shade}></div>
                 <div className={`text-center ${shade}`}>
                   {formatDollars(displayPurpose(key))}
@@ -180,7 +232,8 @@ export function ResultsBlock({
               </Fragment>
             );
           })}
-          <div className="font-bold bg-emerald-950/15">Total</div>
+          <div className="font-bold bg-emerald-950/15"></div>
+          <div className="font-bold bg-emerald-950/15 text-left">Total</div>
           <div className="bg-emerald-950/15"></div>
           <div className="font-bold text-center bg-emerald-950/15">
             {formatDollars(totalPurpose)}

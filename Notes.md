@@ -14,8 +14,6 @@ From IT [Matt] Security: https://snyk.io/
 - Compute typical county and municipality spending profiles from auditor data [conditioned on county/ city class?]
   - Condition political subdivision spending on county/ city class
 
-- Plan/ implement screen size variation/ mobile view
-
 - Investigate household size vs not include
   - randomly sample to assess divergence
   - Consider re-sizing buckets [1, 2, 3-4, 5+]?
@@ -24,23 +22,27 @@ From IT [Matt] Security: https://snyk.io/
   - restrict to only allow Utah entries
   - implement error messages
 
-# Do Today:
+- Pre-production cleanup:
+  - Update dependencies to latest versions
+  - spell-check all components
+  - set up follow-up meeting with outside groups [Mid-June?]
+
+# Monday:
+
+- Plan/ implement screen size variation/ mobile view
 
 - User guide pages
-  - Income
+  - Income [income tax is calculated *for taxpayers like you*]
   - Sales
-  - Property
-  - Fuels/ Fees
-  - Legislative Map
+  - Property [Copy Sales tax format]
+  - Fuels/ Fees [render fuel tax formula in math notation]
+  - Legislative Map [Graphic to show how the overlap checks work?]
 
 # Meeting Notes:
 
-- group property tax entities by property
+- Map components:
+  - add click functionality on map for auto-calculations
+  - click list to highlight on leg map
 
-- tooltip to explain public purchases/ definitions
-
-- clarify where the money goes/ why it goes there.
-
-- click list to highlight on leg map
-
-- review each component for spellcheck
+- revise purpose text in homepage popups [description text in types file]
+  - talk to budget folk for how they want their committee's described?

@@ -94,7 +94,7 @@ export function SankeyBlock({
     if (allLinks.length === 0) {
       return (
         <div className="text-gray-400 text-sm m-auto">
-          Answer the questions to the left to see how your tax dollars flow.
+          Answer the questions to the left to see how your tax dollars flow
         </div>
       );
     }

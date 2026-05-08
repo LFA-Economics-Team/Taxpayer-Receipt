@@ -453,51 +453,120 @@ export function ResultsDisclaimer() {
     <div className="flex flex-col text-sm text-gray-500 justify-self-end p-2 gap-2 text-left">
       The above results are for illustration purposes only. Estimates represent
       the typical circumstances for similarly situated taxpayers. This is not a
-      tax notice, bill, or other offical record.
+      tax notice, bill, or other official record.
     </div>
   );
 }
 
-export const feeInfo: Record<string, { description: string; statute: string }> =
-  {
-    "Registration Fee": {
-      description:
-        "A flat $66 fee charged per vehicle per year for to fund transportation services. Fee amount is inflation adjusted annually",
-      statute: "41-1a-1206",
-    },
-    "Age-Based Fee": {
-      description:
-        "Uniform fee by vehicle age with older vehicles paying less than newer ones.",
-      statute: "59-2-405.1",
-    },
-    "Corridor Fee": {
-      description:
-        "$10 per year fee imposed by counties for transportation maintainance. Applies to vehicles registered in Salt Lake, Davis, Utah, Weber, Summit, Wasatch, Iron, Box Elder, Washington, Tooele, and Morgan.",
-      statute: "41-1a-1222",
-    },
-    "Driver Education Fee": {
-      description:
-        "$2.50 per vehicle per year, used to fund driver education and student transportation programs.",
-      statute: "41-1a-1204",
-    },
-    "Uninsured Motorist Fee": {
-      description:
-        "$1.00 per vehicle per year, used to fund the Uninsured Motorist Identification Restricted Account.",
-      statute: "41-1a-1218",
-    },
-    "Alternative Fuel Fee": {
-      description:
-        "Up to $180 per year for electric vehicles, offsetting fuel taxes not paid at the pump. Hybrid vehicles or those enrolled in the Road Usage Charge program may pay less depending on miles driven.",
-      statute: "72-1-213.1",
-    },
-    "Pollution Control Fee": {
-      description:
-        "Up to $3 per year which goes to fund local emissions testing programs. Does not apply to EVs. Fee amount is determined by county.",
-      statute: "41-1a-1223",
-    },
-    Total: {
-      description:
-        "Total registration fees are the sum of each fee applicable to the vehicle. Fees calculated here are for passenger cars; other vehicle classes may be subject to different or additional fees at registration.",
-      statute: "",
-    },
-  };
+export const purposeInfo: Record<
+  string,
+  { description: string; link: string }
+> = {
+  criminalJustice: {
+    description:
+      "Funds courts, corrections, law enforcement support, and the justice system to maintain public safety and due process. For more information refer to COBI for state spending or your taxing entities for local budgets.",
+    link: " https://cobi.utah.gov/2026/4527/overview",
+  },
+  higherEd: {
+    description:
+      "Supports Utah's public colleges and universities through infrastructure, instruction, and program spending. For more information refer to COBI for state spending or your taxing entities for local budgets.",
+    link: "https://cobi.utah.gov/2026/6/overview",
+  },
+  econDev: {
+    description:
+      "Funds programs that attract businesses, support workforce development, and promote Utah's economy and tourism. For more information refer to COBI for state spending or your taxing entities for local budgets.",
+    link: "https://cobi.utah.gov/2026/4528/overview",
+  },
+  generalGov: {
+    description:
+      "Covers the operating costs of state government, including legislative offices, executive functions, and general administrative expenses. For more information refer to COBI for state spending or your taxing entities for local budgets.",
+    link: "https://cobi.utah.gov/2026/4526/overview",
+  },
+  infrastructure: {
+    description:
+      "Builds and maintains roads, bridges, public transit systems, and other transportation and utility infrastructure. For more information refer to COBI for state spending or your taxing entities for local budgets.",
+    link: "https://cobi.utah.gov/2026/4529/overview",
+  },
+  muniServices: {
+    description:
+      "Funds locally-delivered services such as parks, libraries, and other services provided by cities, counties, and special districts. For more information refer to your taxing entities for local budgets.",
+    link: "",
+  },
+  naturalRes: {
+    description:
+      "Supports management of Utah's lands, water, wildlife, and environmental programs, including state parks and the Division of Natural Resources. For more information refer to COBI for state spending or your taxing entities for local budgets.",
+    link: "https://cobi.utah.gov/2026/7/overview",
+  },
+  publicEd: {
+    description:
+      "Funds Utah's K–12 public school system, including teacher salaries, curricula, and school operations across all districts. For more information refer to COBI for state spending or your taxing entities for local budgets.",
+    link: "https://cobi.utah.gov/2026/8/overview",
+  },
+  socialServices: {
+    description:
+      "Funds Medicaid, food assistance, child welfare, disability services, and other programs supporting residents in need. For more information refer to COBI for state spending or your taxing entities for local budgets.",
+    link: "https://cobi.utah.gov/2026/5/overview",
+  },
+};
+
+export const feeInfo: Record<
+  string,
+  { description: string; statute: string; link: string; criteria: string }
+> = {
+  "Registration Fee": {
+    description:
+      "A flat $66 fee charged per vehicle per year for to fund transportation services. Fee amount is inflation adjusted annually",
+    statute: "41-1a-1206",
+    link: "https://le.utah.gov/xcode/Title41/Chapter1A/41-1a-S1206.html?v=C41-1a-S1206_2026050620261001",
+    criteria: "Applies to all passenger vehicles",
+  },
+  "Age-Based Fee": {
+    description:
+      "Uniform fee by vehicle age with older vehicles paying less than newer ones.",
+    statute: "59-2-405.1",
+    link: "https://le.utah.gov/xcode/Title59/Chapter2/59-2-S405.1.html?v=C59-2-S405.1_2026050620270101",
+    criteria: "Fee decreases with vehicle age",
+  },
+  "Corridor Fee": {
+    description:
+      "$10 per year fee imposed by counties for transportation maintenance. Applies to vehicles registered in Salt Lake, Davis, Utah, Weber, Summit, Wasatch, Iron, Box Elder, Washington, Tooele, and Morgan.",
+    statute: "41-1a-1222",
+    link: "https://le.utah.gov/xcode/Title41/Chapter1A/41-1a-S1222.html?v=C41-1a-S1222_2026010120250507",
+    criteria: "Certain counties impose this fee",
+  },
+  "Driver Education Fee": {
+    description:
+      "$2.50 per vehicle per year, used to fund driver education and student transportation programs.",
+    statute: "41-1a-1204",
+    link: "https://le.utah.gov/xcode/Title41/Chapter1A/41-1a-S1204.html?v=C41-1a-S1204_2026010120250507",
+    criteria: "Applies to all passenger vehicles",
+  },
+  "Uninsured Motorist Fee": {
+    description:
+      "$1.00 per vehicle per year, used to fund the Uninsured Motorist Identification Restricted Account.",
+    statute: "41-1a-1218",
+    link: "https://le.utah.gov/xcode/Title41/Chapter1A/41-1a-S1218.html?v=C41-1a-S1218_2026010120250507",
+    criteria: "Applies to all passenger vehicles",
+  },
+  "Alternative Fuel Fee": {
+    description:
+      "Up to $180 per year for electric vehicles, offsetting fuel taxes not paid at the pump. Hybrid vehicles or those enrolled in the Road Usage Charge program may pay less depending on miles driven.",
+    statute: "72-1-213.1",
+    link: "https://le.utah.gov/xcode/Title72/Chapter1/72-1-S213.1.html?v=C72-1-S213.1_2026050620260701",
+    criteria: "Applies to Electric cars in lieu of fuel Tax",
+  },
+  "Pollution Control Fee": {
+    description:
+      "Up to $3 per year which goes to fund local emissions testing programs. Does not apply to EVs. Fee amount is determined by county.",
+    statute: "41-1a-1223",
+    link: "https://le.utah.gov/xcode/Title41/Chapter1A/41-1a-S1223.html",
+    criteria: "Certain counties impose this fee",
+  },
+  Total: {
+    description:
+      "Total registration fees are the sum of each fee applicable to the vehicle. Fees calculated here are for passenger cars; other vehicle classes may be subject to different or additional fees at registration.",
+    statute: "",
+    link: "",
+    criteria: "",
+  },
+};

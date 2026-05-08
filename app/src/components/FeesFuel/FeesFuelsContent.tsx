@@ -142,7 +142,7 @@ export function FeesFuelsContent() {
               value: cars.length * FEES_FUEL_CONSTANTS.registrationFee,
             };
           case "Age-Based Fee": {
-            // Calcuate Age-Based fee by vehicle age
+            // Calculate Age-Based fee by vehicle age
             const currentYear = new Date().getFullYear();
             const total = cars.reduce((sum, car) => {
               const age = currentYear - car.year;
@@ -188,7 +188,7 @@ export function FeesFuelsContent() {
               value: cars.length * FEES_FUEL_CONSTANTS.uninsuredMotoristFee,
             };
           case "Alternative Fuel Fee": {
-            // Calcuates the maximum additional fee for evs. True amount will be lower for Hybrids and if the user is enrolled in the Road Usage Program
+            // Calculates the maximum additional fee for evs. True amount will be lower for Hybrids and if the user is enrolled in the Road Usage Program
             const evCount = cars.filter(
               (car) => car.fueltype === "electric",
             ).length;
@@ -232,7 +232,7 @@ export function FeesFuelsContent() {
         <div className="flex flex-col gap-2">
           <div className="flex flex-col bg-gray-100/25 text-center w-full p-4 rounded-xl">
             <div className="font-bold text-xl">
-              What vehicles does your houshold own or drive regularly?
+              What vehicles does your household own or drive regularly?
             </div>
           </div>
 
@@ -253,9 +253,9 @@ export function FeesFuelsContent() {
           {cars.length !== 0 ? (
             <div className="flex flex-col text-sm justify-self-end p-2 gap-2">
               <div>
-                *Fuel taxes are estimated from miles diven and combined expected
-                fuel efficiency. Individual tax liability will vary with driving
-                behavior and vehicle maintainance.
+                *Fuel taxes are estimated from miles driven and combined
+                expected fuel efficiency. Individual tax liability will vary
+                with driving behavior and vehicle maintenance.
               </div>
               <div>
                 **Results are illustrative of full-year registration fees.
@@ -341,7 +341,18 @@ export function FeesFuelsContent() {
                           </p>
                           {result.name != "Total" && (
                             <p className="text-xs text-gray-400">
-                              Utah Code §{feeInfo[result.name].statute}
+                              {feeInfo[result.name].link ? (
+                                <a
+                                  href={feeInfo[result.name].link}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="underline hover:text-gray-600"
+                                >
+                                  Utah Code §{feeInfo[result.name].statute}
+                                </a>
+                              ) : (
+                                <>Utah Code §{feeInfo[result.name].statute}</>
+                              )}
                             </p>
                           )}
                         </div>
@@ -382,7 +393,7 @@ export function FeesFuelsContent() {
 
 How to address duplicates of [make, model, year]
 
-Fees to calcuate:
+Fees to calculate:
 Sources:
   Registration Fees: https://dmv.utah.gov/register/registration-taxes-fees/
   Uniform (Age-Based) Fees: https://dmv.utah.gov/register/registration-taxes-fees/uniform-fees/

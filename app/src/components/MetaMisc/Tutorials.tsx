@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { useAppContext } from "../../AppContext";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Select from "react-select";
 import {
   geocodeAddress,
@@ -13,6 +13,10 @@ import type { FuelEntry } from "./types";
 import MakeOptions from "../../data/Misc/MakeOptions.json";
 import ModelOptions from "../../data/Misc/ModelOptions.json";
 import FuelData from "../../data/Misc/FuelData.json";
+import ReactMarkdown from "react-markdown";
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
+import "katex/dist/katex.min.css";
 
 export function TutorialTemplate({ children }: { children?: React.ReactNode }) {
   const { setTutorialOpen } = useAppContext();
@@ -486,6 +490,10 @@ export function IncomeTutorial() {
 }
 
 export function SalesTutorial() {
+  const { setTutorialOpen } = useAppContext();
+
+  const [TutPage, setTutPage] = useState(0);
+
   return (
     <TutorialTemplate>
       <div className="flex flex-col h-full gap-y-8 justify-between text-center">
@@ -514,8 +522,35 @@ export function SalesTutorial() {
               government.
             </p>
           </div>
-          <div className="w-1/2 border-1">
-            Map visual to explain sales tax areas
+
+          <div className="flex flex-col w-1/2 justify-between">
+            <div className="justify-self-center">
+              Map visual to explain sales tax areas
+            </div>
+            <div className="bg-red-200 w-2/3 h-2/3 place-self-center rounded-xl">
+              County
+            </div>
+            <div>
+              {" "}
+              <div className="flex flex-row w-full gap-8 justify-center">
+                <button
+                  onClick={() => setTutPage(TutPage - 1)}
+                  className="text-xl text-gray-300 font-bold w-1/5 place-self-center border-1 rounded-xl bg-emerald-950/10 hover:bg-emerald-950/15"
+                >
+                  ← Back
+                </button>
+                <button
+                  onClick={() =>
+                    TutPage === 4
+                      ? setTutorialOpen(false)
+                      : setTutPage(TutPage + 1)
+                  }
+                  className="text-xl text-gray-300 font-bold w-1/5 place-self-center border-1 rounded-xl bg-emerald-950/10 hover:bg-emerald-950/15"
+                >
+                  {TutPage === 4 ? "Close Guide" : "Next →"}
+                </button>
+              </div>
+            </div>
           </div>
         </div>
         <div> - </div>
@@ -539,11 +574,11 @@ export function FuelsTutorial() {
     <TutorialTemplate>
       <div className="flex flex-col h-full gap-4 justify-between text-center">
         <div className=" text-4xl font-bold"> Fuel Tax and Fees </div>
-        <div className="flex flex-col h-full w-full p-2 place-self-center">
+        <div className="flex flex-col h-full w-full p-2 gap-6 place-self-center">
           <div className="flex w-2/3 place-self-center">
             Since fuel taxes and fees are fixed charges per unit, calculating
             them is among the most straightforward of the Receipt's
-            computations. For each vehicle, it's fuel EPA economy is used to
+            computations. For each vehicle, it's EPA fuel economy is used to
             estimate fuel tax as detailed in the formula below. Additionally,
             its characteristics are compared against the criteria of the fees to
             determine which apply. See the table below for a summary of these
@@ -551,25 +586,38 @@ export function FuelsTutorial() {
           </div>
 
           <div className="flex flex-row justify-around">
-            <div className="flex flex-col gap-2 w-1/2">
+            <div className="flex flex-col gap-4 w-1/2 ">
               <div className=" text-2xl font-bold pb-4">Fuel Tax</div>
-              <div className="px-8">
+              <div className="px-8 pb-8">
                 Fuels taxes are computed by identifying the combined fuel
                 economy for the specific make, model, and year combination
                 entered by the user. This value is then used to compute
                 estimated fuel tax using this formula:
               </div>
-              <div className="font-bold">
-                {" "}
-                (Vehicle Mileage/ Fuel Economy) * Fuel Tax Rate = Estimated Fuel
-                Tax{" "}
+              <ReactMarkdown
+                remarkPlugins={[remarkMath]}
+                rehypePlugins={[rehypeKatex]}
+              >
+                {
+                  "$\\Large\\frac{\\text{Vehicle Mileage}}{\\text{Fuel Economy}} \\times \\text{Fuel Tax Rate} = \\text{Estimated Fuel Tax}$"
+                }
+              </ReactMarkdown>
+              <div className="px-8 pt-8">
+                The Fuel Tax Rate is measured in cents per gallon rather than as
+                a percentage rate on the value of the transaction. As a result,
+                changes in the price of fuel do not directly impact the tax
+                paid. The rate itself is updated annual by the State Tax
+                Commission as specified in law.
               </div>
             </div>
-            <div className="flex flex-col w-1/2 px-8">
+
+            <div className="flex flex-col w-1/2 px-8 gap-4">
               <div className=" text-2xl font-bold pb-4">Fees</div>
               <div className="px-8 pb-4">
-                Each fee has criteria to determine whether it applies to a given
-                vehicle or to determine the amount charged at registration.
+                Each fee has criteria outlined in statute to determine whether
+                it applies to a given vehicle or to determine the amount charged
+                at registration. More information about individual fees can be
+                found on the Tax Commission's website.
               </div>
               <div className="grid grid-cols-[50%_50%]">
                 <div className="font-bold border-b border-gray-200">Fee</div>

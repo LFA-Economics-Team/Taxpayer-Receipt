@@ -33,9 +33,8 @@ From IT [Matt] Security: https://snyk.io/
 
 - User guide pages
   - Income [income tax is calculated *for taxpayers like you*]
-  - Sales
+  - Sales [Improve Text visually and complete tax area visual]
   - Property [Copy Sales tax format]
-  - Fuels/ Fees [render fuel tax formula in math notation]
   - Legislative Map [Graphic to show how the overlap checks work?]
 
 # Meeting Notes:
@@ -45,4 +44,4 @@ From IT [Matt] Security: https://snyk.io/
   - click list to highlight on leg map
 
 - revise purpose text in homepage popups [description text in types file]
-  - talk to budget folk for how they want their committee's described?
+  - talk to budget folks for how they want their committees described?

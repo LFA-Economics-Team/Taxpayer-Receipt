@@ -133,6 +133,29 @@ export const RATE_COMPONENTS = [
   "EMERGENCY SERVICES TAX",
 ];
 
+export const SALES_COMPONENT_ENTITY_ASSIGNMENT: Record<string, EntityKey> = {
+  "STATE SALES AND USE TAX": "state",
+  "SUPPLEMENTAL STATE SALES AND USE TAX": "state",
+  "COUNTY OPTION SALES TAX": "county",
+  "COUNTY OPTION TRANSPORTATION TAX": "county",
+  "COUNTY AIRPORT, HIGHWAY, PUBLIC TRANSIT TAX": "county",
+  "COUNTY PUBLIC TRANSIT": "county",
+  "MASS TRANSIT TAX": "county",
+  "ADDITIONAL MASS TRANSIT TAX": "county",
+  "MASS TRANSIT FIXED GUIDEWAY TAX": "county",
+  "TRANSPORTATION INFRUSTRUCTURE TAX": "county",
+  "BOTANICAL, CULTURAL, ZOO TAX": "county",
+  "EMERGENCY SERVICES TAX": "county",
+  "LOCAL SALES AND USE TAX": "municipality",
+  "TOWN OPTION TAX": "municipality",
+  "CITY OR TOWN OPTION TAX": "municipality",
+  "RESORT COMMUNITY TAX": "municipality",
+  "CAPITAL CITY REVITALIZATION TAX": "municipality",
+  "CORRECTIONAL FACILITY TAX": "municipality",
+  "RURAL HOSPITAL TAX": "municipality",
+  "HIGHWAYS TAX": "municipality",
+};
+
 // Property Tax
 
 export type Property = {
@@ -164,6 +187,24 @@ export type PropertyFeatureProps = {
   entity_type: string;
   county: string;
 };
+
+export const PROPERTY_ENTITY_TYPE_MAP: Record<string, EntityKey> = {
+  County: "county",
+  Municipality: "municipality",
+  "School District": "schoolDistrict",
+  "County Assessing": "specialDistricts",
+  "Multicounty Assessing": "specialDistricts",
+  "Special District": "specialDistricts",
+  PID: "specialDistricts",
+  "RDA or CDA": "specialDistricts",
+};
+
+export type EntityKey =
+  | "state"
+  | "county"
+  | "schoolDistrict"
+  | "municipality"
+  | "specialDistricts";
 
 // Fuel & Fees
 
@@ -208,47 +249,6 @@ export const FEES_FUEL_CONSTANTS = {
     Utah: 2,
     Weber: 2,
   } as Record<string, number>,
-};
-
-export type EntityKey =
-  | "state"
-  | "county"
-  | "schoolDistrict"
-  | "municipality"
-  | "specialDistricts";
-
-export const PROPERTY_ENTITY_TYPE_MAP: Record<string, EntityKey> = {
-  County: "county",
-  Municipality: "municipality",
-  "School District": "schoolDistrict",
-  "County Assessing": "specialDistricts",
-  "Multicounty Assessing": "specialDistricts",
-  "Special District": "specialDistricts",
-  PID: "specialDistricts",
-  "RDA or CDA": "specialDistricts",
-};
-
-export const SALES_COMPONENT_ENTITY_ASSIGNMENT: Record<string, EntityKey> = {
-  "STATE SALES AND USE TAX": "state",
-  "SUPPLEMENTAL STATE SALES AND USE TAX": "state",
-  "COUNTY OPTION SALES TAX": "county",
-  "COUNTY OPTION TRANSPORTATION TAX": "county",
-  "COUNTY AIRPORT, HIGHWAY, PUBLIC TRANSIT TAX": "county",
-  "COUNTY PUBLIC TRANSIT": "county",
-  "MASS TRANSIT TAX": "county",
-  "ADDITIONAL MASS TRANSIT TAX": "county",
-  "MASS TRANSIT FIXED GUIDEWAY TAX": "county",
-  "TRANSPORTATION INFRUSTRUCTURE TAX": "county",
-  "BOTANICAL, CULTURAL, ZOO TAX": "county",
-  "EMERGENCY SERVICES TAX": "county",
-  "LOCAL SALES AND USE TAX": "municipality",
-  "TOWN OPTION TAX": "municipality",
-  "CITY OR TOWN OPTION TAX": "municipality",
-  "RESORT COMMUNITY TAX": "municipality",
-  "CAPITAL CITY REVITALIZATION TAX": "municipality",
-  "CORRECTIONAL FACILITY TAX": "municipality",
-  "RURAL HOSPITAL TAX": "municipality",
-  "HIGHWAYS TAX": "municipality",
 };
 
 export const FEE_ENTITY_ASSIGNMENT: Record<string, EntityKey> = {
@@ -464,17 +464,17 @@ export const purposeInfo: Record<
 > = {
   criminalJustice: {
     description:
-      "Funds courts, corrections, law enforcement support, and the justice system to maintain public safety and due process. For more information refer to COBI for state spending or your taxing entities for local budgets.",
+      "Funds the state criminal justice system including state courts, corrections, law enforcement support, and the other public safety and related functions. For more information refer to COBI for state spending or your taxing entities for local budgets.",
     link: " https://cobi.utah.gov/2026/4527/overview",
   },
   higherEd: {
     description:
-      "Supports Utah's public colleges and universities through infrastructure, instruction, and program spending. For more information refer to COBI for state spending or your taxing entities for local budgets.",
+      "Supports Utah's public colleges and universities. For more information refer to COBI for state spending or your taxing entities for local budgets.",
     link: "https://cobi.utah.gov/2026/6/overview",
   },
   econDev: {
     description:
-      "Funds programs that attract businesses, support workforce development, and promote Utah's economy and tourism. For more information refer to COBI for state spending or your taxing entities for local budgets.",
+      "Funds state economic development and workforce development origrams and efforts such as attract businesses, support labor market development, and promote Utah's economy and tourism. For more information refer to COBI for state spending or your taxing entities for local budgets.",
     link: "https://cobi.utah.gov/2026/4528/overview",
   },
   generalGov: {
@@ -494,7 +494,7 @@ export const purposeInfo: Record<
   },
   naturalRes: {
     description:
-      "Supports management of Utah's lands, water, wildlife, and environmental programs, including state parks and the Division of Natural Resources. For more information refer to COBI for state spending or your taxing entities for local budgets.",
+      "Supports management of Utah's land, water, wildlife, and environmental programs, including state parks and the air quality. For more information refer to COBI for state spending or your taxing entities for local budgets.",
     link: "https://cobi.utah.gov/2026/7/overview",
   },
   publicEd: {
@@ -504,7 +504,7 @@ export const purposeInfo: Record<
   },
   socialServices: {
     description:
-      "Funds Medicaid, food assistance, child welfare, disability services, and other programs supporting residents in need. For more information refer to COBI for state spending or your taxing entities for local budgets.",
+      "Funds Medicaid, disability services, and other programs supporting residents in need. For more information refer to COBI for state spending or your taxing entities for local budgets.",
     link: "https://cobi.utah.gov/2026/5/overview",
   },
 };

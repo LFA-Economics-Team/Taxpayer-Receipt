@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { useAppContext } from "../../AppContext";
+import { useAppContext, STATE_SALES_RATE } from "../../AppContext";
 import React, { useState, useEffect } from "react";
 import Select from "react-select";
 import {
@@ -17,6 +17,7 @@ import ReactMarkdown from "react-markdown";
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
 import "katex/dist/katex.min.css";
+import { round } from "@turf/helpers";
 
 export function TutorialTemplate({ children }: { children?: React.ReactNode }) {
   const { setTutorialOpen } = useAppContext();
@@ -510,16 +511,15 @@ export function SalesTutorial() {
               These composite rates are organized geographically into Sales Tax
               Areas. A Sales Tax Area is a geographic region with a unique
               combination of sales tax rates. See the graphic to the right for a
-              visual demonstration of how theses areas are determined.
+              visual demonstration of how these areas are determined.
             </p>
             <p>
               The Taxpayer Receipt estimates sales tax by first identifying the
-              Sales Tax Area(s) which apply. Then, it takes the annualized value
-              of taxable transactions entered by the user (or inferred from the
-              user's income) and multiplies the value by the identified Area(s).
-              This allows the Receipt to determine the amount of sales tax
-              attributable to each rate component, and therefore each level of
-              government.
+              Sales Tax Area(s) which apply. Then, multiplies the area's rates
+              by the annualized value of taxable transactions entered by the
+              user (or inferred from the user's income). This allows the Receipt
+              to determine the amount of sales tax attributable to each rate
+              component, and therefore each level of government.
             </p>
           </div>
 
@@ -527,9 +527,52 @@ export function SalesTutorial() {
             <div className="justify-self-center">
               Map visual to explain sales tax areas
             </div>
-            <div className="bg-red-200 w-2/3 h-2/3 place-self-center rounded-xl">
-              County
-            </div>
+            {TutPage === 0 ? (
+              <div> test </div>
+            ) : (
+              <div className="flex flex-col font-bold bg-[#F5E3EF] w-2/3 h-2/3 place-self-center rounded-xl">
+                <p>State</p>
+                {TutPage === 1 ? (
+                  <div className="flex flex-col h-full font-normal text-center justify-around">
+                    <p>
+                      Starting at the highest level, all tax areas contain the
+                      state sales tax rate since it applies state-wide.
+                    </p>
+                    <p className="font-bold">
+                      {" "}
+                      Tax Rate: {round(STATE_SALES_RATE * 100, 2)}%
+                    </p>
+                  </div>
+                ) : (
+                  <div className="flex h-full w-full place-items-center justify-around">
+                    <div className=" flex flex-col bg-[#D8A8C4] w-1/3 h-2/3 place-items-center justify-around rounded-xl">
+                      <p>County</p>
+                      <p> +2.00%* </p>
+                      {TutPage >= 3 && (
+                        <div className="bg-[#BA749E] w-1/2 h-1/2 rounded-xl">
+                          <p>City</p>
+                          <p> +1.00%* </p>
+                        </div>
+                      )}
+                    </div>
+                    {TutPage === 2 ? (
+                      <div className=" flex flex-col font-normal w-1/3 h-2/3  place-items-center justify-around rounded-xl">
+                        Layering on top of the state rate are the county
+                        rate(s). Since each county covers a subset of the state,
+                        the rate options applied by a county only apply within
+                        their borders.
+                      </div>
+                    ) : (
+                      <div className=" flex flex-col font-normal w-1/3 h-2/3  place-items-center justify-around rounded-xl">
+                        Lastly, any municipal sales tax rates are added within
+                        municipal borders.
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+            )}
+
             <div>
               {" "}
               <div className="flex flex-row w-full gap-8 justify-center">
@@ -572,9 +615,9 @@ export function PropertyTutorial() {
 export function FuelsTutorial() {
   return (
     <TutorialTemplate>
-      <div className="flex flex-col h-full gap-4 justify-between text-center">
+      <div className="flex flex-col h-full gap-2 justify-between text-center">
         <div className=" text-4xl font-bold"> Fuel Tax and Fees </div>
-        <div className="flex flex-col h-full w-full p-2 gap-6 place-self-center">
+        <div className="flex flex-col h-full w-full p-2 gap-4 place-self-center">
           <div className="flex w-2/3 place-self-center">
             Since fuel taxes and fees are fixed charges per unit, calculating
             them is among the most straightforward of the Receipt's
@@ -586,7 +629,7 @@ export function FuelsTutorial() {
           </div>
 
           <div className="flex flex-row justify-around">
-            <div className="flex flex-col gap-4 w-1/2 ">
+            <div className="flex flex-col gap-2 w-1/2 ">
               <div className=" text-2xl font-bold pb-4">Fuel Tax</div>
               <div className="px-8 pb-8">
                 Fuels taxes are computed by identifying the combined fuel
@@ -611,7 +654,7 @@ export function FuelsTutorial() {
               </div>
             </div>
 
-            <div className="flex flex-col w-1/2 px-8 gap-4">
+            <div className="flex flex-col w-1/2 px-8 gap-2">
               <div className=" text-2xl font-bold pb-4">Fees</div>
               <div className="px-8 pb-4">
                 Each fee has criteria outlined in statute to determine whether

@@ -481,10 +481,51 @@ export function HomeTutorial() {
 }
 
 export function IncomeTutorial() {
+  const { setTutorialOpen } = useAppContext();
+
+  const [TutPage, setTutPage] = useState(0);
+
   return (
     <TutorialTemplate>
-      <div className="flex flex-col h-full gap-y-8 justify-around text-center">
-        Income
+      <div className="flex flex-col h-full gap-y-4 justify-around text-center">
+        <div className=" text-4xl font-bold"> Income Tax </div>
+        <div className="flex flex-row h-1/20 font-bold">
+          <div className="w-1/5 rounded-xl">All Tax returns</div>
+          <div className="w-1/5 rounded-xl">Filing Status</div>
+          <div className="w-1/5 rounded-xl">Percentiles</div>
+          <div className="w-1/5 rounded-xl">All Tax returns</div>
+          <div className="w-1/5 rounded-xl">All Tax returns</div>
+        </div>
+        <div className="flex flex-row h-full justify-around border-1 rounded-xl">
+          <div className="w-1/5 bg-[#C2676770] rounded-xl">All Tax returns</div>
+          <div className="w-1/5 rounded-xl">
+            <div className="h-1/5 rounded-xl">Single</div>
+            <div className="h-1/5 rounded-xl">Married Filling Jointly</div>
+            <div className="h-1/5 rounded-xl">Married Filling Single</div>
+            <div className="h-1/5 rounded-xl">Head of Household</div>
+            <div className="h-1/5 rounded-xl">Qualifying Surviving Spouse</div>
+          </div>
+          <div className="w-1/5 rounded-xl">All Tax returns</div>
+          <div className="w-1/5 rounded-xl">All Tax returns</div>
+          <div className="w-1/5 rounded-xl">All Tax returns</div>
+        </div>
+
+        <div className="flex flex-row w-full gap-8 justify-center">
+          <button
+            onClick={() => setTutPage(TutPage - 1)}
+            className="text-xl text-gray-300 font-bold w-1/5 place-self-center border-1 rounded-xl bg-emerald-950/10 hover:bg-emerald-950/15"
+          >
+            ← Back
+          </button>
+          <button
+            onClick={() =>
+              TutPage === 4 ? setTutorialOpen(false) : setTutPage(TutPage + 1)
+            }
+            className="text-xl text-gray-300 font-bold w-1/5 place-self-center border-1 rounded-xl bg-emerald-950/10 hover:bg-emerald-950/15"
+          >
+            {TutPage === 4 ? "Show my Results" : "Next →"}
+          </button>
+        </div>
       </div>
     </TutorialTemplate>
   );
@@ -500,19 +541,24 @@ export function SalesTutorial() {
       <div className="flex flex-col h-full gap-y-8 justify-between text-center">
         <div className=" text-4xl font-bold"> Sales Tax </div>
         <div className="flex flex-row h-full justify-around">
-          <div className="flex flex-col h-full w-1/2 gap-2 p-2 place-self-center">
+          <div className="flex flex-col h-full w-1/2 gap-4 p-2 place-self-center ">
+            <p className="font-bold text-xl">What is the tax rate?</p>
             <p>
               Sales taxes in Utah are assessed as a composite rate on the value
               of a taxable transaction. In practice, this means that the total
               tax on a given transaction is the sum of the rates charged by all
               levels of government.
             </p>
+            <p className="font-bold text-xl">What are Tax Areas?</p>
+
             <p>
               These composite rates are organized geographically into Sales Tax
               Areas. A Sales Tax Area is a geographic region with a unique
-              combination of sales tax rates. See the graphic to the right for a
+              combination of sales tax rates. See the demo to the right for a
               visual demonstration of how these areas are determined.
             </p>
+
+            <p className="font-bold text-xl">How does the Receipt use Areas?</p>
             <p>
               The Taxpayer Receipt estimates sales tax by first identifying the
               Sales Tax Area(s) which apply. Then, multiplies the area's rates
@@ -523,20 +569,28 @@ export function SalesTutorial() {
             </p>
           </div>
 
-          <div className="flex flex-col w-1/2 justify-between">
-            <div className="justify-self-center">
-              Map visual to explain sales tax areas
-            </div>
+          <div className="flex flex-col h-full justify-center w-1/2 gap-4">
             {TutPage === 0 ? (
-              <div> test </div>
+              <button
+                onClick={() => setTutPage(TutPage + 1)}
+                className="flex text-xl text-gray-300 w-1/2 place-self-center justify-center"
+              >
+                Begin Demo
+              </button>
             ) : (
-              <div className="flex flex-col font-bold bg-[#F5E3EF] w-2/3 h-2/3 place-self-center rounded-xl">
+              <div className="flex flex-col font-bold bg-[#F5E3EF] w-2/3 h-9/10 p-2 place-self-center rounded-xl">
                 <p>State</p>
+                {TutPage >= 2 && (
+                  <p className="font-bold">
+                    {" "}
+                    {round(STATE_SALES_RATE * 100, 2)}%
+                  </p>
+                )}
                 {TutPage === 1 ? (
-                  <div className="flex flex-col h-full font-normal text-center justify-around">
-                    <p>
+                  <div className="flex flex-col h-full font-normal text-center justify-center gap-8">
+                    <p className="w-2/3 place-self-center">
                       Starting at the highest level, all tax areas contain the
-                      state sales tax rate since it applies state-wide.
+                      state sales tax rate since it applies statewide.
                     </p>
                     <p className="font-bold">
                       {" "}
@@ -545,55 +599,68 @@ export function SalesTutorial() {
                   </div>
                 ) : (
                   <div className="flex h-full w-full place-items-center justify-around">
-                    <div className=" flex flex-col bg-[#D8A8C4] w-1/3 h-2/3 place-items-center justify-around rounded-xl">
+                    <div className=" flex flex-col bg-[#D8A8C4] w-1/2 h-3/4 place-items-center gap-2 p-2 rounded-xl">
                       <p>County</p>
-                      <p> +2.00%* </p>
+                      <div>
+                        <p> {round(STATE_SALES_RATE * 100, 2)}%</p>
+                        <p> +2.00%* </p>
+                      </div>
                       {TutPage >= 3 && (
                         <div className="bg-[#BA749E] w-1/2 h-1/2 rounded-xl">
                           <p>City</p>
+                          <p> {round(STATE_SALES_RATE * 100, 2)}%</p>
+                          <p> +2.00%* </p>
                           <p> +1.00%* </p>
                         </div>
                       )}
                     </div>
                     {TutPage === 2 ? (
                       <div className=" flex flex-col font-normal w-1/3 h-2/3  place-items-center justify-around rounded-xl">
-                        Layering on top of the state rate are the county
-                        rate(s). Since each county covers a subset of the state,
-                        the rate options applied by a county only apply within
-                        their borders.
+                        <p>
+                          Layering on top of the state rate are the county
+                          rate(s). Since each county covers a subset of the
+                          state, the rate options applied by a county only apply
+                          within their borders.
+                        </p>
                       </div>
                     ) : (
                       <div className=" flex flex-col font-normal w-1/3 h-2/3  place-items-center justify-around rounded-xl">
                         Lastly, any municipal sales tax rates are added within
-                        municipal borders.
+                        municipal borders. Together, these three layers comprise
+                        the total sales tax rate.
                       </div>
                     )}
                   </div>
                 )}
               </div>
             )}
-
-            <div>
-              {" "}
-              <div className="flex flex-row w-full gap-8 justify-center">
-                <button
-                  onClick={() => setTutPage(TutPage - 1)}
-                  className="text-xl text-gray-300 font-bold w-1/5 place-self-center border-1 rounded-xl bg-emerald-950/10 hover:bg-emerald-950/15"
-                >
-                  ← Back
-                </button>
-                <button
-                  onClick={() =>
-                    TutPage === 4
-                      ? setTutorialOpen(false)
-                      : setTutPage(TutPage + 1)
-                  }
-                  className="text-xl text-gray-300 font-bold w-1/5 place-self-center border-1 rounded-xl bg-emerald-950/10 hover:bg-emerald-950/15"
-                >
-                  {TutPage === 4 ? "Close Guide" : "Next →"}
-                </button>
-              </div>
-            </div>
+            {TutPage >= 1 && (
+              <>
+                {TutPage >= 2 && (
+                  <div className="text-sm">
+                    *Local rates are illustrative only. Actual rates may vary.
+                  </div>
+                )}
+                <div className="flex flex-row w-full gap-8 justify-center">
+                  <button
+                    onClick={() => setTutPage(TutPage - 1)}
+                    className="text-xl text-gray-300 font-bold w-1/5 place-self-center border-1 rounded-xl bg-emerald-950/10 hover:bg-emerald-950/15"
+                  >
+                    ← Back
+                  </button>
+                  <button
+                    onClick={() =>
+                      TutPage === 3
+                        ? setTutorialOpen(false)
+                        : setTutPage(TutPage + 1)
+                    }
+                    className="text-xl text-gray-300 font-bold w-1/5 place-self-center border-1 rounded-xl bg-emerald-950/10 hover:bg-emerald-950/15"
+                  >
+                    {TutPage === 3 ? "Close Guide" : "Next →"}
+                  </button>
+                </div>
+              </>
+            )}
           </div>
         </div>
         <div> - </div>
@@ -603,10 +670,131 @@ export function SalesTutorial() {
 }
 
 export function PropertyTutorial() {
+  const { setTutorialOpen } = useAppContext();
+
+  const [TutPage, setTutPage] = useState(0);
+
   return (
     <TutorialTemplate>
-      <div className="flex flex-col h-full gap-y-8 justify-around text-center">
-        Property
+      <div className="flex flex-col h-full gap-y-8 justify-between text-center">
+        <div className=" text-4xl font-bold"> Property Tax </div>
+        <div className="flex flex-row h-full justify-around">
+          <div className="flex flex-col h-full w-1/2 gap-4 p-2 place-self-center ">
+            <p className="font-bold text-xl">What is the tax rate?</p>
+            <p>
+              Property taxes rates in Utah are set by individual taxing entities
+              through a process called Truth in Taxation. Broadly, rates go down
+              when property values increase to maintain the same level of
+              revenue unless the entity acts to increase revenue.
+            </p>
+            <p className="font-bold text-xl">What are Tax Entities?</p>
+
+            <p>
+              Tax entities are generally political subdivisions of the state
+              such as counties, school districts, municipalities, etc. State
+              code endows these entities with property taxing authority: the
+              authority to collect property tax, and set the tax to be collected
+              via Truth in Taxation. See the demo to the right to see how these
+              entities interact.
+            </p>
+
+            <p className="font-bold text-xl">
+              How does the Receipt use Entities?
+            </p>
+            <p>
+              The Taxpayer Receipt estimates property tax by first identifying
+              the Property Tax Entities which apply. Then, multiplies the
+              entities' rates by the taxable value of property as entered by the
+              user. This allows the Receipt to determine the amount of property
+              tax attributable to each taxing entities, and therefore each level
+              of government.
+            </p>
+          </div>
+
+          <div className="flex flex-col h-full justify-center w-1/2 gap-4">
+            {TutPage === 0 ? (
+              <button
+                onClick={() => setTutPage(TutPage + 1)}
+                className="flex text-xl text-gray-300 w-1/2 place-self-center justify-center"
+              >
+                Begin Demo
+              </button>
+            ) : (
+              <div className="flex flex-col font-bold border-1 w-2/3 h-9/10 p-2 place-self-center rounded-xl">
+                <p>State</p>
+
+                {TutPage === 1 ? (
+                  <div className="flex flex-col h-full font-normal text-center justify-center gap-8">
+                    <p className="w-2/3 place-self-center">
+                      The state itself does not levy a property tax. All
+                      property tax in the state is levied at the county level or
+                      below.
+                    </p>
+                  </div>
+                ) : (
+                  <div className="flex h-full w-full place-items-center justify-around">
+                    <div className=" flex flex-col bg-[#5576e020] w-1/2 h-3/4 place-items-center gap-2 p-2 rounded-xl">
+                      <p>County</p>
+                      <div>
+                        <p> .15%* </p>
+                      </div>
+                      {TutPage >= 3 && (
+                        <div className="bg-[#5576e050] w-1/2 h-1/2 rounded-xl">
+                          <p>City</p>
+                          <p> +.15%* </p>
+                        </div>
+                      )}
+                    </div>
+                    {TutPage === 2 ? (
+                      <div className=" flex flex-col font-normal w-1/3 h-2/3  place-items-center rounded-xl">
+                        <p>
+                          All taxable property is (at minimum) taxed by a county
+                          and a school district. Although not true universally,
+                          many school districts use the same boundaries as their
+                          county.
+                        </p>
+                      </div>
+                    ) : (
+                      <div className=" flex flex-col font-normal w-1/3 h-2/3  place-items-center justify-around rounded-xl">
+                        Any property within a municipality or a special district
+                        is also taxed by those entities. This applies to most
+                        taxpayer since most live within cities or towns.
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+            )}
+            {TutPage >= 1 && (
+              <>
+                {TutPage >= 2 && (
+                  <div className="text-sm">
+                    *Local rates are illustrative only. Actual rates may vary.
+                  </div>
+                )}
+                <div className="flex flex-row w-full gap-8 justify-center">
+                  <button
+                    onClick={() => setTutPage(TutPage - 1)}
+                    className="text-xl text-gray-300 font-bold w-1/5 place-self-center border-1 rounded-xl bg-emerald-950/10 hover:bg-emerald-950/15"
+                  >
+                    ← Back
+                  </button>
+                  <button
+                    onClick={() =>
+                      TutPage === 3
+                        ? setTutorialOpen(false)
+                        : setTutPage(TutPage + 1)
+                    }
+                    className="text-xl text-gray-300 font-bold w-1/5 place-self-center border-1 rounded-xl bg-emerald-950/10 hover:bg-emerald-950/15"
+                  >
+                    {TutPage === 3 ? "Close Guide" : "Next →"}
+                  </button>
+                </div>
+              </>
+            )}
+          </div>
+        </div>
+        <div> - </div>
       </div>
     </TutorialTemplate>
   );

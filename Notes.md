@@ -31,7 +31,6 @@ From IT [Matt] Security: https://snyk.io/
 
 - User guide pages
   - Income [income tax is calculated *for taxpayers like you*]
-  - Legislative Map [Graphic to show how the overlap checks work?]
 
 # Meeting Notes:
 

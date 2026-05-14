@@ -485,47 +485,146 @@ export function IncomeTutorial() {
 
   const [TutPage, setTutPage] = useState(0);
 
+  const items = Array.from({ length: 100 }, (_, index) => index);
+
   return (
     <TutorialTemplate>
-      <div className="flex flex-col h-full gap-y-4 justify-around text-center">
+      <div className="flex flex-col h-full gap-y-8 p-2 text-center">
         <div className=" text-4xl font-bold"> Income Tax </div>
-        <div className="flex flex-row h-1/20 font-bold">
-          <div className="w-1/5 rounded-xl">All Tax returns</div>
-          <div className="w-1/5 rounded-xl">Filing Status</div>
-          <div className="w-1/5 rounded-xl">Percentiles</div>
-          <div className="w-1/5 rounded-xl">All Tax returns</div>
-          <div className="w-1/5 rounded-xl">All Tax returns</div>
-        </div>
-        <div className="flex flex-row h-full justify-around border-1 rounded-xl">
-          <div className="w-1/5 bg-[#C2676770] rounded-xl">All Tax returns</div>
-          <div className="w-1/5 rounded-xl">
-            <div className="h-1/5 rounded-xl">Single</div>
-            <div className="h-1/5 rounded-xl">Married Filling Jointly</div>
-            <div className="h-1/5 rounded-xl">Married Filling Single</div>
-            <div className="h-1/5 rounded-xl">Head of Household</div>
-            <div className="h-1/5 rounded-xl">Qualifying Surviving Spouse</div>
-          </div>
-          <div className="w-1/5 rounded-xl">All Tax returns</div>
-          <div className="w-1/5 rounded-xl">All Tax returns</div>
-          <div className="w-1/5 rounded-xl">All Tax returns</div>
-        </div>
 
-        <div className="flex flex-row w-full gap-8 justify-center">
-          <button
-            onClick={() => setTutPage(TutPage - 1)}
-            className="text-xl text-gray-300 font-bold w-1/5 place-self-center border-1 rounded-xl bg-emerald-950/10 hover:bg-emerald-950/15"
-          >
-            ← Back
-          </button>
-          <button
-            onClick={() =>
-              TutPage === 4 ? setTutorialOpen(false) : setTutPage(TutPage + 1)
-            }
-            className="text-xl text-gray-300 font-bold w-1/5 place-self-center border-1 rounded-xl bg-emerald-950/10 hover:bg-emerald-950/15"
-          >
-            {TutPage === 4 ? "Show my Results" : "Next →"}
-          </button>
-        </div>
+        {TutPage === 0 ? (
+          <>
+            <div className="flex flex-col w-2/3 place-self-center py-8 gap-4">
+              <p>
+                There are two ways income tax can be estimated. One way is to
+                compile records, document circumstances, and file a fully
+                complete return to calculate one's tax liability down to the
+                dollar. This would not be appropriate here due to privacy
+                concerns and because requiring all that information would make
+                the Receipt unusable due to needless complexity.
+              </p>
+              <p>
+                Instead, the Receipt relies upon the second method: calculating
+                effective tax rates across the population of taxpayers. While
+                this cannot calculate one's specific tax liability, it provides
+                a reliable statistical approximation of the liability for
+                similarly situated taxpayers. In other words, while the Receipt
+                cannot calculate your specific taxes, it calculates an estimate
+                for taxpayers like you. Additionally, this takes substantially
+                less information, ensuring the Receipt is simple, non-invasive,
+                and easy to use.
+              </p>
+              <p>
+                Please refer to the demo below for a walkthrough of how the
+                Receipt goes from the statewide population of taxpayers to the
+                specific estimate shown on this page.{" "}
+              </p>
+            </div>
+            <button
+              onClick={() => setTutPage(TutPage + 1)}
+              className="flex text-xl text-gray-300 w-1/2 place-self-center justify-center"
+            >
+              Begin Demo
+            </button>
+          </>
+        ) : (
+          <>
+            <div className=" flex h-full gap-1">
+              <div className="flex flex-col h-full gap-2 w-1/5 ">
+                <div className="h-1/20 text-white bg-[#17301b]/90 border-1 rounded-xl">
+                  All Tax Returns
+                </div>
+                <div className=" flex font-bold text-xl h-19/20 border-1 items-center justify-center ">
+                  Nearly 2 million tax returns
+                </div>
+              </div>
+
+              {TutPage >= 2 && (
+                <div className="flex flex-col h-full gap-2 w-1/5">
+                  <div className="h-1/20 text-white bg-[#17301b]/90 border-1 rounded-xl">
+                    Filing Status
+                  </div>
+                  <div className="flex flex-col h-full gap-0.5">
+                    <div className="h-1/5 border-1">Single</div>
+                    <div className="h-1/5 border-1">Married Filling Joint</div>
+                    <div className="h-1/5 border-1">Married Filing Single</div>
+                    <div className="h-1/5 border-1 ">Head of Household</div>
+                    <div className="h-1/5 border-1">Qualifying Spouse</div>
+                  </div>
+                </div>
+              )}
+
+              {TutPage >= 3 && (
+                <div className="flex flex-col h-full  gap-2 w-1/5">
+                  <div className="h-1/20 text-white bg-[#17301b]/90 border-1 rounded-xl">
+                    Percentile
+                  </div>
+                  <div className="columns-4 gap-0 overflow-hidden flex-1">
+                    {items.map((num) => (
+                      <div key={num} className="text-xs">
+                        {num}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {TutPage >= 4 && (
+                <div className="flex flex-col h-full  gap-2 w-1/5">
+                  <div className="h-1/20 text-white bg-[#17301b]/90 border-1 rounded-xl">
+                    Variables of Interest
+                  </div>
+                  <div className="h-1/5 ">Average Effective Tax Rate</div>
+                  <div className="h-1/5 ">Average Taxable Income</div>
+                  <div className="h-1/5 ">Cumulative Income</div>
+                  <div className="h-1/5 ">Cumulative Tax Liability</div>
+                  <div className="h-1/5 ">Average Household Size</div>
+                </div>
+              )}
+              <div className="flex items-center justify-center max-w-7/10">
+                {TutPage === 1 && (
+                  <div className="w-1/2 ">
+                    <p>
+                      To calculate effective income tax rates, the Receipt
+                      starts with the entire collection of individual income tax
+                      returns filed with the state. These returns are anonymized
+                      and de-identified before any analysis is conducted. These
+                      nearly 2 million returns are represented by the rectangle
+                      to the left.
+                    </p>
+                  </div>
+                )}
+                {TutPage === 2 && (
+                  <div className="w-1/2 ">
+                    <p>text</p>
+                  </div>
+                )}
+                {TutPage === 3 && <div>Page 3 text </div>}
+                {TutPage === 4 && <div>Page 4 text </div>}
+                {TutPage === 5 && <div>Page 5 text </div>}
+              </div>
+            </div>
+
+            <div className="flex flex-row grow gap-8 justify-center">
+              <button
+                onClick={() => setTutPage(TutPage - 1)}
+                className="text-xl text-gray-300 font-bold w-1/5 place-self-center border-1 rounded-xl bg-emerald-950/10 hover:bg-emerald-950/15"
+              >
+                ← Back
+              </button>
+              <button
+                onClick={() =>
+                  TutPage === 5
+                    ? setTutorialOpen(false)
+                    : setTutPage(TutPage + 1)
+                }
+                className="text-xl text-gray-300 font-bold w-1/5 place-self-center border-1 rounded-xl bg-emerald-950/10 hover:bg-emerald-950/15"
+              >
+                {TutPage === 5 ? "Close Guide" : "Next →"}
+              </button>
+            </div>
+          </>
+        )}
       </div>
     </TutorialTemplate>
   );
@@ -886,8 +985,27 @@ export function FuelsTutorial() {
 export function LegTutorial() {
   return (
     <TutorialTemplate>
-      <div className="flex flex-col h-full gap-y-8 justify-around text-center">
-        Legislative Map
+      <div className="flex flex-col h-full gap-y-8 p-2 text-center">
+        <div className="text-4xl font-bold"> Legislative Map </div>
+        <div className="w-2/3 place-self-center">
+          In contrast to the other features of the Receipt, this page does not
+          compute taxation of any sort. Instead, it aims at identifying the list
+          of taxing districts which impact the residents of a given legislative
+          district. It does this by filtering all taxing districts down to those
+          which geographically overlap with the selected legislative
+          district(s). In other words, when a legislative district is selected
+          in the Map controls on the left, any and all taxing districts at least
+          partially within the legislative boundaries will appear in the list on
+          the right.
+        </div>
+        <div className="w-2/3 place-self-center">
+          For convenience, districts are group into a property entity layer and
+          a sales areas layer. These layers can be toggled on and off in the map
+          controls. Districts will only appear on the map and in the list when
+          the layer containing them is toggled on. For the best experience, turn
+          on either the property layer or the sales layer but not both at one
+          time to prevent the map from becoming too cluttered.
+        </div>
       </div>
     </TutorialTemplate>
   );

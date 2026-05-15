@@ -530,7 +530,7 @@ export function IncomeTutorial() {
         ) : (
           <>
             <div className=" flex h-full gap-1">
-              <div className="flex flex-col h-full gap-2 w-1/5 ">
+              <div className="flex flex-col h-full gap-2 w-1/5 shrink-0">
                 <div className="h-1/20 text-white bg-[#17301b]/90 border-1 rounded-xl">
                   All Tax Returns
                 </div>
@@ -540,7 +540,7 @@ export function IncomeTutorial() {
               </div>
 
               {TutPage >= 2 && (
-                <div className="flex flex-col h-full gap-2 w-1/5">
+                <div className="flex flex-col h-full gap-2 w-1/5 shrink-0">
                   <div className="h-1/20 text-white bg-[#17301b]/90 border-1 rounded-xl">
                     Filing Status
                   </div>
@@ -555,7 +555,7 @@ export function IncomeTutorial() {
               )}
 
               {TutPage >= 3 && (
-                <div className="flex flex-col h-full  gap-2 w-1/5">
+                <div className="flex flex-col h-full  gap-2 w-1/5 shrink-0">
                   <div className="h-1/20 text-white bg-[#17301b]/90 border-1 rounded-xl">
                     Percentile
                   </div>
@@ -570,7 +570,7 @@ export function IncomeTutorial() {
               )}
 
               {TutPage >= 4 && (
-                <div className="flex flex-col h-full  gap-2 w-1/5">
+                <div className="flex flex-col h-full  gap-2 w-1/5 shrink-0">
                   <div className="h-1/20 text-white bg-[#17301b]/90 border-1 rounded-xl">
                     Variables of Interest
                   </div>
@@ -581,26 +581,54 @@ export function IncomeTutorial() {
                   <div className="h-1/5 ">Average Household Size</div>
                 </div>
               )}
-              <div className="flex items-center justify-center max-w-7/10">
+              <div className="flex items-center justify-center">
                 {TutPage === 1 && (
                   <div className="w-1/2 ">
                     <p>
                       To calculate effective income tax rates, the Receipt
                       starts with the entire collection of individual income tax
                       returns filed with the state. These returns are anonymized
-                      and de-identified before any analysis is conducted. These
+                      and de-identified before any analysis is conducted. The
                       nearly 2 million returns are represented by the rectangle
                       to the left.
                     </p>
                   </div>
                 )}
                 {TutPage === 2 && (
-                  <div className="w-1/2 ">
-                    <p>text</p>
+                  <div className="w-1/2">
+                    <p>
+                      The Receipt's analysis starts by categorizing each return
+                      by filing status. Grouping the returns this way increases
+                      the precision of the estimates by comparing like with like
+                      in the next steps. The approximate size of the boxes shows
+                      the relative prevalence of each filing status across the
+                      entire taxpaying population.
+                    </p>
                   </div>
                 )}
-                {TutPage === 3 && <div>Page 3 text </div>}
-                {TutPage === 4 && <div>Page 4 text </div>}
+                {TutPage === 3 && (
+                  <div className="w-9/10">
+                    Next, each filing status group is further subdivided into
+                    percentiles. This is accomplished by sorting the returns by
+                    reported income, and dividing them into one hundred equally
+                    sized groups. In this way, a return in the first group
+                    represents a household whose income is in the lowest
+                    hundredth among households with their filing status. A
+                    household in the second group has second hundredth lowest,
+                    and so on.
+                  </div>
+                )}
+                {TutPage === 4 && (
+                  <div>
+                    Once subdivided by filing status and percentile, the Receipt
+                    calculates the variables of interest within and between
+                    groups. For example, average effective tax rate is computed
+                    by dividing reported income by tax liability for each
+                    return, then averaging the result across all returns in each
+                    percentile group. Analogous calculations are done for each
+                    variable of interest.
+                  </div>
+                )}
                 {TutPage === 5 && <div>Page 5 text </div>}
               </div>
             </div>

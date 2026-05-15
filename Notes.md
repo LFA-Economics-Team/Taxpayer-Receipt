@@ -31,6 +31,7 @@ From IT [Matt] Security: https://snyk.io/
 
 - User guide pages
   - Income [income tax is calculated *for taxpayers like you*]
+    - Grab accurate shares of population in each filing status.
 
 # Meeting Notes:
 

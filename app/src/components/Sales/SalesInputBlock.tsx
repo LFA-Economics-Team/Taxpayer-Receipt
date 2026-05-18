@@ -1,6 +1,6 @@
 import { useState } from "react";
 import type { SalesLocation } from "../MetaMisc/types";
-import { geocodeAddress, formatDollars } from "../MetaMisc/types";
+import { geocodeAddress, formatDollars, GeocodingErrorModal } from "../MetaMisc/types";
 import { FOOD_STATE_RATE, STATE_SALES_RATE } from "../../AppContext";
 
 function SalesCard({
@@ -14,6 +14,7 @@ function SalesCard({
 }) {
   const [nonFoodEditing, setNonFoodEditing] = useState(false);
   const [foodEditing, setFoodEditing] = useState(false);
+  const [geoError, setGeoError] = useState(false);
 
   const handleAddressBlur = async () => {
     if (!location.address) return;
@@ -25,10 +26,14 @@ function SalesCard({
         address: city ?? county ?? location.address,
         ...latLon,
       });
+    } else {
+      setGeoError(true);
     }
   };
 
   return (
+    <>
+    {geoError && <GeocodingErrorModal onClose={() => setGeoError(false)} />}
     <div className=" flex flex-row justify-between bg-gray-100/25 rounded-xl p-1 items-center">
       <div className="flex flex-col w-full items-center gap-1 p-1">
         <div className="flex flex-row w-full justify-between ">
@@ -89,6 +94,7 @@ function SalesCard({
         -
       </button>
     </div>
+    </>
   );
 }
 

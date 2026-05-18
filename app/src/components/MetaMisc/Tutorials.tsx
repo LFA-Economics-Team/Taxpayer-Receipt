@@ -8,6 +8,7 @@ import {
   filingOptions,
   lookupIncomeData,
   feeInfo,
+  GeocodingErrorModal,
 } from "./types";
 import type { FuelEntry } from "./types";
 import MakeOptions from "../../data/Misc/MakeOptions.json";
@@ -24,7 +25,7 @@ export function TutorialTemplate({ children }: { children?: React.ReactNode }) {
 
   return (
     <div
-      className="fixed text-[#17301b] inset-0 place-self-center content-center h-full w-full z-[1001] w-64 bg-gray-100/70 rounded-lg shadow-xl"
+      className="fixed text-[#17301b] inset-0 place-self-center content-center h-full w-full z-[1001] bg-gray-100/70 rounded-lg shadow-xl"
       onClick={() => setTutorialOpen(false)}
     >
       <div
@@ -35,9 +36,9 @@ export function TutorialTemplate({ children }: { children?: React.ReactNode }) {
           onClick={() => setTutorialOpen(false)}
           className="flex border-1 rounded-xl size-6 place-self-end "
         >
-          <p className="flex w-full place-self-center justify-center text-white">
+          <div className="flex w-full place-self-center justify-center text-white">
             X
-          </p>
+          </div>
         </button>
         {children}
       </div>
@@ -75,8 +76,9 @@ export function HomeTutorial() {
     return makeModels;
   })();
 
-  const [TutPage, setTutPage] = useState(0);
+  const [tutPage, setTutPage] = useState(0);
   const [valueEditing, setValueEditing] = useState(false);
+  const [geoError, setGeoError] = useState(false);
   const [incomeDisplay, setIncomeDisplay] = useState(
     incomeInfo.annualIncome ? formatDollars(incomeInfo.annualIncome) : "",
   );
@@ -86,8 +88,10 @@ export function HomeTutorial() {
   }, [incomeInfo.annualIncome]);
 
   return (
+    <>
+    {geoError && <GeocodingErrorModal onClose={() => setGeoError(false)} />}
     <TutorialTemplate>
-      {TutPage === 0 && (
+      {tutPage === 0 && (
         <div className="flex flex-col h-full gap-y-8 justify-around text-center">
           <div className=" text-4xl font-bold">
             Welcome to the Utah State Taxpayer Receipt!
@@ -105,7 +109,7 @@ export function HomeTutorial() {
               <div className="text-base font-normal ">
                 One of the largest revenue sources for the state, income tax is
                 assessed as a percentage on most types of individual income.
-                These fund are constitutionally earmarked for public education
+                These funds are constitutionally earmarked for public education
                 and social services.
               </div>
               <NavLink
@@ -120,7 +124,7 @@ export function HomeTutorial() {
               <div className="text-base font-normal ">
                 The total rate levied on a given taxable transaction is the sum
                 of the individual components charged by each level of
-                government. While the state's sales tax revenue in unrestricted,
+                government. While the state's sales tax revenue is unrestricted,
                 most local rate components are dedicated to specific purposes.
               </div>
               <NavLink
@@ -168,7 +172,7 @@ export function HomeTutorial() {
             more detail.
           </div>
           <button
-            onClick={() => setTutPage(TutPage + 1)}
+            onClick={() => setTutPage(tutPage + 1)}
             className="text-xl text-gray-300 font-bold w-1/5 place-self-center border-1 rounded-xl bg-emerald-950/10 hover:bg-emerald-950/15"
           >
             {" "}
@@ -176,32 +180,32 @@ export function HomeTutorial() {
           </button>
         </div>
       )}
-      {TutPage >= 1 && TutPage <= 4 && (
+      {tutPage >= 1 && tutPage <= 4 && (
         <div className="flex flex-col h-full gap-y-8 justify-between text-center">
           <div className="flex flex-row h-1/20 w-8/10 rounded-xl overflow-hidden justify-evenly border-1 place-self-center divide-x ">
             <div
-              className={`flex w-1/4 justify-center ${TutPage >= 1 ? "bg-emerald-950/15" : ""}`}
+              className={`flex w-1/4 justify-center ${tutPage >= 1 ? "bg-emerald-950/15" : ""}`}
             >
               General
             </div>
             <div
-              className={`flex w-1/4 justify-center ${TutPage >= 2 ? "bg-emerald-950/15" : ""}`}
+              className={`flex w-1/4 justify-center ${tutPage >= 2 ? "bg-emerald-950/15" : ""}`}
             >
               Income
             </div>
             <div
-              className={`flex w-1/4 justify-center ${TutPage >= 3 ? "bg-emerald-950/15" : ""}`}
+              className={`flex w-1/4 justify-center ${tutPage >= 3 ? "bg-emerald-950/15" : ""}`}
             >
               Property
             </div>
             <div
-              className={`flex w-1/4 justify-center ${TutPage >= 4 ? "bg-emerald-950/15" : ""}`}
+              className={`flex w-1/4 justify-center ${tutPage >= 4 ? "bg-emerald-950/15" : ""}`}
             >
               Fuel & Fees
             </div>
           </div>
 
-          {TutPage === 1 && (
+          {tutPage === 1 && (
             <>
               <div className=" flex w-1/2 place-self-center">
                 The first step in getting an estimate of one's overall tax
@@ -240,6 +244,8 @@ export function HomeTutorial() {
                       if (cars.length > 0) {
                         upsertFirstCar({ county: normalizedCounty });
                       }
+                    } else if (e.target.value) {
+                      setGeoError(true);
                     }
                   }}
                 />
@@ -252,7 +258,7 @@ export function HomeTutorial() {
               </div>
             </>
           )}
-          {TutPage === 2 && (
+          {tutPage === 2 && (
             <>
               <div className=" flex w-1/2 place-self-center">
                 Instead of needing an entire tax return's information to
@@ -322,7 +328,7 @@ export function HomeTutorial() {
               </div>
             </>
           )}
-          {TutPage === 3 && (
+          {tutPage === 3 && (
             <>
               <div className=" flex w-1/2 place-self-center">
                 Using the location entered in the 'General' tab, the Receipt can
@@ -363,7 +369,7 @@ export function HomeTutorial() {
               </div>
             </>
           )}
-          {TutPage === 4 && (
+          {tutPage === 4 && (
             <>
               <div className=" flex w-1/2 place-self-center">
                 Last but not least, fuel taxes and fees can be calculated from a
@@ -460,39 +466,38 @@ export function HomeTutorial() {
 
           <div className="flex flex-row w-full gap-8 justify-center">
             <button
-              onClick={() => setTutPage(TutPage - 1)}
+              onClick={() => setTutPage(tutPage - 1)}
               className="text-xl text-gray-300 font-bold w-1/5 place-self-center border-1 rounded-xl bg-emerald-950/10 hover:bg-emerald-950/15"
             >
               ← Back
             </button>
             <button
               onClick={() =>
-                TutPage === 4 ? setTutorialOpen(false) : setTutPage(TutPage + 1)
+                tutPage === 4 ? setTutorialOpen(false) : setTutPage(tutPage + 1)
               }
               className="text-xl text-gray-300 font-bold w-1/5 place-self-center border-1 rounded-xl bg-emerald-950/10 hover:bg-emerald-950/15"
             >
-              {TutPage === 4 ? "Show my Results" : "Next →"}
+              {tutPage === 4 ? "Show my Results" : "Next →"}
             </button>
           </div>
         </div>
       )}
     </TutorialTemplate>
+    </>
   );
 }
 
 export function IncomeTutorial() {
   const { setTutorialOpen } = useAppContext();
 
-  const [TutPage, setTutPage] = useState(0);
-
-  const items = Array.from({ length: 100 }, (_, index) => index);
+  const [tutPage, setTutPage] = useState(0);
 
   return (
     <TutorialTemplate>
       <div className="flex flex-col h-full gap-y-8 p-2 text-center">
         <div className=" text-4xl font-bold"> Income Tax </div>
 
-        {TutPage === 0 ? (
+        {tutPage === 0 ? (
           <>
             <div className="flex flex-col w-2/3 place-self-center py-8 gap-4">
               <p>
@@ -521,7 +526,7 @@ export function IncomeTutorial() {
               </p>
             </div>
             <button
-              onClick={() => setTutPage(TutPage + 1)}
+              onClick={() => setTutPage(tutPage + 1)}
               className="flex text-xl text-gray-300 w-1/2 place-self-center justify-center"
             >
               Begin Demo
@@ -539,7 +544,7 @@ export function IncomeTutorial() {
                 </div>
               </div>
 
-              {TutPage >= 2 && (
+              {tutPage >= 2 && (
                 <div className="flex flex-col h-full gap-2 w-1/5 shrink-0">
                   <div className="h-1/20 text-white bg-[#17301b]/90 border-1 rounded-xl">
                     Filing Status
@@ -554,22 +559,37 @@ export function IncomeTutorial() {
                 </div>
               )}
 
-              {TutPage >= 3 && (
-                <div className="flex flex-col h-full  gap-2 w-1/5 shrink-0">
+              {tutPage >= 3 && (
+                <div className="flex flex-col h-full gap-2 w-1/5 shrink-0">
                   <div className="h-1/20 text-white bg-[#17301b]/90 border-1 rounded-xl">
                     Percentile
                   </div>
-                  <div className="columns-4 gap-0 overflow-hidden flex-1">
-                    {items.map((num) => (
-                      <div key={num} className="text-xs">
-                        {num}
-                      </div>
-                    ))}
+                  <div className="flex flex-row gap-0 overflow-hidden flex-1">
+                    <div className="flex flex-col w-9/10">
+                      {Array.from({ length: 100 }, (_, i) => (
+                        <div key={i} className="h-1/100 border-t-1 w-full">
+                          {" "}
+                        </div>
+                      ))}
+                    </div>
+                    <div className="flex flex-col justify-between w-1/10">
+                      <p>100</p>
+                      <p>90</p>
+                      <p>80</p>
+                      <p>70</p>
+                      <p>60</p>
+                      <p>50</p>
+                      <p>40</p>
+                      <p>30</p>
+                      <p>20</p>
+                      <p>10</p>
+                      <p>1</p>
+                    </div>
                   </div>
                 </div>
               )}
 
-              {TutPage >= 4 && (
+              {tutPage >= 4 && (
                 <div className="flex flex-col h-full  gap-2 w-1/5 shrink-0">
                   <div className="h-1/20 text-white bg-[#17301b]/90 border-1 rounded-xl">
                     Variables of Interest
@@ -582,7 +602,7 @@ export function IncomeTutorial() {
                 </div>
               )}
               <div className="flex items-center justify-center">
-                {TutPage === 1 && (
+                {tutPage === 1 && (
                   <div className="w-1/2 ">
                     <p>
                       To calculate effective income tax rates, the Receipt
@@ -594,7 +614,7 @@ export function IncomeTutorial() {
                     </p>
                   </div>
                 )}
-                {TutPage === 2 && (
+                {tutPage === 2 && (
                   <div className="w-1/2">
                     <p>
                       The Receipt's analysis starts by categorizing each return
@@ -606,7 +626,7 @@ export function IncomeTutorial() {
                     </p>
                   </div>
                 )}
-                {TutPage === 3 && (
+                {tutPage === 3 && (
                   <div className="w-9/10">
                     Next, each filing status group is further subdivided into
                     percentiles. This is accomplished by sorting the returns by
@@ -618,37 +638,48 @@ export function IncomeTutorial() {
                     and so on.
                   </div>
                 )}
-                {TutPage === 4 && (
+                {tutPage === 4 && (
                   <div>
                     Once subdivided by filing status and percentile, the Receipt
                     calculates the variables of interest within and between
                     groups. For example, average effective tax rate is computed
-                    by dividing reported income by tax liability for each
+                    by dividing tax liability by reported income for each
                     return, then averaging the result across all returns in each
                     percentile group. Analogous calculations are done for each
-                    variable of interest.
+                    variable of interest listed to the left.
                   </div>
                 )}
-                {TutPage === 5 && <div>Page 5 text </div>}
+                {tutPage === 5 && (
+                  <div>
+                    It is these variables of interest which power the estimates
+                    listed on this page. They also power the charts as well.
+                    Each of the charts is organized with the percentiles along
+                    the horizontal axis and a given variable on the vertical
+                    axis. This allows one to examine how the variable changes
+                    along the income spectrum. Finally, a vertical reference
+                    line corresponding to the entered income is also included to
+                    mark where that income falls among the percentiles.
+                  </div>
+                )}
               </div>
             </div>
 
             <div className="flex flex-row grow gap-8 justify-center">
               <button
-                onClick={() => setTutPage(TutPage - 1)}
+                onClick={() => setTutPage(tutPage - 1)}
                 className="text-xl text-gray-300 font-bold w-1/5 place-self-center border-1 rounded-xl bg-emerald-950/10 hover:bg-emerald-950/15"
               >
                 ← Back
               </button>
               <button
                 onClick={() =>
-                  TutPage === 5
+                  tutPage === 5
                     ? setTutorialOpen(false)
-                    : setTutPage(TutPage + 1)
+                    : setTutPage(tutPage + 1)
                 }
                 className="text-xl text-gray-300 font-bold w-1/5 place-self-center border-1 rounded-xl bg-emerald-950/10 hover:bg-emerald-950/15"
               >
-                {TutPage === 5 ? "Close Guide" : "Next →"}
+                {tutPage === 5 ? "Close Guide" : "Next →"}
               </button>
             </div>
           </>
@@ -661,7 +692,7 @@ export function IncomeTutorial() {
 export function SalesTutorial() {
   const { setTutorialOpen } = useAppContext();
 
-  const [TutPage, setTutPage] = useState(0);
+  const [tutPage, setTutPage] = useState(0);
 
   return (
     <TutorialTemplate>
@@ -697,9 +728,9 @@ export function SalesTutorial() {
           </div>
 
           <div className="flex flex-col h-full justify-center w-1/2 gap-4">
-            {TutPage === 0 ? (
+            {tutPage === 0 ? (
               <button
-                onClick={() => setTutPage(TutPage + 1)}
+                onClick={() => setTutPage(tutPage + 1)}
                 className="flex text-xl text-gray-300 w-1/2 place-self-center justify-center"
               >
                 Begin Demo
@@ -707,13 +738,13 @@ export function SalesTutorial() {
             ) : (
               <div className="flex flex-col font-bold bg-[#F5E3EF] w-2/3 h-9/10 p-2 place-self-center rounded-xl">
                 <p>State</p>
-                {TutPage >= 2 && (
+                {tutPage >= 2 && (
                   <p className="font-bold">
                     {" "}
                     {round(STATE_SALES_RATE * 100, 2)}%
                   </p>
                 )}
-                {TutPage === 1 ? (
+                {tutPage === 1 ? (
                   <div className="flex flex-col h-full font-normal text-center justify-center gap-8">
                     <p className="w-2/3 place-self-center">
                       Starting at the highest level, all tax areas contain the
@@ -732,7 +763,7 @@ export function SalesTutorial() {
                         <p> {round(STATE_SALES_RATE * 100, 2)}%</p>
                         <p> +2.00%* </p>
                       </div>
-                      {TutPage >= 3 && (
+                      {tutPage >= 3 && (
                         <div className="bg-[#BA749E] w-1/2 h-1/2 rounded-xl">
                           <p>City</p>
                           <p> {round(STATE_SALES_RATE * 100, 2)}%</p>
@@ -741,7 +772,7 @@ export function SalesTutorial() {
                         </div>
                       )}
                     </div>
-                    {TutPage === 2 ? (
+                    {tutPage === 2 ? (
                       <div className=" flex flex-col font-normal w-1/3 h-2/3  place-items-center justify-around rounded-xl">
                         <p>
                           Layering on top of the state rate are the county
@@ -761,29 +792,29 @@ export function SalesTutorial() {
                 )}
               </div>
             )}
-            {TutPage >= 1 && (
+            {tutPage >= 1 && (
               <>
-                {TutPage >= 2 && (
+                {tutPage >= 2 && (
                   <div className="text-sm">
                     *Local rates are illustrative only. Actual rates may vary.
                   </div>
                 )}
                 <div className="flex flex-row w-full gap-8 justify-center">
                   <button
-                    onClick={() => setTutPage(TutPage - 1)}
+                    onClick={() => setTutPage(tutPage - 1)}
                     className="text-xl text-gray-300 font-bold w-1/5 place-self-center border-1 rounded-xl bg-emerald-950/10 hover:bg-emerald-950/15"
                   >
                     ← Back
                   </button>
                   <button
                     onClick={() =>
-                      TutPage === 3
+                      tutPage === 3
                         ? setTutorialOpen(false)
-                        : setTutPage(TutPage + 1)
+                        : setTutPage(tutPage + 1)
                     }
                     className="text-xl text-gray-300 font-bold w-1/5 place-self-center border-1 rounded-xl bg-emerald-950/10 hover:bg-emerald-950/15"
                   >
-                    {TutPage === 3 ? "Close Guide" : "Next →"}
+                    {tutPage === 3 ? "Close Guide" : "Next →"}
                   </button>
                 </div>
               </>
@@ -799,7 +830,7 @@ export function SalesTutorial() {
 export function PropertyTutorial() {
   const { setTutorialOpen } = useAppContext();
 
-  const [TutPage, setTutPage] = useState(0);
+  const [tutPage, setTutPage] = useState(0);
 
   return (
     <TutorialTemplate>
@@ -839,9 +870,9 @@ export function PropertyTutorial() {
           </div>
 
           <div className="flex flex-col h-full justify-center w-1/2 gap-4">
-            {TutPage === 0 ? (
+            {tutPage === 0 ? (
               <button
-                onClick={() => setTutPage(TutPage + 1)}
+                onClick={() => setTutPage(tutPage + 1)}
                 className="flex text-xl text-gray-300 w-1/2 place-self-center justify-center"
               >
                 Begin Demo
@@ -850,7 +881,7 @@ export function PropertyTutorial() {
               <div className="flex flex-col font-bold border-1 w-2/3 h-9/10 p-2 place-self-center rounded-xl">
                 <p>State</p>
 
-                {TutPage === 1 ? (
+                {tutPage === 1 ? (
                   <div className="flex flex-col h-full font-normal text-center justify-center gap-8">
                     <p className="w-2/3 place-self-center">
                       The state itself does not levy a property tax. All
@@ -865,14 +896,14 @@ export function PropertyTutorial() {
                       <div>
                         <p> .15%* </p>
                       </div>
-                      {TutPage >= 3 && (
+                      {tutPage >= 3 && (
                         <div className="bg-[#5576e050] w-1/2 h-1/2 rounded-xl">
                           <p>City</p>
                           <p> +.15%* </p>
                         </div>
                       )}
                     </div>
-                    {TutPage === 2 ? (
+                    {tutPage === 2 ? (
                       <div className=" flex flex-col font-normal w-1/3 h-2/3  place-items-center rounded-xl">
                         <p>
                           All taxable property is (at minimum) taxed by a county
@@ -892,29 +923,29 @@ export function PropertyTutorial() {
                 )}
               </div>
             )}
-            {TutPage >= 1 && (
+            {tutPage >= 1 && (
               <>
-                {TutPage >= 2 && (
+                {tutPage >= 2 && (
                   <div className="text-sm">
                     *Local rates are illustrative only. Actual rates may vary.
                   </div>
                 )}
                 <div className="flex flex-row w-full gap-8 justify-center">
                   <button
-                    onClick={() => setTutPage(TutPage - 1)}
+                    onClick={() => setTutPage(tutPage - 1)}
                     className="text-xl text-gray-300 font-bold w-1/5 place-self-center border-1 rounded-xl bg-emerald-950/10 hover:bg-emerald-950/15"
                   >
                     ← Back
                   </button>
                   <button
                     onClick={() =>
-                      TutPage === 3
+                      tutPage === 3
                         ? setTutorialOpen(false)
-                        : setTutPage(TutPage + 1)
+                        : setTutPage(tutPage + 1)
                     }
                     className="text-xl text-gray-300 font-bold w-1/5 place-self-center border-1 rounded-xl bg-emerald-950/10 hover:bg-emerald-950/15"
                   >
-                    {TutPage === 3 ? "Close Guide" : "Next →"}
+                    {tutPage === 3 ? "Close Guide" : "Next →"}
                   </button>
                 </div>
               </>
@@ -964,7 +995,7 @@ export function FuelsTutorial() {
                 The Fuel Tax Rate is measured in cents per gallon rather than as
                 a percentage rate on the value of the transaction. As a result,
                 changes in the price of fuel do not directly impact the tax
-                paid. The rate itself is updated annual by the State Tax
+                paid. The rate itself is updated annually by the State Tax
                 Commission as specified in law.
               </div>
             </div>
@@ -985,7 +1016,7 @@ export function FuelsTutorial() {
                 {Object.entries(feeInfo)
                   .filter(([name]) => name !== "Total")
                   .map(([name, info]) => (
-                    <>
+                    <React.Fragment key={name}>
                       <div
                         key={`${name}-name`}
                         className="py-1 border-b border-gray-200"
@@ -998,7 +1029,7 @@ export function FuelsTutorial() {
                       >
                         {info.criteria}
                       </div>
-                    </>
+                    </React.Fragment>
                   ))}
               </div>
             </div>
@@ -1022,17 +1053,17 @@ export function LegTutorial() {
           district. It does this by filtering all taxing districts down to those
           which geographically overlap with the selected legislative
           district(s). In other words, when a legislative district is selected
-          in the Map controls on the left, any and all taxing districts at least
-          partially within the legislative boundaries will appear in the list on
-          the right.
+          in the Map controls on the left, any and all taxing districts which at
+          least partially overlap with the legislative boundaries will appear in
+          the list on the right.
         </div>
         <div className="w-2/3 place-self-center">
-          For convenience, districts are group into a property entity layer and
-          a sales areas layer. These layers can be toggled on and off in the map
-          controls. Districts will only appear on the map and in the list when
-          the layer containing them is toggled on. For the best experience, turn
-          on either the property layer or the sales layer but not both at one
-          time to prevent the map from becoming too cluttered.
+          For convenience, districts are grouped into a property entity layer
+          and a sales areas layer. These layers can be toggled on and off in the
+          map controls. Districts will only appear on the map and in the list
+          when the layer containing them is toggled on. For the best experience,
+          turn on either the property layer or the sales layer but not both at
+          one time to prevent the map from becoming too cluttered.
         </div>
       </div>
     </TutorialTemplate>

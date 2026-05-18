@@ -15,6 +15,7 @@ import { HomeTutorial } from "../MetaMisc/Tutorials";
 export function HomeContent() {
   const sankeyContainerRef = useRef<HTMLDivElement>(null);
   const [isGeneratingPdf, setIsGeneratingPdf] = useState(false);
+  const [pdfError, setPdfError] = useState(false);
 
   const {
     incomeInfo,
@@ -100,20 +101,56 @@ export function HomeContent() {
       a.download = "taxpayer-receipt.pdf";
       a.click();
       URL.revokeObjectURL(url);
+    } catch {
+      setPdfError(true);
     } finally {
       setIsGeneratingPdf(false);
     }
   }
 
   return (
-    <div className="flex flex-row h-full w-full text-black">
-      <ControlBlock />
-      <SankeyBlock containerRef={sankeyContainerRef} />
-      <ResultsBlock
-        onDownloadPdf={handleDownloadPdf}
-        isGeneratingPdf={isGeneratingPdf}
-      />
-      {tutorialOpen && <HomeTutorial />}
-    </div>
+    <>
+      {pdfError && (
+        <div
+          className="fixed inset-0 z-[1002] flex items-center justify-center bg-gray-100/70"
+          onClick={() => setPdfError(false)}
+        >
+          <div
+            className="flex flex-col bg-white text-[#17301b] rounded-xl shadow-xl p-6 w-80 gap-3"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="font-bold text-base">
+              Download failed. Please refresh the page and try again.
+            </div>
+            <div className="text-sm">
+              Refreshing the page will wipe all user-entered information.
+            </div>
+            <div className="flex gap-2 mt-2">
+              <button
+                onClick={() => setPdfError(false)}
+                className="flex-1 py-1 rounded-xl border border-gray-300 text-[#17301b] hover:bg-gray-100 transition-colors"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={() => window.location.reload()}
+                className="flex-1 py-1 rounded-xl bg-green-700 text-white hover:bg-green-600 transition-colors"
+              >
+                Refresh anyway?
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+      <div className="flex flex-row h-full w-full text-black">
+        <ControlBlock />
+        <SankeyBlock containerRef={sankeyContainerRef} />
+        <ResultsBlock
+          onDownloadPdf={handleDownloadPdf}
+          isGeneratingPdf={isGeneratingPdf}
+        />
+        {tutorialOpen && <HomeTutorial />}
+      </div>
+    </>
   );
 }

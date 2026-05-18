@@ -86,6 +86,15 @@ function Salestyle(feature: Feature | undefined) {
   };
 }
 
+function HighlightStyle() {
+  return {
+    color: "#ff6b00",
+    weight: 3,
+    fillColor: "#ff6b00",
+    fillOpacity: 0.35,
+  };
+}
+
 function MapClickHandler({
   onClick,
 }: {
@@ -114,6 +123,10 @@ export function LegMap() {
     new Set(),
   );
   const [propCardExpanded, setPropCardExpanded] = useState(false);
+  const [hoveredFeature, setHoveredFeature] = useState<GeoJSON.Feature | null>(
+    null,
+  );
+  const [hoverKey, setHoverKey] = useState(0);
 
   const toggleSalesCard = (i: number) =>
     setExpandedSalesCards((prev) => {
@@ -435,6 +448,15 @@ export function LegMap() {
               <></>
             )}
           </Pane>
+          {hoveredFeature && (
+            <Pane name="highlight-pane" style={{ zIndex: 451 }}>
+              <GeoJSON
+                key={hoverKey}
+                data={hoveredFeature}
+                style={HighlightStyle}
+              />
+            </Pane>
+          )}
         </MapContainer>
       </div>
 
@@ -462,39 +484,49 @@ export function LegMap() {
                   </div>
                 ) : (
                   <div className="flex flex-col gap-2 mb-3">
-                    {filteredSales.features.map((f: any, i: number) => {
-                      const isExpanded = expandedSalesCards.has(i);
-                      const activeComponents = RATE_COMPONENTS.filter(
-                        (key) => f.properties[key] != null,
-                      );
-                      return (
-                        <div
-                          key={i}
-                          className="bg-white rounded-xl p-2 cursor-pointer select-none"
-                          onClick={() => toggleSalesCard(i)}
-                        >
-                          <div className="flex flex-row justify-between text-xs font-bold">
-                            <div>{f.properties.SHORTDESC_x}</div>
-                            <div>{fmtRate(f.properties.CURRRATE, 2)}</div>
-                          </div>
-                          {isExpanded && (
-                            <div className="mt-1">
-                              {activeComponents.map((key) => (
-                                <div
-                                  key={key}
-                                  className="flex flex-row justify-between text-xs py-0.5 border-t border-gray-200"
-                                >
-                                  <div className="text-gray-500">
-                                    {formatRateLabel(key)}
-                                  </div>
-                                  <div>{fmtRate(f.properties[key], 2)}</div>
-                                </div>
-                              ))}
+                    {[...filteredSales.features]
+                      .sort(
+                        (a: any, b: any) =>
+                          b.properties.CURRRATE - a.properties.CURRRATE,
+                      )
+                      .map((f: any, i: number) => {
+                        const isExpanded = expandedSalesCards.has(i);
+                        const activeComponents = RATE_COMPONENTS.filter(
+                          (key) => f.properties[key] != null,
+                        );
+                        return (
+                          <div
+                            key={i}
+                            className="bg-white rounded-xl p-2 cursor-pointer select-none"
+                            onClick={() => toggleSalesCard(i)}
+                            onMouseEnter={() => {
+                              setHoveredFeature(f);
+                              setHoverKey((k) => k + 1);
+                            }}
+                            onMouseLeave={() => setHoveredFeature(null)}
+                          >
+                            <div className="flex flex-row justify-between text-xs font-bold">
+                              <div>{f.properties.SHORTDESC_x}</div>
+                              <div>{fmtRate(f.properties.CURRRATE, 2)}</div>
                             </div>
-                          )}
-                        </div>
-                      );
-                    })}
+                            {isExpanded && (
+                              <div className="mt-1">
+                                {activeComponents.map((key) => (
+                                  <div
+                                    key={key}
+                                    className="flex flex-row justify-between text-xs py-0.5 border-t border-gray-200"
+                                  >
+                                    <div className="text-gray-500">
+                                      {formatRateLabel(key)}
+                                    </div>
+                                    <div>{fmtRate(f.properties[key], 2)}</div>
+                                  </div>
+                                ))}
+                              </div>
+                            )}
+                          </div>
+                        );
+                      })}
                   </div>
                 )}
               </>
@@ -520,11 +552,20 @@ export function LegMap() {
                       </div>
                       {propCardExpanded && (
                         <div className="mt-1">
-                          {filteredProperty.features.map(
-                            (f: any, i: number) => (
+                          {[...filteredProperty.features]
+                            .sort(
+                              (a: any, b: any) =>
+                                b.properties.ENT_RATE - a.properties.ENT_RATE,
+                            )
+                            .map((f: any, i: number) => (
                               <div
                                 key={i}
-                                className="grid grid-cols-[50%_35%_15%] text-xs py-1 border-t border-gray-200"
+                                className="grid grid-cols-[50%_35%_15%] text-xs py-1 border-t border-gray-200 cursor-pointer hover:bg-orange-50"
+                                onMouseEnter={() => {
+                                  setHoveredFeature(f);
+                                  setHoverKey((k) => k + 1);
+                                }}
+                                onMouseLeave={() => setHoveredFeature(null)}
                               >
                                 <div className="font-semibold">
                                   {formatRateLabel(f.properties.ENT_DESC)}
@@ -534,8 +575,7 @@ export function LegMap() {
                                 </div>
                                 <div>{fmtRate(f.properties.ENT_RATE)}</div>
                               </div>
-                            ),
-                          )}
+                            ))}
                         </div>
                       )}
                     </div>

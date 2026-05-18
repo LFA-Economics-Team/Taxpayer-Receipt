@@ -433,17 +433,58 @@ export async function geocodeAddress(address: string): Promise<{
   city: string | null;
   county: string | null;
 } | null> {
-  const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(address)}&format=json&limit=1&addressdetails=1`;
-  const res = await fetch(url, { headers: { "Accept-Language": "en" } });
-  const data = await res.json();
-  if (!data.length) return null;
-  const addr = data[0].address ?? {};
-  return {
-    lat: parseFloat(data[0].lat),
-    lon: parseFloat(data[0].lon),
-    city: addr.city ?? addr.town ?? addr.village ?? null,
-    county: addr.county ?? null,
-  };
+  try {
+    const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(address)}&format=json&limit=1&addressdetails=1`;
+    const res = await fetch(url, { headers: { "Accept-Language": "en" } });
+    if (!res.ok) return null;
+    const data = await res.json();
+    if (!Array.isArray(data) || !data.length) return null;
+    const addr = data[0].address ?? {};
+    if (addr.state !== "Utah") return null;
+    return {
+      lat: parseFloat(data[0].lat),
+      lon: parseFloat(data[0].lon),
+      city: addr.city ?? addr.town ?? addr.village ?? null,
+      county: addr.county ?? null,
+    };
+  } catch {
+    return null;
+  }
+}
+
+export function GeocodingErrorModal({ onClose }: { onClose: () => void }) {
+  return (
+    <div
+      className="fixed inset-0 z-[1002] flex items-center justify-center bg-gray-100/70"
+      onClick={onClose}
+    >
+      <div
+        className="flex flex-col bg-white text-[#17301b] rounded-xl shadow-xl p-6 w-80 gap-3"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="font-bold text-base">
+          Geolocation failed. Please try again.
+        </div>
+        <div className="text-sm">
+          Common error causes include: network issues, insufficient specificity,
+          and Non-Utah addresses.
+        </div>
+        <div className="text-sm">
+          Geolocation should succeed when entry is formatted as "city, Utah"
+          where 'city' is replaced with your nearest municipality.
+        </div>
+        <div className="text-sm">
+          Alternatively, county can be used formatted as "____ county, Utah".
+        </div>
+        <button
+          onClick={onClose}
+          className="mt-2 py-1 rounded-xl bg-green-700 text-white hover:bg-green-600 transition-colors"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  );
 }
 
 // Standard Text

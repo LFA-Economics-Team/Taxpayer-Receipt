@@ -5,9 +5,19 @@ import {
   formatDollars,
 } from "../MetaMisc/types";
 
-function ResultCard({ entity }: { entity: Entity }) {
+function ResultCard({
+  entity,
+  onHoverEntity,
+}: {
+  entity: Entity;
+  onHoverEntity: (id: number | null) => void;
+}) {
   return (
-    <div className="bg-white rounded-xl text-base p-2">
+    <div
+      className="bg-white rounded-xl text-base p-2"
+      onMouseEnter={() => onHoverEntity(entity.id)}
+      onMouseLeave={() => onHoverEntity(null)}
+    >
       <div className="font-bold text-center">{entity.name}</div>
       <div className="text-center">{entity.county} County</div>
       <div className="text-center">{entity.type}</div>
@@ -28,9 +38,11 @@ function ResultCard({ entity }: { entity: Entity }) {
 export function PropertyResultsBlock({
   properties,
   entitiesByProperty,
+  onHoverEntity,
 }: {
   properties: Property[];
   entitiesByProperty: Record<number, Entity[]>;
+  onHoverEntity: (id: number | null) => void;
 }) {
   const total = Object.values(entitiesByProperty)
     .flat()
@@ -69,7 +81,7 @@ export function PropertyResultsBlock({
                       {p.address || `Property ${p.id}`}
                     </div>
                     {propEntities.map((e) => (
-                      <ResultCard key={e.id} entity={e} />
+                      <ResultCard key={e.id} entity={e} onHoverEntity={onHoverEntity} />
                     ))}
                     <div className="text-sm font-semibold text-right pr-2 pb-1 border-b border-gray-400">
                       Subtotal: {formatDollars(subtotal, 0, 0)}

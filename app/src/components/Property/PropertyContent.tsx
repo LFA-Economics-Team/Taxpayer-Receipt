@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { PropertyInputBlock } from "./PropertyInputBlock";
 import { PropertyMapBlock } from "./PropertyMapBlock";
 import { PropertyResultsBlock } from "./PropertyResultsBlock";
@@ -16,6 +17,8 @@ export function PropertyContent() {
     tutorialOpen,
   } = useAppContext();
 
+  const [hoveredEntityId, setHoveredEntityId] = useState<number | null>(null);
+
   return (
     <div className="flex flex-row overflow-hidden h-full w-full text-black">
       <PropertyInputBlock
@@ -24,8 +27,12 @@ export function PropertyContent() {
         onUpdate={updateProperty}
         onRemove={removeProperty}
       />
-      <PropertyMapBlock properties={properties} />
-      <PropertyResultsBlock properties={properties} entitiesByProperty={entitiesByProperty} />
+      <PropertyMapBlock properties={properties} hoveredEntityId={hoveredEntityId} />
+      <PropertyResultsBlock
+        properties={properties}
+        entitiesByProperty={entitiesByProperty}
+        onHoverEntity={setHoveredEntityId}
+      />
       {tutorialOpen && <PropertyTutorial />}
     </div>
   );

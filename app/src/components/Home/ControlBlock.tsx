@@ -6,6 +6,7 @@ import {
   formatDollars,
   lookupIncomeData,
   geocodeAddress,
+  GeocodingErrorModal,
 } from "../MetaMisc/types";
 import type { FuelEntry } from "../MetaMisc/types";
 import MakeOptions from "../../data/Misc/MakeOptions.json";
@@ -30,6 +31,7 @@ export function ControlBlock() {
     incomeInfo.annualIncome ? formatDollars(incomeInfo.annualIncome) : "",
   );
   const [valueEditing, setValueEditing] = useState(false);
+  const [geoError, setGeoError] = useState(false);
 
   useEffect(() => {
     if (incomeInfo.annualIncome === 0) setIncomeDisplay("");
@@ -53,6 +55,8 @@ export function ControlBlock() {
   })();
 
   return (
+    <>
+    {geoError && <GeocodingErrorModal onClose={() => setGeoError(false)} />}
     <div className="flex flex-col h-90-vh w-1/5 justify-between bg-[#17301b]/90 rounded-xl shadow-xl/20 text-white text-center m-2 p-2">
       <div className="flex h-1/10 w-9/10 place-self-center font-bold italic text-[20px]">
         Answer the following questions to see what your tax dollars buy*
@@ -84,6 +88,8 @@ export function ControlBlock() {
                 if (cars.length > 0) {
                   upsertFirstCar({ county: normalizedCounty });
                 }
+              } else if (e.target.value) {
+                setGeoError(true);
               }
             }}
           />
@@ -262,5 +268,6 @@ export function ControlBlock() {
         </div>
       </div>
     </div>
+    </>
   );
 }

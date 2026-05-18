@@ -1,6 +1,6 @@
 import { useState } from "react";
 import type { Property } from "../MetaMisc/types";
-import { geocodeAddress, formatDollars } from "../MetaMisc/types";
+import { geocodeAddress, formatDollars, GeocodingErrorModal } from "../MetaMisc/types";
 import { PRIME_RESIDE_EXEMPT } from "../../AppContext";
 
 function PropertyCard({
@@ -13,6 +13,7 @@ function PropertyCard({
   onRemove: () => void;
 }) {
   const [valueEditing, setValueEditing] = useState(false);
+  const [geoError, setGeoError] = useState(false);
 
   const handleAddressBlur = async () => {
     if (!property.address) return;
@@ -24,10 +25,14 @@ function PropertyCard({
         address: city ?? county ?? property.address,
         ...latLon,
       });
+    } else {
+      setGeoError(true);
     }
   };
 
   return (
+    <>
+    {geoError && <GeocodingErrorModal onClose={() => setGeoError(false)} />}
     <div className=" flex flex-row justify-around bg-gray-100/25 rounded-xl p-1 items-center">
       <div className="flex flex-col w-7/10 items-center gap-2 p-1">
         <input
@@ -70,6 +75,7 @@ function PropertyCard({
         -
       </button>
     </div>
+    </>
   );
 }
 

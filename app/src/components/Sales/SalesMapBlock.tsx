@@ -1,6 +1,16 @@
-import { MapContainer, TileLayer, GeoJSON, Marker, Popup } from "react-leaflet";
+import {
+  MapContainer,
+  TileLayer,
+  GeoJSON,
+  Marker,
+  Popup,
+  useMapEvents,
+} from "react-leaflet";
 import type { Feature } from "geojson";
 import L from "leaflet";
+import { useState } from "react";
+import booleanPointInPolygon from "@turf/boolean-point-in-polygon";
+import { point } from "@turf/helpers";
 import Sales2025 from "../../data/Geospacial/Sales2025.json";
 import {
   RATE_COMPONENTS,
@@ -18,6 +28,34 @@ type SalesFC = GeoJSON.FeatureCollection<
   GeoJSON.MultiPolygon,
   SalesFeatureProps
 >;
+
+type SalesFeature = SalesFC["features"][number];
+
+function fmtRate(rate: number, decimals = 2) {
+  return (rate * 100).toFixed(decimals) + "%";
+}
+
+function fmtLiability(rate: number) {
+  return "$" + (rate * 1000).toFixed(2);
+}
+
+function MapClickHandler({
+  data,
+  onFeatureFound,
+}: {
+  data: SalesFC;
+  onFeatureFound: (feature: SalesFeature | null, latlng: L.LatLng) => void;
+}) {
+  useMapEvents({
+    click(e) {
+      const clicked = point([e.latlng.lng, e.latlng.lat]);
+      const match =
+        data.features.find((f) => booleanPointInPolygon(clicked, f)) ?? null;
+      onFeatureFound(match, e.latlng);
+    },
+  });
+  return null;
+}
 
 const customIcon = L.divIcon({
   className: "",
@@ -43,6 +81,11 @@ export function SalesMapBlock({
 }: {
   locationsWithFeatures: SalesLocationWithFeature[];
 }) {
+  const [clickPopup, setClickPopup] = useState<{
+    latlng: L.LatLng;
+    feature: SalesFeature;
+  } | null>(null);
+
   const matchedFeatureIds = new Set(
     locationsWithFeatures
       .filter((lf) => lf.feature !== null)
@@ -72,28 +115,61 @@ export function SalesMapBlock({
           key={locationsWithFeatures.map((lf) => lf.location.id).join(",")}
           data={filteredData}
           style={style}
-          onEachFeature={(feature, layer) => {
-            const p = feature.properties ?? {};
-            const componentRows = RATE_COMPONENTS.filter(
-              (key) => p[key] != null,
-            )
-              .map(
-                (key) =>
-                  `<tr><td style="padding-right:8px">${formatRateLabel(key)}</td><td style="text-align:right">${(p[key] * 100).toFixed(2)}%</td></tr>`,
-              )
-              .join("");
-            layer.bindPopup(
-              `<strong>${p.METRONAME}</strong><br/>
-               <table style="margin-top:6px;font-size:12px;border-collapse:collapse">
-                 ${componentRows}
-                 <tr style="border-top:1px solid #ccc;font-weight:bold">
-                   <td style="padding-right:8px;padding-top:4px">Total</td>
-                   <td style="text-align:right;padding-top:4px">${(p.CURRRATE * 100).toFixed(2)}%</td>
-                 </tr>
-               </table>`,
-            );
-          }}
         />
+        <MapClickHandler
+          data={filteredData}
+          onFeatureFound={(feature, latlng) =>
+            setClickPopup(feature ? { latlng, feature } : null)
+          }
+        />
+        {clickPopup && (
+          <Popup
+            position={clickPopup.latlng}
+            eventHandlers={{ remove: () => setClickPopup(null) }}
+            maxWidth={300}
+          >
+            <div className="text-sm" style={{ minWidth: 220 }}>
+              <div className="font-bold text-base mb-2 border-b pb-1">
+                {clickPopup.feature.properties.SHORTDESC_x}
+              </div>
+              <table className="w-full text-xs border-collapse">
+                <thead>
+                  <tr className="bg-gray-100">
+                    <th className="text-left p-1">Component</th>
+                    <th className="text-right p-1">Rate</th>
+                    <th className="text-right p-1">Tax Per $1,000</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {RATE_COMPONENTS.filter(
+                    (k) =>
+                      clickPopup.feature.properties[k] != null &&
+                      clickPopup.feature.properties[k] !== 0,
+                  ).map((k) => (
+                    <tr key={k} className="border-t border-gray-200">
+                      <td className="p-1">{formatRateLabel(k)}</td>
+                      <td className="p-1 text-right">
+                        {fmtRate(clickPopup.feature.properties[k])}
+                      </td>
+                      <td className="p-1 text-right">
+                        {fmtLiability(clickPopup.feature.properties[k])}
+                      </td>
+                    </tr>
+                  ))}
+                  <tr className="border-t-2 border-gray-400 font-semibold">
+                    <td className="p-1">Total</td>
+                    <td className="p-1 text-right">
+                      {fmtRate(clickPopup.feature.properties.CURRRATE)}
+                    </td>
+                    <td className="p-1 text-right">
+                      {fmtLiability(clickPopup.feature.properties.CURRRATE)}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </Popup>
+        )}
         {locationsWithFeatures.map(({ location }) => (
           <Marker
             key={location.id}

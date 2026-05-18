@@ -5,14 +5,19 @@ import {
   Marker,
   Popup,
   useMapEvents,
+  Pane,
 } from "react-leaflet";
 import type { Feature } from "geojson";
 import L from "leaflet";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import booleanPointInPolygon from "@turf/boolean-point-in-polygon";
 import { point } from "@turf/helpers";
 import Property2025 from "../../data/Geospacial/Property2025.json";
-import type { Property, PropertyFeatureProps } from "../MetaMisc/types";
+import {
+  formatRateLabel,
+  type Property,
+  type PropertyFeatureProps,
+} from "../MetaMisc/types";
 import {
   UTAH_MAP_CENTER,
   UTAH_MAP_DEFAULT_ZOOM,
@@ -43,6 +48,23 @@ const ENTITY_DASH: Record<string, string> = {
   "RDA or CDA": "12 6",
 };
 
+function fmtRate(rate: number, decimals = 3) {
+  return (rate * 100).toFixed(decimals) + "%";
+}
+
+function fmtLiability(rate: number) {
+  return "$" + (rate * 100000).toFixed(0);
+}
+
+function HighlightStyle() {
+  return {
+    color: "#ff6b00",
+    weight: 3,
+    fillColor: "#ff6b00",
+    fillOpacity: 0.35,
+  };
+}
+
 function style(feature: Feature | undefined) {
   return {
     fillColor: "#5576e0",
@@ -72,7 +94,13 @@ function MapClickHandler({
   return null;
 }
 
-export function PropertyMapBlock({ properties }: { properties: Property[] }) {
+export function PropertyMapBlock({
+  properties,
+  hoveredEntityId,
+}: {
+  properties: Property[];
+  hoveredEntityId: number | null;
+}) {
   const [clickPopup, setClickPopup] = useState<{
     latlng: L.LatLng;
     features: PropertyFC["features"];
@@ -94,6 +122,16 @@ export function PropertyMapBlock({ properties }: { properties: Property[] }) {
             ),
           ),
         };
+
+  const hoveredFeature = useMemo(
+    () =>
+      hoveredEntityId !== null
+        ? (filteredData.features.find(
+            (f) => f.properties?.ENT_NBR === hoveredEntityId,
+          ) ?? null)
+        : null,
+    [hoveredEntityId, filteredData],
+  );
 
   return (
     <div className="flex flex-col h-90vh w-3/5 rounded-xl shadow-xl/20 overflow-hidden my-2">
@@ -118,34 +156,43 @@ export function PropertyMapBlock({ properties }: { properties: Property[] }) {
           <Popup
             position={clickPopup.latlng}
             eventHandlers={{ remove: () => setClickPopup(null) }}
+            maxWidth={450}
+            minWidth={400}
           >
-            <div
-              style={{
-                maxHeight: "200px",
-                overflowY: "auto",
-                minWidth: "200px",
-              }}
-            >
-              <strong>
-                {clickPopup.features.length} entities at this location
-              </strong>
-              {clickPopup.features.map((f, i) => (
-                <div
-                  key={i}
-                  style={{
-                    marginTop: "8px",
-                    paddingTop: "8px",
-                    borderTop: "1px solid #ddd",
-                  }}
-                >
-                  <div>
-                    <strong>{f.properties?.ENT_DESC}</strong>
-                  </div>
-                  <div>{f.properties?.county} County</div>
-                  <div>Type: {f.properties?.entity_type}</div>
-                  <div>Rate: {(f.properties?.ENT_RATE * 100).toFixed(3)}%</div>
-                </div>
-              ))}
+            <div className="text-sm">
+              <div className="font-bold text-base mb-2 border-b pb-1">
+                {clickPopup.features.length} Property Tax{" "}
+                {clickPopup.features.length === 1 ? "Entity" : "Entities"}
+              </div>
+              <table className="w-full text-xs border-collapse">
+                <thead>
+                  <tr className="bg-gray-100">
+                    <th className="text-left p-1">Entity</th>
+                    <th className="text-left p-1">Type</th>
+                    <th className="text-right p-1">Rate</th>
+                    <th className="text-right p-1">Tax Per $100K </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {clickPopup.features
+                    .slice()
+                    .sort((a, b) => (b.properties?.ENT_RATE ?? 0) - (a.properties?.ENT_RATE ?? 0))
+                    .map((f, i) => (
+                    <tr key={i} className="border-t border-gray-200">
+                      <td className="p-1">
+                        {formatRateLabel(f.properties?.ENT_DESC)}
+                      </td>
+                      <td className="p-1">{f.properties?.entity_type}</td>
+                      <td className="p-1 text-right">
+                        {fmtRate(f.properties?.ENT_RATE)}
+                      </td>
+                      <td className="p-1 text-right">
+                        {fmtLiability(f.properties?.ENT_RATE)}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           </Popup>
         )}
@@ -160,6 +207,11 @@ export function PropertyMapBlock({ properties }: { properties: Property[] }) {
             </Popup>
           </Marker>
         ))}
+        {hoveredFeature && (
+          <Pane name="highlight-pane" style={{ zIndex: 451 }}>
+            <GeoJSON key={hoveredEntityId!} data={hoveredFeature} style={HighlightStyle} />
+          </Pane>
+        )}
       </MapContainer>
     </div>
   );
